@@ -1,0 +1,80 @@
+body {
+    font-family: 'Courier New', Courier, monospace; /* Default font */
+    background-color: #121212; /* Dark background for an aesthetic look */
+    color: #00ff00; /* Neon green text for an accelerated feel */
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    width: 100%;
+    background: linear-gradient(to right, #0f0, #03e, #00f); /* Hacker matrix gradient */
+    overflow: hidden;
+    border-radius: 10px; /* Rounded corners */
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: black; /* Light text for readability */
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover for interactivity */
+    color: #000; /* Ensuring readability on hover */
+}
+.introduction, .content {
+    text-align: center; /* Centered text for a modern look */
+    padding: 20px; /* Spacing for readability */
+}
+
+.universe-gallery, .blog-posts {
+    display: flex;
+    flex-wrap: wrap; /* Responsive design for galleries and blog posts */
+    justify-content: center; /* Center items for a balanced layout */
+    gap: 20px; /* Spacing between items */
+}
+
+.universe, .post {
+    width: 450px;
+    height: auto; /* Adjusts height based on content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stacks children vertically */
+    padding: 20px; /* Adds spacing inside the div */
+    transition: transform 0.5s ease; /* Smooth scaling effect */
+}
+
+.universe:hover, .post:hover {
+    transform: scale(1.05); /* Slight scale on hover for emphasis */
+    cursor: pointer;
+}
+
+.universe img, .post img {
+    width: 100%; /* Full width images for visual appeal */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensures the image is not wider than its container */
+}
+
+@media (max-width: 768px) {
+    .universe img, .post img {
+        max-width: 100%; /* Adjusts image width for smaller screens */
+        max-height: 200px; /* Optional: Adjusts image height for smaller screens */
+    }
+}
+
+.universe-gallery {
+    display: flex;
+    flex-direction: column; /* Stacks children vertically */
+    align-items: center; /* Centers children horizontally */
+}
+
+.universe h2, .universe p {
+    text-align: center; /* Centers the text within each universe div */
+    width: 100%; /* Ensures text elements span the full width of the div */
+}
