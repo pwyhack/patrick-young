@@ -1,80 +1,237 @@
-body {
-    font-family: 'Courier New', Courier, monospace; /* Default font */
-    background-color: #121212; /* Dark background for an aesthetic look */
-    color: #00ff00; /* Neon green text for an accelerated feel */
+/* Reset and base styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Navbar styles */
 .navbar {
-    width: 100%;
-    background: linear-gradient(to right, #0f0, #03e, #00f); /* Hacker matrix gradient */
-    overflow: hidden;
-    border-radius: 10px; /* Rounded corners */
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    z-index: 1000;
 }
 
-.navbar a {
-    float: left;
-    display: block;
-    color: black; /* Light text for readability */
-    font-weight: bold;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-}
-
-.navbar a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover for interactivity */
-    color: #000; /* Ensuring readability on hover */
-}
-.introduction, .content {
-    text-align: center; /* Centered text for a modern look */
-    padding: 20px; /* Spacing for readability */
-}
-
-.universe-gallery, .blog-posts {
+.nav-content {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem 2rem;
     display: flex;
-    flex-wrap: wrap; /* Responsive design for galleries and blog posts */
-    justify-content: center; /* Center items for a balanced layout */
-    gap: 20px; /* Spacing between items */
-}
-
-.universe, .post {
-    width: 450px;
-    height: auto; /* Adjusts height based on content */
-    display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column; /* Stacks children vertically */
-    padding: 20px; /* Adds spacing inside the div */
-    transition: transform 0.5s ease; /* Smooth scaling effect */
 }
 
-.universe:hover, .post:hover {
-    transform: scale(1.05); /* Slight scale on hover for emphasis */
+.nav-brand {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+/* Hero section styles */
+.hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem 2rem 2rem;
+}
+
+.hero-content {
+    max-width: 800px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: #b0b0b0;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Categories section styles */
+.categories {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.category {
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
     cursor: pointer;
 }
 
-.universe img, .post img {
-    width: 100%; /* Full width images for visual appeal */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensures the image is not wider than its container */
+.category:hover {
+    transform: translateY(-5px);
 }
 
+.category h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.category p {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+/* Add these new styles after your existing CSS */
+
+.content-sections {
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    padding: 0 2rem;
+}
+
+.section-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+}
+
+.content-section {
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.section-divider {
+    position: relative;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 0.5rem;
+}
+
+.section-divider::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: repeating-linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.1) 0,
+        rgba(255, 255, 255, 0.1) 6px,
+        transparent 6px,
+        transparent 12px
+    );
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
-    .universe img, .post img {
-        max-width: 100%; /* Adjusts image width for smaller screens */
-        max-height: 200px; /* Optional: Adjusts image height for smaller screens */
+    .nav-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .categories {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .section-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
     }
 }
 
-.universe-gallery {
-    display: flex;
-    flex-direction: column; /* Stacks children vertically */
-    align-items: center; /* Centers children horizontally */
+@media (min-height: 800px) {
+    .hero {
+        min-height: 50vh;
+    }
 }
 
-.universe h2, .universe p {
-    text-align: center; /* Centers the text within each universe div */
-    width: 100%; /* Ensures text elements span the full width of the div */
+@media (max-height: 700px) {
+    .hero {
+        min-height: 40vh;
+        padding-top: 4rem;
+    }
+    
+    .hero h1 {
+        font-size: 3rem;
+    }
+    
+    .categories {
+        margin-top: 1rem;
+    }
+}
+
+/* Adjust the categories margin to create better spacing */
+.categories {
+    margin-bottom: 2rem;
 }

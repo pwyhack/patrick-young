@@ -5,40 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick William Young</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="technocapital.html">Free Techno Capital</a>
-        <!-- More sections can be added here -->
-    </div>
-    <div class="introduction">
-        <h1>Patrick William Young</h1>
-        <p>A man from Glenwood Springs, Colorado. A Georgia Tech dropout & return. An exiled employee of Sellraze. A techno-optimist & capitalist. An accelerator of biology and robotics. An industrialist. A force, a weapon, something and someone to be reckoned with. I don't play, I vision, I build, I execute. I am Rick C-137.</p>
-        <p>Welcome to my accelerated world.</p>
-    </div>
-    <div class="universe-gallery">
-        <div class="universe" onclick="window.location.href='lemur-king.html';" style="max-width: 300px;">
-            <h2>Lemur King Cinematic Universe</h2>
-            <img src="images/lemur-sphere.png" alt="Lemur King Universe" style="max-width: 100%; margin-bottom: 10px;">
-            <p>Explore the vast and whimsical world of the Lemur King, where every corner holds a new adventure and mystery.</p>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">PWY</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="https://github.com/pwyhack" target="_blank">GitHub</a>
+                <a href="mailto:13patrickyoung1313@gmail.com">Contact</a>
+            </div>
         </div>
-        <div class="universe" onclick="window.location.href='https://www.thegame.social';" style="max-width: 300px;">
-            <h2>"The Game"</h2>
-            <img src="images/game-sphere.png" alt="The Game" style="max-width: 100%; margin-bottom: 10px;">
-            <p>play the game</p>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Patrick William Young</h1>
+            <p>Exploring the intersection of artificial intelligence and human potential. Writing about the future and our collective journey towards it.</p>
         </div>
-        <!-- Additional universes can be added here -->
-    </div>
-    <script>
-        const gallery = document.querySelector('.universe-gallery');
-        gallery.addEventListener('mouseover', () => {
-            gallery.style.overflowX = 'hidden';
-        });
-        gallery.addEventListener('mouseout', () => {
-            gallery.style.overflowX = 'auto';
-        });
-    </script>
+    </section>
+
+    <section class="content-sections">
+        <div class="section-container">
+            <div class="content-section">
+                <h2 class="section-title">Me</h2>
+                <div class="section-divider"></div>
+                <!-- Add your newest content items here -->
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title">Projects</h2>
+                <div class="section-divider"></div>
+    </section> 
+    <section class="content-sections">            
+        <div class="section-container">
+            <div class="content-section">
+                <h2 class="section-title">Future</h2>
+                <div class="section-divider"></div>
+                <!-- Add your newest content items here -->
+            </div>
+                    
+            <div class="content-section">
+                <h2 class="section-title">Musings</h2>
+                <div class="section-divider"></div>
+                <!-- Add your popular content items here -->
+            </div>
+        </div>
+    </section>
 </body>
 </html>
