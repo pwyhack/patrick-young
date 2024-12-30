@@ -9,6 +9,11 @@ AddHandler application/x-httpd-php82 .php
 php_value memory_limit 256M
 
 # Handle all requests through index.php
-RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [QSA,L] 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Force all .md files to be processed by PHP
+<Files *.md>
+    SetHandler application/x-httpd-php
+</Files> 
