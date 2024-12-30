@@ -1,5 +1,18 @@
+# Enable rewrite engine
 RewriteEngine On
 RewriteBase /
+
+# Handle PHP version
+AddHandler application/x-httpd-php82 .php
+
+# Set PHP memory limit
+php_value memory_limit 256M
+
+# Handle redirects
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^posts/([^/]+)/?$ post.php?slug=$1 [L,QSA] 
+RewriteRule ^posts/([^/]+)/?$ post.php?slug=$1 [L,QSA]
+
+# Force HTTPS (if needed)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301] 

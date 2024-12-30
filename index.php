@@ -1,53 +1,49 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-use Blog\PostManager;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
+use Parsedown;
 
-$postManager = new PostManager(__DIR__ . '/content/posts');
-$posts = $postManager->getAllPosts();
+// Simple router
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = trim($uri, '/');
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Young</title>
-    <link rel="stylesheet" href="/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="nav-brand">PWY</div>
-            <div class="nav-links">
-                <a href="https://twitter.com/ConsumerRick" target="_blank">X</a>
-            </div>
-        </div>
-    </nav>
+// If it's a post request
+if (preg_match('/^posts\/(.+)$/', $uri, $matches)) {
+    $slug = $matches[1];
+    $filepath = __DIR__ . "/content/posts/{$slug}.md";
 
-    <section id="about" class="about-section">
-        <div class="content-wrapper">
-            <h1>Patrick William Young</h1>
-            <div class="bio">
-                <p>A technologist, founder, and writer exploring artificial intelligence and human potential. Originally from Glenwood Springs, now at Georgia Tech graduating in May 2025.</p>
-                <p>Working to summon an abundant future.</p>
-            </div>
-        </div>
-    </section>
+    if (!file_exists($filepath)) {
+        header('Location: /');
+        exit;
+    }
 
-    <section id="writings" class="writings-section">
-        <div class="content-wrapper">
-            <h2>Writing</h2>
-            <div class="writings-grid">
-                <?php foreach ($posts as $post): ?>
-                <a href="/post.php?slug=<?= htmlspecialchars($post->getSlug()) ?>" class="writing-item">
-                    <span class="writing-date"><?= htmlspecialchars($post->getFormattedDate()) ?></span>
-                    <h3><?= htmlspecialchars($post->getTitle()) ?></h3>
-                </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-</body>
-</html> 
+    $document = YamlFrontMatter::parseFile($filepath);
+    $parsedown = new Parsedown();
+    $content = $parsedown->text($document->body());
+    
+    require __DIR__ . '/templates/post.php';
+    exit;
+}
+
+// Home page
+function getPosts() {
+    $posts = [];
+    $files = glob(__DIR__ . '/content/posts/*.md');
+    
+    foreach ($files as $file) {
+        $document = YamlFrontMatter::parseFile($file);
+        $posts[] = [
+            'slug' => basename($file, '.md'),
+            'title' => $document->matter('title'),
+            'date' => $document->matter('date'),
+            'description' => $document->matter('description')
+        ];
+    }
+    
+    usort($posts, fn($a, $b) => strtotime($b['date']) - strtotime($a['date']));
+    return $posts;
+}
+
+$posts = getPosts();
+require __DIR__ . '/templates/home.php'; 
