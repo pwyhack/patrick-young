@@ -34,19 +34,39 @@ if (preg_match('/^posts\/(.+)$/', $uri, $matches)) {
 
 // Home page
 function getPosts() {
+    $cacheFile = __DIR__ . '/cache/posts.json';
+
+    // Gather all markdown files and determine the most recent modification time.
+    $markdownFiles = glob(__DIR__ . '/posts/*.md');
+    $latestMtime   = $markdownFiles ? max(array_map('filemtime', $markdownFiles)) : 0;
+
+    // 1. Try fast-path: use cache if present and still valid.
+    if (file_exists($cacheFile)) {
+        $cached = json_decode(file_get_contents($cacheFile), true);
+        if ($cached && isset($cached['mtime'], $cached['posts']) && $cached['mtime'] === $latestMtime) {
+            return $cached['posts'];
+        }
+    }
+
+    // 2. Cache miss or stale → rebuild.
     $posts = [];
-    $files = glob(__DIR__ . '/posts/*.md');
-    
-    foreach ($files as $file) {
+    foreach ($markdownFiles as $file) {
         $document = YamlFrontMatter::parseFile($file);
-        $posts[] = [
-            'slug' => basename($file, '.md'),
+        $posts[]  = [
+            'slug'  => basename($file, '.md'),
             'title' => $document->matter('title'),
-            'date' => $document->matter('date')
+            'date'  => $document->matter('date'),
         ];
     }
-    
-    usort($posts, fn($a, $b) => strtotime($b['date']) - strtotime($a['date']));
+
+    usort($posts, static fn ($a, $b) => strtotime($b['date']) <=> strtotime($a['date']));
+
+    // 3. Persist to cache (fail-soft).
+    @file_put_contents($cacheFile, json_encode([
+        'mtime'  => $latestMtime,
+        'posts'  => $posts,
+    ], JSON_THROW_ON_ERROR));
+
     return $posts;
 }
 
