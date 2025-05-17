@@ -20,6 +20,7 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 </head>
 <body<?= $isSuperintelligencePost ? ' class="cosmic-theme"' : '' ?>>
+    <div id="dinosaur-layer"></div>
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-brand"><a href="/">PWY</a></div>

@@ -1,5 +1,7 @@
 .article-container {
     padding-top: 2rem;
+    position: relative; /* For stacking context */
+    z-index: 10;      /* Above dinosaur layer */
 }
 
 .article-header {

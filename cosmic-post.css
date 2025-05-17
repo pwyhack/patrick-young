@@ -23,8 +23,8 @@ body.cosmic-theme {
     background-color: rgba(10, 10, 30, 0.8); /* Slightly transparent dark container */
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(128, 128, 255, 0.3);
-    position: relative; /* Needed for z-index stacking context */
-    z-index: 1; /* Above dinosaurs and cosmic background */
+    position: relative; /* Needed for z-index stacking context, already set but explicit is fine */
+    /* z-index: 1; */ /* Removed, will inherit z-index: 10 from article-styles.css */
 }
 
 .cosmic-theme .article-header h1 {

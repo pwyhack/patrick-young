@@ -8,10 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <?php $cssPath = '/styles.min.css'; ?>
     <link rel="stylesheet" href="<?= $cssPath ?>?v=<?= filemtime(__DIR__ . '/..' . $cssPath) ?>">
+    <link rel="stylesheet" href="/jurassic.css?v=<?= filemtime(__DIR__ . '/../jurassic.css') ?>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 </head>
 <body>
+    <div id="dinosaur-layer"></div>
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-brand">PWY</div>
@@ -20,6 +23,7 @@
             </div>
         </div>
     </nav>
+    <div class="layer-mid" aria-hidden="true"></div>
 
     <section id="about" class="about-section">
         <div class="content-wrapper">
