@@ -68,6 +68,15 @@ body {
     color: var(--text-primary);
 }
 
+/* Sticky blur-navbar on scroll */
+.navbar.scrolled {
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(12px);
+    background: rgba(10, 10, 11, 0.65);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
 /* About Section */
 .about-section {
     min-height: auto;
@@ -150,6 +159,9 @@ body {
     text-decoration: none;
     color: var(--text-primary);
     transition: transform 0.2s ease;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .writing-item:hover {
@@ -178,6 +190,11 @@ body {
 .writing-item:hover h3 {
     color: var(--text-secondary);
     transition: color 0.2s ease;
+}
+
+.writing-item.visible {
+    opacity: 1;
+    transform: none;
 }
 
 /* Responsive Design */
