@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick William Young</title>
-    <link rel="stylesheet" href="/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Preconnect for faster font fetching -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/styles.css?v=<?= filemtime(__DIR__ . '/../styles.css') ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 </head>
 <body>
     <nav class="navbar">
@@ -21,7 +24,7 @@
         <div class="content-wrapper">
             <h1>Patrick William Young</h1>
             <div class="bio">
-                <p>A technologist, founder, and writer exploring artificial intelligence and human potential. Originally from Glenwood Springs, now at Georgia Tech graduating in May 2025.</p>
+                <p>23, graduating from Georgia Tech in May. Sometimes I build software, but right now I think robots are the shit.</p>
                 <p>Working to summon an abundant future.</p>
             </div>
         </div>

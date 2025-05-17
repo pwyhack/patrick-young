@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($document->matter('title')) ?> - Patrick William Young</title>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/article-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/styles.css?v=<?= filemtime(__DIR__ . '/../styles.css') ?>">
+    <link rel="stylesheet" href="/article-styles.css?v=<?= filemtime(__DIR__ . '/../article-styles.css') ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 </head>
 <body>
     <nav class="navbar">
