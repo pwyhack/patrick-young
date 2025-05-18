@@ -143,16 +143,16 @@ body::after {
   position: fixed;
   top: 0;
   left: 100%;
-  width: 40px;
-  height: 40px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath fill='%23fffef4' d='M4 32 L24 24 L40 4 L36 28 L60 32 L36 36 L40 60 L24 40 Z'/%3E%3C/svg%3E") no-repeat center / contain;
+  width: 64px;
+  height: 48px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='48' viewBox='0 0 64 48'%3E%3Cpath fill='%23fffef4' d='M2 24l20-8L40 2l-4 22 26 4-26 4 4 22-18-16z'/%3E%3C/svg%3E") no-repeat center/contain;
   pointer-events: none;
-  z-index: 1000;
+  z-index: 1;
   animation: pteroFly 30s linear infinite;
 }
 @keyframes pteroFly {
   from { transform: translateX(0) scaleX(-1); }
-  to { transform: translateX(calc(-100vw - 40px)) scaleX(-1); }
+  to { transform: translateX(calc(-100vw - 64px)) scaleX(-1); }
 }
 
 /* Disable heavy motion for reduced-motion users */
@@ -189,22 +189,27 @@ body::after  { will-change: transform; transform: translate3d(calc(var(--shiftX,
   position: fixed;
   bottom: 6vh;
   left: 100vw;
-  width: 56px;
-  height: 32px;
+  width: 80px;
+  height: 48px;
   pointer-events: none;
   animation: walkAcross var(--dino-speed, 16s) linear forwards;
   will-change: transform;
-  z-index: 1000;
+  z-index: 1;
 }
 @keyframes walkAcross {
   from { transform: translateX(0) scaleX(-1); }
   to   { transform: translateX(calc(-100vw - 60px)) scaleX(-1); }
 }
 .dino.raptor {
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpath fill='%23cdc6b3' d='M2 22 L10 19 L18 21 L24 16 L30 18 L38 14 L46 15 L54 10 L62 12 L64 14 L64 32 0 32Z'/%3E%3C/svg%3E") no-repeat center/contain;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='48' viewBox='0 0 80 48'%3E%3Cpath fill='%237bd389' d='M0 38h8l4-4h12l8-8h24l8 4h8l8 16h-16l-4-4H40l-4 4H0z'/%3E%3C/svg%3E") no-repeat center/contain;
 }
 .dino.trice {
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpath fill='%23cdc6b3' d='M2 24 L12 16 L20 18 L28 14 L36 15 L44 11 L56 13 L62 10 L64 12 L64 32 0 32Z'/%3E%3C/svg%3E") no-repeat center/contain;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='48' viewBox='0 0 80 48'%3E%3Cpath fill='%23c9a8ff' d='M2 40l10-10h12l10-6h20l10 2h10l4 24H30l-4-4H4z'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+.dino.trex {
+  width: 96px;
+  height: 56px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='56' viewBox='0 0 96 56'%3E%3Cpath fill='%2363c35c' d='M0 44h12l6-6h16l12-12h28l12 6h10l10 24H46l-6-4H0z'/%3E%3C/svg%3E") no-repeat center/contain;
 }
 
 /* Ensure dinos and ptero are still visible; their z-index is relative to #dinosaur-layer now. */
@@ -217,4 +222,33 @@ body::after  { will-change: transform; transform: translate3d(calc(var(--shiftX,
 /* Update reduced-motion overrides */
 @media (prefers-reduced-motion: reduce) {
   body::before, body::after, .layer-mid, .ptero, .dino { animation: none !important; transform: none !important; }
-} 
+}
+
+/* 0.5 Additional Jungle Layers */
+.vine-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 18vh;
+  pointer-events: none;
+  z-index: -1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='120' viewBox='0 0 800 120'%3E%3Cpath fill='%2308452d' d='M0 0 H800 V40 L760 60 L720 40 L680 70 L640 60 L600 85 L560 70 L520 90 L480 60 L440 95 L400 80 L360 95 L320 60 L280 80 L240 60 L200 75 L160 55 L120 70 L80 50 L40 65 L0 50 Z'/%3E%3C/svg%3E") repeat-x;
+  background-size: 800px 120px;
+  animation: vinesScroll 35s linear infinite;
+}
+@keyframes vinesScroll { to { background-position-x: -800px; } }
+
+.ground-layer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 14vh;
+  pointer-events: none;
+  z-index: -2;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='100' viewBox='0 0 1000 100'%3E%3Cpath fill='%23093519' d='M0 30 L40 40 L80 35 L120 50 L160 42 L200 54 L240 48 L280 58 L320 53 L360 61 L400 57 L440 63 L480 61 L520 65 L560 62 L600 67 L640 64 L680 68 L720 65 L760 70 L800 67 L840 72 L880 70 L920 73 L960 71 L1000 75 V100 H0 Z'/%3E%3C/svg%3E") repeat-x;
+  background-size: 1000px 100px;
+  animation: groundScroll 20s linear infinite;
+}
+@keyframes groundScroll { to { background-position-x: -1000px; } } 

@@ -139,11 +139,15 @@ function initDinoSpawner() {
     console.warn('Dinosaur layer not found for Dino Spawner!');
     return;
   }
-  const kinds = ['raptor', 'trice'];
+  const kinds = ['raptor', 'trice', 'trex'];
   const spawn = () => {
     const kind = kinds[Math.random() * kinds.length | 0];
     const dino = document.createElement('div');
     dino.className = `dino ${kind}`;
+    // Adjust speed for T-Rex (slower)
+    if (kind === 'trex') {
+      dino.style.setProperty('--dino-speed', '24s');
+    }
     dinoLayer.appendChild(dino);
     // remove when done
     const duration = 16000;

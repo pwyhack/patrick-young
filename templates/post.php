@@ -20,7 +20,9 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 </head>
 <body<?= $isSuperintelligencePost ? ' class="cosmic-theme"' : '' ?>>
+    <div class="vine-layer" aria-hidden="true"></div>
     <div id="dinosaur-layer"></div>
+    <div class="ground-layer" aria-hidden="true"></div>
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-brand"><a href="/">PWY</a></div>

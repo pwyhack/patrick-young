@@ -7,7 +7,9 @@ body.cosmic-theme {
 /* Hide Jurassic theme-specific parallax layers when cosmic theme is active */
 .cosmic-theme body::before,
 .cosmic-theme body::after,
-.cosmic-theme .layer-mid {
+.cosmic-theme .layer-mid,
+.cosmic-theme .vine-layer,
+.cosmic-theme .ground-layer {
     display: none !important; /* Important to override jurassic.css */
 }
 

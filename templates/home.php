@@ -14,7 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 </head>
 <body>
+    <div class="vine-layer" aria-hidden="true"></div>
     <div id="dinosaur-layer"></div>
+    <div class="ground-layer" aria-hidden="true"></div>
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-brand">PWY</div>
