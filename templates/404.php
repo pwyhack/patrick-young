@@ -6,6 +6,10 @@
     <title>404 - Page Not Found</title>
     <meta name="description" content="Lost at sea in the digital ocean">
     
+    <!-- Preload fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- Styles -->
     <link rel="stylesheet" href="/theme.css">
     

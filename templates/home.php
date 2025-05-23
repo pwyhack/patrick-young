@@ -6,6 +6,10 @@
     <title>Patrick Young</title>
     <meta name="description" content="Navigating the depths of consciousness, technology, and human potential">
     
+    <!-- Preload fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- Styles -->
     <link rel="stylesheet" href="/theme.css">
     

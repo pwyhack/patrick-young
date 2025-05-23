@@ -1,31 +1,40 @@
-// Ocean Mysticism Theme - 3D ASCII Wave Field
+// Ocean Mysticism Theme - Realistic Wave Simulation
 class OceanEngine {
   constructor() {
     this.time = 0;
     this.phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     this.animationFrame = null;
     
-    // Wave parameters
-    this.waveConfig = {
-      amplitude: 3,
-      frequency: 0.08,
-      speed: 0.02,
-      damping: 0.85
+    // Realistic ocean wave parameters
+    this.ocean = {
+      windSpeed: 12,
+      wavelength: 100,
+      amplitude: 0.8,
+      choppiness: 1.2,
+      direction: { x: 1, z: 0.7 }
     };
     
-    // ASCII depth mapping
-    this.depthChars = [
-      { char: '░', threshold: -2.5 },
-      { char: '▒', threshold: -1.5 },
-      { char: '▓', threshold: -0.5 },
-      { char: '≈', threshold: 0.5 },
-      { char: '~', threshold: 1.5 },
-      { char: '∼', threshold: 2.0 },
-      { char: '-', threshold: 2.5 },
-      { char: '=', threshold: 3.0 },
-      { char: '≡', threshold: 3.5 },
-      { char: '°', threshold: 4.0 },
-      { char: '∘', threshold: 5.0 }
+    // Smoother ASCII gradient for water
+    this.waterGradient = ' ·.¸,¸.·˜˜·.¸¸.·˜≈~≋∼∽≈≋~∼∽';
+    
+    // Sea creatures
+    this.creatures = [];
+    this.creatureTypes = [
+      { art: '><>', speed: 0.8, name: 'fish' },
+      { art: '<><', speed: 0.7, name: 'fish2' },
+      { art: '~(°)~', speed: 0.4, name: 'jellyfish' },
+      { art: 'ς>', speed: 0.5, name: 'seahorse' },
+      { art: '*', speed: 0.3, name: 'starfish' },
+      { art: '~θ~', speed: 0.6, name: 'octopus' },
+      { art: '◉', speed: 0.2, name: 'bubble' }
+    ];
+    
+    // Pipeline paths for creatures (invisible maze)
+    this.pipelines = [
+      { start: { x: -10, y: 20 }, control: { x: 40, y: 15 }, end: { x: 90, y: 25 }, depth: 0.7 },
+      { start: { x: 90, y: 10 }, control: { x: 50, y: 18 }, end: { x: -10, y: 12 }, depth: 0.5 },
+      { start: { x: -10, y: 30 }, control: { x: 35, y: 22 }, end: { x: 90, y: 35 }, depth: 0.9 },
+      { start: { x: 90, y: 5 }, control: { x: 60, y: 8 }, end: { x: -10, y: 6 }, depth: 0.3 }
     ];
     
     this.init();
@@ -35,6 +44,8 @@ class OceanEngine {
     this.initScrollEffects();
     this.initNavbar();
     this.initOceanVisualization();
+    this.initCreatures();
+    this.initSubtleInteractions();
     this.initReadingProgress();
     this.startAnimation();
   }
@@ -59,36 +70,59 @@ class OceanEngine {
     this.oceanContainer = container;
   }
   
-  // Generate 3D wave field using multiple sine waves
-  generateWaveField(time) {
-    const width = 80;
-    const height = 24;
-    const depth = 20;
+  // Gerstner wave simulation for realistic ocean movement
+  gerstnerWave(x, z, time) {
+    const k = 2 * Math.PI / this.ocean.wavelength; // Wave number
+    const w = Math.sqrt(9.81 * k); // Angular frequency (deep water)
+    const a = this.ocean.amplitude;
+    const d = this.ocean.direction;
+    const dot = d.x * x + d.z * z;
+    
+    // Gerstner wave equations
+    const phase = k * dot - w * time * 0.05;
+    const height = a * Math.sin(phase);
+    
+    // Add secondary waves for realism
+    const k2 = k * 1.7;
+    const w2 = Math.sqrt(9.81 * k2);
+    const phase2 = k2 * (x * 0.7 + z * 0.3) - w2 * time * 0.03;
+    const height2 = a * 0.4 * Math.sin(phase2);
+    
+    // Tertiary high-frequency ripples
+    const k3 = k * 3.2;
+    const phase3 = k3 * x - w2 * time * 0.08;
+    const height3 = a * 0.15 * Math.sin(phase3);
+    
+    return height + height2 + height3;
+  }
+  
+  // Generate ocean field with realistic wave physics
+  generateOceanField(time) {
+    const width = 72;
+    const height = 18;
+    const depth = 25;
     
     let field = [];
     
     for (let z = 0; z < depth; z++) {
       let row = [];
       for (let x = 0; x < width; x++) {
-        // Create complex wave patterns using golden ratio
-        const wave1 = Math.sin((x * this.waveConfig.frequency + time) * this.phi) * 
-                      Math.cos(z * this.waveConfig.frequency * 0.5);
+        // Normalize coordinates
+        const nx = (x - width/2) * 2;
+        const nz = z * 1.5;
         
-        const wave2 = Math.sin((x * this.waveConfig.frequency * 0.7 - time * 0.8) + 
-                      z * this.waveConfig.frequency * 0.3) * 0.5;
+        // Calculate wave height using Gerstner waves
+        let waveHeight = this.gerstnerWave(nx, nz, time);
         
-        const wave3 = Math.cos((x + z) * this.waveConfig.frequency * 1.3 + time * 1.2) * 0.3;
+        // Add some turbulence
+        const turbulence = Math.sin(x * 0.1 + time * 0.02) * 
+                          Math.cos(z * 0.15 - time * 0.01) * 0.3;
         
-        // Fibonacci-inspired wave interference
-        const interference = Math.sin(x * 0.0618 + time * 0.5) * 
-                           Math.cos(z * 0.0382 - time * 0.3) * 0.4;
+        // Depth attenuation
+        const depthFactor = Math.exp(-z / depth * 2);
+        waveHeight = (waveHeight + turbulence) * depthFactor;
         
-        // Combine waves with depth-based damping
-        const dampingFactor = Math.pow(this.waveConfig.damping, z / depth * 3);
-        const height = (wave1 + wave2 + wave3 + interference) * 
-                      this.waveConfig.amplitude * dampingFactor;
-        
-        row.push(height);
+        row.push(waveHeight);
       }
       field.push(row);
     }
@@ -96,40 +130,36 @@ class OceanEngine {
     return field;
   }
   
-  // Convert height values to ASCII characters
+  // Convert height to character with smooth gradients
   heightToChar(height) {
-    for (let i = this.depthChars.length - 1; i >= 0; i--) {
-      if (height >= this.depthChars[i].threshold) {
-        return this.depthChars[i].char;
-      }
-    }
-    return this.depthChars[0].char;
+    // Normalize height to 0-1 range
+    const normalized = (height + 2) / 4;
+    const index = Math.floor(normalized * (this.waterGradient.length - 1));
+    const clampedIndex = Math.max(0, Math.min(this.waterGradient.length - 1, index));
+    return this.waterGradient[clampedIndex];
   }
   
-  // Apply perspective projection for 3D effect
-  projectTo2D(field) {
+  // Render ocean with perspective
+  renderOcean(field) {
     const width = field[0].length;
     const depth = field.length;
-    const viewHeight = 20;
+    const viewHeight = 16;
     
     let ascii = [];
-    
-    // Perspective parameters
-    const fov = 60;
-    const cameraHeight = 15;
-    const horizon = viewHeight * 0.4;
+    const horizon = viewHeight * 0.35;
     
     for (let y = 0; y < viewHeight; y++) {
       let line = '';
       
-      // Calculate which depth slice to sample based on perspective
-      const perspectiveDepth = (y - horizon) / (viewHeight - horizon);
-      const z = Math.floor(Math.max(0, Math.min(depth - 1, 
-                perspectiveDepth * perspectiveDepth * depth)));
+      // Non-linear perspective for more natural look
+      const t = (y - horizon) / (viewHeight - horizon);
+      const perspectiveDepth = t * t * t; // Cubic for smoother falloff
+      const z = Math.floor(Math.max(0, Math.min(depth - 1, perspectiveDepth * depth)));
       
       for (let x = 0; x < width; x++) {
-        // Add some horizontal perspective distortion
-        const perspectiveX = x + (x - width/2) * perspectiveDepth * 0.1;
+        // Slight barrel distortion at edges
+        const distortionFactor = 1 - Math.pow((x - width/2) / (width/2), 2) * 0.1;
+        const perspectiveX = x + (x - width/2) * perspectiveDepth * 0.05 * distortionFactor;
         const sampleX = Math.floor(Math.max(0, Math.min(width - 1, perspectiveX)));
         
         const height = field[z][sampleX];
@@ -139,42 +169,187 @@ class OceanEngine {
       ascii.push(line);
     }
     
-    // Add mystical symbols at cardinal points
-    if (this.time % 200 < 100) {
-      // North star
-      if (ascii[0]) ascii[0] = ascii[0].substring(0, 40) + '✦' + ascii[0].substring(41);
-      // Sacred geometry markers
-      if (ascii[10]) ascii[10] = '◊' + ascii[10].substring(1, 79) + '◊';
-    }
+    return ascii;
+  }
+  
+  initCreatures() {
+    if (!this.oceanContainer) return;
     
-    return ascii.join('\n');
+    // Create creature container
+    const creatureLayer = document.createElement('div');
+    creatureLayer.className = 'creature-layer';
+    creatureLayer.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1;
+    `;
+    this.oceanContainer.style.position = 'relative';
+    this.oceanContainer.appendChild(creatureLayer);
+    this.creatureLayer = creatureLayer;
+    
+    // Spawn initial creatures
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => this.spawnCreature(), i * 2000);
+    }
+  }
+  
+  spawnCreature() {
+    if (this.creatures.length > 8) return; // Limit creatures
+    
+    const type = this.creatureTypes[Math.floor(Math.random() * this.creatureTypes.length)];
+    const pipeline = this.pipelines[Math.floor(Math.random() * this.pipelines.length)];
+    
+    const creature = {
+      ...type,
+      pipeline,
+      progress: 0,
+      element: document.createElement('div'),
+      opacity: 0
+    };
+    
+    creature.element.textContent = type.art;
+    creature.element.style.cssText = `
+      position: absolute;
+      color: var(--text-tertiary);
+      opacity: 0;
+      transition: opacity 2s ease;
+      transform: translate(-50%, -50%);
+    `;
+    
+    this.creatureLayer.appendChild(creature.element);
+    this.creatures.push(creature);
+    
+    // Fade in
+    setTimeout(() => {
+      creature.element.style.opacity = pipeline.depth * 0.6;
+      creature.opacity = pipeline.depth * 0.6;
+    }, 100);
+  }
+  
+  updateCreatures() {
+    this.creatures = this.creatures.filter(creature => {
+      creature.progress += creature.speed * 0.001;
+      
+      if (creature.progress >= 1) {
+        // Remove creature
+        creature.element.style.opacity = '0';
+        setTimeout(() => creature.element.remove(), 2000);
+        
+        // Spawn new one occasionally
+        if (Math.random() < 0.3) {
+          setTimeout(() => this.spawnCreature(), 1000 + Math.random() * 4000);
+        }
+        return false;
+      }
+      
+      // Calculate position along quadratic bezier curve
+      const t = creature.progress;
+      const p = creature.pipeline;
+      const x = (1-t)*(1-t)*p.start.x + 2*(1-t)*t*p.control.x + t*t*p.end.x;
+      const y = (1-t)*(1-t)*p.start.y + 2*(1-t)*t*p.control.y + t*t*p.end.y;
+      
+      // Add gentle sine wave motion
+      const wave = Math.sin(t * Math.PI * 4 + this.time * 0.05) * 2;
+      
+      creature.element.style.left = `${x}%`;
+      creature.element.style.top = `${y + wave}%`;
+      
+      // Slight rotation for fish
+      if (creature.name.includes('fish')) {
+        const angle = Math.atan2(
+          p.end.y - p.start.y,
+          p.end.x - p.start.x
+        ) * 180 / Math.PI;
+        creature.element.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      }
+      
+      return true;
+    });
   }
   
   updateOcean() {
     if (!this.oceanContainer) return;
     
-    const field = this.generateWaveField(this.time);
-    const ascii = this.projectTo2D(field);
+    const field = this.generateOceanField(this.time);
+    const ascii = this.renderOcean(field);
     
-    this.oceanContainer.textContent = ascii;
+    // Update ocean visualization
+    const oceanText = this.oceanContainer.querySelector('.ocean-text');
+    if (oceanText) {
+      oceanText.textContent = ascii.join('\n');
+    } else {
+      const textDiv = document.createElement('div');
+      textDiv.className = 'ocean-text';
+      textDiv.textContent = ascii.join('\n');
+      this.oceanContainer.appendChild(textDiv);
+    }
     
-    // Gentle breathing effect
-    const breathe = Math.sin(this.time * 0.05) * 0.05 + 1;
-    this.oceanContainer.style.transform = `scale(${breathe})`;
+    // Update creatures
+    this.updateCreatures();
+  }
+  
+  initSubtleInteractions() {
+    // Water droplet on click (not mousemove)
+    document.addEventListener('click', (e) => {
+      // Only on important elements
+      if (!e.target.matches('a, button, .post-card')) return;
+      
+      const droplet = document.createElement('div');
+      droplet.className = 'water-droplet';
+      droplet.style.cssText = `
+        position: fixed;
+        left: ${e.clientX}px;
+        top: ${e.clientY}px;
+        width: 4px;
+        height: 4px;
+        background: var(--icy-sky);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1000;
+        animation: droplet 1.5s ease-out forwards;
+      `;
+      
+      document.body.appendChild(droplet);
+      setTimeout(() => droplet.remove(), 1500);
+    });
+    
+    // Add droplet animation
+    if (!document.querySelector('#droplet-style')) {
+      const style = document.createElement('style');
+      style.id = 'droplet-style';
+      style.textContent = `
+        @keyframes droplet {
+          0% {
+            transform: scale(0) translateY(0);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.5) translateY(0);
+            opacity: 0.7;
+          }
+          100% {
+            transform: scale(3) translateY(20px);
+            opacity: 0;
+            border: 1px solid var(--text-tertiary);
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
   }
   
   initScrollEffects() {
-    // Subtle parallax for water overlay
     let ticking = false;
     
     const updateParallax = () => {
       const scrollY = window.scrollY;
-      const waterOverlay = document.querySelector('body::before');
-      
-      if (waterOverlay) {
-        document.body.style.setProperty('--scroll-offset', `${scrollY * 0.5}px`);
-      }
-      
+      document.body.style.setProperty('--scroll-offset', `${scrollY * 0.5}px`);
       ticking = false;
     };
     
@@ -200,7 +375,6 @@ class OceanEngine {
   }
   
   initReadingProgress() {
-    // Only on post pages
     if (!window.location.pathname.startsWith('/posts/')) return;
     
     const progressBar = document.createElement('div');
@@ -219,10 +393,10 @@ class OceanEngine {
       this.time++;
       this.updateOcean();
       
-      // Slower frame rate for ASCII (15 fps)
+      // Slower frame rate for smooth ocean (10 fps)
       setTimeout(() => {
         this.animationFrame = requestAnimationFrame(animate);
-      }, 1000 / 15);
+      }, 1000 / 10);
     };
     
     this.animationFrame = requestAnimationFrame(animate);
@@ -255,100 +429,6 @@ document.addEventListener('click', (e) => {
     }
   }
 });
-
-// Add subtle water ripple effect on mouse movement (homepage only)
-if (window.location.pathname === '/' || window.location.pathname === '') {
-  let rippleTimeout;
-  
-  document.addEventListener('mousemove', (e) => {
-    clearTimeout(rippleTimeout);
-    
-    rippleTimeout = setTimeout(() => {
-      const ripple = document.createElement('div');
-      ripple.style.cssText = `
-        position: fixed;
-        left: ${e.clientX}px;
-        top: ${e.clientY}px;
-        width: 1px;
-        height: 1px;
-        background: transparent;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 5;
-        box-shadow: 0 0 10px 10px rgba(35, 88, 127, 0.1);
-        animation: ripple 2s ease-out forwards;
-      `;
-      
-      document.body.appendChild(ripple);
-      
-      setTimeout(() => ripple.remove(), 2000);
-    }, 100);
-  });
-  
-  // Add ripple animation if not exists
-  if (!document.querySelector('#ripple-style')) {
-    const style = document.createElement('style');
-    style.id = 'ripple-style';
-    style.textContent = `
-      @keyframes ripple {
-        to {
-          box-shadow: 0 0 40px 40px rgba(35, 88, 127, 0);
-          transform: scale(40);
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-}
-
-// Code block enhancements for posts
-function enhanceCodeBlocks() {
-  const article = document.querySelector('article');
-  if (!article) return;
-  
-  article.querySelectorAll('pre').forEach(pre => {
-    pre.style.position = 'relative';
-    
-    const code = pre.querySelector('code');
-    if (!code) return;
-    
-    // Add line numbers
-    const lines = code.textContent.split('\n');
-    if (lines.length > 3) {
-      const lineNumbers = document.createElement('div');
-      lineNumbers.style.cssText = `
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 3em;
-        padding: 1rem 0.5rem;
-        text-align: right;
-        color: rgba(35, 88, 127, 0.3);
-        border-right: 1px solid rgba(35, 88, 127, 0.1);
-        font-family: var(--font-mono);
-        font-size: 0.875em;
-        line-height: inherit;
-        user-select: none;
-      `;
-      
-      for (let i = 1; i <= lines.length; i++) {
-        lineNumbers.innerHTML += `${i}<br>`;
-      }
-      
-      pre.appendChild(lineNumbers);
-      code.style.marginLeft = '4em';
-    }
-  });
-}
-
-if (window.location.pathname.startsWith('/posts/')) {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', enhanceCodeBlocks);
-  } else {
-    enhanceCodeBlocks();
-  }
-}
 
 // Pause animation when tab is not visible
 document.addEventListener('visibilitychange', () => {
