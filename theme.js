@@ -68,14 +68,14 @@ class OceanEngine {
     svg.className = 'wave-svg';
     
     // Create concentric interference circles
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', 300 + i * 40);
+      circle.setAttribute('cx', 350 + i * 30);
       circle.setAttribute('cy', 200);
-      circle.setAttribute('r', 20 + i * 25);
+      circle.setAttribute('r', 25 + i * 35);
       circle.setAttribute('fill', 'none');
-      circle.setAttribute('stroke', 'rgba(35, 88, 127, 0.1)');
-      circle.setAttribute('stroke-width', '1');
+      circle.setAttribute('stroke', i % 2 === 0 ? 'rgba(35, 88, 127, 0.3)' : 'rgba(227, 241, 255, 0.4)');
+      circle.setAttribute('stroke-width', '2');
       circle.className = `interference-circle circle-${i}`;
       svg.appendChild(circle);
       this.circles.push(circle);
@@ -86,19 +86,19 @@ class OceanEngine {
     const spiral = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     spiral.setAttribute('d', spiralPath);
     spiral.setAttribute('fill', 'none');
-    spiral.setAttribute('stroke', 'rgba(35, 88, 127, 0.15)');
-    spiral.setAttribute('stroke-width', '2');
+    spiral.setAttribute('stroke', 'rgba(35, 88, 127, 0.35)');
+    spiral.setAttribute('stroke-width', '2.5');
     spiral.className = 'golden-spiral';
     svg.appendChild(spiral);
     
     // Create wave interference pattern
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       const wavePath = this.generateWavePath(i);
       const wave = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       wave.setAttribute('d', wavePath);
       wave.setAttribute('fill', 'none');
-      wave.setAttribute('stroke', `rgba(35, 88, 127, ${0.05 + i * 0.03})`);
-      wave.setAttribute('stroke-width', '1.5');
+      wave.setAttribute('stroke', `rgba(35, 88, 127, ${0.15 + i * 0.08})`);
+      wave.setAttribute('stroke-width', '2');
       wave.className = `wave-path wave-${i}`;
       svg.appendChild(wave);
     }
@@ -107,18 +107,51 @@ class OceanEngine {
     
     // Add floating geometric particles
     this.createParticles();
+    
+    // Add immediate visual feedback
+    this.oceanContainer.style.border = '1px solid rgba(35, 88, 127, 0.2)';
+    this.oceanContainer.style.minHeight = '300px';
+    this.oceanContainer.style.background = 'radial-gradient(ellipse, rgba(35, 88, 127, 0.1), rgba(227, 241, 255, 0.15), transparent)';
+    
+    // Add a central focal point
+    const centerDot = document.createElement('div');
+    centerDot.style.cssText = `
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, rgba(35, 88, 127, 0.6), transparent);
+      border-radius: 50%;
+      animation: pulse 3s ease-in-out infinite;
+    `;
+    this.oceanContainer.appendChild(centerDot);
+    
+    // Debug text
+    const debugText = document.createElement('div');
+    debugText.textContent = '🌊 Geometric Ocean Active';
+    debugText.style.cssText = `
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 12px;
+      color: rgba(35, 88, 127, 0.5);
+      font-family: var(--font-mono);
+    `;
+    this.oceanContainer.appendChild(debugText);
   }
   
   generateSpiralPath() {
     let path = 'M400,200';
-    const turns = 3;
-    const maxRadius = 150;
+    const turns = 2.5;
+    const maxRadius = 120;
     
-    for (let i = 0; i <= turns * 360; i += 5) {
+    for (let i = 0; i <= turns * 360; i += 3) {
       const angle = (i * Math.PI) / 180;
       const radius = (i / (turns * 360)) * maxRadius;
       const x = 400 + radius * Math.cos(angle);
-      const y = 200 + radius * Math.sin(angle) * 0.6; // Elliptical
+      const y = 200 + radius * Math.sin(angle) * 0.7;
       path += ` L${x},${y}`;
     }
     
@@ -139,18 +172,20 @@ class OceanEngine {
   }
   
   createParticles() {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 12; i++) {
       const particle = document.createElement('div');
       particle.className = 'geometric-particle';
+      const size = 6 + Math.random() * 12;
       particle.style.cssText = `
         position: absolute;
-        width: ${4 + Math.random() * 8}px;
-        height: ${4 + Math.random() * 8}px;
-        background: radial-gradient(circle, rgba(35, 88, 127, 0.3), transparent);
+        width: ${size}px;
+        height: ${size}px;
+        background: radial-gradient(circle, rgba(35, 88, 127, 0.4), rgba(227, 241, 255, 0.3), transparent);
         border-radius: 50%;
-        left: ${Math.random() * 100}%;
-        top: ${Math.random() * 100}%;
+        left: ${20 + Math.random() * 60}%;
+        top: ${20 + Math.random() * 60}%;
         pointer-events: none;
+        box-shadow: 0 0 ${size}px rgba(35, 88, 127, 0.2);
       `;
       
       this.oceanContainer.appendChild(particle);
@@ -197,11 +232,13 @@ class OceanEngine {
     
     // Animate circles
     this.circles.forEach((circle, i) => {
-      const phase = this.time * 0.001 + i * Math.PI / 3;
-      const scale = 1 + Math.sin(phase) * 0.1;
-      const opacity = 0.1 + Math.sin(phase * 2) * 0.05;
+      const phase = this.time * 0.002 + i * Math.PI / 3;
+      const scale = 1 + Math.sin(phase) * 0.15;
+      const baseOpacity = i % 2 === 0 ? 0.25 : 0.35;
+      const opacity = baseOpacity + Math.sin(phase * 2) * 0.1;
+      const color = i % 2 === 0 ? `rgba(35, 88, 127, ${opacity})` : `rgba(227, 241, 255, ${opacity + 0.1})`;
       circle.setAttribute('transform', `scale(${scale})`);
-      circle.setAttribute('stroke', `rgba(35, 88, 127, ${opacity})`);
+      circle.setAttribute('stroke', color);
     });
     
     // Animate wave paths
