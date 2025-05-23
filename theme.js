@@ -7,15 +7,15 @@ class OceanEngine {
     
     // Realistic ocean wave parameters
     this.ocean = {
-      windSpeed: 12,
-      wavelength: 100,
-      amplitude: 0.8,
-      choppiness: 1.2,
-      direction: { x: 1, z: 0.7 }
+      windSpeed: 8,
+      wavelength: 120,
+      amplitude: 0.6,
+      choppiness: 0.8,
+      direction: { x: 1, z: 0.4 }
     };
     
-    // Smoother ASCII gradient for water
-    this.waterGradient = ' ·.¸,¸.·˜˜·.¸¸.·˜≈~≋∼∽≈≋~∼∽';
+    // Smoother ASCII gradient for water - from deep to shore
+    this.waterGradient = ' .·,¸.·˜˜·.¸¸.·˜≈~≋∼∽≈≋~∼∽'
     
     // Sea creatures
     this.creatures = [];
@@ -98,9 +98,9 @@ class OceanEngine {
   
   // Generate ocean field with realistic wave physics
   generateOceanField(time) {
-    const width = 72;
-    const height = 18;
-    const depth = 25;
+    const width = 68;
+    const height = 14;
+    const depth = 20;
     
     let field = [];
     
@@ -114,13 +114,14 @@ class OceanEngine {
         // Calculate wave height using Gerstner waves
         let waveHeight = this.gerstnerWave(nx, nz, time);
         
-        // Add some turbulence
-        const turbulence = Math.sin(x * 0.1 + time * 0.02) * 
-                          Math.cos(z * 0.15 - time * 0.01) * 0.3;
+        // Add gentle turbulence
+        const turbulence = Math.sin(x * 0.08 + time * 0.015) * 
+                          Math.cos(z * 0.12 - time * 0.008) * 0.2;
         
-        // Depth attenuation
-        const depthFactor = Math.exp(-z / depth * 2);
-        waveHeight = (waveHeight + turbulence) * depthFactor;
+        // Beach-like depth attenuation (shallower toward shore)
+        const beachFactor = Math.exp(-z / depth * 1.5);
+        const shoreFade = Math.max(0, 1 - z / (depth * 0.7)); // More gentle fade
+        waveHeight = (waveHeight + turbulence) * beachFactor * shoreFade;
         
         row.push(waveHeight);
       }
@@ -143,7 +144,7 @@ class OceanEngine {
   renderOcean(field) {
     const width = field[0].length;
     const depth = field.length;
-    const viewHeight = 16;
+    const viewHeight = 12;
     
     let ascii = [];
     const horizon = viewHeight * 0.35;
@@ -151,10 +152,10 @@ class OceanEngine {
     for (let y = 0; y < viewHeight; y++) {
       let line = '';
       
-      // Non-linear perspective for more natural look
+        // Non-linear perspective for beach-like effect
       const t = (y - horizon) / (viewHeight - horizon);
-      const perspectiveDepth = t * t * t; // Cubic for smoother falloff
-      const z = Math.floor(Math.max(0, Math.min(depth - 1, perspectiveDepth * depth)));
+      const perspectiveDepth = t * t; // Quadratic for gentler falloff
+      const z = Math.floor(Math.max(0, Math.min(depth - 1, perspectiveDepth * depth * 0.9)));
       
       for (let x = 0; x < width; x++) {
         // Slight barrel distortion at edges
@@ -193,14 +194,14 @@ class OceanEngine {
     this.oceanContainer.appendChild(creatureLayer);
     this.creatureLayer = creatureLayer;
     
-    // Spawn initial creatures
-    for (let i = 0; i < 5; i++) {
-      setTimeout(() => this.spawnCreature(), i * 2000);
+    // Spawn initial creatures (fewer, more subtle)
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => this.spawnCreature(), i * 4000);
     }
   }
   
   spawnCreature() {
-    if (this.creatures.length > 8) return; // Limit creatures
+    if (this.creatures.length > 5) return; // Limit creatures
     
     const type = this.creatureTypes[Math.floor(Math.random() * this.creatureTypes.length)];
     const pipeline = this.pipelines[Math.floor(Math.random() * this.pipelines.length)];
@@ -225,10 +226,10 @@ class OceanEngine {
     this.creatureLayer.appendChild(creature.element);
     this.creatures.push(creature);
     
-    // Fade in
+    // Fade in more subtly
     setTimeout(() => {
-      creature.element.style.opacity = pipeline.depth * 0.6;
-      creature.opacity = pipeline.depth * 0.6;
+      creature.element.style.opacity = pipeline.depth * 0.4;
+      creature.opacity = pipeline.depth * 0.4;
     }, 100);
   }
   
@@ -242,8 +243,8 @@ class OceanEngine {
         setTimeout(() => creature.element.remove(), 2000);
         
         // Spawn new one occasionally
-        if (Math.random() < 0.3) {
-          setTimeout(() => this.spawnCreature(), 1000 + Math.random() * 4000);
+        if (Math.random() < 0.15) {
+          setTimeout(() => this.spawnCreature(), 3000 + Math.random() * 8000);
         }
         return false;
       }
@@ -393,10 +394,10 @@ class OceanEngine {
       this.time++;
       this.updateOcean();
       
-      // Slower frame rate for smooth ocean (10 fps)
+      // Slower frame rate for meditative ocean (8 fps)
       setTimeout(() => {
         this.animationFrame = requestAnimationFrame(animate);
-      }, 1000 / 10);
+      }, 1000 / 8);
     };
     
     this.animationFrame = requestAnimationFrame(animate);
