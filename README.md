@@ -1,14 +1,15 @@
 # Patrick Young's Blog
 
-A minimalist, cyberpunk-themed blog system built with PHP and Markdown. Features a unified aqua-cosmic theme with smooth animations and excellent performance.
+A minimalist ocean-themed blog system built with PHP and Markdown. Features a mystical water aesthetic with mathematical ASCII wave visualizations.
 
 ## Features
 
 - **Simple Markdown Blogging**: Just drop `.md` files in the `posts/` directory
 - **YAML Front Matter**: Support for metadata in your posts
-- **Unified Theme System**: Combines aqua/water, cosmic/space, and cyberpunk aesthetics
-- **Performance Optimized**: Built-in caching, lazy loading, and minimal dependencies
-- **Mobile Responsive**: Looks great on all devices
+- **Ocean Theme**: Serene water-inspired design with golden ratio proportions
+- **ASCII Wave Visualization**: Mathematically generated 3D ocean waves on homepage
+- **Performance Optimized**: Lightweight with minimal dependencies
+- **Mobile Responsive**: Elegant on all devices
 - **SEO Friendly**: Clean URLs, meta tags, and semantic HTML
 
 ## Quick Start
@@ -23,7 +24,7 @@ A minimalist, cyberpunk-themed blog system built with PHP and Markdown. Features
 title: Your Post Title
 date: 2024-01-20
 description: A brief description of your post
-tags: [technology, future, ai]
+tags: [technology, consciousness, ocean]
 ---
 
 Your markdown content goes here...
@@ -37,7 +38,17 @@ Your markdown content goes here...
 - `date` (required): Publication date in YYYY-MM-DD format
 - `description` (optional): Brief description for SEO and post previews
 - `tags` (optional): Array of tags for categorization
-- `theme` (optional): Custom theme name (defaults to unified theme)
+- `theme` (optional): Custom theme name (defaults to ocean theme)
+
+## Theme Design
+
+The ocean theme uses a carefully selected color palette:
+- **Soft Custard** (#FCF9F1): Primary background
+- **Icy Sky** (#E3F1FF): Accent highlights
+- **Sunlit Ripples** (#EFF6FB): Secondary backgrounds
+- **Abyssal Drift** (#23587F): Primary text and borders
+
+Typography follows golden ratio proportions for harmonious spacing.
 
 ## File Structure
 
@@ -50,34 +61,18 @@ Your markdown content goes here...
 ├── cache/             # Cached post data
 ├── vendor/            # Composer dependencies
 ├── index.php          # Main router
-├── theme.css          # Unified theme styles
-├── theme.js           # Interactive effects
+├── theme.css          # Ocean theme styles
+├── theme.js           # Wave animations
 └── composer.json      # PHP dependencies
 ```
 
-## Customization
+## ASCII Ocean Visualization
 
-### Theme Colors
-
-Edit CSS variables in `theme.css`:
-
-```css
-:root {
-  --accent-aqua: #00ffff;
-  --accent-pink: #ff00ff;
-  --accent-purple: #8000ff;
-  --accent-cosmic: #4080ff;
-}
-```
-
-### Animation Settings
-
-Adjust particle count and animation speed in `theme.js`:
-
-```javascript
-this.maxParticles = 50;  // Number of floating particles
-this.fps = 60;           // Animation frame rate
-```
+The homepage features a mathematically generated 3D ASCII ocean using:
+- Multiple sine waves with golden ratio frequencies
+- Fibonacci-inspired wave interference patterns
+- Perspective projection for depth
+- Sacred geometry symbols at cardinal points
 
 ## Dependencies
 
@@ -93,12 +88,12 @@ this.fps = 60;           // Animation frame rate
 4. Point your web server to the project directory
 5. Start creating posts!
 
-## Performance Tips
+## Performance
 
 - Posts are cached for 1 hour automatically
-- CSS is minified in production
-- Images should be optimized before uploading
-- Use lazy loading for images in posts
+- Minimal external dependencies
+- System fonts for faster loading
+- Optimized ASCII animation at 15fps
 
 ## Browser Support
 
@@ -107,6 +102,6 @@ this.fps = 60;           // Animation frame rate
 - Safari (latest)
 - Mobile browsers
 
-## License
+---
 
-MIT License - Feel free to use and modify as needed.
+*Drifting through digital tides*

@@ -4,14 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Young</title>
-    <meta name="description" content="Personal blog exploring technology, consciousness, and the future">
-    
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="description" content="Navigating the depths of consciousness, technology, and human potential">
     
     <!-- Styles -->
     <link rel="stylesheet" href="/theme.css">
@@ -28,8 +21,8 @@
         </nav>
         
         <main>
-            <h1>Welcome to the Digital Frontier</h1>
-            <p>Exploring the intersection of technology, consciousness, and human potential in the age of superintelligence.</p>
+            <h1>Ocean of Thought</h1>
+            <p>Navigating the depths where technology meets consciousness, where code becomes poetry.</p>
             
             <div class="post-list">
                 <?php foreach ($posts as $post): ?>
@@ -52,7 +45,7 @@
         </main>
         
         <footer>
-            <p>&copy; <?= date('Y') ?> Patrick Young. Crafted with curiosity and code.</p>
+            <p>&copy; <?= date('Y') ?> Patrick Young · Drifting through digital tides</p>
         </footer>
     </div>
     

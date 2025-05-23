@@ -1,175 +1,178 @@
-// Unified Theme System - Interactive Effects
-class ThemeEngine {
+// Ocean Mysticism Theme - 3D ASCII Wave Field
+class OceanEngine {
   constructor() {
-    this.particles = [];
-    this.maxParticles = 50;
+    this.time = 0;
+    this.phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     this.animationFrame = null;
-    this.lastTime = 0;
-    this.fps = 60;
-    this.frameInterval = 1000 / this.fps;
+    
+    // Wave parameters
+    this.waveConfig = {
+      amplitude: 3,
+      frequency: 0.08,
+      speed: 0.02,
+      damping: 0.85
+    };
+    
+    // ASCII depth mapping
+    this.depthChars = [
+      { char: '░', threshold: -2.5 },
+      { char: '▒', threshold: -1.5 },
+      { char: '▓', threshold: -0.5 },
+      { char: '≈', threshold: 0.5 },
+      { char: '~', threshold: 1.5 },
+      { char: '∼', threshold: 2.0 },
+      { char: '-', threshold: 2.5 },
+      { char: '=', threshold: 3.0 },
+      { char: '≡', threshold: 3.5 },
+      { char: '°', threshold: 4.0 },
+      { char: '∘', threshold: 5.0 }
+    ];
     
     this.init();
   }
   
   init() {
-    // Create theme effects container
-    this.createEffectsContainer();
-    
-    // Initialize different effect systems
-    this.initStarfield();
-    this.initParticles();
     this.initScrollEffects();
     this.initNavbar();
-    
-    // Start animation loop
+    this.initOceanVisualization();
+    this.initReadingProgress();
     this.startAnimation();
-    
-    // Initialize intersection observer for fade-ins
-    this.initFadeInObserver();
   }
   
-  createEffectsContainer() {
+  initOceanVisualization() {
+    // Only create ocean on homepage
+    if (window.location.pathname !== '/' && window.location.pathname !== '') return;
+    
     const container = document.createElement('div');
-    container.className = 'theme-effects';
-    container.innerHTML = `
-      <div class="starfield"></div>
-      <div class="cosmic-gradient"></div>
-      <div class="water-overlay"></div>
-      <canvas id="particles-canvas"></canvas>
-    `;
-    document.body.prepend(container);
+    container.className = 'ocean-ascii';
+    container.setAttribute('aria-hidden', 'true');
     
-    this.canvas = document.getElementById('particles-canvas');
-    this.ctx = this.canvas.getContext('2d');
-    this.resizeCanvas();
-    
-    window.addEventListener('resize', () => this.resizeCanvas());
-  }
-  
-  resizeCanvas() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-  }
-  
-  initStarfield() {
-    // Additional dynamic stars
-    const starfield = document.querySelector('.starfield');
-    if (!starfield) return;
-    
-    for (let i = 0; i < 100; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.cssText = `
-        position: absolute;
-        width: ${Math.random() * 3}px;
-        height: ${Math.random() * 3}px;
-        background: white;
-        border-radius: 50%;
-        left: ${Math.random() * 100}%;
-        top: ${Math.random() * 100}%;
-        animation: twinkle ${3 + Math.random() * 4}s ease-in-out infinite;
-        animation-delay: ${Math.random() * 4}s;
-        opacity: ${0.3 + Math.random() * 0.7};
-      `;
-      starfield.appendChild(star);
+    // Insert after the intro paragraph
+    const mainElement = document.querySelector('main');
+    const firstParagraph = mainElement.querySelector('p');
+    if (firstParagraph && firstParagraph.nextSibling) {
+      firstParagraph.parentNode.insertBefore(container, firstParagraph.nextSibling);
+    } else if (mainElement) {
+      mainElement.appendChild(container);
     }
     
-    // Add twinkle animation
-    if (!document.querySelector('#twinkle-style')) {
-      const style = document.createElement('style');
-      style.id = 'twinkle-style';
-      style.textContent = `
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.2); }
-        }
-      `;
-      document.head.appendChild(style);
-    }
+    this.oceanContainer = container;
   }
   
-  initParticles() {
-    // Create floating particles (bubbles/orbs)
-    for (let i = 0; i < this.maxParticles; i++) {
-      this.particles.push(this.createParticle());
-    }
-  }
-  
-  createParticle() {
-    return {
-      x: Math.random() * window.innerWidth,
-      y: window.innerHeight + Math.random() * 100,
-      radius: Math.random() * 3 + 1,
-      speed: Math.random() * 0.5 + 0.2,
-      opacity: Math.random() * 0.5 + 0.2,
-      hue: Math.random() * 60 + 180, // Blue to purple range
-      oscillation: Math.random() * 2 - 1,
-      phase: Math.random() * Math.PI * 2
-    };
-  }
-  
-  updateParticles(deltaTime) {
-    this.particles.forEach((particle, index) => {
-      // Update position
-      particle.y -= particle.speed * deltaTime * 0.05;
-      particle.x += Math.sin(particle.phase + particle.y * 0.01) * particle.oscillation;
-      
-      // Reset particle if it goes off screen
-      if (particle.y < -particle.radius) {
-        this.particles[index] = this.createParticle();
+  // Generate 3D wave field using multiple sine waves
+  generateWaveField(time) {
+    const width = 80;
+    const height = 24;
+    const depth = 20;
+    
+    let field = [];
+    
+    for (let z = 0; z < depth; z++) {
+      let row = [];
+      for (let x = 0; x < width; x++) {
+        // Create complex wave patterns using golden ratio
+        const wave1 = Math.sin((x * this.waveConfig.frequency + time) * this.phi) * 
+                      Math.cos(z * this.waveConfig.frequency * 0.5);
+        
+        const wave2 = Math.sin((x * this.waveConfig.frequency * 0.7 - time * 0.8) + 
+                      z * this.waveConfig.frequency * 0.3) * 0.5;
+        
+        const wave3 = Math.cos((x + z) * this.waveConfig.frequency * 1.3 + time * 1.2) * 0.3;
+        
+        // Fibonacci-inspired wave interference
+        const interference = Math.sin(x * 0.0618 + time * 0.5) * 
+                           Math.cos(z * 0.0382 - time * 0.3) * 0.4;
+        
+        // Combine waves with depth-based damping
+        const dampingFactor = Math.pow(this.waveConfig.damping, z / depth * 3);
+        const height = (wave1 + wave2 + wave3 + interference) * 
+                      this.waveConfig.amplitude * dampingFactor;
+        
+        row.push(height);
       }
-    });
+      field.push(row);
+    }
+    
+    return field;
   }
   
-  drawParticles() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  // Convert height values to ASCII characters
+  heightToChar(height) {
+    for (let i = this.depthChars.length - 1; i >= 0; i--) {
+      if (height >= this.depthChars[i].threshold) {
+        return this.depthChars[i].char;
+      }
+    }
+    return this.depthChars[0].char;
+  }
+  
+  // Apply perspective projection for 3D effect
+  projectTo2D(field) {
+    const width = field[0].length;
+    const depth = field.length;
+    const viewHeight = 20;
     
-    this.particles.forEach(particle => {
-      this.ctx.save();
-      this.ctx.globalAlpha = particle.opacity;
+    let ascii = [];
+    
+    // Perspective parameters
+    const fov = 60;
+    const cameraHeight = 15;
+    const horizon = viewHeight * 0.4;
+    
+    for (let y = 0; y < viewHeight; y++) {
+      let line = '';
       
-      // Create gradient for each particle
-      const gradient = this.ctx.createRadialGradient(
-        particle.x, particle.y, 0,
-        particle.x, particle.y, particle.radius
-      );
-      gradient.addColorStop(0, `hsla(${particle.hue}, 100%, 70%, 1)`);
-      gradient.addColorStop(1, `hsla(${particle.hue}, 100%, 50%, 0)`);
+      // Calculate which depth slice to sample based on perspective
+      const perspectiveDepth = (y - horizon) / (viewHeight - horizon);
+      const z = Math.floor(Math.max(0, Math.min(depth - 1, 
+                perspectiveDepth * perspectiveDepth * depth)));
       
-      this.ctx.fillStyle = gradient;
-      this.ctx.beginPath();
-      this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-      this.ctx.fill();
+      for (let x = 0; x < width; x++) {
+        // Add some horizontal perspective distortion
+        const perspectiveX = x + (x - width/2) * perspectiveDepth * 0.1;
+        const sampleX = Math.floor(Math.max(0, Math.min(width - 1, perspectiveX)));
+        
+        const height = field[z][sampleX];
+        line += this.heightToChar(height);
+      }
       
-      // Add glow effect
-      this.ctx.shadowBlur = 10;
-      this.ctx.shadowColor = `hsla(${particle.hue}, 100%, 50%, 0.5)`;
-      this.ctx.fill();
-      
-      this.ctx.restore();
-    });
+      ascii.push(line);
+    }
+    
+    // Add mystical symbols at cardinal points
+    if (this.time % 200 < 100) {
+      // North star
+      if (ascii[0]) ascii[0] = ascii[0].substring(0, 40) + '✦' + ascii[0].substring(41);
+      // Sacred geometry markers
+      if (ascii[10]) ascii[10] = '◊' + ascii[10].substring(1, 79) + '◊';
+    }
+    
+    return ascii.join('\n');
+  }
+  
+  updateOcean() {
+    if (!this.oceanContainer) return;
+    
+    const field = this.generateWaveField(this.time);
+    const ascii = this.projectTo2D(field);
+    
+    this.oceanContainer.textContent = ascii;
+    
+    // Gentle breathing effect
+    const breathe = Math.sin(this.time * 0.05) * 0.05 + 1;
+    this.oceanContainer.style.transform = `scale(${breathe})`;
   }
   
   initScrollEffects() {
+    // Subtle parallax for water overlay
     let ticking = false;
     
-    const updateScrollEffects = () => {
+    const updateParallax = () => {
       const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
+      const waterOverlay = document.querySelector('body::before');
       
-      // Parallax for background layers
-      const starfield = document.querySelector('.starfield');
-      const cosmicGradient = document.querySelector('.cosmic-gradient');
-      const waterOverlay = document.querySelector('.water-overlay');
-      
-      if (starfield) {
-        starfield.style.transform = `translateY(${scrollY * 0.5}px)`;
-      }
-      if (cosmicGradient) {
-        cosmicGradient.style.transform = `translateY(${scrollY * 0.3}px)`;
-      }
       if (waterOverlay) {
-        waterOverlay.style.transform = `translateY(${scrollY * 0.2}px)`;
+        document.body.style.setProperty('--scroll-offset', `${scrollY * 0.5}px`);
       }
       
       ticking = false;
@@ -177,7 +180,7 @@ class ThemeEngine {
     
     window.addEventListener('scroll', () => {
       if (!ticking) {
-        requestAnimationFrame(updateScrollEffects);
+        requestAnimationFrame(updateParallax);
         ticking = true;
       }
     });
@@ -187,63 +190,39 @@ class ThemeEngine {
     const nav = document.querySelector('nav');
     if (!nav) return;
     
-    let lastScroll = 0;
-    
     window.addEventListener('scroll', () => {
-      const currentScroll = window.scrollY;
-      
-      if (currentScroll > 50) {
+      if (window.scrollY > 50) {
         nav.classList.add('scrolled');
       } else {
         nav.classList.remove('scrolled');
       }
-      
-      lastScroll = currentScroll;
     });
   }
   
-  initFadeInObserver() {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    );
+  initReadingProgress() {
+    // Only on post pages
+    if (!window.location.pathname.startsWith('/posts/')) return;
     
-    // Observe all fade-in elements
-    document.querySelectorAll('.fade-in').forEach(el => {
-      observer.observe(el);
-    });
+    const progressBar = document.createElement('div');
+    progressBar.className = 'reading-progress';
+    document.body.appendChild(progressBar);
     
-    // Auto-apply fade-in to certain elements
-    const autoFadeElements = document.querySelectorAll(
-      'article > *, .post-card, main > h1, main > p'
-    );
-    autoFadeElements.forEach((el, index) => {
-      el.classList.add('fade-in');
-      el.style.transitionDelay = `${index * 50}ms`;
-      observer.observe(el);
+    window.addEventListener('scroll', () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = (window.scrollY / scrollHeight) * 100;
+      progressBar.style.width = `${scrollProgress}%`;
     });
   }
   
   startAnimation() {
-    const animate = (currentTime) => {
-      const deltaTime = currentTime - this.lastTime;
+    const animate = () => {
+      this.time++;
+      this.updateOcean();
       
-      if (deltaTime >= this.frameInterval) {
-        this.updateParticles(deltaTime);
-        this.drawParticles();
-        this.lastTime = currentTime - (deltaTime % this.frameInterval);
-      }
-      
-      this.animationFrame = requestAnimationFrame(animate);
+      // Slower frame rate for ASCII (15 fps)
+      setTimeout(() => {
+        this.animationFrame = requestAnimationFrame(animate);
+      }, 1000 / 15);
     };
     
     this.animationFrame = requestAnimationFrame(animate);
@@ -256,107 +235,126 @@ class ThemeEngine {
   }
 }
 
-// Initialize theme engine when DOM is ready
+// Initialize ocean engine
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    window.themeEngine = new ThemeEngine();
+    window.oceanEngine = new OceanEngine();
   });
 } else {
-  window.themeEngine = new ThemeEngine();
+  window.oceanEngine = new OceanEngine();
 }
 
-// Add smooth scroll for anchor links
+// Smooth anchor scrolling
 document.addEventListener('click', (e) => {
   if (e.target.tagName === 'A' && e.target.hash) {
     const target = document.querySelector(e.target.hash);
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Update URL without jumping
       history.pushState(null, null, e.target.hash);
     }
   }
 });
 
-// Add post theme enhancements
-function enhancePostTheme() {
+// Add subtle water ripple effect on mouse movement (homepage only)
+if (window.location.pathname === '/' || window.location.pathname === '') {
+  let rippleTimeout;
+  
+  document.addEventListener('mousemove', (e) => {
+    clearTimeout(rippleTimeout);
+    
+    rippleTimeout = setTimeout(() => {
+      const ripple = document.createElement('div');
+      ripple.style.cssText = `
+        position: fixed;
+        left: ${e.clientX}px;
+        top: ${e.clientY}px;
+        width: 1px;
+        height: 1px;
+        background: transparent;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 5;
+        box-shadow: 0 0 10px 10px rgba(35, 88, 127, 0.1);
+        animation: ripple 2s ease-out forwards;
+      `;
+      
+      document.body.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 2000);
+    }, 100);
+  });
+  
+  // Add ripple animation if not exists
+  if (!document.querySelector('#ripple-style')) {
+    const style = document.createElement('style');
+    style.id = 'ripple-style';
+    style.textContent = `
+      @keyframes ripple {
+        to {
+          box-shadow: 0 0 40px 40px rgba(35, 88, 127, 0);
+          transform: scale(40);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+// Code block enhancements for posts
+function enhanceCodeBlocks() {
   const article = document.querySelector('article');
   if (!article) return;
   
-  // Add reading progress bar
-  const progressBar = document.createElement('div');
-  progressBar.className = 'reading-progress';
-  progressBar.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #00ffff, #ff00ff);
-    width: 0%;
-    z-index: 1001;
-    transition: width 100ms ease;
-  `;
-  document.body.appendChild(progressBar);
-  
-  window.addEventListener('scroll', () => {
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollProgress = (window.scrollY / scrollHeight) * 100;
-    progressBar.style.width = `${scrollProgress}%`;
-  });
-  
-  // Enhance code blocks
-  article.querySelectorAll('pre code').forEach(codeBlock => {
-    const pre = codeBlock.parentElement;
+  article.querySelectorAll('pre').forEach(pre => {
     pre.style.position = 'relative';
     
-    // Add copy button
-    const copyBtn = document.createElement('button');
-    copyBtn.textContent = 'Copy';
-    copyBtn.className = 'copy-code';
-    copyBtn.style.cssText = `
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      padding: 4px 12px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 4px;
-      color: #a0a0c0;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 150ms ease;
-      font-family: var(--font-mono);
-    `;
+    const code = pre.querySelector('code');
+    if (!code) return;
     
-    copyBtn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(codeBlock.textContent);
-        copyBtn.textContent = 'Copied!';
-        copyBtn.style.color = '#00ffff';
-        setTimeout(() => {
-          copyBtn.textContent = 'Copy';
-          copyBtn.style.color = '#a0a0c0';
-        }, 2000);
-      } catch (err) {
-        console.error('Failed to copy:', err);
+    // Add line numbers
+    const lines = code.textContent.split('\n');
+    if (lines.length > 3) {
+      const lineNumbers = document.createElement('div');
+      lineNumbers.style.cssText = `
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3em;
+        padding: 1rem 0.5rem;
+        text-align: right;
+        color: rgba(35, 88, 127, 0.3);
+        border-right: 1px solid rgba(35, 88, 127, 0.1);
+        font-family: var(--font-mono);
+        font-size: 0.875em;
+        line-height: inherit;
+        user-select: none;
+      `;
+      
+      for (let i = 1; i <= lines.length; i++) {
+        lineNumbers.innerHTML += `${i}<br>`;
       }
-    });
-    
-    pre.appendChild(copyBtn);
+      
+      pre.appendChild(lineNumbers);
+      code.style.marginLeft = '4em';
+    }
   });
 }
 
-// Run post enhancements if on a post page
 if (window.location.pathname.startsWith('/posts/')) {
-  enhancePostTheme();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enhanceCodeBlocks);
+  } else {
+    enhanceCodeBlocks();
+  }
 }
 
-// Performance optimization: Pause animations when tab is not visible
+// Pause animation when tab is not visible
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden && window.themeEngine) {
-    window.themeEngine.destroy();
-  } else if (!document.hidden && window.themeEngine) {
-    window.themeEngine.startAnimation();
+  if (document.hidden && window.oceanEngine) {
+    window.oceanEngine.destroy();
+  } else if (!document.hidden && !window.oceanEngine) {
+    window.oceanEngine = new OceanEngine();
   }
 });

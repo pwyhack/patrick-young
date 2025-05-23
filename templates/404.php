@@ -4,14 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found</title>
-    <meta name="description" content="The page you're looking for doesn't exist">
-    
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="description" content="Lost at sea in the digital ocean">
     
     <!-- Styles -->
     <link rel="stylesheet" href="/theme.css">
@@ -29,11 +22,7 @@
             font-size: clamp(4rem, 15vw, 8rem);
             font-weight: 700;
             line-height: 1;
-            background: var(--gradient-cosmic);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
+            color: var(--text-primary);
             margin-bottom: var(--space-md);
             animation: glitch 3s ease-in-out infinite;
         }
@@ -85,8 +74,8 @@
         <main>
             <div class="error-container">
                 <div class="error-code">404</div>
-                <p class="error-message">Lost in the digital void</p>
-                <p>The page you're seeking has vanished into the quantum realm.</p>
+                <p class="error-message">Adrift in unknown waters</p>
+                <p>The page you seek has sunk beneath the digital waves.</p>
                 
                 <div class="error-actions">
                     <a href="/">Return Home</a>
@@ -96,7 +85,7 @@
         </main>
         
         <footer>
-            <p>&copy; <?= date('Y') ?> Patrick Young. Crafted with curiosity and code.</p>
+            <p>&copy; <?= date('Y') ?> Patrick Young · Drifting through digital tides</p>
         </footer>
     </div>
     
