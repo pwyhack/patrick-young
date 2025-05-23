@@ -1,40 +1,53 @@
-// Ocean Mysticism Theme - Realistic Wave Simulation
+// Ocean Mysticism Theme - 3D Island Wave Simulation
 class OceanEngine {
   constructor() {
     this.time = 0;
     this.phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     this.animationFrame = null;
     
-    // Realistic ocean wave parameters
+    // Ocean parameters
     this.ocean = {
-      windSpeed: 8,
-      wavelength: 120,
-      amplitude: 0.6,
-      choppiness: 0.8,
-      direction: { x: 1, z: 0.4 }
+      windSpeed: 6,
+      wavelength: 140,
+      amplitude: 0.5,
+      direction: { x: 1, z: 0.3 }
     };
     
-    // Smoother ASCII gradient for water - from deep to shore
-    this.waterGradient = ' .·,¸.·˜˜·.¸¸.·˜≈~≋∼∽≈≋~∼∽'
+    // Depth-based ASCII characters for 3D effect
+    this.depthLayers = {
+      deep: ' ·.¸,¸.·˜',
+      medium: '˜·.¸¸.·˜≈',
+      shallow: '≈~≋∼∽≈≋',
+      shore: '~∼∽-=≡',
+      land: '░▒▓█▲▼'
+    };
+    
+    // Island terrain
+    this.island = {
+      center: { x: 34, z: 10 },
+      radius: 8,
+      height: 4,
+      peaks: [
+        { x: 32, z: 8, height: 3.5 },
+        { x: 36, z: 11, height: 2.8 },
+        { x: 35, z: 9, height: 4.2 }
+      ]
+    };
     
     // Sea creatures
     this.creatures = [];
     this.creatureTypes = [
-      { art: '><>', speed: 0.8, name: 'fish' },
-      { art: '<><', speed: 0.7, name: 'fish2' },
-      { art: '~(°)~', speed: 0.4, name: 'jellyfish' },
-      { art: 'ς>', speed: 0.5, name: 'seahorse' },
-      { art: '*', speed: 0.3, name: 'starfish' },
-      { art: '~θ~', speed: 0.6, name: 'octopus' },
+      { art: '><>', speed: 0.6, name: 'fish' },
+      { art: '~(°)~', speed: 0.3, name: 'jellyfish' },
+      { art: 'ς>', speed: 0.4, name: 'seahorse' },
       { art: '◉', speed: 0.2, name: 'bubble' }
     ];
     
-    // Pipeline paths for creatures (invisible maze)
+    // Curved pipeline paths around island
     this.pipelines = [
-      { start: { x: -10, y: 20 }, control: { x: 40, y: 15 }, end: { x: 90, y: 25 }, depth: 0.7 },
-      { start: { x: 90, y: 10 }, control: { x: 50, y: 18 }, end: { x: -10, y: 12 }, depth: 0.5 },
-      { start: { x: -10, y: 30 }, control: { x: 35, y: 22 }, end: { x: 90, y: 35 }, depth: 0.9 },
-      { start: { x: 90, y: 5 }, control: { x: 60, y: 8 }, end: { x: -10, y: 6 }, depth: 0.3 }
+      { start: { x: -10, y: 25 }, control: { x: 20, y: 20 }, end: { x: 80, y: 30 }, depth: 0.6 },
+      { start: { x: 80, y: 15 }, control: { x: 60, y: 8 }, end: { x: -10, y: 12 }, depth: 0.4 },
+      { start: { x: -10, y: 35 }, control: { x: 45, y: 25 }, end: { x: 90, y: 40 }, depth: 0.8 }
     ];
     
     this.init();
@@ -70,60 +83,91 @@ class OceanEngine {
     this.oceanContainer = container;
   }
   
-  // Gerstner wave simulation for realistic ocean movement
-  gerstnerWave(x, z, time) {
-    const k = 2 * Math.PI / this.ocean.wavelength; // Wave number
-    const w = Math.sqrt(9.81 * k); // Angular frequency (deep water)
-    const a = this.ocean.amplitude;
-    const d = this.ocean.direction;
-    const dot = d.x * x + d.z * z;
-    
-    // Gerstner wave equations
-    const phase = k * dot - w * time * 0.05;
-    const height = a * Math.sin(phase);
-    
-    // Add secondary waves for realism
-    const k2 = k * 1.7;
-    const w2 = Math.sqrt(9.81 * k2);
-    const phase2 = k2 * (x * 0.7 + z * 0.3) - w2 * time * 0.03;
-    const height2 = a * 0.4 * Math.sin(phase2);
-    
-    // Tertiary high-frequency ripples
-    const k3 = k * 3.2;
-    const phase3 = k3 * x - w2 * time * 0.08;
-    const height3 = a * 0.15 * Math.sin(phase3);
-    
-    return height + height2 + height3;
+  // Calculate distance from point to island
+  distanceToIsland(x, z) {
+    const dx = x - this.island.center.x;
+    const dz = z - this.island.center.z;
+    return Math.sqrt(dx * dx + dz * dz);
   }
   
-  // Generate ocean field with realistic wave physics
+  // Get terrain height at point
+  getTerrainHeight(x, z) {
+    const distToCenter = this.distanceToIsland(x, z);
+    
+    if (distToCenter > this.island.radius) return 0; // Water level
+    
+    // Base island height
+    const falloff = Math.max(0, 1 - distToCenter / this.island.radius);
+    let height = this.island.height * falloff * falloff;
+    
+    // Add peaks
+    this.island.peaks.forEach(peak => {
+      const peakDist = Math.sqrt((x - peak.x) ** 2 + (z - peak.z) ** 2);
+      if (peakDist < 3) {
+        const peakFalloff = Math.max(0, 1 - peakDist / 3);
+        height += peak.height * peakFalloff * peakFalloff;
+      }
+    });
+    
+    return height;
+  }
+  
+  // Wave interference around obstacles
+  waveInterference(x, z, time) {
+    const k = 2 * Math.PI / this.ocean.wavelength;
+    const w = Math.sqrt(9.81 * k) * 0.3; // Slower waves
+    
+    // Primary wave
+    const dot = this.ocean.direction.x * x + this.ocean.direction.z * z;
+    const phase = k * dot - w * time;
+    let wave = this.ocean.amplitude * Math.sin(phase);
+    
+    // Wave reflection/diffraction around island
+    const distToIsland = this.distanceToIsland(x, z);
+    if (distToIsland < this.island.radius + 10) {
+      // Reflection
+      const reflectionAngle = Math.atan2(z - this.island.center.z, x - this.island.center.x);
+      const reflectedPhase = k * (x * Math.cos(reflectionAngle) + z * Math.sin(reflectionAngle)) + w * time;
+      const reflectionStrength = Math.exp(-(distToIsland - this.island.radius) / 5);
+      wave += this.ocean.amplitude * 0.4 * Math.sin(reflectedPhase) * reflectionStrength;
+      
+      // Diffraction (waves bending around island)
+      const diffractionPhase = phase + reflectionAngle;
+      wave += this.ocean.amplitude * 0.2 * Math.sin(diffractionPhase) * reflectionStrength;
+    }
+    
+    // Secondary ripples
+    const ripple = this.ocean.amplitude * 0.3 * Math.sin(k * x * 1.7 - w * time * 1.3);
+    
+    return wave + ripple;
+  }
+  
+  // Generate 3D ocean field with island
   generateOceanField(time) {
     const width = 68;
-    const height = 14;
-    const depth = 20;
+    const depth = 18;
     
     let field = [];
     
     for (let z = 0; z < depth; z++) {
       let row = [];
       for (let x = 0; x < width; x++) {
-        // Normalize coordinates
-        const nx = (x - width/2) * 2;
-        const nz = z * 1.5;
+        const terrainHeight = this.getTerrainHeight(x, z);
         
-        // Calculate wave height using Gerstner waves
-        let waveHeight = this.gerstnerWave(nx, nz, time);
-        
-        // Add gentle turbulence
-        const turbulence = Math.sin(x * 0.08 + time * 0.015) * 
-                          Math.cos(z * 0.12 - time * 0.008) * 0.2;
-        
-        // Beach-like depth attenuation (shallower toward shore)
-        const beachFactor = Math.exp(-z / depth * 1.5);
-        const shoreFade = Math.max(0, 1 - z / (depth * 0.7)); // More gentle fade
-        waveHeight = (waveHeight + turbulence) * beachFactor * shoreFade;
-        
-        row.push(waveHeight);
+        if (terrainHeight > 0.5) {
+          // Land
+          row.push({ type: 'land', height: terrainHeight });
+        } else {
+          // Water with waves
+          const waveHeight = this.waveInterference(x, z, time);
+          const waterDepth = Math.max(0, -terrainHeight); // Depth below sea level
+          
+          row.push({ 
+            type: 'water', 
+            height: waveHeight,
+            depth: waterDepth + z * 0.1 // Deeper toward back
+          });
+        }
       }
       field.push(row);
     }
@@ -131,40 +175,54 @@ class OceanEngine {
     return field;
   }
   
-  // Convert height to character with smooth gradients
-  heightToChar(height) {
-    // Normalize height to 0-1 range
-    const normalized = (height + 2) / 4;
-    const index = Math.floor(normalized * (this.waterGradient.length - 1));
-    const clampedIndex = Math.max(0, Math.min(this.waterGradient.length - 1, index));
-    return this.waterGradient[clampedIndex];
+  // Convert field data to ASCII with 3D depth
+  fieldToChar(cell) {
+    if (cell.type === 'land') {
+      const heightIndex = Math.floor(Math.min(cell.height * 1.5, this.depthLayers.land.length - 1));
+      return this.depthLayers.land[heightIndex];
+    } else {
+      // Water
+      const totalDepth = cell.depth + cell.height;
+      
+      if (totalDepth < -1.5) {
+        const index = Math.floor(Math.random() * this.depthLayers.deep.length);
+        return this.depthLayers.deep[index];
+      } else if (totalDepth < -0.5) {
+        const index = Math.floor(Math.random() * this.depthLayers.medium.length);
+        return this.depthLayers.medium[index];
+      } else if (totalDepth < 0.5) {
+        const index = Math.floor(Math.random() * this.depthLayers.shallow.length);
+        return this.depthLayers.shallow[index];
+      } else {
+        const index = Math.floor(Math.random() * this.depthLayers.shore.length);
+        return this.depthLayers.shore[index];
+      }
+    }
   }
   
-  // Render ocean with perspective
+  // Render with natural perspective
   renderOcean(field) {
     const width = field[0].length;
     const depth = field.length;
-    const viewHeight = 12;
+    const viewHeight = 14;
     
     let ascii = [];
-    const horizon = viewHeight * 0.35;
     
     for (let y = 0; y < viewHeight; y++) {
       let line = '';
       
-        // Non-linear perspective for beach-like effect
-      const t = (y - horizon) / (viewHeight - horizon);
-      const perspectiveDepth = t * t; // Quadratic for gentler falloff
-      const z = Math.floor(Math.max(0, Math.min(depth - 1, perspectiveDepth * depth * 0.9)));
+      // Natural perspective mapping
+      const perspective = (y / viewHeight) ** 1.8;
+      const z = Math.floor(perspective * (depth - 1));
       
       for (let x = 0; x < width; x++) {
-        // Slight barrel distortion at edges
-        const distortionFactor = 1 - Math.pow((x - width/2) / (width/2), 2) * 0.1;
-        const perspectiveX = x + (x - width/2) * perspectiveDepth * 0.05 * distortionFactor;
-        const sampleX = Math.floor(Math.max(0, Math.min(width - 1, perspectiveX)));
+        // Add slight fisheye distortion for naturalism
+        const center = width / 2;
+        const distortion = 1 - Math.abs(x - center) / center * 0.05;
+        const sampleX = Math.floor(x * distortion);
+        const clampedX = Math.max(0, Math.min(width - 1, sampleX));
         
-        const height = field[z][sampleX];
-        line += this.heightToChar(height);
+        line += this.fieldToChar(field[z][clampedX]);
       }
       
       ascii.push(line);
@@ -187,21 +245,21 @@ class OceanEngine {
       height: 100%;
       pointer-events: none;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       line-height: 1;
     `;
     this.oceanContainer.style.position = 'relative';
     this.oceanContainer.appendChild(creatureLayer);
     this.creatureLayer = creatureLayer;
     
-    // Spawn initial creatures (fewer, more subtle)
-    for (let i = 0; i < 3; i++) {
-      setTimeout(() => this.spawnCreature(), i * 4000);
+    // Spawn initial creatures
+    for (let i = 0; i < 2; i++) {
+      setTimeout(() => this.spawnCreature(), i * 6000);
     }
   }
   
   spawnCreature() {
-    if (this.creatures.length > 5) return; // Limit creatures
+    if (this.creatures.length > 3) return;
     
     const type = this.creatureTypes[Math.floor(Math.random() * this.creatureTypes.length)];
     const pipeline = this.pipelines[Math.floor(Math.random() * this.pipelines.length)];
@@ -210,8 +268,7 @@ class OceanEngine {
       ...type,
       pipeline,
       progress: 0,
-      element: document.createElement('div'),
-      opacity: 0
+      element: document.createElement('div')
     };
     
     creature.element.textContent = type.art;
@@ -219,56 +276,44 @@ class OceanEngine {
       position: absolute;
       color: var(--text-tertiary);
       opacity: 0;
-      transition: opacity 2s ease;
+      transition: opacity 3s ease;
       transform: translate(-50%, -50%);
     `;
     
     this.creatureLayer.appendChild(creature.element);
     this.creatures.push(creature);
     
-    // Fade in more subtly
+    // Fade in subtly
     setTimeout(() => {
-      creature.element.style.opacity = pipeline.depth * 0.4;
-      creature.opacity = pipeline.depth * 0.4;
+      creature.element.style.opacity = pipeline.depth * 0.3;
     }, 100);
   }
   
   updateCreatures() {
     this.creatures = this.creatures.filter(creature => {
-      creature.progress += creature.speed * 0.001;
+      creature.progress += creature.speed * 0.0008;
       
       if (creature.progress >= 1) {
-        // Remove creature
         creature.element.style.opacity = '0';
-        setTimeout(() => creature.element.remove(), 2000);
+        setTimeout(() => creature.element.remove(), 3000);
         
-        // Spawn new one occasionally
-        if (Math.random() < 0.15) {
-          setTimeout(() => this.spawnCreature(), 3000 + Math.random() * 8000);
+        if (Math.random() < 0.1) {
+          setTimeout(() => this.spawnCreature(), 5000 + Math.random() * 10000);
         }
         return false;
       }
       
-      // Calculate position along quadratic bezier curve
+      // Bezier curve movement
       const t = creature.progress;
       const p = creature.pipeline;
       const x = (1-t)*(1-t)*p.start.x + 2*(1-t)*t*p.control.x + t*t*p.end.x;
       const y = (1-t)*(1-t)*p.start.y + 2*(1-t)*t*p.control.y + t*t*p.end.y;
       
-      // Add gentle sine wave motion
-      const wave = Math.sin(t * Math.PI * 4 + this.time * 0.05) * 2;
+      // Gentle wave motion
+      const wave = Math.sin(t * Math.PI * 3 + this.time * 0.03) * 1.5;
       
       creature.element.style.left = `${x}%`;
       creature.element.style.top = `${y + wave}%`;
-      
-      // Slight rotation for fish
-      if (creature.name.includes('fish')) {
-        const angle = Math.atan2(
-          p.end.y - p.start.y,
-          p.end.x - p.start.x
-        ) * 180 / Math.PI;
-        creature.element.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-      }
       
       return true;
     });
@@ -280,7 +325,6 @@ class OceanEngine {
     const field = this.generateOceanField(this.time);
     const ascii = this.renderOcean(field);
     
-    // Update ocean visualization
     const oceanText = this.oceanContainer.querySelector('.ocean-text');
     if (oceanText) {
       oceanText.textContent = ascii.join('\n');
@@ -291,15 +335,13 @@ class OceanEngine {
       this.oceanContainer.appendChild(textDiv);
     }
     
-    // Update creatures
     this.updateCreatures();
   }
   
   initSubtleInteractions() {
-    // Water droplet on click (not mousemove)
+    // Water droplet on important clicks only
     document.addEventListener('click', (e) => {
-      // Only on important elements
-      if (!e.target.matches('a, button, .post-card')) return;
+      if (!e.target.matches('a[href], button, .post-card, .nav-link')) return;
       
       const droplet = document.createElement('div');
       droplet.className = 'water-droplet';
@@ -307,20 +349,19 @@ class OceanEngine {
         position: fixed;
         left: ${e.clientX}px;
         top: ${e.clientY}px;
-        width: 4px;
-        height: 4px;
+        width: 3px;
+        height: 3px;
         background: var(--icy-sky);
         border-radius: 50%;
         pointer-events: none;
         z-index: 1000;
-        animation: droplet 1.5s ease-out forwards;
+        animation: droplet 1.2s ease-out forwards;
       `;
       
       document.body.appendChild(droplet);
-      setTimeout(() => droplet.remove(), 1500);
+      setTimeout(() => droplet.remove(), 1200);
     });
     
-    // Add droplet animation
     if (!document.querySelector('#droplet-style')) {
       const style = document.createElement('style');
       style.id = 'droplet-style';
@@ -331,11 +372,11 @@ class OceanEngine {
             opacity: 1;
           }
           50% {
-            transform: scale(1.5) translateY(0);
-            opacity: 0.7;
+            transform: scale(1.2) translateY(0);
+            opacity: 0.8;
           }
           100% {
-            transform: scale(3) translateY(20px);
+            transform: scale(2.5) translateY(15px);
             opacity: 0;
             border: 1px solid var(--text-tertiary);
           }
@@ -367,7 +408,7 @@ class OceanEngine {
     if (!nav) return;
     
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 30) {
         nav.classList.add('scrolled');
       } else {
         nav.classList.remove('scrolled');
@@ -394,10 +435,10 @@ class OceanEngine {
       this.time++;
       this.updateOcean();
       
-      // Slower frame rate for meditative ocean (8 fps)
+      // Very slow for contemplative feel (6 fps)
       setTimeout(() => {
         this.animationFrame = requestAnimationFrame(animate);
-      }, 1000 / 8);
+      }, 1000 / 6);
     };
     
     this.animationFrame = requestAnimationFrame(animate);

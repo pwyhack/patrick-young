@@ -27,6 +27,7 @@
         <nav>
             <div class="container">
                 <a href="/"><h1>Patrick Young</h1></a>
+                <a href="https://x.com/Consumerrick" class="nav-link" target="_blank" rel="noopener">@Consumerrick</a>
             </div>
         </nav>
         
