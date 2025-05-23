@@ -63,7 +63,7 @@ body {
   position: relative;
 }
 
-/* Subtle water texture overlay */
+/* Subtle water texture overlay that flows with geometric ocean */
 body::before {
   content: '';
   position: fixed;
@@ -72,10 +72,10 @@ body::before {
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(circle at 30% 40%, var(--icy-sky) 0%, transparent 40%),
-    radial-gradient(circle at 70% 60%, var(--sunlit-ripples) 0%, transparent 45%),
-    radial-gradient(circle at 50% 90%, var(--icy-sky) 0%, transparent 50%);
-  opacity: 0.2;
+    radial-gradient(ellipse at 30% 40%, var(--icy-sky) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 60%, var(--sunlit-ripples) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 90%, var(--icy-sky) 0%, transparent 50%);
+  opacity: 0.15;
   pointer-events: none;
   z-index: 1;
   transform: translateY(var(--scroll-offset, 0));
@@ -156,6 +156,18 @@ main {
   margin: 0 auto;
   padding: var(--space-xl) var(--space-lg) var(--space-xl);
   width: 100%;
+  position: relative;
+}
+
+/* Flowing content integration */
+main > p:first-of-type {
+  position: relative;
+  z-index: 5;
+}
+
+main .geometric-ocean + * {
+  position: relative;
+  z-index: 5;
 }
 
 /* Typography */
@@ -204,44 +216,147 @@ a:hover {
 }
 
 /* Ocean ASCII container */
-.ocean-ascii {
+/* Flowing Geometric Ocean - No Rectangles */
+.geometric-ocean {
   position: relative;
+  width: 100%;
+  height: clamp(200px, 40vmin, 350px);
   margin: var(--space-xl) 0;
-  padding: var(--space-lg) 0;
-  overflow: hidden;
+  overflow: visible;
   opacity: 0;
   animation: fadeIn 3s ease forwards 1s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 300px;
+  
+  /* Create organic flowing shape */
+  clip-path: ellipse(90% 70% at 50% 50%);
+  border-radius: 50%;
+  
+  /* Subtle background glow */
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, 
+    rgba(35, 88, 127, 0.03) 0%, 
+    rgba(227, 241, 255, 0.02) 40%, 
+    transparent 70%);
 }
 
-.ocean-text {
-  font-family: var(--font-mono);
-  font-size: clamp(0.45rem, 1.1vw, 0.7rem);
-  line-height: 1.1;
-  color: var(--text-tertiary);
-  white-space: pre;
-  letter-spacing: 0.02em;
-  user-select: none;
+.wave-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   opacity: 0.8;
-  text-align: center;
-  filter: contrast(1.1) brightness(0.9);
-  text-shadow: 0 0 1px rgba(35, 88, 127, 0.3);
+  filter: blur(0.5px);
 }
 
-.creature-layer {
-  z-index: 2;
+.interference-circle {
+  transform-origin: center;
+  animation: breathe 8s ease-in-out infinite;
+}
+
+.interference-circle:nth-child(odd) {
+  animation-direction: reverse;
+}
+
+.golden-spiral {
+  opacity: 0.6;
+  filter: drop-shadow(0 0 2px rgba(35, 88, 127, 0.1));
+}
+
+.wave-path {
+  opacity: 0.7;
+}
+
+.geometric-particle {
+  animation: float 12s ease-in-out infinite;
+}
+
+.geometric-particle:nth-child(even) {
+  animation-delay: -6s;
+}
+
+.flow-creature {
+  z-index: 3;
+  filter: drop-shadow(0 0 3px rgba(35, 88, 127, 0.2));
+}
+
+/* Flowing edge integration */
+.geometric-ocean::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  right: -10%;
+  bottom: -20%;
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, 
+    rgba(239, 246, 251, 0.4) 0%, 
+    rgba(227, 241, 255, 0.2) 30%, 
+    transparent 60%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 10s ease-in-out infinite;
+}
+
+.geometric-ocean::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -20%;
+  right: -20%;
+  bottom: -30%;
+  background: radial-gradient(ellipse 60% 40% at 50% 50%, 
+    rgba(35, 88, 127, 0.03) 0%, 
+    transparent 50%);
+  border-radius: 50%;
+  z-index: -2;
+  animation: pulse 15s ease-in-out infinite reverse;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(2deg); }
+  66% { transform: translateY(4px) rotate(-1deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
 }
 
 @keyframes fadeIn {
-  to { opacity: 1; }
+  from { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Post list */
 .post-list {
   margin-top: var(--space-xl);
+  position: relative;
+  z-index: 5;
+}
+
+/* Subtle flow connection between ocean and posts */
+.post-list::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, 
+    transparent, 
+    rgba(35, 88, 127, 0.1), 
+    transparent);
 }
 
 .post-card {
@@ -456,10 +571,13 @@ footer {
     padding: var(--space-lg) var(--space-md) var(--space-lg);
   }
   
-  .ocean-ascii {
-    margin-left: calc(var(--space-md) * -1);
-    margin-right: calc(var(--space-md) * -1);
-    padding: var(--space-sm) 0 var(--space-lg);
+  .geometric-ocean {
+    height: clamp(150px, 35vmin, 250px);
+    margin: var(--space-lg) 0;
+  }
+  
+  .wave-svg {
+    filter: blur(0.3px);
   }
   
   nav.scrolled {

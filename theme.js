@@ -1,51 +1,27 @@
-// Ocean Mysticism Theme - Handcrafted Geometric Wave Mandala
+// Ocean Mysticism Theme - Flowing Geometric Wave Art
 class OceanEngine {
   constructor() {
     this.time = 0;
     this.phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     this.animationFrame = null;
     
-    // Sacred geometry parameters
-    this.mandala = {
-      centerX: 34,
-      centerY: 8,
-      rings: 6,
-      spokes: 8,
-      waveAmplitude: 0.4,
-      rotationSpeed: 0.01
+    // Wave parameters
+    this.waves = {
+      amplitude: 30,
+      frequency: 0.008,
+      speed: 0.02,
+      layers: 5
     };
     
-    // Handcrafted wave symbols by intensity
-    this.waveSymbols = {
-      void: ' ',
-      ripple: '·',
-      gentle: '¸',
-      flow: '~',
-      wave: '≈',
-      surge: '≋',
-      peak: '∼',
-      crest: '∽'
-    };
-    
-    // Geometric island pattern (hexagonal sacred geometry)
-    this.islandCore = [
-      '    ◊    ',
-      '   ◊▲◊   ',
-      '  ◊▲█▲◊  ',
-      ' ◊▲█◊█▲◊ ',
-      '◊▲█◊ ◊█▲◊',
-      ' ◊▲█◊█▲◊ ',
-      '  ◊▲█▲◊  ',
-      '   ◊▲◊   ',
-      '    ◊    '
-    ];
-    
-    // Creature paths following golden spirals
+    // Geometric elements
+    this.circles = [];
+    this.spirals = [];
     this.creatures = [];
+    
     this.creatureTypes = [
-      { art: '><>', speed: 0.4, name: 'fish' },
-      { art: '~°~', speed: 0.2, name: 'jellyfish' },
-      { art: '◉', speed: 0.15, name: 'bubble' }
+      { symbol: '◦', size: 8, speed: 0.3 },
+      { symbol: '○', size: 12, speed: 0.2 },
+      { symbol: '◯', size: 6, speed: 0.4 }
     ];
     
     this.init();
@@ -54,22 +30,22 @@ class OceanEngine {
   init() {
     this.initScrollEffects();
     this.initNavbar();
-    this.initOceanVisualization();
+    this.initGeometricOcean();
     this.initCreatures();
     this.initSubtleInteractions();
     this.initReadingProgress();
     this.startAnimation();
   }
   
-  initOceanVisualization() {
-    // Only create ocean on homepage
+  initGeometricOcean() {
+    // Only create on homepage
     if (window.location.pathname !== '/' && window.location.pathname !== '') return;
     
+    // Create flowing wave container
     const container = document.createElement('div');
-    container.className = 'ocean-ascii';
-    container.setAttribute('aria-hidden', 'true');
+    container.className = 'geometric-ocean';
     
-    // Insert after the intro paragraph
+    // Insert after intro paragraph
     const mainElement = document.querySelector('main');
     const firstParagraph = mainElement.querySelector('p');
     if (firstParagraph && firstParagraph.nextSibling) {
@@ -79,167 +55,114 @@ class OceanEngine {
     }
     
     this.oceanContainer = container;
+    this.createGeometricElements();
   }
   
-  // Calculate distance from center with golden ratio scaling
-  distanceFromCenter(x, y) {
-    const dx = x - this.mandala.centerX;
-    const dy = y - this.mandala.centerY;
-    return Math.sqrt(dx * dx + dy * dy);
-  }
-  
-  // Calculate angle from center
-  angleFromCenter(x, y) {
-    const dx = x - this.mandala.centerX;
-    const dy = y - this.mandala.centerY;
-    return Math.atan2(dy, dx);
-  }
-  
-  // Generate wave intensity using polar coordinates and golden ratio
-  getWaveIntensity(x, y, time) {
-    const distance = this.distanceFromCenter(x, y);
-    const angle = this.angleFromCenter(x, y);
+  createGeometricElements() {
+    if (!this.oceanContainer) return;
     
-    // Concentric rings following golden ratio
-    const ringPhase = (distance / this.phi) * 2 * Math.PI;
-    const ringWave = Math.sin(ringPhase - time * 0.02);
+    // SVG for complex shapes
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 800 400');
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    svg.className = 'wave-svg';
     
-    // Radial spokes
-    const spokePhase = angle * this.mandala.spokes;
-    const spokeWave = Math.sin(spokePhase + time * 0.015);
-    
-    // Spiral component (Fibonacci spiral)
-    const spiralPhase = angle + distance * 0.1 - time * 0.008;
-    const spiralWave = Math.sin(spiralPhase);
-    
-    // Interference pattern
-    const interference = ringWave * 0.5 + spokeWave * 0.3 + spiralWave * 0.2;
-    
-    // Distance attenuation for natural falloff
-    const attenuation = Math.exp(-distance / 25);
-    
-    return interference * attenuation;
-  }
-  
-  // Check if point is inside sacred island geometry
-  isInsideIsland(x, y) {
-    const centerX = this.mandala.centerX;
-    const centerY = this.mandala.centerY;
-    
-    // Map to island core coordinates
-    const islandX = Math.floor(x - centerX + 4);
-    const islandY = Math.floor(y - centerY + 4);
-    
-    if (islandY >= 0 && islandY < this.islandCore.length &&
-        islandX >= 0 && islandX < this.islandCore[islandY].length) {
-      return this.islandCore[islandY][islandX] !== ' ';
-    }
-    return false;
-  }
-  
-  // Get island character at position
-  getIslandChar(x, y) {
-    const centerX = this.mandala.centerX;
-    const centerY = this.mandala.centerY;
-    
-    const islandX = Math.floor(x - centerX + 4);
-    const islandY = Math.floor(y - centerY + 4);
-    
-    if (islandY >= 0 && islandY < this.islandCore.length &&
-        islandX >= 0 && islandX < this.islandCore[islandY].length) {
-      return this.islandCore[islandY][islandX];
-    }
-    return ' ';
-  }
-  
-  // Convert wave intensity to ASCII character
-  intensityToChar(intensity) {
-    if (intensity < -0.6) return this.waveSymbols.void;
-    if (intensity < -0.3) return this.waveSymbols.ripple;
-    if (intensity < -0.1) return this.waveSymbols.gentle;
-    if (intensity < 0.1) return this.waveSymbols.flow;
-    if (intensity < 0.3) return this.waveSymbols.wave;
-    if (intensity < 0.5) return this.waveSymbols.surge;
-    if (intensity < 0.7) return this.waveSymbols.peak;
-    return this.waveSymbols.crest;
-  }
-  
-  // Generate the handcrafted wave mandala
-  generateWaveMandala(time) {
-    const width = 68;
-    const height = 16;
-    
-    let mandala = [];
-    
-    for (let y = 0; y < height; y++) {
-      let line = '';
-      for (let x = 0; x < width; x++) {
-        
-        if (this.isInsideIsland(x, y)) {
-          // Sacred island geometry
-          line += this.getIslandChar(x, y);
-        } else {
-          // Wave field with sacred geometry
-          const intensity = this.getWaveIntensity(x, y, time);
-          line += this.intensityToChar(intensity);
-        }
-      }
-      mandala.push(line);
+    // Create concentric interference circles
+    for (let i = 0; i < 6; i++) {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', 300 + i * 40);
+      circle.setAttribute('cy', 200);
+      circle.setAttribute('r', 20 + i * 25);
+      circle.setAttribute('fill', 'none');
+      circle.setAttribute('stroke', 'rgba(35, 88, 127, 0.1)');
+      circle.setAttribute('stroke-width', '1');
+      circle.className = `interference-circle circle-${i}`;
+      svg.appendChild(circle);
+      this.circles.push(circle);
     }
     
-    return mandala;
+    // Create golden spiral
+    const spiralPath = this.generateSpiralPath();
+    const spiral = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    spiral.setAttribute('d', spiralPath);
+    spiral.setAttribute('fill', 'none');
+    spiral.setAttribute('stroke', 'rgba(35, 88, 127, 0.15)');
+    spiral.setAttribute('stroke-width', '2');
+    spiral.className = 'golden-spiral';
+    svg.appendChild(spiral);
+    
+    // Create wave interference pattern
+    for (let i = 0; i < 3; i++) {
+      const wavePath = this.generateWavePath(i);
+      const wave = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      wave.setAttribute('d', wavePath);
+      wave.setAttribute('fill', 'none');
+      wave.setAttribute('stroke', `rgba(35, 88, 127, ${0.05 + i * 0.03})`);
+      wave.setAttribute('stroke-width', '1.5');
+      wave.className = `wave-path wave-${i}`;
+      svg.appendChild(wave);
+    }
+    
+    this.oceanContainer.appendChild(svg);
+    
+    // Add floating geometric particles
+    this.createParticles();
   }
   
-  // Apply natural edge fading to create organic boundaries
-  applyEdgeFading(mandala) {
-    const height = mandala.length;
-    const width = mandala[0].length;
+  generateSpiralPath() {
+    let path = 'M400,200';
+    const turns = 3;
+    const maxRadius = 150;
     
-    return mandala.map((line, y) => {
-      return line.split('').map((char, x) => {
-        // Distance from edges
-        const edgeDistY = Math.min(y, height - 1 - y) / height;
-        const edgeDistX = Math.min(x, width - 1 - x) / width;
-        const edgeDist = Math.min(edgeDistY, edgeDistX);
-        
-        // Fade based on distance from edge
-        const fadeThreshold = 0.15;
-        if (edgeDist < fadeThreshold && char !== ' ') {
-          const fadeRatio = edgeDist / fadeThreshold;
-          if (fadeRatio < 0.3) return ' ';
-          if (fadeRatio < 0.6) return '·';
-          if (fadeRatio < 0.8) return '¸';
-        }
-        
-        return char;
-      }).join('');
-    });
+    for (let i = 0; i <= turns * 360; i += 5) {
+      const angle = (i * Math.PI) / 180;
+      const radius = (i / (turns * 360)) * maxRadius;
+      const x = 400 + radius * Math.cos(angle);
+      const y = 200 + radius * Math.sin(angle) * 0.6; // Elliptical
+      path += ` L${x},${y}`;
+    }
+    
+    return path;
+  }
+  
+  generateWavePath(layer) {
+    let path = 'M0,200';
+    const amplitude = 20 + layer * 10;
+    const frequency = 0.01 + layer * 0.005;
+    
+    for (let x = 0; x <= 800; x += 5) {
+      const y = 200 + amplitude * Math.sin(x * frequency + layer * Math.PI / 3);
+      path += ` L${x},${y}`;
+    }
+    
+    return path;
+  }
+  
+  createParticles() {
+    for (let i = 0; i < 8; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'geometric-particle';
+      particle.style.cssText = `
+        position: absolute;
+        width: ${4 + Math.random() * 8}px;
+        height: ${4 + Math.random() * 8}px;
+        background: radial-gradient(circle, rgba(35, 88, 127, 0.3), transparent);
+        border-radius: 50%;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        pointer-events: none;
+      `;
+      
+      this.oceanContainer.appendChild(particle);
+    }
   }
   
   initCreatures() {
     if (!this.oceanContainer) return;
     
-    // Create creature container
-    const creatureLayer = document.createElement('div');
-    creatureLayer.className = 'creature-layer';
-    creatureLayer.style.cssText = `
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      line-height: 1;
-    `;
-    this.oceanContainer.style.position = 'relative';
-    this.oceanContainer.appendChild(creatureLayer);
-    this.creatureLayer = creatureLayer;
-    
-    // Spawn creatures following golden spiral
-    for (let i = 0; i < 2; i++) {
-      setTimeout(() => this.spawnCreature(), i * 8000);
+    // Create minimal creatures
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => this.spawnCreature(), i * 5000);
     }
   }
   
@@ -248,56 +171,76 @@ class OceanEngine {
     
     const type = this.creatureTypes[Math.floor(Math.random() * this.creatureTypes.length)];
     
-    const creature = {
-      ...type,
-      progress: 0,
-      element: document.createElement('div'),
-      spiralRadius: 15 + Math.random() * 10,
-      spiralSpeed: 0.3 + Math.random() * 0.2
-    };
-    
-    creature.element.textContent = type.art;
-    creature.element.style.cssText = `
+    const creature = document.createElement('div');
+    creature.className = 'flow-creature';
+    creature.textContent = type.symbol;
+    creature.style.cssText = `
       position: absolute;
-      color: var(--text-tertiary);
-      opacity: 0;
-      transition: opacity 4s ease;
-      transform: translate(-50%, -50%);
+      font-size: ${type.size}px;
+      color: rgba(35, 88, 127, 0.2);
+      pointer-events: none;
+      transition: all 3s ease;
+      font-family: var(--font-mono);
     `;
     
-    this.creatureLayer.appendChild(creature.element);
-    this.creatures.push(creature);
-    
-    // Fade in very subtly
-    setTimeout(() => {
-      creature.element.style.opacity = 0.25;
-    }, 200);
+    this.oceanContainer.appendChild(creature);
+    this.creatures.push({
+      element: creature,
+      progress: 0,
+      speed: type.speed,
+      radius: 100 + Math.random() * 50
+    });
   }
   
-  updateCreatures() {
+  updateGeometry() {
+    if (!this.oceanContainer) return;
+    
+    // Animate circles
+    this.circles.forEach((circle, i) => {
+      const phase = this.time * 0.001 + i * Math.PI / 3;
+      const scale = 1 + Math.sin(phase) * 0.1;
+      const opacity = 0.1 + Math.sin(phase * 2) * 0.05;
+      circle.setAttribute('transform', `scale(${scale})`);
+      circle.setAttribute('stroke', `rgba(35, 88, 127, ${opacity})`);
+    });
+    
+    // Animate wave paths
+    const waves = this.oceanContainer.querySelectorAll('.wave-path');
+    waves.forEach((wave, i) => {
+      const newPath = this.generateAnimatedWavePath(i);
+      wave.setAttribute('d', newPath);
+    });
+    
+    // Update particles
+    const particles = this.oceanContainer.querySelectorAll('.geometric-particle');
+    particles.forEach((particle, i) => {
+      const phase = this.time * 0.0005 + i;
+      const x = 50 + Math.cos(phase) * 30;
+      const y = 50 + Math.sin(phase * 1.3) * 20;
+      const opacity = 0.2 + Math.sin(phase * 2) * 0.1;
+      
+      particle.style.left = `${x}%`;
+      particle.style.top = `${y}%`;
+      particle.style.opacity = opacity;
+    });
+    
+    // Update creatures
     this.creatures = this.creatures.filter(creature => {
-      creature.progress += creature.speed * 0.0005;
+      creature.progress += creature.speed * 0.001;
       
       if (creature.progress >= 1) {
-        creature.element.style.opacity = '0';
-        setTimeout(() => creature.element.remove(), 4000);
+        creature.element.remove();
         
-        // Rare respawn
-        if (Math.random() < 0.08) {
-          setTimeout(() => this.spawnCreature(), 10000 + Math.random() * 15000);
+        if (Math.random() < 0.1) {
+          setTimeout(() => this.spawnCreature(), 8000);
         }
         return false;
       }
       
-      // Golden spiral path around mandala center
-      const angle = creature.progress * Math.PI * 4; // Two full rotations
-      const radius = creature.spiralRadius * (1 + creature.progress * this.phi);
-      
-      const centerX = 50; // Percentage
-      const centerY = 50;
-      
-      const x = centerX + Math.cos(angle) * radius;
-      const y = centerY + Math.sin(angle) * radius * 0.6; // Elliptical
+      // Flow along curves
+      const angle = creature.progress * Math.PI * 4;
+      const x = 50 + Math.cos(angle) * (creature.radius / 4);
+      const y = 50 + Math.sin(angle * 1.6) * 15;
       
       creature.element.style.left = `${x}%`;
       creature.element.style.top = `${y}%`;
@@ -306,67 +249,49 @@ class OceanEngine {
     });
   }
   
-  updateOcean() {
-    if (!this.oceanContainer) return;
+  generateAnimatedWavePath(layer) {
+    let path = 'M0,200';
+    const amplitude = 15 + layer * 8;
+    const frequency = 0.008 + layer * 0.003;
+    const timeOffset = this.time * (0.01 + layer * 0.005);
     
-    const mandala = this.generateWaveMandala(this.time);
-    const fadedMandala = this.applyEdgeFading(mandala);
-    
-    const oceanText = this.oceanContainer.querySelector('.ocean-text');
-    if (oceanText) {
-      oceanText.textContent = fadedMandala.join('\n');
-    } else {
-      const textDiv = document.createElement('div');
-      textDiv.className = 'ocean-text';
-      textDiv.textContent = fadedMandala.join('\n');
-      this.oceanContainer.appendChild(textDiv);
+    for (let x = 0; x <= 800; x += 8) {
+      const y = 200 + amplitude * Math.sin(x * frequency + timeOffset);
+      path += ` L${x},${y}`;
     }
     
-    this.updateCreatures();
+    return path;
   }
   
   initSubtleInteractions() {
-    // Water droplet on important clicks only
     document.addEventListener('click', (e) => {
       if (!e.target.matches('a[href], button, .post-card, .nav-link')) return;
       
-      const droplet = document.createElement('div');
-      droplet.className = 'water-droplet';
-      droplet.style.cssText = `
+      const ripple = document.createElement('div');
+      ripple.style.cssText = `
         position: fixed;
         left: ${e.clientX}px;
         top: ${e.clientY}px;
-        width: 2px;
-        height: 2px;
-        background: var(--icy-sky);
+        width: 4px;
+        height: 4px;
+        border: 1px solid rgba(35, 88, 127, 0.3);
         border-radius: 50%;
         pointer-events: none;
         z-index: 1000;
-        animation: droplet 1s ease-out forwards;
+        animation: rippleExpand 1.5s ease-out forwards;
       `;
       
-      document.body.appendChild(droplet);
-      setTimeout(() => droplet.remove(), 1000);
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 1500);
     });
     
-    if (!document.querySelector('#droplet-style')) {
+    if (!document.querySelector('#ripple-style')) {
       const style = document.createElement('style');
-      style.id = 'droplet-style';
+      style.id = 'ripple-style';
       style.textContent = `
-        @keyframes droplet {
-          0% {
-            transform: scale(0) translateY(0);
-            opacity: 1;
-          }
-          50% {
-            transform: scale(1) translateY(0);
-            opacity: 0.6;
-          }
-          100% {
-            transform: scale(2) translateY(10px);
-            opacity: 0;
-            border: 1px solid var(--text-tertiary);
-          }
+        @keyframes rippleExpand {
+          0% { transform: scale(0); opacity: 1; }
+          100% { transform: scale(20); opacity: 0; }
         }
       `;
       document.head.appendChild(style);
@@ -420,12 +345,12 @@ class OceanEngine {
   startAnimation() {
     const animate = () => {
       this.time++;
-      this.updateOcean();
+      this.updateGeometry();
       
-      // Ultra-slow for deep contemplation (4 fps)
+      // Smooth 30fps for fluid geometry
       setTimeout(() => {
         this.animationFrame = requestAnimationFrame(animate);
-      }, 1000 / 4);
+      }, 1000 / 30);
     };
     
     this.animationFrame = requestAnimationFrame(animate);
