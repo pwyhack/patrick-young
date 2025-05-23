@@ -12,6 +12,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="/theme.css">
+    <link rel="stylesheet" href="/sculpture.css">
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🌊</text></svg>">

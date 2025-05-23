@@ -1,5 +1,6 @@
 /* Ocean Mysticism Theme */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+@import url('./sculpture.css');
 
 :root {
   /* Core palette */
@@ -216,132 +217,7 @@ a:hover {
 }
 
 /* Ocean ASCII container */
-/* Flowing Geometric Ocean - No Rectangles */
-.geometric-ocean {
-  position: relative;
-  width: 100%;
-  height: clamp(250px, 45vmin, 400px);
-  margin: var(--space-xl) 0;
-  overflow: visible;
-  opacity: 0;
-  animation: fadeIn 2s ease forwards 0.5s;
-  
-  /* Visible background with organic shape */
-  background: radial-gradient(ellipse 85% 65% at 50% 50%, 
-    rgba(35, 88, 127, 0.08) 0%, 
-    rgba(227, 241, 255, 0.12) 30%, 
-    rgba(239, 246, 251, 0.06) 60%,
-    transparent 80%);
-  
-  /* Soft organic boundary */
-  border-radius: 50% / 40%;
-}
-
-.wave-svg {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 1;
-  filter: none;
-}
-
-.interference-circle {
-  transform-origin: center;
-  animation: breathe 6s ease-in-out infinite;
-  stroke: rgba(35, 88, 127, 0.25) !important;
-  stroke-width: 1.5;
-}
-
-.interference-circle:nth-child(odd) {
-  animation-direction: reverse;
-  stroke: rgba(35, 88, 127, 0.2) !important;
-}
-
-.interference-circle:nth-child(even) {
-  stroke: rgba(227, 241, 255, 0.4) !important;
-}
-
-.golden-spiral {
-  opacity: 1;
-  stroke: rgba(35, 88, 127, 0.3) !important;
-  stroke-width: 2;
-  filter: drop-shadow(0 0 3px rgba(35, 88, 127, 0.2));
-}
-
-.wave-path {
-  opacity: 1;
-  stroke-width: 2;
-}
-
-.geometric-particle {
-  animation: float 10s ease-in-out infinite;
-  background: radial-gradient(circle, rgba(35, 88, 127, 0.4), rgba(227, 241, 255, 0.3), transparent) !important;
-  box-shadow: 0 0 8px rgba(35, 88, 127, 0.2);
-}
-
-.geometric-particle:nth-child(even) {
-  animation-delay: -5s;
-  background: radial-gradient(circle, rgba(227, 241, 255, 0.5), rgba(35, 88, 127, 0.2), transparent) !important;
-}
-
-.flow-creature {
-  z-index: 3;
-  filter: drop-shadow(0 0 4px rgba(35, 88, 127, 0.3));
-  color: rgba(35, 88, 127, 0.4) !important;
-  font-weight: bold;
-}
-
-/* Flowing edge integration */
-.geometric-ocean::before {
-  content: '';
-  position: absolute;
-  top: -15%;
-  left: -8%;
-  right: -8%;
-  bottom: -15%;
-  background: radial-gradient(ellipse 75% 55% at 50% 50%, 
-    rgba(239, 246, 251, 0.15) 0%, 
-    rgba(227, 241, 255, 0.08) 30%, 
-    rgba(35, 88, 127, 0.04) 60%,
-    transparent 80%);
-  border-radius: 50%;
-  z-index: -1;
-  animation: pulse 8s ease-in-out infinite;
-}
-
-.geometric-ocean::after {
-  content: '';
-  position: absolute;
-  top: -25%;
-  left: -15%;
-  right: -15%;
-  bottom: -25%;
-  background: radial-gradient(ellipse 65% 45% at 50% 50%, 
-    rgba(35, 88, 127, 0.06) 0%, 
-    rgba(227, 241, 255, 0.04) 40%,
-    transparent 70%);
-  border-radius: 50%;
-  z-index: -2;
-  animation: pulse 12s ease-in-out infinite reverse;
-}
-
-@keyframes breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  33% { transform: translateY(-8px) rotate(2deg); }
-  66% { transform: translateY(4px) rotate(-1deg); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-}
+/* Digital Sculpture styles are imported from sculpture.css */
 
 @keyframes fadeIn {
   from { 
