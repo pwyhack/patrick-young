@@ -1,6 +1,8 @@
 ---
-title: "the children yearn for the stars"
+title: "The Children Yearn for the Stars"
 date: "2024-12-24"
+description: "A reflection on existential awareness, childhood wonder, and humanity's cosmic destiny"
+tags: [existentialism, consciousness, space, childhood]
 ---
 
 Try to remember your first existential crisis. Seriously, look back and think about the first time you had any inkling of existential thought.

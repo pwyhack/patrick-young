@@ -3,62 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, follow">
-    <title>Page Not Found - Patrick William Young</title>
+    <title>404 - Page Not Found</title>
+    <meta name="description" content="The page you're looking for doesn't exist">
     
-    <!-- Preconnect for faster font fetching -->
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <?php $cssPath = '/styles.min.css'; ?>
-    <link rel="stylesheet" href="<?= $cssPath ?>?v=<?= filemtime(__DIR__ . '/..' . $cssPath) ?>">
-    <link rel="stylesheet" href="/aquawave.css?v=<?= filemtime(__DIR__ . '/../aquawave.css') ?>">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Critical fonts with display swap for better performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/theme.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🌊</text></svg>">
+    
+    <style>
+        .error-container {
+            text-align: center;
+            padding: var(--space-xl) 0;
+        }
+        
+        .error-code {
+            font-size: clamp(4rem, 15vw, 8rem);
+            font-weight: 700;
+            line-height: 1;
+            background: var(--gradient-cosmic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            margin-bottom: var(--space-md);
+            animation: glitch 3s ease-in-out infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-actions a {
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            transition: all var(--transition-fast);
+        }
+        
+        .error-actions a:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent-aqua);
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-    <!-- Water theme layers are created by JavaScript -->
-    <div id="sea-creature-layer"></div>
-    
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="nav-brand"><a href="/">PWY</a></div>
-            <div class="nav-links">
-                <a href="https://twitter.com/ConsumerRick" target="_blank" rel="noopener">𝕏</a>
+    <div class="content-wrapper">
+        <nav>
+            <div class="container">
+                <a href="/"><h1>Patrick Young</h1></a>
             </div>
-        </div>
-    </nav>
-
-    <section id="error-page" class="about-section">
-        <div class="content-wrapper">
-            <h1>404 - Ocean Floor</h1>
-            <div class="bio">
-                <p>You've drifted too deep. This page doesn't exist or has been moved.</p>
-                <div style="margin-top: 2rem;">
-                    <a href="/" style="
-                        display: inline-block;
-                        background: rgba(1, 205, 254, 0.2);
-                        color: var(--water-highlight);
-                        padding: 12px 24px;
-                        border-radius: 4px;
-                        text-decoration: none;
-                        font-weight: 500;
-                        border: 1px solid var(--neon-blue);
-                        box-shadow: 0 0 15px rgba(1, 205, 254, 0.3);
-                        transition: all 0.3s ease;
-                    ">Return to Surface</a>
+        </nav>
+        
+        <main>
+            <div class="error-container">
+                <div class="error-code">404</div>
+                <p class="error-message">Lost in the digital void</p>
+                <p>The page you're seeking has vanished into the quantum realm.</p>
+                
+                <div class="error-actions">
+                    <a href="/">Return Home</a>
+                    <a href="javascript:history.back()">Go Back</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Defer non-critical JS -->
-    <script src="/compat.js" defer></script>
-    <script src="/main.js" defer></script>
-    <script src="/aquawave.js" defer></script>
+        </main>
+        
+        <footer>
+            <p>&copy; <?= date('Y') ?> Patrick Young. Crafted with curiosity and code.</p>
+        </footer>
+    </div>
+    
+    <script src="/theme.js"></script>
 </body>
-</html> 
+</html>

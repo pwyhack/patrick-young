@@ -1,83 +1,93 @@
 <?php
-error_reporting(E_ALL & ~E_DEPRECATED);
+require_once __DIR__ . '/vendor/autoload.php';
 
-require __DIR__ . '/vendor/autoload.php';
-
+use Parsedown;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
-// Simple router
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$uri = trim($uri, '/');
+// Initialize Parsedown
+$parsedown = new Parsedown();
+$parsedown->setSafeMode(false);
 
-error_log("Requested URI: " . $uri);
+// Get request path
+$request = $_SERVER['REQUEST_URI'];
+$request = strtok($request, '?'); // Remove query string
+$request = rtrim($request, '/'); // Remove trailing slash
 
-// If it's a post request
-if (preg_match('/^posts\/(.+)$/', $uri, $matches)) {
-    $slug = $matches[1];
-    $filepath = __DIR__ . "/posts/{$slug}.md";
-    
-    error_log("Looking for file: " . $filepath);
-    
-    if (!file_exists($filepath)) {
-        error_log("File not found: " . $filepath);
-        http_response_code(404);
-        include __DIR__ . '/templates/404.php';
-        exit;
-    }
-
-    $document = YamlFrontMatter::parseFile($filepath);
-    $parsedown = new \Parsedown();
-    $content = $parsedown->text($document->body());
-    
-    // Post template
-    include __DIR__ . '/templates/post.php';
-    exit;
+// Cache directory
+$cacheDir = __DIR__ . '/cache';
+if (!is_dir($cacheDir)) {
+    mkdir($cacheDir, 0755, true);
 }
 
-// Handle 404s for non-existent pages that aren't posts
-if ($uri !== '' && !file_exists(__DIR__ . '/' . $uri) && !is_dir(__DIR__ . '/' . $uri)) {
-    http_response_code(404);
-    include __DIR__ . '/templates/404.php';
-    exit;
-}
-
-// Home page
-function getPosts() {
-    $cacheFile = __DIR__ . '/cache/posts.json';
-
-    // Gather all markdown files and determine the most recent modification time.
-    $markdownFiles = glob(__DIR__ . '/posts/*.md');
-    $latestMtime   = $markdownFiles ? max(array_map('filemtime', $markdownFiles)) : 0;
-
-    // 1. Try fast-path: use cache if present and still valid.
-    if (file_exists($cacheFile)) {
-        $cached = json_decode(file_get_contents($cacheFile), true);
-        if ($cached && isset($cached['mtime'], $cached['posts']) && $cached['mtime'] === $latestMtime) {
-            return $cached['posts'];
-        }
+// Function to get all posts
+function getAllPosts($cacheDir) {
+    $cacheFile = $cacheDir . '/posts.json';
+    $postsDir = __DIR__ . '/posts';
+    
+    // Check if cache exists and is fresh (1 hour)
+    if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < 3600)) {
+        return json_decode(file_get_contents($cacheFile), true);
     }
-
-    // 2. Cache miss or stale → rebuild.
+    
     $posts = [];
-    foreach ($markdownFiles as $file) {
-        $document = YamlFrontMatter::parseFile($file);
-        $posts[]  = [
-            'slug'  => basename($file, '.md'),
-            'title' => $document->matter('title'),
-            'date'  => $document->matter('date'),
+    $files = glob($postsDir . '/*.md');
+    
+    foreach ($files as $file) {
+        $content = file_get_contents($file);
+        $document = YamlFrontMatter::parse($content);
+        $slug = basename($file, '.md');
+        
+        $posts[] = [
+            'title' => $document->title ?? 'Untitled',
+            'date' => $document->date ?? date('Y-m-d', filemtime($file)),
+            'description' => $document->description ?? '',
+            'slug' => $slug,
+            'theme' => $document->theme ?? 'default',
+            'tags' => $document->tags ?? []
         ];
     }
-
-    usort($posts, static fn ($a, $b) => strtotime($b['date']) <=> strtotime($a['date']));
-
-    // 3. Persist to cache (fail-soft).
-    @file_put_contents($cacheFile, json_encode([
-        'mtime'  => $latestMtime,
-        'posts'  => $posts,
-    ], JSON_THROW_ON_ERROR));
-
+    
+    // Sort by date (newest first)
+    usort($posts, function($a, $b) {
+        return strtotime($b['date']) - strtotime($a['date']);
+    });
+    
+    // Cache the results
+    file_put_contents($cacheFile, json_encode($posts));
+    
     return $posts;
 }
 
-$posts = getPosts();
-include __DIR__ . '/templates/home.php'; 
+// Router
+if ($request === '' || $request === '/') {
+    // Home page
+    $posts = getAllPosts($cacheDir);
+    require __DIR__ . '/templates/home.php';
+} elseif (preg_match('/^\/posts\/(.+)$/', $request, $matches)) {
+    // Blog post
+    $slug = $matches[1];
+    $postFile = __DIR__ . '/posts/' . $slug . '.md';
+    
+    if (file_exists($postFile)) {
+        $content = file_get_contents($postFile);
+        $document = YamlFrontMatter::parse($content);
+        
+        $post = [
+            'title' => $document->title ?? 'Untitled',
+            'date' => $document->date ?? date('Y-m-d', filemtime($postFile)),
+            'description' => $document->description ?? '',
+            'content' => $parsedown->text($document->body()),
+            'theme' => $document->theme ?? 'default',
+            'tags' => $document->tags ?? []
+        ];
+        
+        require __DIR__ . '/templates/post.php';
+    } else {
+        http_response_code(404);
+        require __DIR__ . '/templates/404.php';
+    }
+} else {
+    // 404
+    http_response_code(404);
+    require __DIR__ . '/templates/404.php';
+}

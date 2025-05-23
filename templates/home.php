@@ -3,78 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Patrick William Young - Tech and robotics enthusiast, graduating from Georgia Tech">
-    <meta name="theme-color" content="#0b0b3b">
-    <link rel="canonical" href="https://<?= $_SERVER['HTTP_HOST'] ?>">
+    <title>Patrick Young</title>
+    <meta name="description" content="Personal blog exploring technology, consciousness, and the future">
     
-    <title>Patrick William Young</title>
-    
-    <!-- Preconnect for faster font fetching -->
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <?php $cssPath = '/styles.min.css'; ?>
-    <link rel="stylesheet" href="<?= $cssPath ?>?v=<?= filemtime(__DIR__ . '/..' . $cssPath) ?>">
-    <link rel="stylesheet" href="/aquawave.css?v=<?= filemtime(__DIR__ . '/../aquawave.css') ?>">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Critical fonts with display swap for better performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/theme.css">
     
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Patrick William Young">
-    <meta property="og:description" content="Tech and robotics enthusiast, graduating from Georgia Tech">
-    <meta property="og:url" content="https://<?= $_SERVER['HTTP_HOST'] ?>">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@ConsumerRick">
-    <meta name="twitter:title" content="Patrick William Young">
-    <meta name="twitter:description" content="Tech and robotics enthusiast, graduating from Georgia Tech">
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🌊</text></svg>">
 </head>
 <body>
-    <!-- Water theme layers are created by JavaScript -->
-    <div id="sea-creature-layer"></div>
-    
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="nav-brand">PWY</div>
-            <div class="nav-links">
-                <a href="https://twitter.com/ConsumerRick" target="_blank" rel="noopener">𝕏</a>
+    <div class="content-wrapper">
+        <nav>
+            <div class="container">
+                <a href="/"><h1>Patrick Young</h1></a>
             </div>
-        </div>
-    </nav>
-
-    <section id="about" class="about-section">
-        <div class="content-wrapper">
-            <h1>Patrick William Young</h1>
-            <div class="bio">
-                <p>23, graduating from Georgia Tech in May. Sometimes I build software, but right now I think robots are the shit.</p>
-                <p>Working to summon an abundant future.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="writings" class="writings-section">
-        <div class="content-wrapper">
-            <h2>Writing</h2>
-            <div class="writings-grid">
+        </nav>
+        
+        <main>
+            <h1>Welcome to the Digital Frontier</h1>
+            <p>Exploring the intersection of technology, consciousness, and human potential in the age of superintelligence.</p>
+            
+            <div class="post-list">
                 <?php foreach ($posts as $post): ?>
-                <a href="/posts/<?= htmlspecialchars($post['slug']) ?>" class="writing-item">
-                    <span class="writing-date"><?= date('F jS Y', strtotime($post['date'])) ?></span>
-                    <h3><?= htmlspecialchars($post['title']) ?></h3>
-                </a>
+                    <a href="/posts/<?= htmlspecialchars($post['slug']) ?>" class="post-card">
+                        <h2><?= htmlspecialchars($post['title']) ?></h2>
+                        <div class="post-meta"><?= date('F j, Y', strtotime($post['date'])) ?></div>
+                        <?php if ($post['description']): ?>
+                            <p class="post-description"><?= htmlspecialchars($post['description']) ?></p>
+                        <?php endif; ?>
+                        <?php if (!empty($post['tags'])): ?>
+                            <div class="post-tags">
+                                <?php foreach ($post['tags'] as $tag): ?>
+                                    <span class="tag"><?= htmlspecialchars($tag) ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </a>
                 <?php endforeach; ?>
             </div>
-        </div>
-    </section>
-
-    <!-- Defer non-critical JS -->
-    <script src="/compat.js" defer></script>
-    <script src="/main.js" defer></script>
-    <script src="/aquawave.js" defer></script>
+        </main>
+        
+        <footer>
+            <p>&copy; <?= date('Y') ?> Patrick Young. Crafted with curiosity and code.</p>
+        </footer>
+    </div>
+    
+    <script src="/theme.js"></script>
 </body>
-</html> 
+</html>
