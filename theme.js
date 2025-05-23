@@ -1,53 +1,51 @@
-// Ocean Mysticism Theme - 3D Island Wave Simulation
+// Ocean Mysticism Theme - Handcrafted Geometric Wave Mandala
 class OceanEngine {
   constructor() {
     this.time = 0;
     this.phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     this.animationFrame = null;
     
-    // Ocean parameters
-    this.ocean = {
-      windSpeed: 6,
-      wavelength: 140,
-      amplitude: 0.5,
-      direction: { x: 1, z: 0.3 }
+    // Sacred geometry parameters
+    this.mandala = {
+      centerX: 34,
+      centerY: 8,
+      rings: 6,
+      spokes: 8,
+      waveAmplitude: 0.4,
+      rotationSpeed: 0.01
     };
     
-    // Depth-based ASCII characters for 3D effect
-    this.depthLayers = {
-      deep: ' ·.¸,¸.·˜',
-      medium: '˜·.¸¸.·˜≈',
-      shallow: '≈~≋∼∽≈≋',
-      shore: '~∼∽-=≡',
-      land: '░▒▓█▲▼'
+    // Handcrafted wave symbols by intensity
+    this.waveSymbols = {
+      void: ' ',
+      ripple: '·',
+      gentle: '¸',
+      flow: '~',
+      wave: '≈',
+      surge: '≋',
+      peak: '∼',
+      crest: '∽'
     };
     
-    // Island terrain
-    this.island = {
-      center: { x: 34, z: 10 },
-      radius: 8,
-      height: 4,
-      peaks: [
-        { x: 32, z: 8, height: 3.5 },
-        { x: 36, z: 11, height: 2.8 },
-        { x: 35, z: 9, height: 4.2 }
-      ]
-    };
-    
-    // Sea creatures
-    this.creatures = [];
-    this.creatureTypes = [
-      { art: '><>', speed: 0.6, name: 'fish' },
-      { art: '~(°)~', speed: 0.3, name: 'jellyfish' },
-      { art: 'ς>', speed: 0.4, name: 'seahorse' },
-      { art: '◉', speed: 0.2, name: 'bubble' }
+    // Geometric island pattern (hexagonal sacred geometry)
+    this.islandCore = [
+      '    ◊    ',
+      '   ◊▲◊   ',
+      '  ◊▲█▲◊  ',
+      ' ◊▲█◊█▲◊ ',
+      '◊▲█◊ ◊█▲◊',
+      ' ◊▲█◊█▲◊ ',
+      '  ◊▲█▲◊  ',
+      '   ◊▲◊   ',
+      '    ◊    '
     ];
     
-    // Curved pipeline paths around island
-    this.pipelines = [
-      { start: { x: -10, y: 25 }, control: { x: 20, y: 20 }, end: { x: 80, y: 30 }, depth: 0.6 },
-      { start: { x: 80, y: 15 }, control: { x: 60, y: 8 }, end: { x: -10, y: 12 }, depth: 0.4 },
-      { start: { x: -10, y: 35 }, control: { x: 45, y: 25 }, end: { x: 90, y: 40 }, depth: 0.8 }
+    // Creature paths following golden spirals
+    this.creatures = [];
+    this.creatureTypes = [
+      { art: '><>', speed: 0.4, name: 'fish' },
+      { art: '~°~', speed: 0.2, name: 'jellyfish' },
+      { art: '◉', speed: 0.15, name: 'bubble' }
     ];
     
     this.init();
@@ -83,152 +81,139 @@ class OceanEngine {
     this.oceanContainer = container;
   }
   
-  // Calculate distance from point to island
-  distanceToIsland(x, z) {
-    const dx = x - this.island.center.x;
-    const dz = z - this.island.center.z;
-    return Math.sqrt(dx * dx + dz * dz);
+  // Calculate distance from center with golden ratio scaling
+  distanceFromCenter(x, y) {
+    const dx = x - this.mandala.centerX;
+    const dy = y - this.mandala.centerY;
+    return Math.sqrt(dx * dx + dy * dy);
   }
   
-  // Get terrain height at point
-  getTerrainHeight(x, z) {
-    const distToCenter = this.distanceToIsland(x, z);
-    
-    if (distToCenter > this.island.radius) return 0; // Water level
-    
-    // Base island height
-    const falloff = Math.max(0, 1 - distToCenter / this.island.radius);
-    let height = this.island.height * falloff * falloff;
-    
-    // Add peaks
-    this.island.peaks.forEach(peak => {
-      const peakDist = Math.sqrt((x - peak.x) ** 2 + (z - peak.z) ** 2);
-      if (peakDist < 3) {
-        const peakFalloff = Math.max(0, 1 - peakDist / 3);
-        height += peak.height * peakFalloff * peakFalloff;
-      }
-    });
-    
-    return height;
+  // Calculate angle from center
+  angleFromCenter(x, y) {
+    const dx = x - this.mandala.centerX;
+    const dy = y - this.mandala.centerY;
+    return Math.atan2(dy, dx);
   }
   
-  // Wave interference around obstacles
-  waveInterference(x, z, time) {
-    const k = 2 * Math.PI / this.ocean.wavelength;
-    const w = Math.sqrt(9.81 * k) * 0.3; // Slower waves
+  // Generate wave intensity using polar coordinates and golden ratio
+  getWaveIntensity(x, y, time) {
+    const distance = this.distanceFromCenter(x, y);
+    const angle = this.angleFromCenter(x, y);
     
-    // Primary wave
-    const dot = this.ocean.direction.x * x + this.ocean.direction.z * z;
-    const phase = k * dot - w * time;
-    let wave = this.ocean.amplitude * Math.sin(phase);
+    // Concentric rings following golden ratio
+    const ringPhase = (distance / this.phi) * 2 * Math.PI;
+    const ringWave = Math.sin(ringPhase - time * 0.02);
     
-    // Wave reflection/diffraction around island
-    const distToIsland = this.distanceToIsland(x, z);
-    if (distToIsland < this.island.radius + 10) {
-      // Reflection
-      const reflectionAngle = Math.atan2(z - this.island.center.z, x - this.island.center.x);
-      const reflectedPhase = k * (x * Math.cos(reflectionAngle) + z * Math.sin(reflectionAngle)) + w * time;
-      const reflectionStrength = Math.exp(-(distToIsland - this.island.radius) / 5);
-      wave += this.ocean.amplitude * 0.4 * Math.sin(reflectedPhase) * reflectionStrength;
-      
-      // Diffraction (waves bending around island)
-      const diffractionPhase = phase + reflectionAngle;
-      wave += this.ocean.amplitude * 0.2 * Math.sin(diffractionPhase) * reflectionStrength;
+    // Radial spokes
+    const spokePhase = angle * this.mandala.spokes;
+    const spokeWave = Math.sin(spokePhase + time * 0.015);
+    
+    // Spiral component (Fibonacci spiral)
+    const spiralPhase = angle + distance * 0.1 - time * 0.008;
+    const spiralWave = Math.sin(spiralPhase);
+    
+    // Interference pattern
+    const interference = ringWave * 0.5 + spokeWave * 0.3 + spiralWave * 0.2;
+    
+    // Distance attenuation for natural falloff
+    const attenuation = Math.exp(-distance / 25);
+    
+    return interference * attenuation;
+  }
+  
+  // Check if point is inside sacred island geometry
+  isInsideIsland(x, y) {
+    const centerX = this.mandala.centerX;
+    const centerY = this.mandala.centerY;
+    
+    // Map to island core coordinates
+    const islandX = Math.floor(x - centerX + 4);
+    const islandY = Math.floor(y - centerY + 4);
+    
+    if (islandY >= 0 && islandY < this.islandCore.length &&
+        islandX >= 0 && islandX < this.islandCore[islandY].length) {
+      return this.islandCore[islandY][islandX] !== ' ';
     }
-    
-    // Secondary ripples
-    const ripple = this.ocean.amplitude * 0.3 * Math.sin(k * x * 1.7 - w * time * 1.3);
-    
-    return wave + ripple;
+    return false;
   }
   
-  // Generate 3D ocean field with island
-  generateOceanField(time) {
+  // Get island character at position
+  getIslandChar(x, y) {
+    const centerX = this.mandala.centerX;
+    const centerY = this.mandala.centerY;
+    
+    const islandX = Math.floor(x - centerX + 4);
+    const islandY = Math.floor(y - centerY + 4);
+    
+    if (islandY >= 0 && islandY < this.islandCore.length &&
+        islandX >= 0 && islandX < this.islandCore[islandY].length) {
+      return this.islandCore[islandY][islandX];
+    }
+    return ' ';
+  }
+  
+  // Convert wave intensity to ASCII character
+  intensityToChar(intensity) {
+    if (intensity < -0.6) return this.waveSymbols.void;
+    if (intensity < -0.3) return this.waveSymbols.ripple;
+    if (intensity < -0.1) return this.waveSymbols.gentle;
+    if (intensity < 0.1) return this.waveSymbols.flow;
+    if (intensity < 0.3) return this.waveSymbols.wave;
+    if (intensity < 0.5) return this.waveSymbols.surge;
+    if (intensity < 0.7) return this.waveSymbols.peak;
+    return this.waveSymbols.crest;
+  }
+  
+  // Generate the handcrafted wave mandala
+  generateWaveMandala(time) {
     const width = 68;
-    const depth = 18;
+    const height = 16;
     
-    let field = [];
+    let mandala = [];
     
-    for (let z = 0; z < depth; z++) {
-      let row = [];
+    for (let y = 0; y < height; y++) {
+      let line = '';
       for (let x = 0; x < width; x++) {
-        const terrainHeight = this.getTerrainHeight(x, z);
         
-        if (terrainHeight > 0.5) {
-          // Land
-          row.push({ type: 'land', height: terrainHeight });
+        if (this.isInsideIsland(x, y)) {
+          // Sacred island geometry
+          line += this.getIslandChar(x, y);
         } else {
-          // Water with waves
-          const waveHeight = this.waveInterference(x, z, time);
-          const waterDepth = Math.max(0, -terrainHeight); // Depth below sea level
-          
-          row.push({ 
-            type: 'water', 
-            height: waveHeight,
-            depth: waterDepth + z * 0.1 // Deeper toward back
-          });
+          // Wave field with sacred geometry
+          const intensity = this.getWaveIntensity(x, y, time);
+          line += this.intensityToChar(intensity);
         }
       }
-      field.push(row);
+      mandala.push(line);
     }
     
-    return field;
+    return mandala;
   }
   
-  // Convert field data to ASCII with 3D depth
-  fieldToChar(cell) {
-    if (cell.type === 'land') {
-      const heightIndex = Math.floor(Math.min(cell.height * 1.5, this.depthLayers.land.length - 1));
-      return this.depthLayers.land[heightIndex];
-    } else {
-      // Water
-      const totalDepth = cell.depth + cell.height;
-      
-      if (totalDepth < -1.5) {
-        const index = Math.floor(Math.random() * this.depthLayers.deep.length);
-        return this.depthLayers.deep[index];
-      } else if (totalDepth < -0.5) {
-        const index = Math.floor(Math.random() * this.depthLayers.medium.length);
-        return this.depthLayers.medium[index];
-      } else if (totalDepth < 0.5) {
-        const index = Math.floor(Math.random() * this.depthLayers.shallow.length);
-        return this.depthLayers.shallow[index];
-      } else {
-        const index = Math.floor(Math.random() * this.depthLayers.shore.length);
-        return this.depthLayers.shore[index];
-      }
-    }
-  }
-  
-  // Render with natural perspective
-  renderOcean(field) {
-    const width = field[0].length;
-    const depth = field.length;
-    const viewHeight = 14;
+  // Apply natural edge fading to create organic boundaries
+  applyEdgeFading(mandala) {
+    const height = mandala.length;
+    const width = mandala[0].length;
     
-    let ascii = [];
-    
-    for (let y = 0; y < viewHeight; y++) {
-      let line = '';
-      
-      // Natural perspective mapping
-      const perspective = (y / viewHeight) ** 1.8;
-      const z = Math.floor(perspective * (depth - 1));
-      
-      for (let x = 0; x < width; x++) {
-        // Add slight fisheye distortion for naturalism
-        const center = width / 2;
-        const distortion = 1 - Math.abs(x - center) / center * 0.05;
-        const sampleX = Math.floor(x * distortion);
-        const clampedX = Math.max(0, Math.min(width - 1, sampleX));
+    return mandala.map((line, y) => {
+      return line.split('').map((char, x) => {
+        // Distance from edges
+        const edgeDistY = Math.min(y, height - 1 - y) / height;
+        const edgeDistX = Math.min(x, width - 1 - x) / width;
+        const edgeDist = Math.min(edgeDistY, edgeDistX);
         
-        line += this.fieldToChar(field[z][clampedX]);
-      }
-      
-      ascii.push(line);
-    }
-    
-    return ascii;
+        // Fade based on distance from edge
+        const fadeThreshold = 0.15;
+        if (edgeDist < fadeThreshold && char !== ' ') {
+          const fadeRatio = edgeDist / fadeThreshold;
+          if (fadeRatio < 0.3) return ' ';
+          if (fadeRatio < 0.6) return '·';
+          if (fadeRatio < 0.8) return '¸';
+        }
+        
+        return char;
+      }).join('');
+    });
   }
   
   initCreatures() {
@@ -245,30 +230,30 @@ class OceanEngine {
       height: 100%;
       pointer-events: none;
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       line-height: 1;
     `;
     this.oceanContainer.style.position = 'relative';
     this.oceanContainer.appendChild(creatureLayer);
     this.creatureLayer = creatureLayer;
     
-    // Spawn initial creatures
+    // Spawn creatures following golden spiral
     for (let i = 0; i < 2; i++) {
-      setTimeout(() => this.spawnCreature(), i * 6000);
+      setTimeout(() => this.spawnCreature(), i * 8000);
     }
   }
   
   spawnCreature() {
-    if (this.creatures.length > 3) return;
+    if (this.creatures.length > 2) return;
     
     const type = this.creatureTypes[Math.floor(Math.random() * this.creatureTypes.length)];
-    const pipeline = this.pipelines[Math.floor(Math.random() * this.pipelines.length)];
     
     const creature = {
       ...type,
-      pipeline,
       progress: 0,
-      element: document.createElement('div')
+      element: document.createElement('div'),
+      spiralRadius: 15 + Math.random() * 10,
+      spiralSpeed: 0.3 + Math.random() * 0.2
     };
     
     creature.element.textContent = type.art;
@@ -276,44 +261,46 @@ class OceanEngine {
       position: absolute;
       color: var(--text-tertiary);
       opacity: 0;
-      transition: opacity 3s ease;
+      transition: opacity 4s ease;
       transform: translate(-50%, -50%);
     `;
     
     this.creatureLayer.appendChild(creature.element);
     this.creatures.push(creature);
     
-    // Fade in subtly
+    // Fade in very subtly
     setTimeout(() => {
-      creature.element.style.opacity = pipeline.depth * 0.3;
-    }, 100);
+      creature.element.style.opacity = 0.25;
+    }, 200);
   }
   
   updateCreatures() {
     this.creatures = this.creatures.filter(creature => {
-      creature.progress += creature.speed * 0.0008;
+      creature.progress += creature.speed * 0.0005;
       
       if (creature.progress >= 1) {
         creature.element.style.opacity = '0';
-        setTimeout(() => creature.element.remove(), 3000);
+        setTimeout(() => creature.element.remove(), 4000);
         
-        if (Math.random() < 0.1) {
-          setTimeout(() => this.spawnCreature(), 5000 + Math.random() * 10000);
+        // Rare respawn
+        if (Math.random() < 0.08) {
+          setTimeout(() => this.spawnCreature(), 10000 + Math.random() * 15000);
         }
         return false;
       }
       
-      // Bezier curve movement
-      const t = creature.progress;
-      const p = creature.pipeline;
-      const x = (1-t)*(1-t)*p.start.x + 2*(1-t)*t*p.control.x + t*t*p.end.x;
-      const y = (1-t)*(1-t)*p.start.y + 2*(1-t)*t*p.control.y + t*t*p.end.y;
+      // Golden spiral path around mandala center
+      const angle = creature.progress * Math.PI * 4; // Two full rotations
+      const radius = creature.spiralRadius * (1 + creature.progress * this.phi);
       
-      // Gentle wave motion
-      const wave = Math.sin(t * Math.PI * 3 + this.time * 0.03) * 1.5;
+      const centerX = 50; // Percentage
+      const centerY = 50;
+      
+      const x = centerX + Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius * 0.6; // Elliptical
       
       creature.element.style.left = `${x}%`;
-      creature.element.style.top = `${y + wave}%`;
+      creature.element.style.top = `${y}%`;
       
       return true;
     });
@@ -322,16 +309,16 @@ class OceanEngine {
   updateOcean() {
     if (!this.oceanContainer) return;
     
-    const field = this.generateOceanField(this.time);
-    const ascii = this.renderOcean(field);
+    const mandala = this.generateWaveMandala(this.time);
+    const fadedMandala = this.applyEdgeFading(mandala);
     
     const oceanText = this.oceanContainer.querySelector('.ocean-text');
     if (oceanText) {
-      oceanText.textContent = ascii.join('\n');
+      oceanText.textContent = fadedMandala.join('\n');
     } else {
       const textDiv = document.createElement('div');
       textDiv.className = 'ocean-text';
-      textDiv.textContent = ascii.join('\n');
+      textDiv.textContent = fadedMandala.join('\n');
       this.oceanContainer.appendChild(textDiv);
     }
     
@@ -349,17 +336,17 @@ class OceanEngine {
         position: fixed;
         left: ${e.clientX}px;
         top: ${e.clientY}px;
-        width: 3px;
-        height: 3px;
+        width: 2px;
+        height: 2px;
         background: var(--icy-sky);
         border-radius: 50%;
         pointer-events: none;
         z-index: 1000;
-        animation: droplet 1.2s ease-out forwards;
+        animation: droplet 1s ease-out forwards;
       `;
       
       document.body.appendChild(droplet);
-      setTimeout(() => droplet.remove(), 1200);
+      setTimeout(() => droplet.remove(), 1000);
     });
     
     if (!document.querySelector('#droplet-style')) {
@@ -372,11 +359,11 @@ class OceanEngine {
             opacity: 1;
           }
           50% {
-            transform: scale(1.2) translateY(0);
-            opacity: 0.8;
+            transform: scale(1) translateY(0);
+            opacity: 0.6;
           }
           100% {
-            transform: scale(2.5) translateY(15px);
+            transform: scale(2) translateY(10px);
             opacity: 0;
             border: 1px solid var(--text-tertiary);
           }
@@ -408,7 +395,7 @@ class OceanEngine {
     if (!nav) return;
     
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 20) {
         nav.classList.add('scrolled');
       } else {
         nav.classList.remove('scrolled');
@@ -435,10 +422,10 @@ class OceanEngine {
       this.time++;
       this.updateOcean();
       
-      // Very slow for contemplative feel (6 fps)
+      // Ultra-slow for deep contemplation (4 fps)
       setTimeout(() => {
         this.animationFrame = requestAnimationFrame(animate);
-      }, 1000 / 6);
+      }, 1000 / 4);
     };
     
     this.animationFrame = requestAnimationFrame(animate);

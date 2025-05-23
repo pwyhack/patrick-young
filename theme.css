@@ -206,43 +206,29 @@ a:hover {
 /* Ocean ASCII container */
 .ocean-ascii {
   position: relative;
-  margin: var(--space-lg) calc(var(--space-lg) * -1) var(--space-xl);
-  padding: var(--space-md) 0 var(--space-xl);
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg) 0;
   overflow: hidden;
   opacity: 0;
-  animation: fadeIn 2s ease forwards 0.5s;
-  
-  /* Natural beach fade effect */
-  mask-image: linear-gradient(to bottom, 
-    transparent 0%, 
-    rgba(0,0,0,0.3) 10%, 
-    rgba(0,0,0,0.8) 20%, 
-    black 30%, 
-    black 70%, 
-    rgba(0,0,0,0.8) 80%, 
-    rgba(0,0,0,0.3) 90%, 
-    transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, 
-    transparent 0%, 
-    rgba(0,0,0,0.3) 10%, 
-    rgba(0,0,0,0.8) 20%, 
-    black 30%, 
-    black 70%, 
-    rgba(0,0,0,0.8) 80%, 
-    rgba(0,0,0,0.3) 90%, 
-    transparent 100%);
+  animation: fadeIn 3s ease forwards 1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
 }
 
 .ocean-text {
   font-family: var(--font-mono);
-  font-size: clamp(0.4rem, 1vw, 0.65rem);
-  line-height: 1;
+  font-size: clamp(0.45rem, 1.1vw, 0.7rem);
+  line-height: 1.1;
   color: var(--text-tertiary);
-  text-align: center;
   white-space: pre;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   user-select: none;
-  opacity: 0.7;
+  opacity: 0.8;
+  text-align: center;
+  filter: contrast(1.1) brightness(0.9);
+  text-shadow: 0 0 1px rgba(35, 88, 127, 0.3);
 }
 
 .creature-layer {
