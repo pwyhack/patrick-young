@@ -8,6 +8,11 @@ AddHandler application/x-httpd-php82 .php
 # Set PHP memory limit
 php_value memory_limit 256M
 
+# Better redirect handling - trailing slashes normalization
+# Remove trailing slash from non-directory URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
 # Handle all requests through index.php
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -18,6 +23,17 @@ RewriteRule ^(.*)$ index.php [QSA,L]
     SetHandler application/x-httpd-php
 </Files>
 
+# Prevent direct access to sensitive files
+<FilesMatch "(^\.htaccess|\.md$|\.json$|composer\.lock$|php\.ini$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
 # ---------------- Performance Tweaks ----------------
 # Enable compression for text assets (if module available)
 <IfModule mod_deflate.c>
@@ -27,12 +43,35 @@ RewriteRule ^(.*)$ index.php [QSA,L]
 # Cache static assets aggressively
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresByType text/css "access plus 7 days"
-    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType text/css "access plus 30 days"
+    ExpiresByType application/javascript "access plus 30 days"
     ExpiresByType image/svg+xml "access plus 30 days"
     ExpiresByType font/woff2 "access plus 30 days"
     ExpiresByType font/woff "access plus 30 days"
+    ExpiresByType image/webp "access plus 30 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/jpeg "access plus 30 days"
     ExpiresDefault "access plus 1 hour"
+</IfModule>
+
+# Cache control headers
+<IfModule mod_headers.c>
+    # Cache CSS, JS and SVG for 30 days
+    <FilesMatch "\.(css|js|svg)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    
+    # Cache fonts for 30 days
+    <FilesMatch "\.(woff|woff2)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    
+    # Don't cache PHP files
+    <FilesMatch "\.php$">
+        Header set Cache-Control "private, no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
 </IfModule>
 
 # Strong ETag handling (avoid double validation)
@@ -45,5 +84,8 @@ FileETag MTime Size
     Header always set X-Frame-Options "SAMEORIGIN"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     Header always set X-XSS-Protection "1; mode=block"
-    Header always set Content-Security-Policy "default-src 'self'; img-src 'self' https: data:; font-src 'self' https:; style-src 'self' https: 'unsafe-inline'; script-src 'self' 'unsafe-inline'"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    
+    # CSP - Allow Google Fonts and better inline script handling
+    Header always set Content-Security-Policy "default-src 'self'; img-src 'self' https: data:; font-src 'self' https: fonts.gstatic.com; style-src 'self' https: fonts.googleapis.com 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'self'"
 </IfModule> 

@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 require __DIR__ . '/vendor/autoload.php';
 
 use Spatie\YamlFrontMatter\YamlFrontMatter;
@@ -19,7 +21,7 @@ if (preg_match('/^posts\/(.+)$/', $uri, $matches)) {
     if (!file_exists($filepath)) {
         error_log("File not found: " . $filepath);
         http_response_code(404);
-        echo "Post not found";
+        include __DIR__ . '/templates/404.php';
         exit;
     }
 
@@ -29,6 +31,13 @@ if (preg_match('/^posts\/(.+)$/', $uri, $matches)) {
     
     // Post template
     include __DIR__ . '/templates/post.php';
+    exit;
+}
+
+// Handle 404s for non-existent pages that aren't posts
+if ($uri !== '' && !file_exists(__DIR__ . '/' . $uri) && !is_dir(__DIR__ . '/' . $uri)) {
+    http_response_code(404);
+    include __DIR__ . '/templates/404.php';
     exit;
 }
 

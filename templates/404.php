@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Patrick William Young - Tech and robotics enthusiast, graduating from Georgia Tech">
-    <meta name="theme-color" content="#0b0b3b">
-    <link rel="canonical" href="https://<?= $_SERVER['HTTP_HOST'] ?>">
-    
-    <title>Patrick William Young</title>
+    <meta name="robots" content="noindex, follow">
+    <title>Page Not Found - Patrick William Young</title>
     
     <!-- Preconnect for faster font fetching -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,18 +19,6 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
-    
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Patrick William Young">
-    <meta property="og:description" content="Tech and robotics enthusiast, graduating from Georgia Tech">
-    <meta property="og:url" content="https://<?= $_SERVER['HTTP_HOST'] ?>">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@ConsumerRick">
-    <meta name="twitter:title" content="Patrick William Young">
-    <meta name="twitter:description" content="Tech and robotics enthusiast, graduating from Georgia Tech">
 </head>
 <body>
     <!-- Water theme layers are created by JavaScript -->
@@ -41,33 +26,32 @@
     
     <nav class="navbar">
         <div class="nav-content">
-            <div class="nav-brand">PWY</div>
+            <div class="nav-brand"><a href="/">PWY</a></div>
             <div class="nav-links">
                 <a href="https://twitter.com/ConsumerRick" target="_blank" rel="noopener">𝕏</a>
             </div>
         </div>
     </nav>
 
-    <section id="about" class="about-section">
+    <section id="error-page" class="about-section">
         <div class="content-wrapper">
-            <h1>Patrick William Young</h1>
+            <h1>404 - Ocean Floor</h1>
             <div class="bio">
-                <p>23, graduating from Georgia Tech in May. Sometimes I build software, but right now I think robots are the shit.</p>
-                <p>Working to summon an abundant future.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="writings" class="writings-section">
-        <div class="content-wrapper">
-            <h2>Writing</h2>
-            <div class="writings-grid">
-                <?php foreach ($posts as $post): ?>
-                <a href="/posts/<?= htmlspecialchars($post['slug']) ?>" class="writing-item">
-                    <span class="writing-date"><?= date('F jS Y', strtotime($post['date'])) ?></span>
-                    <h3><?= htmlspecialchars($post['title']) ?></h3>
-                </a>
-                <?php endforeach; ?>
+                <p>You've drifted too deep. This page doesn't exist or has been moved.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="/" style="
+                        display: inline-block;
+                        background: rgba(1, 205, 254, 0.2);
+                        color: var(--water-highlight);
+                        padding: 12px 24px;
+                        border-radius: 4px;
+                        text-decoration: none;
+                        font-weight: 500;
+                        border: 1px solid var(--neon-blue);
+                        box-shadow: 0 0 15px rgba(1, 205, 254, 0.3);
+                        transition: all 0.3s ease;
+                    ">Return to Surface</a>
+                </div>
             </div>
         </div>
     </section>
