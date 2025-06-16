@@ -27,6 +27,10 @@
         </nav>
         
         <main>
+            <div style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; padding: 2rem; text-align: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 2rem; border-radius: 10px; animation: pulse 2s infinite;">
+                🚀 DEPLOYMENT TEST - IT'S WORKING! 🚀<br>
+                <span style="font-size: 1rem;">Last updated: <?= date('F j, Y g:i A') ?></span>
+            </div>
             <h1>Ocean of Thought</h1>
             <p>Navigating the depths where technology meets consciousness, where code becomes poetry.</p>
             

@@ -540,6 +540,13 @@ footer {
   background: rgba(35, 88, 127, 0.3);
 }
 
+/* Test deployment animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
 /* Print */
 @media print {
   body::before,
