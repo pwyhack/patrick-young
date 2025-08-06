@@ -1,6 +1,0 @@
-{
-    "require": {
-        "erusev/parsedown": "^1.7",
-        "spatie/yaml-front-matter": "^2.0"
-    }
-} 
