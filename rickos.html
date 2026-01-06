@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rickOS v1.0</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            overflow: hidden;
+        }
+        
+        #terminal {
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            position: relative;
+            background: radial-gradient(ellipse at center, #001100 0%, #000 100%);
+        }
+        
+        #terminal::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        #boot-sequence {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            font-size: 14px;
+            line-height: 1.4;
+            text-shadow: 0 0 5px #0f0;
+        }
+        
+        #boot-sequence .line {
+            opacity: 0;
+            animation: fadeIn 0.1s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        #globe-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 2s ease;
+            z-index: 5;
+        }
+        
+        #globe-container.visible {
+            opacity: 1;
+        }
+        
+        #globe {
+            font-family: monospace;
+            font-size: 10px;
+            line-height: 8px;
+            white-space: pre;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            letter-spacing: 1px;
+            color: #888;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background: #0f0;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+        
+        #prompt {
+            position: absolute;
+            bottom: 40px;
+            left: 20px;
+            opacity: 0;
+            z-index: 10;
+        }
+        
+        #prompt.visible {
+            opacity: 1;
+        }
+        
+        a {
+            color: #0f0;
+            text-decoration: none;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        a.visible {
+            opacity: 0.7;
+        }
+        
+        a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal">
+        <div id="boot-sequence"></div>
+        <div id="globe-container">
+            <pre id="globe"></pre>
+        </div>
+        <div id="prompt">
+            <span>rick@earth:~$ </span><span class="cursor"></span>
+        </div>
+    </div>
+    <a href="/" id="home-link">[exit]</a>
+    
+    <script>
+        const bootMessages = [
+            'rickOS v1.0.0',
+            'Copyright (c) 2025 Earth Terminal Systems',
+            '',
+            'Initializing quantum processors...',
+            'Loading kernel modules...',
+            '  [OK] Loaded module: ascii_renderer',
+            '  [OK] Loaded module: sphere_projection',
+            '  [OK] Loaded module: terminal_emulator',
+            '',
+            'Starting services...',
+            '  [OK] Started Earth Rotation Daemon',
+            '  [OK] Started Coordinate Mapping Service',
+            '  [OK] Started ASCII Transform Engine',
+            '',
+            'Establishing satellite connection...',
+            'Synchronizing with GPS constellation...',
+            'Triangulating position: 40.7128° N, 74.0060° W',
+            '',
+            'System ready.',
+            '',
+            'Loading Earth visualization...'
+        ];
+        
+        const bootSequence = document.getElementById('boot-sequence');
+        const globeContainer = document.getElementById('globe-container');
+        const prompt = document.getElementById('prompt');
+        const homeLink = document.getElementById('home-link');
+        const globe = document.getElementById('globe');
+        
+        // ASCII Globe/Sphere implementation
+        let B = 0; // Only Y-axis rotation
+        const chars = ' .:-=+*#%@';
+        const colors = [
+            '#000', '#111', '#222', '#333', '#444', 
+            '#555', '#666', '#0a0', '#0f0', '#0f0'
+        ];
+        
+        function renderGlobe() {
+            const output = [];
+            const zbuffer = [];
+            
+            // Screen dimensions
+            const width = 80;
+            const height = 40;
+            
+            // Initialize buffers
+            for (let i = 0; i < width * height; i++) {
+                output[i] = ' ';
+                zbuffer[i] = 0;
+            }
+            
+            // Sphere parameters
+            const R = 12; // Sphere radius
+            const K1 = 30;
+            const K2 = 20;
+            
+            // Generate sphere surface points
+            for (let theta = 0; theta < 2 * Math.PI; theta += 0.07) {
+                for (let phi = 0; phi < Math.PI; phi += 0.035) {
+                    // Calculate 3D coordinates
+                    const sinTheta = Math.sin(theta);
+                    const cosTheta = Math.cos(theta);
+                    const sinPhi = Math.sin(phi);
+                    const cosPhi = Math.cos(phi);
+                    
+                    const sinB = Math.sin(B);
+                    const cosB = Math.cos(B);
+                    
+                    // 3D coordinates of point on sphere
+                    const x = R * sinPhi * cosTheta;
+                    const y = R * cosPhi; // Y is up
+                    const z = R * sinPhi * sinTheta;
+                    
+                    // Rotate only around Y axis (vertical)
+                    const x1 = x * cosB - z * sinB;
+                    const z1 = x * sinB + z * cosB;
+                    const y1 = y;
+                    
+                    // Final coordinates after rotation
+                    const finalX = x1;
+                    const finalY = y1;
+                    const finalZ = z1 + K2;
+                    
+                    // Project to 2D
+                    const ooz = 1 / finalZ;
+                    const xp = Math.floor(width / 2 + K1 * ooz * finalX);
+                    const yp = Math.floor(height / 2 - K1 * ooz * finalY / 2);
+                    
+                    // Calculate surface normal for lighting
+                    const nx = sinPhi * cosTheta;
+                    const ny = cosPhi;
+                    const nz = sinPhi * sinTheta;
+                    
+                    // Apply Y rotation to normal
+                    const nx1 = nx * cosB - nz * sinB;
+                    const nz1 = nx * sinB + nz * cosB;
+                    const ny1 = ny;
+                    
+                    // Light direction (from front-top-right)
+                    const L = nz1 * 0.7 + ny1 * 0.2 + nx1 * 0.1;
+                    
+                    // Draw pixel if visible
+                    if (L > 0 && xp >= 0 && xp < width && yp >= 0 && yp < height) {
+                        const idx = xp + yp * width;
+                        if (ooz > zbuffer[idx]) {
+                            zbuffer[idx] = ooz;
+                            const luminanceIdx = Math.floor(L * 8);
+                            
+                            // Add meridians and parallels with grayscale
+                            const isLatLine = Math.abs(phi % (Math.PI / 6)) < 0.06;
+                            const isLonLine = Math.abs(theta % (Math.PI / 6)) < 0.06;
+                            
+                            if (isLatLine || isLonLine) {
+                                // Grid lines in brighter green
+                                output[idx] = `<span style="color: #0f0">+</span>`;
+                            } else {
+                                // Grayscale shading
+                                const charIdx = Math.max(0, Math.min(chars.length - 1, luminanceIdx));
+                                const colorIdx = Math.max(0, Math.min(colors.length - 1, luminanceIdx));
+                                output[idx] = `<span style="color: ${colors[colorIdx]}">${chars[charIdx]}</span>`;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Convert array to HTML string
+            let result = '';
+            for (let i = 0; i < height; i++) {
+                for (let j = 0; j < width; j++) {
+                    const char = output[i * width + j];
+                    result += char.includes('<span') ? char : char;
+                }
+                result += '\n';
+            }
+            
+            globe.innerHTML = result;
+            
+            // Rotate slowly around Y axis only
+            B += 0.008; // Much slower rotation
+        }
+        
+        // Animation loop
+        let animationId;
+        function animate() {
+            renderGlobe();
+            animationId = requestAnimationFrame(animate);
+        }
+        
+        // Boot sequence animation
+        async function runBootSequence() {
+            for (let i = 0; i < bootMessages.length; i++) {
+                const line = document.createElement('div');
+                line.className = 'line';
+                line.style.animationDelay = `${i * 0.05}s`;
+                line.textContent = bootMessages[i];
+                bootSequence.appendChild(line);
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            
+            // Wait a bit then show globe
+            setTimeout(() => {
+                bootSequence.style.opacity = '0';
+                setTimeout(() => {
+                    bootSequence.style.display = 'none';
+                    globeContainer.classList.add('visible');
+                    animate();
+                    
+                    // Show prompt and home link after globe appears
+                    setTimeout(() => {
+                        prompt.classList.add('visible');
+                        homeLink.classList.add('visible');
+                    }, 1000);
+                }, 500);
+            }, 1500);
+        }
+        
+        // Start the experience
+        runBootSequence();
+        
+        // Cleanup on page leave
+        window.addEventListener('beforeunload', () => {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        });
+    </script>
+</body>
+</html>

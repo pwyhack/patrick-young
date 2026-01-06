@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>social simulacra</title>
+    <style>
+        @font-face {
+            font-family: 'Berkeley Mono';
+            src: url('/fonts/BerkeleyMono-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            padding: 60px 20px;
+            background: #f5e6c8;
+            color: #2c1810;
+            font-family: 'Berkeley Mono', monospace;
+            font-size: 16px;
+            line-height: 1.75;
+        }
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        header {
+            margin-bottom: 60px;
+        }
+        header a {
+            color: #5c4033;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+        p {
+            margin-bottom: 24px;
+        }
+        a {
+            color: #8b4513;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/">← back</a>
+            <h1>social simulacra</h1>
+        </header>
+
+        <p>
+            We compress each other, recursively, and we never internally traverse our own social graphs.
+        </p>
+
+        <p>
+            A friend recently asked me how many people I can name. I respond, thousands, and I start with my priests. Along this I had a realization about the compression mechanisms in the brain - you can remember so much, do such a deep search, and you remember so many more people than you're ever cognizant of.
+        </p>
+
+        <div class="footer">
+            <canvas id="fractal" width="100" height="100" style="border: 1px solid #8b7355;"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fractal');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#f5e6c8';
+        ctx.fillRect(0, 0, 100, 100);
+
+        function drawSierpinski(x, y, size, depth) {
+            if (depth === 0) {
+                ctx.fillStyle = '#2c1810';
+                ctx.fillRect(x, y, 1, 1);
+            } else {
+                const newSize = size / 2;
+                drawSierpinski(x, y, newSize, depth - 1);
+                drawSierpinski(x + newSize, y, newSize, depth - 1);
+                drawSierpinski(x, y + newSize, newSize, depth - 1);
+            }
+        }
+
+        drawSierpinski(0, 0, 100, 6);
+    </script>
+</body>
+</html>
