@@ -356,19 +356,14 @@
 
         .horizon-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: baseline;
             gap: 12px;
-            border-bottom: 1px dashed rgba(44,24,16,0.25);
-            padding-bottom: 10px;
             margin-bottom: 14px;
         }
 
         .horizon-title {
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--ink-faded);
+            display: none;
         }
 
         .horizon-readout {
@@ -739,8 +734,8 @@
             transform-origin: top left;
         }
 
-        .section[style*="display: none"] {
-            transform: translateY(-10px);
+        .section[hidden] {
+            display: none !important;
         }
 
         .section::before {
@@ -1621,10 +1616,10 @@
         <section class="horizon-panel" aria-labelledby="horizon-title">
             <div class="horizon-header">
                 <div class="horizon-title" id="horizon-title">Primary Navigation</div>
-                <div class="horizon-readout" aria-live="polite">Projection: <span id="timeline-year">10</span> <span id="timeline-year-unit">years</span></div>
+                <div class="horizon-readout" aria-live="polite">Projection: <span id="timeline-year">1</span> <span id="timeline-year-unit">year</span></div>
             </div>
             <div class="horizon-scrubber" role="radiogroup" aria-label="Select projection horizon">
-                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="1" tabindex="-1">
+                <button class="horizon-marker active" type="button" role="radio" aria-checked="true" data-year="1" tabindex="0">
                     <span class="horizon-marker-year">1</span>
                     <span class="horizon-marker-label">yr</span>
                 </button>
@@ -1636,7 +1631,7 @@
                     <span class="horizon-marker-year">5</span>
                     <span class="horizon-marker-label">yrs</span>
                 </button>
-                <button class="horizon-marker" type="button" role="radio" aria-checked="true" data-year="10" tabindex="0">
+                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="10" tabindex="-1">
                     <span class="horizon-marker-year">10</span>
                     <span class="horizon-marker-label">yrs</span>
                 </button>
@@ -3780,7 +3775,7 @@
             payload: 60,
             regulation: 50,
             discoveryContext: 'corporation',
-            timelineYear: 10
+            timelineYear: 1
         };
 
         // Scenario parameters are "committed" when projections are recalculated.
