@@ -331,35 +331,35 @@
             outline-offset: 3px;
         }
 
-        /* Primary Timeline Scrubber */
-        .horizon-panel {
-            margin: 18px 0 28px;
-            padding: 18px 18px 16px;
-            background:
-                linear-gradient(to bottom, rgba(0,0,0,0.02), transparent),
-                var(--parchment);
-            border: 2px solid var(--ink-faded);
-            position: relative;
+        /* Main Layout with Sidebar */
+        .main-layout {
+            display: flex;
+            gap: 0;
+            align-items: flex-start;
         }
 
-        .horizon-panel::before {
-            content: 'PROJECTION HORIZON';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: var(--parchment);
-            padding: 0 10px;
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: var(--ink-faded);
+        /* Timeline Sidebar */
+        .horizon-panel {
+            position: sticky;
+            top: 20px;
+            width: 90px;
+            flex-shrink: 0;
+            padding: 20px 12px;
+            background:
+                linear-gradient(to right, rgba(0,0,0,0.03), transparent),
+                var(--parchment);
+            border-right: 2px solid var(--ink-faded);
+            min-height: calc(100vh - 40px);
+            z-index: 10;
         }
 
         .horizon-header {
-            display: flex;
-            justify-content: flex-end;
-            align-items: baseline;
-            gap: 12px;
-            margin-bottom: 14px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--ink-faded);
         }
 
         .horizon-title {
@@ -367,113 +367,117 @@
         }
 
         .horizon-readout {
-            font-size: 14px;
+            font-size: 11px;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            color: var(--ink-faded);
+        }
+
+        .horizon-readout #timeline-year {
+            color: var(--ink);
+            font-size: 14px;
         }
 
         .horizon-scrubber {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             position: relative;
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            align-items: end;
         }
 
         .horizon-scrubber::before {
             content: '';
             position: absolute;
-            left: 0;
-            right: 0;
-            top: 15px;
-            height: 2px;
-            background: rgba(44,24,16,0.35);
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(44,24,16,0.25);
         }
 
         .horizon-marker {
             -webkit-appearance: none;
             appearance: none;
-            border: 2px solid rgba(44,24,16,0.55);
+            border: 2px solid rgba(44,24,16,0.4);
             background:
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(44, 24, 16, 0.03) 0px,
-                    rgba(44, 24, 16, 0.03) 1px,
-                    transparent 1px,
-                    transparent 8px
-                ),
                 linear-gradient(135deg, #f4e4bc 0%, #e7d2a1 70%, #f4e4bc 100%);
             color: var(--ink);
-            border-radius: 10px;
-            padding: 10px 6px 8px;
+            border-radius: 6px;
+            padding: 8px 8px 6px 20px;
             cursor: pointer;
-            box-shadow: 1px 2px 0 rgba(0,0,0,0.10);
+            box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
             position: relative;
             z-index: 1;
-            display: grid;
-            justify-items: center;
-            gap: 2px;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            transition: all 0.15s ease;
+            text-align: left;
         }
 
-        .horizon-marker::after {
+        .horizon-marker::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
-            background: var(--ink);
+            left: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--ink-faded);
             border: 2px solid var(--parchment);
-            box-shadow: 1px 2px 0 rgba(0,0,0,0.15);
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
         }
 
         .horizon-marker .horizon-marker-year {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
-            letter-spacing: 1px;
-            margin-top: 4px;
+            letter-spacing: 0.5px;
         }
 
         .horizon-marker .horizon-marker-label {
-            font-size: 9px;
-            letter-spacing: 2px;
+            font-size: 8px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--ink-faded);
         }
 
         .horizon-marker:hover {
             border-color: var(--ink);
-            transform: translateY(-2px);
-            box-shadow: 2px 6px 0 rgba(0,0,0,0.12);
+            transform: translateX(3px);
+            box-shadow: 2px 4px 0 rgba(0,0,0,0.1);
         }
 
         .horizon-marker.active,
         .horizon-marker[aria-checked="true"] {
             border-color: var(--ink);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 18px rgba(0,0,0,0.16);
-            background:
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(44, 24, 16, 0.035) 0px,
-                    rgba(44, 24, 16, 0.035) 1px,
-                    transparent 1px,
-                    transparent 7px
-                ),
-                linear-gradient(135deg, #fff0c9 0%, #f0dbac 70%, #f6e8c7 100%);
+            transform: translateX(6px);
+            box-shadow: 3px 6px 12px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #fff0c9 0%, #f0dbac 70%, #f6e8c7 100%);
+        }
+
+        .horizon-marker.active::before,
+        .horizon-marker[aria-checked="true"]::before {
+            background: var(--classified-red);
+            border-color: var(--parchment);
         }
 
         .horizon-marker:focus-visible {
             outline: 2px solid var(--classified-red);
-            outline-offset: 4px;
+            outline-offset: 2px;
+        }
+
+        /* Remove old top marker dot */
+        .horizon-marker::after {
+            display: none;
         }
 
         /* Tab Panels */
         .tab-content {
             position: relative;
+            flex: 1;
+            min-width: 0;
         }
 
         .tab-panel[hidden] {
@@ -1473,6 +1477,54 @@
                 display: none;
             }
 
+            .main-layout {
+                flex-direction: column;
+            }
+
+            .horizon-panel {
+                position: relative;
+                top: 0;
+                width: 100%;
+                min-height: auto;
+                border-right: none;
+                border-bottom: 2px solid var(--ink-faded);
+                padding: 15px;
+            }
+
+            .horizon-header {
+                writing-mode: horizontal-tb;
+                transform: none;
+                margin-bottom: 12px;
+                padding-bottom: 10px;
+            }
+
+            .horizon-scrubber {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .horizon-scrubber::before {
+                display: none;
+            }
+
+            .horizon-marker {
+                padding: 6px 10px 5px 10px;
+            }
+
+            .horizon-marker::before {
+                display: none;
+            }
+
+            .horizon-marker.active,
+            .horizon-marker[aria-checked="true"] {
+                transform: translateY(-3px);
+            }
+
+            .horizon-marker:hover {
+                transform: translateY(-2px);
+            }
+
             .folder-tabs {
                 padding-left: 0;
                 justify-content: center;
@@ -1480,20 +1532,6 @@
 
             .folder-tab + .folder-tab {
                 margin-left: -10px;
-            }
-
-            .horizon-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .horizon-scrubber {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 8px;
-            }
-
-            .horizon-scrubber::before {
-                display: none;
             }
 
             .document-container {
@@ -1612,45 +1650,46 @@
             <button class="folder-tab" id="tab-defense" type="button" role="tab" aria-selected="false" aria-controls="panel-defense" tabindex="-1" data-tab="defense">Defense</button>
         </div>
 
-        <!-- Timeline Scrubber -->
-        <section class="horizon-panel" aria-labelledby="horizon-title">
-            <div class="horizon-header">
-                <div class="horizon-title" id="horizon-title">Primary Navigation</div>
-                <div class="horizon-readout" aria-live="polite">Projection: <span id="timeline-year">1</span> <span id="timeline-year-unit">year</span></div>
-            </div>
-            <div class="horizon-scrubber" role="radiogroup" aria-label="Select projection horizon">
-                <button class="horizon-marker active" type="button" role="radio" aria-checked="true" data-year="1" tabindex="0">
-                    <span class="horizon-marker-year">1</span>
-                    <span class="horizon-marker-label">yr</span>
-                </button>
-                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="3" tabindex="-1">
-                    <span class="horizon-marker-year">3</span>
-                    <span class="horizon-marker-label">yrs</span>
-                </button>
-                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="5" tabindex="-1">
-                    <span class="horizon-marker-year">5</span>
-                    <span class="horizon-marker-label">yrs</span>
-                </button>
-                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="10" tabindex="-1">
-                    <span class="horizon-marker-year">10</span>
-                    <span class="horizon-marker-label">yrs</span>
-                </button>
-                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="25" tabindex="-1">
-                    <span class="horizon-marker-year">25</span>
-                    <span class="horizon-marker-label">yrs</span>
-                </button>
-                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="50" tabindex="-1">
-                    <span class="horizon-marker-year">50</span>
-                    <span class="horizon-marker-label">yrs</span>
-                </button>
-                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="100" tabindex="-1">
-                    <span class="horizon-marker-year">100</span>
-                    <span class="horizon-marker-label">yrs</span>
-                </button>
-            </div>
-        </section>
+        <div class="main-layout">
+            <!-- Timeline Sidebar -->
+            <aside class="horizon-panel" aria-labelledby="horizon-title">
+                <div class="horizon-header">
+                    <div class="horizon-title" id="horizon-title">Timeline</div>
+                    <div class="horizon-readout" aria-live="polite"><span id="timeline-year">1</span> <span id="timeline-year-unit">yr</span></div>
+                </div>
+                <div class="horizon-scrubber" role="radiogroup" aria-label="Select projection horizon">
+                    <button class="horizon-marker active" type="button" role="radio" aria-checked="true" data-year="1" tabindex="0">
+                        <span class="horizon-marker-year">1</span>
+                        <span class="horizon-marker-label">yr</span>
+                    </button>
+                    <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="3" tabindex="-1">
+                        <span class="horizon-marker-year">3</span>
+                        <span class="horizon-marker-label">yrs</span>
+                    </button>
+                    <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="5" tabindex="-1">
+                        <span class="horizon-marker-year">5</span>
+                        <span class="horizon-marker-label">yrs</span>
+                    </button>
+                    <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="10" tabindex="-1">
+                        <span class="horizon-marker-year">10</span>
+                        <span class="horizon-marker-label">yrs</span>
+                    </button>
+                    <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="25" tabindex="-1">
+                        <span class="horizon-marker-year">25</span>
+                        <span class="horizon-marker-label">yrs</span>
+                    </button>
+                    <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="50" tabindex="-1">
+                        <span class="horizon-marker-year">50</span>
+                        <span class="horizon-marker-label">yrs</span>
+                    </button>
+                    <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="100" tabindex="-1">
+                        <span class="horizon-marker-year">100</span>
+                        <span class="horizon-marker-label">yrs</span>
+                    </button>
+                </div>
+            </aside>
 
-        <main class="tab-content" id="tab-content">
+            <main class="tab-content" id="tab-content">
             <section class="tab-panel" id="panel-social" role="tabpanel" aria-labelledby="tab-social" hidden>
 
                 <!-- Year 1: The Containment Illusion -->
