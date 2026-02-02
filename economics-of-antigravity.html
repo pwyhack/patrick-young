@@ -235,6 +235,300 @@
             gap: 8px;
         }
 
+        /* Manila Folder Tabs */
+        .folder-tabs {
+            display: flex;
+            align-items: flex-end;
+            gap: 0;
+            margin: 10px 0 0;
+            padding-left: 8px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .folder-tabs::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 2px;
+            background: var(--ink-faded);
+            opacity: 0.6;
+        }
+
+        .folder-tab {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 2px solid var(--ink-faded);
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(44, 24, 16, 0.03) 0px,
+                    rgba(44, 24, 16, 0.03) 1px,
+                    transparent 1px,
+                    transparent 7px
+                ),
+                linear-gradient(135deg, #f6e8c7 0%, #e8d3a1 55%, #f4e4bc 100%);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            padding: 12px 18px 10px;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.06);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+
+        .folder-tab + .folder-tab {
+            margin-left: -14px;
+        }
+
+        .folder-tab::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px 12px 0 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.35) 0%, transparent 55%);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .folder-tab.active,
+        .folder-tab[aria-selected="true"] {
+            z-index: 4;
+            transform: translateY(-5px);
+            border-color: var(--ink);
+            box-shadow: 0 10px 18px rgba(0,0,0,0.16);
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(44, 24, 16, 0.035) 0px,
+                    rgba(44, 24, 16, 0.035) 1px,
+                    transparent 1px,
+                    transparent 6px
+                ),
+                linear-gradient(135deg, #fff0c9 0%, #f0dbac 60%, #f6e8c7 100%);
+        }
+
+        .folder-tab:hover {
+            border-color: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        .folder-tab.active:hover,
+        .folder-tab[aria-selected="true"]:hover {
+            transform: translateY(-5px);
+        }
+
+        .folder-tab:focus-visible {
+            outline: 2px solid var(--classified-red);
+            outline-offset: 3px;
+        }
+
+        /* Primary Timeline Scrubber */
+        .horizon-panel {
+            margin: 18px 0 28px;
+            padding: 18px 18px 16px;
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,0.02), transparent),
+                var(--parchment);
+            border: 2px solid var(--ink-faded);
+            position: relative;
+        }
+
+        .horizon-panel::before {
+            content: 'PROJECTION HORIZON';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--parchment);
+            padding: 0 10px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--ink-faded);
+        }
+
+        .horizon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            border-bottom: 1px dashed rgba(44,24,16,0.25);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .horizon-title {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--ink-faded);
+        }
+
+        .horizon-readout {
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .horizon-scrubber {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            align-items: end;
+        }
+
+        .horizon-scrubber::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 15px;
+            height: 2px;
+            background: rgba(44,24,16,0.35);
+        }
+
+        .horizon-marker {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 2px solid rgba(44,24,16,0.55);
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(44, 24, 16, 0.03) 0px,
+                    rgba(44, 24, 16, 0.03) 1px,
+                    transparent 1px,
+                    transparent 8px
+                ),
+                linear-gradient(135deg, #f4e4bc 0%, #e7d2a1 70%, #f4e4bc 100%);
+            color: var(--ink);
+            border-radius: 10px;
+            padding: 10px 6px 8px;
+            cursor: pointer;
+            box-shadow: 1px 2px 0 rgba(0,0,0,0.10);
+            position: relative;
+            z-index: 1;
+            display: grid;
+            justify-items: center;
+            gap: 2px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+        }
+
+        .horizon-marker::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: var(--ink);
+            border: 2px solid var(--parchment);
+            box-shadow: 1px 2px 0 rgba(0,0,0,0.15);
+        }
+
+        .horizon-marker .horizon-marker-year {
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .horizon-marker .horizon-marker-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--ink-faded);
+        }
+
+        .horizon-marker:hover {
+            border-color: var(--ink);
+            transform: translateY(-2px);
+            box-shadow: 2px 6px 0 rgba(0,0,0,0.12);
+        }
+
+        .horizon-marker.active,
+        .horizon-marker[aria-checked="true"] {
+            border-color: var(--ink);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 18px rgba(0,0,0,0.16);
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(44, 24, 16, 0.035) 0px,
+                    rgba(44, 24, 16, 0.035) 1px,
+                    transparent 1px,
+                    transparent 7px
+                ),
+                linear-gradient(135deg, #fff0c9 0%, #f0dbac 70%, #f6e8c7 100%);
+        }
+
+        .horizon-marker:focus-visible {
+            outline: 2px solid var(--classified-red);
+            outline-offset: 4px;
+        }
+
+        /* Tab Panels */
+        .tab-content {
+            position: relative;
+        }
+
+        .tab-panel[hidden] {
+            display: none !important;
+        }
+
+        /* Collapsible Control Panel */
+        details.control-panel > summary {
+            list-style: none;
+        }
+
+        details.control-panel > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .control-summary {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .control-summary .control-header {
+            position: relative;
+            margin-bottom: 0;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--ink-faded);
+        }
+
+        .control-summary .control-header::after {
+            content: '▾';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: var(--ink-faded);
+        }
+
+        details.control-panel:not([open]) .control-summary .control-header::after {
+            content: '▸';
+        }
+
+        details.control-panel[open] .control-body {
+            margin-top: 25px;
+        }
+
+        /* Hide nav when not on ECONOMIC tab */
+        .nav-sidebar.hidden {
+            display: none;
+        }
+
         /* Navigation */
         .nav-sidebar {
             position: fixed;
@@ -1170,6 +1464,29 @@
                 display: none;
             }
 
+            .folder-tabs {
+                padding-left: 0;
+                justify-content: center;
+            }
+
+            .folder-tab + .folder-tab {
+                margin-left: -10px;
+            }
+
+            .horizon-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .horizon-scrubber {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+
+            .horizon-scrubber::before {
+                display: none;
+            }
+
             .document-container {
                 padding: 20px 15px;
             }
@@ -1279,55 +1596,144 @@
             </div>
         </header>
 
-        <!-- Control Panel -->
-        <section class="control-panel" id="controls">
-            <div class="control-header">
-                <h2>Scenario Parameters</h2>
+        <!-- Manila Folder Tabs -->
+        <div class="folder-tabs" role="tablist" aria-label="Dossier tabs">
+            <button class="folder-tab" id="tab-social" type="button" role="tab" aria-selected="false" aria-controls="panel-social" tabindex="-1" data-tab="social">Social</button>
+            <button class="folder-tab active" id="tab-economic" type="button" role="tab" aria-selected="true" aria-controls="panel-economic" tabindex="0" data-tab="economic">Economic</button>
+            <button class="folder-tab" id="tab-defense" type="button" role="tab" aria-selected="false" aria-controls="panel-defense" tabindex="-1" data-tab="defense">Defense</button>
+        </div>
+
+        <!-- Timeline Scrubber -->
+        <section class="horizon-panel" aria-labelledby="horizon-title">
+            <div class="horizon-header">
+                <div class="horizon-title" id="horizon-title">Primary Navigation</div>
+                <div class="horizon-readout" aria-live="polite">Projection: <span id="timeline-year">10</span> <span id="timeline-year-unit">years</span></div>
             </div>
-            <div class="control-grid" role="group" aria-label="Scenario parameters">
-                <div class="control-row">
-                    <label class="control-label" for="adoption-rate">Adoption Timeline</label>
-                    <div class="control-slider">
-                        <input type="range" id="adoption-rate" min="1" max="100" value="20" aria-describedby="adoption-value">
-                    </div>
-                    <span class="control-value" id="adoption-value" aria-live="polite">20 years</span>
-                </div>
-                <div class="control-row">
-                    <label class="control-label" for="energy-cost">Energy Requirement</label>
-                    <div class="control-slider">
-                        <input type="range" id="energy-cost" min="0" max="100" value="50" aria-describedby="energy-value">
-                    </div>
-                    <span class="control-value" id="energy-value" aria-live="polite">Moderate</span>
-                </div>
-                <div class="control-row">
-                    <label class="control-label" for="payload">Payload Capacity</label>
-                    <div class="control-slider">
-                        <input type="range" id="payload" min="0" max="100" value="60" aria-describedby="payload-value">
-                    </div>
-                    <span class="control-value" id="payload-value" aria-live="polite">Industrial</span>
-                </div>
-                <div class="control-row">
-                    <label class="control-label" for="regulation">Regulatory Response</label>
-                    <div class="control-slider">
-                        <input type="range" id="regulation" min="0" max="100" value="50" aria-describedby="regulation-value">
-                    </div>
-                    <span class="control-value" id="regulation-value" aria-live="polite">Controlled</span>
-                </div>
-                <div class="control-row">
-                    <label class="control-label" for="discovery-context">Discovery Context</label>
-                    <div class="control-select">
-                        <select id="discovery-context">
-                            <option value="government">Government Lab</option>
-                            <option value="corporation" selected>Corporation</option>
-                            <option value="individual">Independent</option>
-                            <option value="accident">Accident</option>
-                        </select>
-                    </div>
-                    <span class="control-value"></span>
-                </div>
+            <div class="horizon-scrubber" role="radiogroup" aria-label="Select projection horizon">
+                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="1" tabindex="-1">
+                    <span class="horizon-marker-year">1</span>
+                    <span class="horizon-marker-label">yr</span>
+                </button>
+                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="3" tabindex="-1">
+                    <span class="horizon-marker-year">3</span>
+                    <span class="horizon-marker-label">yrs</span>
+                </button>
+                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="5" tabindex="-1">
+                    <span class="horizon-marker-year">5</span>
+                    <span class="horizon-marker-label">yrs</span>
+                </button>
+                <button class="horizon-marker" type="button" role="radio" aria-checked="true" data-year="10" tabindex="0">
+                    <span class="horizon-marker-year">10</span>
+                    <span class="horizon-marker-label">yrs</span>
+                </button>
+                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="25" tabindex="-1">
+                    <span class="horizon-marker-year">25</span>
+                    <span class="horizon-marker-label">yrs</span>
+                </button>
+                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="50" tabindex="-1">
+                    <span class="horizon-marker-year">50</span>
+                    <span class="horizon-marker-label">yrs</span>
+                </button>
+                <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="100" tabindex="-1">
+                    <span class="horizon-marker-year">100</span>
+                    <span class="horizon-marker-label">yrs</span>
+                </button>
             </div>
-            <button class="recalculate-btn" id="recalculate">Recalculate Projections</button>
         </section>
+
+        <main class="tab-content" id="tab-content">
+            <section class="tab-panel" id="panel-social" role="tabpanel" aria-labelledby="tab-social" hidden>
+                <section class="section" data-section-num="S1" id="social-overview">
+                    <div class="section-header">
+                        <h2 class="section-title">Social Impacts</h2>
+                        <div class="section-status">
+                            <span class="status-indicator mid" aria-hidden="true"></span>
+                            <span>Pending Compilation</span>
+                        </div>
+                    </div>
+                    <p class="narrative">
+                        Placeholder dossier. Social projections will be added later. Current time slice: Year <span class="js-current-year">10</span>.
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Migration & Community</strong>
+                                <span>[To be filed] Effects on cities, rural revival, and voluntary density.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Inequality & Access</strong>
+                                <span>[To be filed] Who gets antigravity first, and what social strata it reshapes.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Institutions</strong>
+                                <span>[To be filed] Education, healthcare, religion, and governance under distance collapse.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+
+            <section class="tab-panel" id="panel-economic" role="tabpanel" aria-labelledby="tab-economic">
+                <!-- Control Panel -->
+                <details class="control-panel" id="controls" open>
+                    <summary class="control-summary">
+                        <div class="control-header">
+                            <h2>Scenario Parameters</h2>
+                        </div>
+                    </summary>
+                    <div class="control-body">
+                        <div class="control-grid" role="group" aria-label="Scenario parameters">
+                            <div class="control-row">
+                                <label class="control-label" for="adoption-rate">Adoption Timeline</label>
+                                <div class="control-slider">
+                                    <input type="range" id="adoption-rate" min="1" max="100" value="20" aria-describedby="adoption-value">
+                                </div>
+                                <span class="control-value" id="adoption-value" aria-live="polite">20 years</span>
+                            </div>
+                            <div class="control-row">
+                                <label class="control-label" for="energy-cost">Energy Requirement</label>
+                                <div class="control-slider">
+                                    <input type="range" id="energy-cost" min="0" max="100" value="50" aria-describedby="energy-value">
+                                </div>
+                                <span class="control-value" id="energy-value" aria-live="polite">Moderate</span>
+                            </div>
+                            <div class="control-row">
+                                <label class="control-label" for="payload">Payload Capacity</label>
+                                <div class="control-slider">
+                                    <input type="range" id="payload" min="0" max="100" value="60" aria-describedby="payload-value">
+                                </div>
+                                <span class="control-value" id="payload-value" aria-live="polite">Industrial</span>
+                            </div>
+                            <div class="control-row">
+                                <label class="control-label" for="regulation">Regulatory Response</label>
+                                <div class="control-slider">
+                                    <input type="range" id="regulation" min="0" max="100" value="50" aria-describedby="regulation-value">
+                                </div>
+                                <span class="control-value" id="regulation-value" aria-live="polite">Controlled</span>
+                            </div>
+                            <div class="control-row">
+                                <label class="control-label" for="discovery-context">Discovery Context</label>
+                                <div class="control-select">
+                                    <select id="discovery-context">
+                                        <option value="government">Government Lab</option>
+                                        <option value="corporation" selected>Corporation</option>
+                                        <option value="individual">Independent</option>
+                                        <option value="accident">Accident</option>
+                                    </select>
+                                </div>
+                                <span class="control-value"></span>
+                            </div>
+                        </div>
+                        <button class="recalculate-btn" id="recalculate">Recalculate Projections</button>
+                    </div>
+                </details>
 
         <!-- Economic Flow Sankey -->
         <section class="sankey-container" aria-labelledby="sankey-title">
@@ -1916,14 +2322,12 @@
         <section class="timeline-container" aria-labelledby="timeline-title">
             <h3 class="timeline-header" id="timeline-title">Cascade Timeline</h3>
             <div class="timeline-viz">
-                <svg id="cascade-timeline" viewBox="0 0 800 240" role="img" aria-label="Timeline showing cascading effects across technology, markets, infrastructure, society, geopolitics, and space from Year 0 to Year 30"></svg>
+                <svg id="cascade-timeline" viewBox="0 0 800 240" role="img" aria-label="Timeline showing cascading effects across technology, markets, infrastructure, society, geopolitics, and space from Year 0 to Year 100"></svg>
                 <div class="timeline-notes" id="timeline-notes" aria-live="polite"></div>
             </div>
-            <div class="timeline-scrubber">
-                <label for="timeline-scrubber" class="visually-hidden">Select timeline year</label>
-                <input type="range" id="timeline-scrubber" min="0" max="30" value="15" aria-describedby="timeline-year-display">
-            </div>
-            <div class="timeline-year-display" id="timeline-year-display" aria-live="polite">Year <span id="timeline-year">15</span></div>
+            <p class="narrative" style="margin-top: 18px;">
+                Timeline display references the active scrubber setting (Year <span class="js-current-year">10</span>).
+            </p>
         </section>
 
         <!-- Footer -->
@@ -1935,6 +2339,47 @@
                 Actual outcomes may vary based on <span class="redacted">classified variables</span>.
             </p>
         </footer>
+
+            </section>
+
+            <section class="tab-panel" id="panel-defense" role="tabpanel" aria-labelledby="tab-defense" hidden>
+                <section class="section" data-section-num="D1" id="defense-overview">
+                    <div class="section-header">
+                        <h2 class="section-title">Defense Impacts</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Restricted Addendum</span>
+                        </div>
+                    </div>
+                    <p class="narrative">
+                        Placeholder dossier. Defense projections will be added later. Current time slice: Year <span class="js-current-year">10</span>.
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Deterrence & Escalation</strong>
+                                <span>[To be filed] Stability under instantaneous mobility and payload delivery.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Airspace & Sovereignty</strong>
+                                <span>[To be filed] Borders when altitude becomes a new geography.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Doctrine & Platforms</strong>
+                                <span>[To be filed] Legacy assets, new platforms, and asymmetric adoption curves.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </main>
     </div>
 
     <script>
@@ -1945,7 +2390,7 @@
             payload: 60,
             regulation: 50,
             discoveryContext: 'corporation',
-            timelineYear: 15
+            timelineYear: 10
         };
 
         // Scenario parameters are "committed" when projections are recalculated.
@@ -1959,6 +2404,9 @@
         };
 
         let lastImpacts = null;
+
+        const PROJECTION_MARKERS = [1, 3, 5, 10, 25, 50, 100];
+        const TIMELINE_HORIZON = PROJECTION_MARKERS[PROJECTION_MARKERS.length - 1];
 
         function getVizParams() {
             return { ...committedScenario, timelineYear: state.timelineYear };
@@ -2218,7 +2666,7 @@
         }
 
         function adoptionProgressAtYear(year, params) {
-            const t = clamp(year, 0, 30);
+            const t = clamp(year, 0, TIMELINE_HORIZON);
             const adoptionYears = clamp(params.adoptionRate || 20, 1, 100);
             const mid = adoptionYears * 0.5
                 + ((params.regulation ?? 50) - 50) / 100 * 4
@@ -2261,7 +2709,7 @@
                 { id: 'stranded', name: 'Stranded Assets', color: 'var(--stamp-red)' }
             ];
 
-            const p = adoptionProgressAtYear(params.timelineYear ?? 15, params);
+            const p = adoptionProgressAtYear(params.timelineYear ?? 10, params);
 
             const d = {
                 transport: clamp((impacts.transport ?? 0) / 100, 0, 1),
@@ -2938,7 +3386,7 @@
         ];
 
         function calculateRegionalMetrics(impacts, params) {
-            const p = adoptionProgressAtYear(params.timelineYear ?? 15, params);
+            const p = adoptionProgressAtYear(params.timelineYear ?? 10, params);
             const regulation = clamp((params.regulation ?? 50) / 100, 0, 1);
 
             const contextBoost = {
@@ -3613,12 +4061,12 @@
                 }
             ];
 
-            // Normalize + clamp display years for timeline horizon (0..30)
+            // Normalize + clamp display years for timeline horizon (0..TIMELINE_HORIZON)
             for (const e of events) {
-                const actual = Number.isFinite(e.year) ? e.year : 30;
+                const actual = Number.isFinite(e.year) ? e.year : TIMELINE_HORIZON;
                 e.year = Math.max(0, actual);
-                e.displayYear = clamp(e.year, 0, 30);
-                e.outOfHorizon = e.year > 30;
+                e.displayYear = clamp(e.year, 0, TIMELINE_HORIZON);
+                e.outOfHorizon = e.year > TIMELINE_HORIZON;
                 e.dependsOn = e.dependsOn || [];
             }
 
@@ -3635,7 +4083,7 @@
             const laneGap = (TIMELINE_LANES.length <= 1) ? 0 : (y1 - y0) / (TIMELINE_LANES.length - 1);
             const laneY = Object.fromEntries(TIMELINE_LANES.map((l, i) => [l.id, y0 + i * laneGap]));
 
-            const xAtYear = (yr) => lerp(x0, x1, clamp(yr / 30, 0, 1));
+            const xAtYear = (yr) => lerp(x0, x1, clamp(yr / TIMELINE_HORIZON, 0, 1));
 
             const laidEvents = events.map(e => {
                 const y = laneY[e.lane] ?? (y0 + y1) / 2;
@@ -3666,7 +4114,7 @@
                 }
             }
 
-            const currentYear = clamp(params.timelineYear ?? 15, 0, 30);
+            const currentYear = clamp(params.timelineYear ?? 10, 0, TIMELINE_HORIZON);
             const currentX = xAtYear(currentYear);
 
             return {
@@ -3753,8 +4201,8 @@
                 const height = layout.height;
 
                 // Year grid lines + labels
-                for (let yr = 0; yr <= 30; yr += 5) {
-                    const x = lerp(layout.x0, layout.x1, yr / 30);
+                for (let yr = 0; yr <= TIMELINE_HORIZON; yr += 10) {
+                    const x = lerp(layout.x0, layout.x1, yr / TIMELINE_HORIZON);
                     const line = document.createElementNS(SVG_NS, 'line');
                     line.setAttribute('x1', x.toFixed(3));
                     line.setAttribute('x2', x.toFixed(3));
@@ -4026,6 +4474,133 @@
             return labels[index];
         }
 
+        // --- Tabs + horizon scrubber ---
+        let activeTab = 'economic';
+
+        function syncTimelineUI() {
+            const year = state.timelineYear;
+
+            const yearEl = document.getElementById('timeline-year');
+            if (yearEl) yearEl.textContent = year;
+
+            const unitEl = document.getElementById('timeline-year-unit');
+            if (unitEl) unitEl.textContent = year === 1 ? 'year' : 'years';
+
+            document.querySelectorAll('.js-current-year').forEach(el => {
+                el.textContent = year;
+            });
+
+            document.querySelectorAll('.horizon-marker').forEach(btn => {
+                const btnYear = parseInt(btn.dataset.year);
+                const isActive = btnYear === year;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
+                btn.setAttribute('tabindex', isActive ? '0' : '-1');
+            });
+        }
+
+        function setTimelineYear(nextYear, opts = {}) {
+            const year = parseInt(nextYear);
+            if (!Number.isFinite(year)) return;
+            state.timelineYear = year;
+            syncTimelineUI();
+            if (opts.updateVisuals !== false) {
+                updateTimeSliceVisuals({ animate: opts.animate ?? false });
+            }
+        }
+
+        function setActiveTab(tab, opts = {}) {
+            if (!tab) return;
+            activeTab = tab;
+            document.body.dataset.activeTab = tab;
+
+            document.querySelectorAll('.folder-tab[role="tab"]').forEach(btn => {
+                const isActive = btn.dataset.tab === tab;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                btn.setAttribute('tabindex', isActive ? '0' : '-1');
+            });
+
+            document.querySelectorAll('.tab-panel[role="tabpanel"]').forEach(panel => {
+                const isActive = panel.id === `panel-${tab}`;
+                panel.hidden = !isActive;
+            });
+
+            const nav = document.querySelector('.nav-sidebar');
+            if (nav) {
+                const showNav = tab === 'economic';
+                nav.classList.toggle('hidden', !showNav);
+                nav.setAttribute('aria-hidden', showNav ? 'false' : 'true');
+            }
+
+            if (opts.focus) {
+                const activeBtn = document.querySelector(`.folder-tab[data-tab="${tab}"]`);
+                if (activeBtn) activeBtn.focus();
+            }
+        }
+
+        function initTabs() {
+            const tabs = Array.from(document.querySelectorAll('.folder-tab[role="tab"]'));
+            if (!tabs.length) return;
+
+            tabs.forEach((tab) => {
+                tab.addEventListener('click', () => setActiveTab(tab.dataset.tab, { focus: false }));
+                tab.addEventListener('keydown', (e) => {
+                    const idx = tabs.indexOf(tab);
+                    if (idx === -1) return;
+
+                    let nextIdx = null;
+                    if (e.key === 'ArrowRight') nextIdx = (idx + 1) % tabs.length;
+                    if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + tabs.length) % tabs.length;
+                    if (e.key === 'Home') nextIdx = 0;
+                    if (e.key === 'End') nextIdx = tabs.length - 1;
+
+                    if (nextIdx === null) return;
+                    e.preventDefault();
+                    const nextTab = tabs[nextIdx];
+                    setActiveTab(nextTab.dataset.tab, { focus: true });
+                });
+            });
+
+            setActiveTab(activeTab, { focus: false });
+        }
+
+        function initHorizonScrubber() {
+            const buttons = Array.from(document.querySelectorAll('.horizon-marker'));
+            if (!buttons.length) return;
+
+            buttons.forEach((btn) => {
+                btn.addEventListener('click', () => setTimelineYear(btn.dataset.year, { animate: false }));
+                btn.addEventListener('keydown', (e) => {
+                    const idx = buttons.indexOf(btn);
+                    if (idx === -1) return;
+
+                    let nextIdx = null;
+                    if (e.key === 'ArrowRight') nextIdx = Math.min(idx + 1, buttons.length - 1);
+                    if (e.key === 'ArrowLeft') nextIdx = Math.max(idx - 1, 0);
+                    if (e.key === 'Home') nextIdx = 0;
+                    if (e.key === 'End') nextIdx = buttons.length - 1;
+
+                    if (nextIdx === null) return;
+                    e.preventDefault();
+                    const nextBtn = buttons[nextIdx];
+                    setTimelineYear(nextBtn.dataset.year, { animate: false });
+                    nextBtn.focus();
+                });
+            });
+
+            // Snap to a valid marker if state was set to a non-marker value.
+            if (!PROJECTION_MARKERS.includes(state.timelineYear)) {
+                const snapped = PROJECTION_MARKERS.reduce((best, y) => {
+                    if (best === null) return y;
+                    return Math.abs(y - state.timelineYear) < Math.abs(best - state.timelineYear) ? y : best;
+                }, null);
+                state.timelineYear = snapped ?? PROJECTION_MARKERS[0];
+            }
+
+            syncTimelineUI();
+        }
+
         // Event Listeners
         document.getElementById('adoption-rate').addEventListener('input', (e) => {
             state.adoptionRate = parseInt(e.target.value);
@@ -4051,12 +4626,6 @@
             state.discoveryContext = e.target.value;
         });
 
-        document.getElementById('timeline-scrubber').addEventListener('input', (e) => {
-            state.timelineYear = parseInt(e.target.value);
-            document.getElementById('timeline-year').textContent = state.timelineYear;
-            updateTimeSliceVisuals({ animate: false });
-        });
-
         document.getElementById('recalculate').addEventListener('click', () => {
             updateUI();
         });
@@ -4064,6 +4633,7 @@
         // Navigation
         document.querySelectorAll('.nav-dot').forEach(dot => {
             dot.addEventListener('click', () => {
+                setActiveTab('economic', { focus: false });
                 const section = dot.dataset.section;
                 const el = document.getElementById(section);
                 if (el) {
@@ -4075,9 +4645,11 @@
         // Update active nav dot on scroll
         let ticking = false;
         window.addEventListener('scroll', () => {
+            if (document.body.dataset.activeTab && document.body.dataset.activeTab !== 'economic') return;
             if (!ticking) {
                 requestAnimationFrame(() => {
-                    const sections = document.querySelectorAll('.section, .control-panel, .document-header');
+                    const sections = Array.from(document.querySelectorAll('.section, .control-panel, .document-header'))
+                        .filter(section => section.offsetParent !== null);
                     let activeSection = 'header';
 
                     sections.forEach(section => {
@@ -4126,6 +4698,8 @@
             if (_initialized) return;
             _initialized = true;
 
+            initTabs();
+            initHorizonScrubber();
             updateUI();
             renderSparklines();
 
