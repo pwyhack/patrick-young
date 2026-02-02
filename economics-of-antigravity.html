@@ -703,6 +703,238 @@
             height: 400px;
         }
 
+        #sankey-diagram .sankey-flow {
+            stroke: rgba(255, 255, 255, 0.55);
+            stroke-dasharray: 7 18;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            pointer-events: none;
+            opacity: 0.85;
+            animation: sankey-flow 1.8s linear infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #sankey-diagram .sankey-flow { animation: none; }
+        }
+
+        /* World Map */
+        .map-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--parchment);
+            border: 2px solid var(--ink-faded);
+            position: relative;
+        }
+
+        .map-container::before {
+            content: 'GEOGRAPHIC DIFFUSION MAP';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--parchment);
+            padding: 0 10px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--ink-faded);
+        }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .map-header span {
+            padding: 4px 12px;
+            background: var(--ink-faded);
+            color: var(--parchment);
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.9fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .map-canvas-wrap {
+            border: 1px solid var(--ink-faded);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent);
+            padding: 10px;
+            position: relative;
+        }
+
+        #world-map {
+            width: 100%;
+            height: 420px;
+            display: block;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .map-caption {
+            margin-top: 8px;
+            font-size: 10px;
+            color: var(--ink-light);
+            letter-spacing: 0.5px;
+        }
+
+        .map-legend {
+            border: 1px solid var(--ink-faded);
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .legend-block + .legend-block {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(44,24,16,0.25);
+        }
+
+        .legend-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ink-faded);
+            margin-bottom: 6px;
+        }
+
+        .legend-bar {
+            height: 10px;
+            border: 1px solid rgba(44,24,16,0.35);
+            background: linear-gradient(to right, var(--parchment) 0%, rgba(74,124,155,0.65) 50%, var(--flow-transport) 100%);
+        }
+
+        .legend-hatch {
+            height: 18px;
+            border: 1px solid rgba(44,24,16,0.35);
+            background:
+                repeating-linear-gradient(
+                    135deg,
+                    rgba(139,0,0,0.00) 0px,
+                    rgba(139,0,0,0.00) 6px,
+                    rgba(139,0,0,0.20) 6px,
+                    rgba(139,0,0,0.20) 8px
+                );
+        }
+
+        .legend-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--ink-light);
+            margin-top: 6px;
+        }
+
+        .region-readout {
+            margin-top: 14px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .region-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px dotted rgba(44,24,16,0.18);
+        }
+
+        .region-row:last-child {
+            border-bottom: none;
+        }
+
+        .region-name {
+            color: var(--ink);
+            font-weight: bold;
+        }
+
+        .region-metrics {
+            text-align: right;
+            color: var(--ink-faded);
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Historical Analogues */
+        .analogues-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--parchment);
+            border: 2px solid var(--ink-faded);
+            position: relative;
+        }
+
+        .analogues-container::before {
+            content: 'REFERENCE CURVES';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--parchment);
+            padding: 0 10px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--ink-faded);
+        }
+
+        .analogues-header {
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .analogues-subtitle {
+            font-size: 11px;
+            color: var(--ink-light);
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .sparkline-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .sparkline-card {
+            border: 1px solid var(--ink-faded);
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+        }
+
+        .sparkline-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .sparkline-title {
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+
+        .sparkline-range {
+            font-size: 10px;
+            color: var(--ink-faded);
+            letter-spacing: 0.5px;
+        }
+
+        canvas.sparkline {
+            width: 100%;
+            height: 90px;
+            display: block;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(44,24,16,0.22);
+        }
+
         /* Timeline */
         .timeline-container {
             margin: 30px 0;
@@ -717,6 +949,73 @@
             font-size: 14px;
             letter-spacing: 2px;
             text-transform: uppercase;
+        }
+
+        .timeline-viz {
+            display: grid;
+            grid-template-columns: 1.35fr 0.85fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        #cascade-timeline {
+            width: 100%;
+            height: 240px;
+            border: 1px solid var(--ink-faded);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent);
+            display: block;
+        }
+
+        .timeline-notes {
+            border: 1px solid var(--ink-faded);
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        .timeline-notes .notes-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ink-faded);
+            margin-bottom: 8px;
+        }
+
+        .timeline-notes .notes-section {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(44,24,16,0.25);
+        }
+
+        .timeline-notes .notes-section:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .timeline-notes .event-line {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px dotted rgba(44,24,16,0.18);
+        }
+
+        .timeline-notes .event-line:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-notes .event-name {
+            font-weight: bold;
+            color: var(--ink);
+        }
+
+        .timeline-notes .event-year {
+            color: var(--ink-faded);
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
         .timeline-track {
@@ -896,6 +1195,26 @@
             #sankey-diagram {
                 height: 300px;
             }
+
+            .map-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #world-map {
+                height: 320px;
+            }
+
+            .sparkline-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-viz {
+                grid-template-columns: 1fr;
+            }
+
+            #cascade-timeline {
+                height: 280px;
+            }
         }
 
         /* Animations */
@@ -920,6 +1239,11 @@
 
         .meter-fill {
             animation: ink-fill 1s ease-out;
+        }
+
+        @keyframes sankey-flow {
+            from { stroke-dashoffset: 0; }
+            to { stroke-dashoffset: -40; }
         }
     </style>
 </head>
@@ -1033,6 +1357,62 @@
                 <div class="counter-unit">transition period</div>
             </div>
         </div>
+
+        <!-- Geographic Diffusion Map -->
+        <section class="map-container" aria-labelledby="map-title">
+            <h3 id="map-title" class="visually-hidden">Global Adoption and Regional Economic Impact</h3>
+            <div class="map-header">
+                <span>GLOBAL ADOPTION</span>
+                <span>REGIONAL SHOCK INTENSITY</span>
+            </div>
+            <div class="map-grid">
+                <div class="map-canvas-wrap">
+                    <canvas id="world-map" width="800" height="420" role="img" aria-label="World map showing regional adoption rates and economic impact"></canvas>
+                    <div class="map-caption" id="map-caption">Adoption fills; impact hatching. Values update with timeline year.</div>
+                </div>
+                <div class="map-legend" aria-label="Map legend and regional readout">
+                    <div class="legend-block">
+                        <div class="legend-title">Adoption</div>
+                        <div class="legend-bar legend-adoption" aria-hidden="true"></div>
+                        <div class="legend-labels">
+                            <span>0%</span><span>100%</span>
+                        </div>
+                    </div>
+                    <div class="legend-block">
+                        <div class="legend-title">Impact</div>
+                        <div class="legend-hatch" aria-hidden="true"></div>
+                        <div class="legend-labels">
+                            <span>Low</span><span>High</span>
+                        </div>
+                    </div>
+                    <div class="region-readout" id="region-readout" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Historical Analogues -->
+        <section class="analogues-container" aria-labelledby="analogues-title">
+            <h3 class="analogues-header" id="analogues-title">Historical Analogues</h3>
+            <p class="analogues-subtitle">
+                Two technologies with non-linear diffusion curves. Use as a reference frame for how quickly infrastructure can reorganize once a tipping point is reached.
+            </p>
+            <div class="sparkline-grid" role="group" aria-label="Sparkline charts of historical adoption curves">
+                <div class="sparkline-card">
+                    <div class="sparkline-meta">
+                        <div class="sparkline-title">Containerization</div>
+                        <div class="sparkline-range">1956 → 1980</div>
+                    </div>
+                    <canvas class="sparkline" id="spark-containerization" width="420" height="90" aria-label="Sparkline chart showing containerization adoption curve"></canvas>
+                </div>
+                <div class="sparkline-card">
+                    <div class="sparkline-meta">
+                        <div class="sparkline-title">Internet</div>
+                        <div class="sparkline-range">1990 → 2010</div>
+                    </div>
+                    <canvas class="sparkline" id="spark-internet" width="420" height="90" aria-label="Sparkline chart showing internet adoption curve"></canvas>
+                </div>
+            </div>
+        </section>
 
         <!-- Section 1: Transportation -->
         <section class="section" data-section-num="01" id="transport">
@@ -1535,26 +1915,9 @@
         <!-- Timeline Section -->
         <section class="timeline-container" aria-labelledby="timeline-title">
             <h3 class="timeline-header" id="timeline-title">Cascade Timeline</h3>
-            <div class="timeline-track" role="img" aria-label="Timeline showing key milestones from Year 1 to Year 30">
-                <div class="timeline-line"></div>
-                <div class="timeline-marker" style="left: 5%" data-year="1" aria-hidden="true">
-                    <div class="timeline-marker-label">Year 1<br><small>First Patent</small></div>
-                </div>
-                <div class="timeline-marker" style="left: 20%" data-year="5" aria-hidden="true">
-                    <div class="timeline-marker-label">Year 5<br><small>Commercial</small></div>
-                </div>
-                <div class="timeline-marker" style="left: 40%" data-year="10" aria-hidden="true">
-                    <div class="timeline-marker-label">Year 10<br><small>Mass Adoption</small></div>
-                </div>
-                <div class="timeline-marker" style="left: 60%" data-year="15" aria-hidden="true">
-                    <div class="timeline-marker-label">Year 15<br><small>Transport Collapse</small></div>
-                </div>
-                <div class="timeline-marker" style="left: 80%" data-year="20" aria-hidden="true">
-                    <div class="timeline-marker-label">Year 20<br><small>Full Transform</small></div>
-                </div>
-                <div class="timeline-marker" style="left: 95%" data-year="30" aria-hidden="true">
-                    <div class="timeline-marker-label">Year 30<br><small>New Equilibrium</small></div>
-                </div>
+            <div class="timeline-viz">
+                <svg id="cascade-timeline" viewBox="0 0 800 240" role="img" aria-label="Timeline showing cascading effects across technology, markets, infrastructure, society, geopolitics, and space from Year 0 to Year 30"></svg>
+                <div class="timeline-notes" id="timeline-notes" aria-live="polite"></div>
             </div>
             <div class="timeline-scrubber">
                 <label for="timeline-scrubber" class="visually-hidden">Select timeline year</label>
@@ -1584,6 +1947,22 @@
             discoveryContext: 'corporation',
             timelineYear: 15
         };
+
+        // Scenario parameters are "committed" when projections are recalculated.
+        // The timeline year is always live and can be scrubbed without recalculation.
+        let committedScenario = {
+            adoptionRate: state.adoptionRate,
+            energyCost: state.energyCost,
+            payload: state.payload,
+            regulation: state.regulation,
+            discoveryContext: state.discoveryContext
+        };
+
+        let lastImpacts = null;
+
+        function getVizParams() {
+            return { ...committedScenario, timelineYear: state.timelineYear };
+        }
 
         // Sector base disruption values (0-100)
         const SECTOR_BASES = {
@@ -1731,8 +2110,17 @@
 
         // Update UI with new calculations
         function updateUI() {
-            const impacts = calculateSectorImpacts(state);
+            committedScenario = {
+                adoptionRate: state.adoptionRate,
+                energyCost: state.energyCost,
+                payload: state.payload,
+                regulation: state.regulation,
+                discoveryContext: state.discoveryContext
+            };
+
+            const impacts = calculateSectorImpacts(committedScenario);
             const jobs = calculateJobDisplacement(impacts);
+            lastImpacts = impacts;
 
             // Update meters
             Object.keys(impacts).forEach(sector => {
@@ -1759,7 +2147,7 @@
                 // Update narrative
                 const narrative = document.getElementById(`${sector}-narrative`);
                 if (narrative) {
-                    narrative.innerHTML = generateNarrative(sector, state, impacts);
+                    narrative.innerHTML = generateNarrative(sector, committedScenario, impacts);
                 }
             });
 
@@ -1769,7 +2157,20 @@
             animateCounter('jobs-net', jobs.net, 'M');
 
             // Update Sankey diagram
-            updateSankeyDiagram(impacts);
+            updateSankeyDiagram(impacts, { animate: true });
+
+            // Update world map
+            updateWorldMap(impacts, { animate: true });
+
+            // Update cascade timeline
+            updateCascadeTimeline(impacts, { animate: true });
+        }
+
+        function updateTimeSliceVisuals(opts = {}) {
+            if (!lastImpacts) return;
+            updateSankeyDiagram(lastImpacts, opts);
+            updateWorldMap(lastImpacts, opts);
+            updateCascadeTimeline(lastImpacts, opts);
         }
 
         // Animate counter values
@@ -1799,114 +2200,1816 @@
             }, 20);
         }
 
-        // Sankey diagram using SVG
-        function updateSankeyDiagram(impacts) {
+        // --- Visualization helpers ---
+        const SVG_NS = 'http://www.w3.org/2000/svg';
+
+        const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+        const lerp = (a, b, t) => a + (b - a) * t;
+        const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+        function prefersReducedMotion() {
+            return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
+
+        function formatTrillions(v) {
+            if (!Number.isFinite(v)) return '';
+            if (v >= 10) return `$${v.toFixed(1)}T`;
+            return `$${v.toFixed(2)}T`;
+        }
+
+        function adoptionProgressAtYear(year, params) {
+            const t = clamp(year, 0, 30);
+            const adoptionYears = clamp(params.adoptionRate || 20, 1, 100);
+            const mid = adoptionYears * 0.5
+                + ((params.regulation ?? 50) - 50) / 100 * 4
+                + ((params.energyCost ?? 50) - 50) / 100 * 3
+                - ((params.payload ?? 60) - 50) / 100 * 2;
+            const k = 8 / Math.max(6, adoptionYears);
+            const p = 1 / (1 + Math.exp(-k * (t - mid)));
+            return clamp(p, 0, 1);
+        }
+
+        function normalizeWeights(weights) {
+            const entries = Object.entries(weights);
+            const sum = entries.reduce((acc, [, v]) => acc + Math.max(0, v), 0);
+            if (sum <= 0) {
+                return Object.fromEntries(entries.map(([k]) => [k, 0]));
+            }
+            return Object.fromEntries(entries.map(([k, v]) => [k, Math.max(0, v) / sum]));
+        }
+
+        // --- Sankey model + renderer (SVG) ---
+        let sankeyRenderer = null;
+
+        function buildSankeyModel(impacts, params) {
+            const left = [
+                { id: 'transport', name: 'Transport Networks', value: 14.1, color: 'var(--flow-transport)' },
+                { id: 'supply', name: 'Supply Chain', value: 7.8, color: 'var(--flow-supply)' },
+                { id: 'realestate', name: 'Real Estate', value: 9.2, color: 'var(--flow-realestate)' },
+                { id: 'energy', name: 'Energy & Fuels', value: 8.4, color: 'var(--flow-energy)' },
+                { id: 'labor', name: 'Labor Services', value: 12.6, color: 'var(--flow-labor)' },
+                { id: 'military', name: 'Military Procurement', value: 2.3, color: 'var(--flow-military)' }
+            ];
+
+            const right = [
+                { id: 'legacy', name: 'Legacy / Hybrid Systems', color: 'var(--ink-light)' },
+                { id: 'agMobility', name: 'AG Mobility & Logistics', color: 'var(--flow-transport)' },
+                { id: 'urban', name: 'Vertical & Floating RE', color: 'var(--flow-urban)' },
+                { id: 'grid', name: 'Grid & Power Buildout', color: 'var(--flow-energy)' },
+                { id: 'space', name: 'Space Economy', color: 'var(--flow-space)' },
+                { id: 'defense', name: 'Defense Platforms', color: 'var(--flow-military)' },
+                { id: 'stranded', name: 'Stranded Assets', color: 'var(--stamp-red)' }
+            ];
+
+            const p = adoptionProgressAtYear(params.timelineYear ?? 15, params);
+
+            const d = {
+                transport: clamp((impacts.transport ?? 0) / 100, 0, 1),
+                supply: clamp((impacts.supply ?? 0) / 100, 0, 1),
+                realestate: clamp((impacts.realestate ?? 0) / 100, 0, 1),
+                energy: clamp((impacts.energy ?? 0) / 100, 0, 1),
+                labor: clamp((impacts.labor ?? 0) / 100, 0, 1),
+                military: clamp((impacts.military ?? 0) / 100, 0, 1),
+                space: clamp((impacts.space ?? 0) / 100, 0, 1)
+            };
+
+            const regulation = clamp((params.regulation ?? 50) / 100, 0, 1);
+            const payload = clamp((params.payload ?? 60) / 100, 0, 1);
+            const gridNeed = clamp((params.energyCost ?? 50) / 100, 0, 1);
+
+            const perSectorFinal = {
+                transport: normalizeWeights({
+                    legacy: 1.4 * (1 - d.transport) + 0.15 * regulation,
+                    agMobility: 2.0 * d.transport + 0.35 * payload,
+                    urban: 0.35 * d.transport,
+                    grid: 0.20 * d.transport * gridNeed,
+                    space: 0.55 * d.transport * payload,
+                    defense: 0.20 * d.transport * d.military,
+                    stranded: 1.25 * d.transport * (0.75 - 0.45 * regulation)
+                }),
+                supply: normalizeWeights({
+                    legacy: 1.25 * (1 - d.supply) + 0.10 * regulation,
+                    agMobility: 1.55 * d.supply + 0.25 * payload,
+                    urban: 0.45 * d.supply,
+                    grid: 0.18 * d.supply * gridNeed,
+                    space: 0.35 * d.supply * payload,
+                    defense: 0.18 * d.supply * d.military,
+                    stranded: 1.05 * d.supply * (0.7 - 0.35 * regulation)
+                }),
+                realestate: normalizeWeights({
+                    legacy: 1.3 * (1 - d.realestate) + 0.18 * regulation,
+                    agMobility: 0.30 * d.realestate,
+                    urban: 2.05 * d.realestate + 0.10 * payload,
+                    grid: 0.30 * d.realestate * gridNeed,
+                    space: 0.35 * d.realestate * d.space,
+                    defense: 0.22 * d.realestate * d.military,
+                    stranded: 1.10 * d.realestate * (0.8 - 0.4 * regulation)
+                }),
+                energy: normalizeWeights({
+                    legacy: 1.45 * (1 - d.energy) + 0.20,
+                    agMobility: 0.35 * d.energy,
+                    urban: 0.15 * gridNeed,
+                    grid: 1.15 * gridNeed + 0.10,
+                    space: 0.20 * d.energy * payload,
+                    defense: 0.10 * d.energy * d.military,
+                    stranded: 1.55 * d.energy * (1 - 0.75 * gridNeed)
+                }),
+                labor: normalizeWeights({
+                    legacy: 1.15 * (1 - d.labor) + 0.20 * regulation,
+                    agMobility: 1.10 * d.labor,
+                    urban: 1.00 * d.labor,
+                    grid: 0.30 * d.labor * gridNeed,
+                    space: 0.50 * d.labor * d.space,
+                    defense: 0.30 * d.labor * d.military,
+                    stranded: 1.40 * d.labor * (0.85 - 0.55 * regulation)
+                }),
+                military: normalizeWeights({
+                    legacy: 1.35 * (1 - d.military) + 0.25 * regulation,
+                    agMobility: 0.20 * d.military,
+                    urban: 0.08 * d.military,
+                    grid: 0.12 * d.military * gridNeed,
+                    space: 0.95 * d.military * d.space,
+                    defense: 1.55 * d.military,
+                    stranded: 0.85 * d.military * (0.75 - 0.45 * regulation)
+                })
+            };
+
+            const perSectorInitial = {
+                transport: { legacy: 0.93, stranded: 0.07 },
+                supply: { legacy: 0.94, stranded: 0.06 },
+                realestate: { legacy: 0.95, stranded: 0.05 },
+                energy: { legacy: 0.96, stranded: 0.04 },
+                labor: { legacy: 0.96, stranded: 0.04 },
+                military: { legacy: 0.98, stranded: 0.02 }
+            };
+
+            const rightIndex = Object.fromEntries(right.map((n, i) => [n.id, i]));
+            const links = [];
+
+            for (const source of left) {
+                const initial = perSectorInitial[source.id] || { legacy: 1 };
+                const final = perSectorFinal[source.id] || { legacy: 1 };
+
+                // Ensure both distributions cover all targets
+                const targets = right.map(n => n.id);
+                const initialFull = Object.fromEntries(targets.map(tid => [tid, initial[tid] ?? 0]));
+                const finalFull = Object.fromEntries(targets.map(tid => [tid, final[tid] ?? 0]));
+
+                const currentFracs = Object.fromEntries(targets.map(tid => [tid, lerp(initialFull[tid], finalFull[tid], p)]));
+                // Renormalize for safety (numerical drift)
+                const norm = normalizeWeights(currentFracs);
+
+                for (const targetId of targets) {
+                    const value = source.value * (norm[targetId] || 0);
+                    links.push({
+                        id: `${source.id}→${targetId}`,
+                        source: source.id,
+                        target: targetId,
+                        value,
+                        color: source.color,
+                        targetIndex: rightIndex[targetId] ?? 0
+                    });
+                }
+            }
+
+            // Stable ordering: group by source, then by target order to reduce crossing
+            links.sort((a, b) => {
+                if (a.source !== b.source) return a.source.localeCompare(b.source);
+                return (a.targetIndex ?? 0) - (b.targetIndex ?? 0);
+            });
+
+            const rightTotals = Object.fromEntries(right.map(n => [n.id, 0]));
+            for (const link of links) {
+                rightTotals[link.target] = (rightTotals[link.target] || 0) + link.value;
+            }
+            right.forEach(n => { n.value = rightTotals[n.id] || 0; });
+
+            return { left, right, links, progress: p };
+        }
+
+        function computeSankeyLayout(model, width, height) {
+            const margin = { top: 18, right: 160, bottom: 18, left: 160 };
+            const nodeWidth = 14;
+            const nodePad = 10;
+            const leftX0 = margin.left;
+            const leftX1 = leftX0 + nodeWidth;
+            const rightX1 = width - margin.right;
+            const rightX0 = rightX1 - nodeWidth;
+
+            const leftNodes = model.left.map(n => ({ ...n, column: 'left' }));
+            const rightNodes = model.right.map(n => ({ ...n, column: 'right' }));
+            const nodes = [...leftNodes, ...rightNodes];
+
+            const leftTotal = leftNodes.reduce((a, n) => a + n.value, 0);
+            const rightTotal = rightNodes.reduce((a, n) => a + n.value, 0);
+            const total = Math.max(leftTotal, rightTotal, 1e-6);
+
+            const available = height - margin.top - margin.bottom;
+            const leftAvail = available - nodePad * (leftNodes.length - 1);
+            const rightAvail = available - nodePad * (rightNodes.length - 1);
+            const scale = Math.min(leftAvail, rightAvail) / total;
+
+            function stackColumn(list, x0, x1, startY) {
+                let y = startY;
+                for (const n of list) {
+                    const h = n.value * scale;
+                    n.x0 = x0;
+                    n.x1 = x1;
+                    n.y0 = y;
+                    n.y1 = y + h;
+                    y += h + nodePad;
+                }
+            }
+
+            const colHeight = (list) => (
+                list.reduce((acc, n) => acc + n.value * scale, 0) + nodePad * (list.length - 1)
+            );
+            const leftStart = margin.top + (available - colHeight(leftNodes)) / 2;
+            const rightStart = margin.top + (available - colHeight(rightNodes)) / 2;
+
+            stackColumn(leftNodes, leftX0, leftX1, leftStart);
+            stackColumn(rightNodes, rightX0, rightX1, rightStart);
+
+            const nodeById = Object.fromEntries(nodes.map(n => [n.id, n]));
+
+            const links = model.links.map(l => {
+                const source = nodeById[l.source];
+                const target = nodeById[l.target];
+                const thickness = l.value * scale;
+                return {
+                    ...l,
+                    thickness,
+                    x0: source.x1,
+                    x1: target.x0,
+                    y0: source.y0,
+                    y1: target.y0
+                };
+            });
+
+            // Stack outgoing (by target position) and incoming (by source position) to reduce crossings
+            const byId = Object.fromEntries(links.map(l => [l.id, l]));
+            const outgoing = {};
+            const incoming = {};
+            for (const l of links) {
+                (outgoing[l.source] || (outgoing[l.source] = [])).push(l);
+                (incoming[l.target] || (incoming[l.target] = [])).push(l);
+            }
+
+            for (const n of leftNodes) {
+                const list = (outgoing[n.id] || []).slice()
+                    .sort((a, b) => (nodeById[a.target].y0 - nodeById[b.target].y0));
+                let y = n.y0;
+                for (const l of list) {
+                    const t = l.thickness;
+                    byId[l.id].y0 = y + t / 2;
+                    y += t;
+                }
+            }
+
+            for (const n of rightNodes) {
+                const list = (incoming[n.id] || []).slice()
+                    .sort((a, b) => (nodeById[a.source].y0 - nodeById[b.source].y0));
+                let y = n.y0;
+                for (const l of list) {
+                    const t = l.thickness;
+                    byId[l.id].y1 = y + t / 2;
+                    y += t;
+                }
+            }
+
+            return {
+                width,
+                height,
+                nodeWidth,
+                nodes,
+                leftNodes,
+                rightNodes,
+                links,
+                progress: model.progress
+            };
+        }
+
+        function ribbonPath(link) {
+            const x0 = link.x0;
+            const x1 = link.x1;
+            const xi = lerp(x0, x1, 0.5);
+
+            const t = Math.max(0.0001, link.thickness);
+            const y0a = link.y0 - t / 2;
+            const y0b = link.y0 + t / 2;
+            const y1a = link.y1 - t / 2;
+            const y1b = link.y1 + t / 2;
+
+            return [
+                `M ${x0.toFixed(3)} ${y0a.toFixed(3)}`,
+                `C ${xi.toFixed(3)} ${y0a.toFixed(3)}, ${xi.toFixed(3)} ${y1a.toFixed(3)}, ${x1.toFixed(3)} ${y1a.toFixed(3)}`,
+                `L ${x1.toFixed(3)} ${y1b.toFixed(3)}`,
+                `C ${xi.toFixed(3)} ${y1b.toFixed(3)}, ${xi.toFixed(3)} ${y0b.toFixed(3)}, ${x0.toFixed(3)} ${y0b.toFixed(3)}`,
+                'Z'
+            ].join(' ');
+        }
+
+        function ribbonCenterPath(link) {
+            const x0 = link.x0;
+            const x1 = link.x1;
+            const xi = lerp(x0, x1, 0.5);
+            return [
+                `M ${x0.toFixed(3)} ${link.y0.toFixed(3)}`,
+                `C ${xi.toFixed(3)} ${link.y0.toFixed(3)}, ${xi.toFixed(3)} ${link.y1.toFixed(3)}, ${x1.toFixed(3)} ${link.y1.toFixed(3)}`
+            ].join(' ');
+        }
+
+        class SankeyRenderer {
+            constructor(svg) {
+                this.svg = svg;
+                this.prev = null;
+                this.nodes = new Map();
+                this.labels = new Map();
+                this.links = new Map();
+                this.flows = new Map();
+
+                // Build fixed structure
+                while (this.svg.firstChild) this.svg.removeChild(this.svg.firstChild);
+
+                const defs = document.createElementNS(SVG_NS, 'defs');
+                defs.innerHTML = `
+                    <filter id="sankeyShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="rgba(0,0,0,0.18)"/>
+                    </filter>
+                `;
+                this.svg.appendChild(defs);
+
+                this.gBack = document.createElementNS(SVG_NS, 'g');
+                this.gLinks = document.createElementNS(SVG_NS, 'g');
+                this.gFlows = document.createElementNS(SVG_NS, 'g');
+                this.gNodes = document.createElementNS(SVG_NS, 'g');
+                this.gLabels = document.createElementNS(SVG_NS, 'g');
+
+                this.gBack.setAttribute('opacity', '0.8');
+                this.gLinks.setAttribute('filter', 'url(#sankeyShadow)');
+                this.gLinks.setAttribute('style', 'mix-blend-mode:multiply');
+                this.gFlows.setAttribute('style', 'mix-blend-mode:screen');
+                this.gNodes.setAttribute('filter', 'url(#sankeyShadow)');
+                this.gLabels.setAttribute('pointer-events', 'none');
+
+                this.svg.appendChild(this.gBack);
+                this.svg.appendChild(this.gLinks);
+                this.svg.appendChild(this.gFlows);
+                this.svg.appendChild(this.gNodes);
+                this.svg.appendChild(this.gLabels);
+            }
+
+            ensureLink(id, color) {
+                let el = this.links.get(id);
+                if (!el) {
+                    el = document.createElementNS(SVG_NS, 'path');
+                    el.setAttribute('data-id', id);
+                    el.setAttribute('fill', color);
+                    el.setAttribute('fill-opacity', '0.55');
+                    el.setAttribute('stroke', 'rgba(0,0,0,0.18)');
+                    el.setAttribute('stroke-width', '0.75');
+                    el.setAttribute('vector-effect', 'non-scaling-stroke');
+                    el.style.cursor = 'default';
+
+                    const title = document.createElementNS(SVG_NS, 'title');
+                    el.appendChild(title);
+
+                    el.addEventListener('mouseenter', () => el.setAttribute('fill-opacity', '0.78'));
+                    el.addEventListener('mouseleave', () => el.setAttribute('fill-opacity', '0.55'));
+
+                    this.gLinks.appendChild(el);
+                    this.links.set(id, el);
+                }
+                el.setAttribute('fill', color);
+                return el;
+            }
+
+            ensureFlow(id) {
+                let el = this.flows.get(id);
+                if (!el) {
+                    el = document.createElementNS(SVG_NS, 'path');
+                    el.setAttribute('class', 'sankey-flow');
+                    el.setAttribute('vector-effect', 'non-scaling-stroke');
+                    el.style.animationDelay = `${(-Math.random() * 1.8).toFixed(2)}s`;
+                    this.gFlows.appendChild(el);
+                    this.flows.set(id, el);
+                }
+                return el;
+            }
+
+            ensureNode(id, color) {
+                let el = this.nodes.get(id);
+                if (!el) {
+                    el = document.createElementNS(SVG_NS, 'rect');
+                    el.setAttribute('rx', '3');
+                    el.setAttribute('ry', '3');
+                    el.setAttribute('stroke', 'rgba(44, 24, 16, 0.35)');
+                    el.setAttribute('stroke-width', '1');
+                    el.setAttribute('vector-effect', 'non-scaling-stroke');
+                    el.setAttribute('fill', color);
+                    el.setAttribute('fill-opacity', '0.18');
+                    this.gNodes.appendChild(el);
+                    this.nodes.set(id, el);
+                }
+                el.setAttribute('stroke', 'rgba(44, 24, 16, 0.35)');
+                return el;
+            }
+
+            ensureLabel(id, anchor) {
+                let el = this.labels.get(id);
+                if (!el) {
+                    el = document.createElementNS(SVG_NS, 'text');
+                    el.setAttribute('font-family', "'Berkeley Mono', 'Courier New', monospace");
+                    el.setAttribute('font-size', '11');
+                    el.setAttribute('fill', 'var(--ink)');
+                    el.setAttribute('text-anchor', anchor);
+                    el.setAttribute('dominant-baseline', 'middle');
+
+                    const tName = document.createElementNS(SVG_NS, 'tspan');
+                    tName.setAttribute('data-part', 'name');
+                    tName.setAttribute('font-weight', 'bold');
+                    el.appendChild(tName);
+
+                    const tVal = document.createElementNS(SVG_NS, 'tspan');
+                    tVal.setAttribute('data-part', 'value');
+                    tVal.setAttribute('x', '0');
+                    tVal.setAttribute('dy', '12');
+                    tVal.setAttribute('font-size', '9');
+                    tVal.setAttribute('fill', 'var(--ink-faded)');
+                    el.appendChild(tVal);
+
+                    this.gLabels.appendChild(el);
+                    this.labels.set(id, el);
+                }
+                el.setAttribute('text-anchor', anchor);
+                return el;
+            }
+
+            drawBackground(layout) {
+                // Subtle ruled lines for the "field report" look
+                if (this._bgDrawn) return;
+                this._bgDrawn = true;
+
+                const w = layout.width;
+                const h = layout.height;
+                const step = 24;
+                for (let y = 18; y < h; y += step) {
+                    const line = document.createElementNS(SVG_NS, 'line');
+                    line.setAttribute('x1', '0');
+                    line.setAttribute('x2', String(w));
+                    line.setAttribute('y1', String(y));
+                    line.setAttribute('y2', String(y));
+                    line.setAttribute('stroke', 'rgba(44, 24, 16, 0.06)');
+                    line.setAttribute('stroke-width', '1');
+                    this.gBack.appendChild(line);
+                }
+            }
+
+            applyLayout(layout) {
+                this.drawBackground(layout);
+
+                // Links
+                for (const link of layout.links) {
+                    const el = this.ensureLink(link.id, link.color);
+                    const d = ribbonPath(link);
+                    el.setAttribute('d', d);
+                    el.setAttribute('display', link.thickness < 0.6 ? 'none' : 'block');
+                    const flow = this.ensureFlow(link.id);
+                    flow.setAttribute('d', ribbonCenterPath(link));
+                    flow.setAttribute('stroke-width', clamp(link.thickness * 0.06, 0.8, 2.6).toFixed(2));
+                    flow.setAttribute('display', link.thickness < 1.2 ? 'none' : 'block');
+                    const title = el.querySelector('title');
+                    if (title) {
+                        title.textContent = `${link.source} → ${link.target}: ${formatTrillions(link.value)}`;
+                    }
+                }
+
+                // Nodes + labels
+                for (const n of layout.nodes) {
+                    const rect = this.ensureNode(n.id, n.color || 'var(--ink)');
+                    rect.setAttribute('x', n.x0.toFixed(3));
+                    rect.setAttribute('y', n.y0.toFixed(3));
+                    rect.setAttribute('width', (n.x1 - n.x0).toFixed(3));
+                    rect.setAttribute('height', Math.max(0.5, n.y1 - n.y0).toFixed(3));
+
+                    const isLeft = n.column === 'left';
+                    const label = this.ensureLabel(n.id, isLeft ? 'end' : 'start');
+                    const x = isLeft ? (n.x0 - 10) : (n.x1 + 10);
+                    const y = (n.y0 + n.y1) / 2;
+                    label.setAttribute('x', x.toFixed(3));
+                    label.setAttribute('y', y.toFixed(3));
+
+                    const [tName, tVal] = Array.from(label.querySelectorAll('tspan'));
+                    if (tName) tName.textContent = n.name;
+                    if (tVal) {
+                        tVal.setAttribute('x', x.toFixed(3));
+                        tVal.textContent = formatTrillions(n.value);
+                    }
+                }
+            }
+
+            animateTo(next, durationMs = 700) {
+                const start = performance.now();
+                const prev = this.prev;
+                const reduced = prefersReducedMotion();
+                if (!prev || reduced) {
+                    this.applyLayout(next);
+                    this.prev = next;
+                    return;
+                }
+
+                const prevLinks = Object.fromEntries(prev.links.map(l => [l.id, l]));
+                const prevNodes = Object.fromEntries(prev.nodes.map(n => [n.id, n]));
+
+                const tick = (now) => {
+                    const t = clamp((now - start) / durationMs, 0, 1);
+                    const e = easeInOutCubic(t);
+
+                    // Interpolate and apply without allocating large new structures each frame.
+                    for (const link of next.links) {
+                        const a = prevLinks[link.id] || link;
+                        const interp = {
+                            ...link,
+                            x0: lerp(a.x0, link.x0, e),
+                            x1: lerp(a.x1, link.x1, e),
+                            y0: lerp(a.y0, link.y0, e),
+                            y1: lerp(a.y1, link.y1, e),
+                            thickness: lerp(a.thickness, link.thickness, e)
+                        };
+                        const el = this.ensureLink(link.id, link.color);
+                        el.setAttribute('d', ribbonPath(interp));
+                        el.setAttribute('display', interp.thickness < 0.6 ? 'none' : 'block');
+
+                        const flow = this.ensureFlow(link.id);
+                        flow.setAttribute('d', ribbonCenterPath(interp));
+                        flow.setAttribute('stroke-width', clamp(interp.thickness * 0.06, 0.8, 2.6).toFixed(2));
+                        flow.setAttribute('display', interp.thickness < 1.2 ? 'none' : 'block');
+                    }
+
+                    for (const n of next.nodes) {
+                        const a = prevNodes[n.id] || n;
+                        const y0 = lerp(a.y0, n.y0, e);
+                        const y1 = lerp(a.y1, n.y1, e);
+
+                        const rect = this.ensureNode(n.id, n.color || 'var(--ink)');
+                        rect.setAttribute('x', n.x0.toFixed(3));
+                        rect.setAttribute('y', y0.toFixed(3));
+                        rect.setAttribute('width', (n.x1 - n.x0).toFixed(3));
+                        rect.setAttribute('height', Math.max(0.5, y1 - y0).toFixed(3));
+
+                        const isLeft = n.column === 'left';
+                        const label = this.ensureLabel(n.id, isLeft ? 'end' : 'start');
+                        const x = isLeft ? (n.x0 - 10) : (n.x1 + 10);
+                        const y = (y0 + y1) / 2;
+                        label.setAttribute('x', x.toFixed(3));
+                        label.setAttribute('y', y.toFixed(3));
+                        const [tName, tVal] = Array.from(label.querySelectorAll('tspan'));
+                        if (tName) tName.textContent = n.name;
+                        if (tVal) {
+                            tVal.setAttribute('x', x.toFixed(3));
+                            tVal.textContent = formatTrillions(n.value);
+                        }
+                    }
+
+                    if (t < 1) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        this.prev = next;
+                    }
+                };
+
+                requestAnimationFrame(tick);
+            }
+        }
+
+        function updateSankeyDiagram(impacts, opts = {}) {
             const svg = document.getElementById('sankey-diagram');
             if (!svg) return;
 
             const width = 800;
             const height = 400;
 
-            // Pre-antigravity sectors (left side)
-            const preSectors = [
-                { name: 'Transport', value: 14.1, color: 'var(--flow-transport)' },
-                { name: 'Real Estate', value: 9.2, color: 'var(--flow-realestate)' },
-                { name: 'Energy', value: 8.4, color: 'var(--flow-energy)' },
-                { name: 'Labor', value: 12.6, color: 'var(--flow-labor)' },
-                { name: 'Manufacturing', value: 7.8, color: 'var(--flow-supply)' }
-            ];
+            if (!sankeyRenderer) {
+                sankeyRenderer = new SankeyRenderer(svg);
+            }
 
-            // Post-antigravity sectors (right side)
-            const postSectors = [
-                { name: 'AG Transport', color: 'var(--flow-transport)' },
-                { name: 'Vertical RE', color: 'var(--flow-realestate)' },
-                { name: 'Space Industry', color: 'var(--flow-space)' },
-                { name: 'AG Services', color: 'var(--flow-labor)' },
-                { name: 'Displaced', color: '#666' }
-            ];
+            const model = buildSankeyModel(impacts, getVizParams());
+            const layout = computeSankeyLayout(model, width, height);
+            const animate = opts.animate !== false;
+            if (animate) {
+                sankeyRenderer.animateTo(layout, 700);
+            } else {
+                sankeyRenderer.applyLayout(layout);
+                sankeyRenderer.prev = layout;
+            }
+        }
 
-            // Calculate flows based on impacts
-            const avgDisruption = (impacts.transport + impacts.realestate + impacts.labor + impacts.supply) / 400;
+        // --- World map (Canvas) ---
+        let worldMapRenderer = null;
 
-            const flows = [
-                // From Transport
-                { from: 0, to: 0, value: preSectors[0].value * (1 - impacts.transport/100) * 1.5 },
-                { from: 0, to: 4, value: preSectors[0].value * (impacts.transport/100) * 0.6 },
-                { from: 0, to: 2, value: preSectors[0].value * (impacts.transport/100) * 0.4 },
-                // From Real Estate
-                { from: 1, to: 1, value: preSectors[1].value * (1 - impacts.realestate/100) * 1.2 },
-                { from: 1, to: 4, value: preSectors[1].value * (impacts.realestate/100) * 0.5 },
-                { from: 1, to: 2, value: preSectors[1].value * (impacts.realestate/100) * 0.3 },
-                // From Energy
-                { from: 2, to: 2, value: preSectors[2].value * (1 - impacts.energy/150) },
-                { from: 2, to: 3, value: preSectors[2].value * (impacts.energy/200) },
-                // From Labor
-                { from: 3, to: 3, value: preSectors[3].value * (1 - impacts.labor/100) * 0.8 },
-                { from: 3, to: 4, value: preSectors[3].value * (impacts.labor/100) * 0.7 },
-                { from: 3, to: 2, value: preSectors[3].value * 0.15 },
-                // From Manufacturing
-                { from: 4, to: 0, value: preSectors[4].value * (impacts.supply/200) },
-                { from: 4, to: 2, value: preSectors[4].value * 0.3 },
-                { from: 4, to: 4, value: preSectors[4].value * avgDisruption * 0.5 }
-            ];
+        function cssVar(name, fallback = '') {
+            const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+            return v || fallback;
+        }
 
-            // Build SVG content
-            let svgContent = '';
+        function parseColorToRGB(input) {
+            const s = (input || '').trim();
+            if (!s) return { r: 0, g: 0, b: 0 };
 
-            // Calculate positions
-            const leftX = 50;
-            const rightX = 750;
-            const sectorHeight = height / (preSectors.length + 1);
+            if (s.startsWith('#')) {
+                const hex = s.slice(1);
+                if (hex.length === 3) {
+                    const r = parseInt(hex[0] + hex[0], 16);
+                    const g = parseInt(hex[1] + hex[1], 16);
+                    const b = parseInt(hex[2] + hex[2], 16);
+                    return { r, g, b };
+                }
+                if (hex.length >= 6) {
+                    const r = parseInt(hex.slice(0, 2), 16);
+                    const g = parseInt(hex.slice(2, 4), 16);
+                    const b = parseInt(hex.slice(4, 6), 16);
+                    return { r, g, b };
+                }
+            }
 
-            // Draw sector labels (left)
-            preSectors.forEach((sector, i) => {
-                const y = (i + 0.5) * sectorHeight + 20;
-                svgContent += `
-                    <text x="${leftX}" y="${y}" fill="var(--ink)" font-size="11" text-anchor="end" dominant-baseline="middle">
-                        ${sector.name}
-                    </text>
-                    <text x="${leftX + 5}" y="${y + 12}" fill="var(--ink-faded)" font-size="9" dominant-baseline="middle">
-                        $${sector.value}T
-                    </text>
-                `;
+            const rgbMatch = s.match(/rgba?\(([^)]+)\)/i);
+            if (rgbMatch) {
+                const parts = rgbMatch[1].split(',').map(p => p.trim());
+                const r = parseFloat(parts[0]) || 0;
+                const g = parseFloat(parts[1]) || 0;
+                const b = parseFloat(parts[2]) || 0;
+                return { r, g, b };
+            }
+
+            // Fall back by letting the browser resolve named colors.
+            const tmp = document.createElement('div');
+            tmp.style.color = s;
+            document.body.appendChild(tmp);
+            const resolved = getComputedStyle(tmp).color;
+            document.body.removeChild(tmp);
+            return parseColorToRGB(resolved);
+        }
+
+        function rgbToRgba(rgb, a = 1) {
+            const r = Math.round(clamp(rgb.r, 0, 255));
+            const g = Math.round(clamp(rgb.g, 0, 255));
+            const b = Math.round(clamp(rgb.b, 0, 255));
+            return `rgba(${r},${g},${b},${clamp(a, 0, 1)})`;
+        }
+
+        function mixRGB(a, b, t) {
+            const tt = clamp(t, 0, 1);
+            return {
+                r: lerp(a.r, b.r, tt),
+                g: lerp(a.g, b.g, tt),
+                b: lerp(a.b, b.b, tt)
+            };
+        }
+
+        const WORLD_REGIONS = [
+            {
+                id: 'na',
+                name: 'North America',
+                points: [
+                    [-168, 72], [-150, 62], [-140, 55], [-125, 50], [-120, 38], [-110, 30],
+                    [-100, 20], [-85, 15], [-60, 20], [-52, 50], [-75, 72], [-168, 72]
+                ],
+                label: [-105, 45],
+                baseAdoption: 1.15,
+                regulationSensitivity: 0.85,
+                exposure: { transport: 0.85, supply: 0.70, realestate: 0.70, energy: 0.55, labor: 0.65, military: 0.65, space: 0.75 }
+            },
+            {
+                id: 'sa',
+                name: 'South America',
+                points: [
+                    [-82, 12], [-35, 12], [-30, -10], [-45, -35], [-60, -55], [-75, -40], [-82, -10], [-82, 12]
+                ],
+                label: [-60, -15],
+                baseAdoption: 0.78,
+                regulationSensitivity: 0.95,
+                exposure: { transport: 0.70, supply: 0.60, realestate: 0.55, energy: 0.60, labor: 0.55, military: 0.35, space: 0.35 }
+            },
+            {
+                id: 'eu',
+                name: 'Europe',
+                points: [
+                    [-11, 36], [5, 36], [25, 40], [35, 52], [40, 60], [10, 72], [-10, 60], [-11, 36]
+                ],
+                label: [15, 52],
+                baseAdoption: 1.00,
+                regulationSensitivity: 1.25,
+                exposure: { transport: 0.75, supply: 0.65, realestate: 0.70, energy: 0.50, labor: 0.65, military: 0.45, space: 0.55 }
+            },
+            {
+                id: 'af',
+                name: 'Africa',
+                points: [
+                    [-20, 35], [10, 35], [35, 30], [50, 10], [52, -10], [40, -35], [10, -35], [-20, 0], [-20, 35]
+                ],
+                label: [18, 2],
+                baseAdoption: 0.58,
+                regulationSensitivity: 0.85,
+                exposure: { transport: 0.65, supply: 0.55, realestate: 0.50, energy: 0.70, labor: 0.60, military: 0.35, space: 0.30 }
+            },
+            {
+                id: 'as',
+                name: 'Asia',
+                points: [
+                    [35, 5], [55, 5], [70, 12], [80, 5], [95, 5], [110, 10], [125, 8], [150, 0],
+                    [170, 20], [170, 55], [140, 70], [90, 75], [60, 70], [45, 55], [35, 35], [35, 5]
+                ],
+                label: [95, 35],
+                baseAdoption: 1.12,
+                regulationSensitivity: 0.90,
+                exposure: { transport: 0.85, supply: 0.90, realestate: 0.60, energy: 0.55, labor: 0.70, military: 0.55, space: 0.55 }
+            },
+            {
+                id: 'oc',
+                name: 'Oceania',
+                points: [
+                    [110, -10], [140, -10], [155, -20], [170, -30], [155, -50], [120, -45], [110, -30], [110, -10]
+                ],
+                label: [140, -28],
+                baseAdoption: 0.88,
+                regulationSensitivity: 1.00,
+                exposure: { transport: 0.70, supply: 0.55, realestate: 0.55, energy: 0.45, labor: 0.50, military: 0.40, space: 0.45 }
+            }
+        ];
+
+        function calculateRegionalMetrics(impacts, params) {
+            const p = adoptionProgressAtYear(params.timelineYear ?? 15, params);
+            const regulation = clamp((params.regulation ?? 50) / 100, 0, 1);
+
+            const contextBoost = {
+                government: { na: 0.06, eu: 0.03, as: 0.01, oc: 0.01, af: 0.00, sa: 0.00 },
+                corporation: { na: 0.05, as: 0.04, eu: 0.02, oc: 0.01, af: 0.00, sa: 0.01 },
+                individual: { eu: 0.04, na: 0.02, as: 0.02, oc: 0.01, af: 0.01, sa: 0.01 },
+                accident: { na: 0.02, eu: 0.01, as: 0.01, oc: 0.00, af: 0.00, sa: 0.00 }
+            }[params.discoveryContext] || {};
+
+            return WORLD_REGIONS.map(r => {
+                const regPenalty = (regulation - 0.5) * 0.30 * r.regulationSensitivity;
+                const adoption = clamp(p * r.baseAdoption * (1 - regPenalty) + (contextBoost[r.id] || 0), 0, 1);
+
+                const ex = r.exposure;
+                const weights = Object.values(ex).reduce((a, b) => a + b, 0) || 1;
+                const shockRaw =
+                    (ex.transport * (impacts.transport ?? 0) +
+                        ex.supply * (impacts.supply ?? 0) +
+                        ex.realestate * (impacts.realestate ?? 0) +
+                        ex.energy * (impacts.energy ?? 0) +
+                        ex.labor * (impacts.labor ?? 0) +
+                        ex.military * (impacts.military ?? 0) +
+                        ex.space * (impacts.space ?? 0)) / weights;
+
+                const shock = clamp((shockRaw / 100) * (0.55 + 0.45 * adoption), 0, 1);
+
+                return {
+                    id: r.id,
+                    name: r.name,
+                    adoption,
+                    shock
+                };
+            });
+        }
+
+        class WorldMapRenderer {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+                this.prev = null;
+                this.colors = this.readPalette();
+            }
+
+            readPalette() {
+                const parchment = parseColorToRGB(cssVar('--parchment', '#f4e4bc'));
+                const ink = parseColorToRGB(cssVar('--ink', '#2c1810'));
+                const inkFaded = parseColorToRGB(cssVar('--ink-faded', '#4a3828'));
+                const stampRed = parseColorToRGB(cssVar('--stamp-red', '#8b0000'));
+                const ocean = parseColorToRGB(cssVar('--flow-transport', '#4a7c9b'));
+                return { parchment, ink, inkFaded, stampRed, ocean };
+            }
+
+            resizeToDisplaySize() {
+                const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+                const rect = this.canvas.getBoundingClientRect();
+                const w = Math.max(320, Math.round(rect.width));
+                const h = Math.max(240, Math.round(rect.height));
+                const nextW = Math.round(w * dpr);
+                const nextH = Math.round(h * dpr);
+                if (this.canvas.width !== nextW || this.canvas.height !== nextH) {
+                    this.canvas.width = nextW;
+                    this.canvas.height = nextH;
+                }
+                return { w, h, dpr };
+            }
+
+            project(lon, lat, w, h) {
+                const x = ((lon + 180) / 360) * w;
+                const y = ((90 - lat) / 180) * h;
+                return { x, y };
+            }
+
+            drawRegionPath(region, w, h) {
+                const ctx = this.ctx;
+                ctx.beginPath();
+                region.points.forEach((p, idx) => {
+                    const pt = this.project(p[0], p[1], w, h);
+                    if (idx === 0) ctx.moveTo(pt.x, pt.y);
+                    else ctx.lineTo(pt.x, pt.y);
+                });
+                ctx.closePath();
+            }
+
+            drawGraticule(w, h) {
+                const ctx = this.ctx;
+                ctx.save();
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = rgbToRgba(this.colors.ink, 0.06);
+                ctx.setLineDash([2, 6]);
+
+                for (let lon = -150; lon <= 150; lon += 30) {
+                    const x = ((lon + 180) / 360) * w;
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, h);
+                    ctx.stroke();
+                }
+
+                for (let lat = -60; lat <= 60; lat += 30) {
+                    const y = ((90 - lat) / 180) * h;
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(w, y);
+                    ctx.stroke();
+                }
+
+                ctx.restore();
+            }
+
+            drawCompassRose(w, h) {
+                const ctx = this.ctx;
+                ctx.save();
+                const x = w - 58;
+                const y = 54;
+                ctx.translate(x, y);
+                ctx.strokeStyle = rgbToRgba(this.colors.ink, 0.55);
+                ctx.fillStyle = rgbToRgba(this.colors.ink, 0.08);
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(0, 0, 18, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(0, -20);
+                ctx.lineTo(0, 20);
+                ctx.moveTo(-20, 0);
+                ctx.lineTo(20, 0);
+                ctx.stroke();
+                ctx.fillStyle = rgbToRgba(this.colors.ink, 0.7);
+                ctx.font = '10px "Berkeley Mono", "Courier New", monospace';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                ctx.fillText('N', 0, -24);
+                ctx.restore();
+            }
+
+            render(data) {
+                const { w, h, dpr } = this.resizeToDisplaySize();
+                const ctx = this.ctx;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                // Background wash
+                ctx.clearRect(0, 0, w, h);
+                ctx.fillStyle = rgbToRgba(this.colors.parchment, 0.20);
+                ctx.fillRect(0, 0, w, h);
+
+                this.drawGraticule(w, h);
+
+                // Ocean tint (very subtle)
+                ctx.fillStyle = rgbToRgba(this.colors.ocean, 0.06);
+                ctx.fillRect(0, 0, w, h);
+
+                // Region fills + outlines
+                const regionById = Object.fromEntries(data.map(d => [d.id, d]));
+
+                for (const region of WORLD_REGIONS) {
+                    const m = regionById[region.id] || { adoption: 0, shock: 0 };
+                    const adopt = clamp(m.adoption, 0, 1);
+                    const shock = clamp(m.shock, 0, 1);
+
+                    const fill = mixRGB(this.colors.parchment, this.colors.ocean, 0.15 + 0.75 * adopt);
+
+                    this.drawRegionPath(region, w, h);
+                    ctx.fillStyle = rgbToRgba(fill, 0.90);
+                    ctx.fill();
+
+                    ctx.lineWidth = 1.25;
+                    ctx.strokeStyle = rgbToRgba(this.colors.ink, 0.35);
+                    ctx.stroke();
+
+                    // Impact hatching
+                    if (shock > 0.02) {
+                        ctx.save();
+                        this.drawRegionPath(region, w, h);
+                        ctx.clip();
+                        const spacing = lerp(28, 8, shock);
+                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = rgbToRgba(this.colors.stampRed, 0.10 + 0.22 * shock);
+                        ctx.beginPath();
+                        for (let x = -h; x < w + h; x += spacing) {
+                            ctx.moveTo(x, 0);
+                            ctx.lineTo(x + h, h);
+                        }
+                        ctx.stroke();
+                        ctx.restore();
+                    }
+
+                    // Labels
+                    const labelLonLat = region.label || region.points[Math.floor(region.points.length / 2)];
+                    const labelPt = this.project(labelLonLat[0], labelLonLat[1], w, h);
+                    ctx.fillStyle = rgbToRgba(this.colors.ink, 0.85);
+                    ctx.font = 'bold 11px "Berkeley Mono", "Courier New", monospace';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(region.name.toUpperCase(), labelPt.x, labelPt.y - 10);
+                    ctx.font = '10px "Berkeley Mono", "Courier New", monospace';
+                    ctx.fillStyle = rgbToRgba(this.colors.inkFaded, 0.95);
+                    ctx.fillText(`${Math.round(adopt * 100)}% • ${Math.round(shock * 100)}%`, labelPt.x, labelPt.y + 8);
+                }
+
+                // Frame
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = rgbToRgba(this.colors.ink, 0.35);
+                ctx.strokeRect(1, 1, w - 2, h - 2);
+
+                // Decorative corner marks
+                ctx.save();
+                ctx.strokeStyle = rgbToRgba(this.colors.ink, 0.25);
+                ctx.lineWidth = 1;
+                const corner = 18;
+                const inset = 6;
+                ctx.beginPath();
+                // TL
+                ctx.moveTo(inset, inset + corner);
+                ctx.lineTo(inset, inset);
+                ctx.lineTo(inset + corner, inset);
+                // TR
+                ctx.moveTo(w - inset - corner, inset);
+                ctx.lineTo(w - inset, inset);
+                ctx.lineTo(w - inset, inset + corner);
+                // BL
+                ctx.moveTo(inset, h - inset - corner);
+                ctx.lineTo(inset, h - inset);
+                ctx.lineTo(inset + corner, h - inset);
+                // BR
+                ctx.moveTo(w - inset - corner, h - inset);
+                ctx.lineTo(w - inset, h - inset);
+                ctx.lineTo(w - inset, h - inset - corner);
+                ctx.stroke();
+                ctx.restore();
+
+                this.drawCompassRose(w, h);
+            }
+
+            animateTo(next, durationMs = 650) {
+                const reduced = prefersReducedMotion();
+                if (!this.prev || reduced || durationMs <= 0) {
+                    this.render(next);
+                    this.prev = next;
+                    return;
+                }
+
+                const prevById = Object.fromEntries(this.prev.map(d => [d.id, d]));
+                const nextById = Object.fromEntries(next.map(d => [d.id, d]));
+
+                const start = performance.now();
+                const tick = (now) => {
+                    const t = clamp((now - start) / durationMs, 0, 1);
+                    const e = easeInOutCubic(t);
+
+                    const blended = WORLD_REGIONS.map(r => {
+                        const a = prevById[r.id] || { adoption: 0, shock: 0 };
+                        const b = nextById[r.id] || { adoption: 0, shock: 0 };
+                        return {
+                            id: r.id,
+                            name: r.name,
+                            adoption: lerp(a.adoption, b.adoption, e),
+                            shock: lerp(a.shock, b.shock, e)
+                        };
+                    });
+
+                    this.render(blended);
+                    if (t < 1) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        this.prev = next;
+                    }
+                };
+                requestAnimationFrame(tick);
+            }
+        }
+
+        function updateWorldMap(impacts, opts = {}) {
+            const canvas = document.getElementById('world-map');
+            if (!canvas) return;
+
+            if (!worldMapRenderer) {
+                worldMapRenderer = new WorldMapRenderer(canvas);
+            }
+
+            const params = getVizParams();
+            const metrics = calculateRegionalMetrics(impacts, params);
+            const animate = opts.animate !== false;
+            worldMapRenderer.animateTo(metrics, animate ? 650 : 0);
+
+            const caption = document.getElementById('map-caption');
+            if (caption) {
+                caption.textContent = `Adoption fills; impact hatching. Year ${params.timelineYear}.`;
+            }
+
+            const readout = document.getElementById('region-readout');
+            if (readout) {
+                readout.innerHTML = metrics
+                    .slice()
+                    .sort((a, b) => b.adoption - a.adoption)
+                    .map(m => {
+                        const adopt = Math.round(m.adoption * 100);
+                        const shock = Math.round(m.shock * 100);
+                        return `
+                            <div class="region-row">
+                                <div>
+                                    <div class="region-name">${m.name}</div>
+                                    <div class="region-metrics">ADOPTION ${adopt}% • SHOCK ${shock}%</div>
+                                </div>
+                                <div class="region-metrics">Y${params.timelineYear}</div>
+                            </div>
+                        `;
+                    })
+                    .join('');
+            }
+        }
+
+        // --- Sparklines (Canvas) ---
+        const SPARKLINE_SERIES = {
+            containerization: { mid: 0.46, k: 10.5, colorVar: '--flow-supply' },
+            internet: { mid: 0.55, k: 12.0, colorVar: '--flow-transport' }
+        };
+
+        function logistic(x, mid, k) {
+            return 1 / (1 + Math.exp(-k * (x - mid)));
+        }
+
+        function generateSeries({ points = 64, mid = 0.5, k = 10 }) {
+            const out = [];
+            for (let i = 0; i < points; i++) {
+                const x = i / (points - 1);
+                out.push(clamp(logistic(x, mid, k), 0, 1));
+            }
+            return out;
+        }
+
+        function resizeCanvasToCSSPixels(canvas) {
+            const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+            const rect = canvas.getBoundingClientRect();
+            const w = Math.max(200, Math.round(rect.width));
+            const h = Math.max(60, Math.round(rect.height));
+            const nextW = Math.round(w * dpr);
+            const nextH = Math.round(h * dpr);
+            if (canvas.width !== nextW || canvas.height !== nextH) {
+                canvas.width = nextW;
+                canvas.height = nextH;
+            }
+            return { w, h, dpr };
+        }
+
+        function drawSparkline(canvas, series, opts = {}) {
+            const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+            const { w, h, dpr } = resizeCanvasToCSSPixels(canvas);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            const ink = parseColorToRGB(cssVar('--ink', '#2c1810'));
+            const inkFaded = parseColorToRGB(cssVar('--ink-faded', '#4a3828'));
+            const parchment = parseColorToRGB(cssVar('--parchment', '#f4e4bc'));
+            const accent = parseColorToRGB(cssVar(opts.colorVar || '--flow-supply', '#3d7c6b'));
+
+            ctx.clearRect(0, 0, w, h);
+            ctx.fillStyle = rgbToRgba(parchment, 0.14);
+            ctx.fillRect(0, 0, w, h);
+
+            const pad = 10;
+            const innerW = w - pad * 2;
+            const innerH = h - pad * 2;
+
+            // Midline + baseline
+            ctx.save();
+            ctx.strokeStyle = rgbToRgba(inkFaded, 0.22);
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 5]);
+            ctx.beginPath();
+            ctx.moveTo(pad, pad + innerH * 0.5);
+            ctx.lineTo(pad + innerW, pad + innerH * 0.5);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.restore();
+
+            // Curve points
+            const pts = series.map((y, i) => {
+                const x = pad + (i / (series.length - 1)) * innerW;
+                const yy = pad + (1 - clamp(y, 0, 1)) * innerH;
+                return { x, y: yy, v: y };
             });
 
-            // Draw sector labels (right)
-            postSectors.forEach((sector, i) => {
-                const y = (i + 0.5) * sectorHeight + 20;
-                svgContent += `
-                    <text x="${rightX}" y="${y}" fill="var(--ink)" font-size="11" text-anchor="start" dominant-baseline="middle">
-                        ${sector.name}
-                    </text>
-                `;
+            // Area fill
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(pts[0].x, pad + innerH);
+            for (const p of pts) ctx.lineTo(p.x, p.y);
+            ctx.lineTo(pts[pts.length - 1].x, pad + innerH);
+            ctx.closePath();
+            ctx.fillStyle = rgbToRgba(accent, 0.12);
+            ctx.fill();
+            ctx.restore();
+
+            // Curve stroke
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(pts[0].x, pts[0].y);
+            for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+            ctx.strokeStyle = rgbToRgba(accent, 0.85);
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.restore();
+
+            // Inflection marker
+            if (Number.isFinite(opts.mid)) {
+                const mx = pad + clamp(opts.mid, 0, 1) * innerW;
+                ctx.save();
+                ctx.strokeStyle = rgbToRgba(ink, 0.35);
+                ctx.lineWidth = 1;
+                ctx.setLineDash([2, 4]);
+                ctx.beginPath();
+                ctx.moveTo(mx, pad);
+                ctx.lineTo(mx, pad + innerH);
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            // Border
+            ctx.save();
+            ctx.strokeStyle = rgbToRgba(ink, 0.18);
+            ctx.lineWidth = 1;
+            ctx.strokeRect(0.5, 0.5, w - 1, h - 1);
+            ctx.restore();
+        }
+
+        function renderSparklines() {
+            const c1 = document.getElementById('spark-containerization');
+            const c2 = document.getElementById('spark-internet');
+            if (c1) {
+                const spec = SPARKLINE_SERIES.containerization;
+                drawSparkline(
+                    c1,
+                    generateSeries({ points: 72, mid: spec.mid, k: spec.k }),
+                    { colorVar: spec.colorVar, mid: spec.mid }
+                );
+            }
+            if (c2) {
+                const spec = SPARKLINE_SERIES.internet;
+                drawSparkline(
+                    c2,
+                    generateSeries({ points: 72, mid: spec.mid, k: spec.k }),
+                    { colorVar: spec.colorVar, mid: spec.mid }
+                );
+            }
+        }
+
+        // --- Cascade timeline (SVG) ---
+        let cascadeTimelineRenderer = null;
+
+        const TIMELINE_LANES = [
+            { id: 'tech', label: 'TECH' },
+            { id: 'markets', label: 'MARKETS' },
+            { id: 'infra', label: 'INFRA' },
+            { id: 'society', label: 'SOCIETY' },
+            { id: 'geo', label: 'GEO' },
+            { id: 'space', label: 'SPACE' }
+        ];
+
+        function computeTimelineAnchors(params) {
+            const adoptionYears = clamp(params.adoptionRate ?? 20, 1, 100);
+            const regulation = (params.regulation ?? 50);
+            const energy = (params.energyCost ?? 50);
+            const payload = (params.payload ?? 60);
+
+            const ctxShift = {
+                government: { commercial: 0.8, market: 1.2, space: -0.6 },
+                corporation: { commercial: -1.2, market: -0.2, space: 0.3 },
+                individual: { commercial: 0.3, market: 0.6, space: 0.5 },
+                accident: { commercial: 0.2, market: 0.8, space: 0.0 }
+            }[params.discoveryContext] || { commercial: 0, market: 0, space: 0 };
+
+            const speedShift =
+                ((regulation - 50) / 100) * 3
+                + ((energy - 50) / 100) * 2
+                - ((payload - 50) / 100) * 2;
+
+            let patent = 1;
+            let commercial = adoptionYears * 0.25 + speedShift * 0.6 + ctxShift.commercial;
+            let mass = adoptionYears * 0.50 + speedShift * 0.45;
+            let collapse = adoptionYears * 0.75 + speedShift * 0.35;
+            let transform = adoptionYears * 1.00 + speedShift * 0.25;
+            let equilibrium = adoptionYears * 1.50 + speedShift * 0.15;
+
+            // enforce monotonic spacing
+            commercial = Math.max(commercial, patent + 1);
+            mass = Math.max(mass, commercial + 2);
+            collapse = Math.max(collapse, mass + 2);
+            transform = Math.max(transform, collapse + 2);
+            equilibrium = Math.max(equilibrium, transform + 4);
+
+            return {
+                patent,
+                commercial,
+                mass,
+                collapse,
+                transform,
+                equilibrium,
+                ctxShift
+            };
+        }
+
+        function computeCascadeEvents(impacts, params) {
+            const anchors = computeTimelineAnchors(params);
+            const regulation = clamp((params.regulation ?? 50) / 100, 0, 1);
+            const payload = clamp((params.payload ?? 60) / 100, 0, 1);
+
+            const d = {
+                transport: clamp((impacts.transport ?? 0) / 100, 0, 1),
+                supply: clamp((impacts.supply ?? 0) / 100, 0, 1),
+                energy: clamp((impacts.energy ?? 0) / 100, 0, 1),
+                labor: clamp((impacts.labor ?? 0) / 100, 0, 1),
+                realestate: clamp((impacts.realestate ?? 0) / 100, 0, 1),
+                urban: clamp((impacts.urban ?? 0) / 100, 0, 1),
+                military: clamp((impacts.military ?? 0) / 100, 0, 1),
+                space: clamp((impacts.space ?? 0) / 100, 0, 1)
+            };
+
+            const yBankruptcy = anchors.commercial + lerp(7, 2, d.transport) + lerp(1.2, -0.6, 1 - regulation) + anchors.ctxShift.market;
+            const yOilCrash = anchors.commercial + lerp(9, 2.5, d.energy) + lerp(1.0, -0.8, 1 - regulation);
+            const yPortStrand = anchors.mass + lerp(4.5, 1.5, d.supply);
+            const yAirspace = anchors.commercial + lerp(4.5, 1.5, d.transport) + lerp(-0.4, 1.2, regulation);
+            const yTreaty = anchors.mass + lerp(10, 3.5, regulation) + lerp(1.2, -0.6, d.military);
+            const yCarrier = anchors.collapse + lerp(6, 2, d.military);
+            const yLaborShock = anchors.collapse + lerp(8, 2.5, d.labor) + lerp(1.0, -0.8, regulation);
+            const yFloatingCity = anchors.collapse + lerp(10, 3.0, (d.urban + d.realestate) / 2);
+            const yOrbitalYard = anchors.mass + lerp(12, 3.5, d.space * payload);
+            const yMoonBase = yOrbitalYard + lerp(10, 3.0, d.space);
+
+            const events = [
+                {
+                    id: 'patent',
+                    lane: 'tech',
+                    label: 'First Patent',
+                    year: anchors.patent,
+                    severity: 0.25,
+                    color: 'var(--ink)'
+                },
+                {
+                    id: 'commercial',
+                    lane: 'tech',
+                    label: 'First Commercial Platform',
+                    year: anchors.commercial,
+                    severity: 0.45,
+                    color: 'var(--flow-transport)',
+                    dependsOn: ['patent']
+                },
+                {
+                    id: 'bankruptcy',
+                    lane: 'markets',
+                    label: 'First Major Bankruptcy',
+                    year: yBankruptcy,
+                    severity: 0.55 + 0.25 * d.transport,
+                    color: 'var(--stamp-red)',
+                    dependsOn: ['commercial']
+                },
+                {
+                    id: 'oilCrash',
+                    lane: 'markets',
+                    label: 'Fuel Market Collapse',
+                    year: yOilCrash,
+                    severity: 0.45 + 0.35 * d.energy,
+                    color: 'var(--flow-energy)',
+                    dependsOn: ['commercial']
+                },
+                {
+                    id: 'airspace',
+                    lane: 'geo',
+                    label: 'Airspace Clampdown',
+                    year: yAirspace,
+                    severity: 0.35 + 0.35 * regulation,
+                    color: 'var(--flow-military)',
+                    dependsOn: ['commercial']
+                },
+                {
+                    id: 'mass',
+                    lane: 'tech',
+                    label: 'Mass Adoption',
+                    year: anchors.mass,
+                    severity: 0.55,
+                    color: 'var(--flow-supply)',
+                    dependsOn: ['commercial']
+                },
+                {
+                    id: 'ports',
+                    lane: 'infra',
+                    label: 'Port Infrastructure Strands',
+                    year: yPortStrand,
+                    severity: 0.35 + 0.35 * d.supply,
+                    color: 'var(--flow-supply)',
+                    dependsOn: ['mass']
+                },
+                {
+                    id: 'collapse',
+                    lane: 'markets',
+                    label: 'Transport Collapse',
+                    year: anchors.collapse,
+                    severity: 0.65 + 0.25 * d.transport,
+                    color: 'var(--flow-transport)',
+                    dependsOn: ['mass', 'bankruptcy']
+                },
+                {
+                    id: 'labor',
+                    lane: 'society',
+                    label: 'Labor Displacement Wave',
+                    year: yLaborShock,
+                    severity: 0.55 + 0.30 * d.labor,
+                    color: 'var(--flow-labor)',
+                    dependsOn: ['collapse', 'bankruptcy']
+                },
+                {
+                    id: 'floatingCity',
+                    lane: 'infra',
+                    label: 'First Floating City',
+                    year: yFloatingCity,
+                    severity: 0.45 + 0.30 * ((d.urban + d.realestate) / 2),
+                    color: 'var(--flow-urban)',
+                    dependsOn: ['collapse']
+                },
+                {
+                    id: 'treaty',
+                    lane: 'geo',
+                    label: 'First Global Treaty',
+                    year: yTreaty,
+                    severity: 0.40 + 0.30 * regulation,
+                    color: 'var(--ink-faded)',
+                    dependsOn: ['airspace', 'mass']
+                },
+                {
+                    id: 'carrier',
+                    lane: 'geo',
+                    label: 'Carrier Doctrine Obsolete',
+                    year: yCarrier,
+                    severity: 0.45 + 0.35 * d.military,
+                    color: 'var(--flow-military)',
+                    dependsOn: ['airspace', 'collapse']
+                },
+                {
+                    id: 'transform',
+                    lane: 'markets',
+                    label: 'Full Transformation',
+                    year: anchors.transform,
+                    severity: 0.65,
+                    color: 'var(--ink)',
+                    dependsOn: ['collapse', 'floatingCity', 'treaty']
+                },
+                {
+                    id: 'yard',
+                    lane: 'space',
+                    label: 'First Orbital Shipyard',
+                    year: yOrbitalYard,
+                    severity: 0.45 + 0.40 * d.space,
+                    color: 'var(--flow-space)',
+                    dependsOn: ['mass']
+                },
+                {
+                    id: 'moon',
+                    lane: 'space',
+                    label: 'First Lunar Base',
+                    year: yMoonBase,
+                    severity: 0.35 + 0.45 * d.space,
+                    color: 'var(--flow-space)',
+                    dependsOn: ['yard']
+                },
+                {
+                    id: 'equilibrium',
+                    lane: 'society',
+                    label: 'New Equilibrium',
+                    year: anchors.equilibrium,
+                    severity: 0.50,
+                    color: 'var(--ink-faded)',
+                    dependsOn: ['transform', 'labor', 'moon']
+                }
+            ];
+
+            // Normalize + clamp display years for timeline horizon (0..30)
+            for (const e of events) {
+                const actual = Number.isFinite(e.year) ? e.year : 30;
+                e.year = Math.max(0, actual);
+                e.displayYear = clamp(e.year, 0, 30);
+                e.outOfHorizon = e.year > 30;
+                e.dependsOn = e.dependsOn || [];
+            }
+
+            return events;
+        }
+
+        function computeTimelineLayout(events, width, height, params) {
+            const margin = { top: 24, right: 18, bottom: 24, left: 84 };
+            const axisY = height - margin.bottom + 2;
+            const x0 = margin.left;
+            const x1 = width - margin.right;
+            const y0 = margin.top;
+            const y1 = height - margin.bottom - 6;
+            const laneGap = (TIMELINE_LANES.length <= 1) ? 0 : (y1 - y0) / (TIMELINE_LANES.length - 1);
+            const laneY = Object.fromEntries(TIMELINE_LANES.map((l, i) => [l.id, y0 + i * laneGap]));
+
+            const xAtYear = (yr) => lerp(x0, x1, clamp(yr / 30, 0, 1));
+
+            const laidEvents = events.map(e => {
+                const y = laneY[e.lane] ?? (y0 + y1) / 2;
+                return {
+                    ...e,
+                    x: xAtYear(e.displayYear),
+                    y
+                };
             });
 
-            // Draw flows as curved paths
-            const maxFlow = Math.max(...flows.map(f => f.value));
+            const eventById = Object.fromEntries(laidEvents.map(e => [e.id, e]));
 
-            flows.forEach(flow => {
-                if (flow.value < 0.1) return; // Skip tiny flows
+            const edges = [];
+            for (const e of laidEvents) {
+                for (const dep of e.dependsOn) {
+                    const from = eventById[dep];
+                    const to = e;
+                    if (!from) continue;
+                    edges.push({
+                        id: `${dep}→${e.id}`,
+                        from: dep,
+                        to: e.id,
+                        x0: from.x,
+                        y0: from.y,
+                        x1: to.x,
+                        y1: to.y
+                    });
+                }
+            }
 
-                const fromY = (flow.from + 0.5) * sectorHeight + 20;
-                const toY = (flow.to + 0.5) * sectorHeight + 20;
-                const strokeWidth = Math.max(2, (flow.value / maxFlow) * 40);
-                const color = preSectors[flow.from].color;
+            const currentYear = clamp(params.timelineYear ?? 15, 0, 30);
+            const currentX = xAtYear(currentYear);
 
-                const midX = (leftX + rightX) / 2;
+            return {
+                width,
+                height,
+                margin,
+                axisY,
+                x0,
+                x1,
+                laneY,
+                events: laidEvents,
+                edges,
+                currentYear,
+                currentX
+            };
+        }
 
-                svgContent += `
-                    <path
-                        d="M ${leftX + 70} ${fromY}
-                           C ${midX} ${fromY}, ${midX} ${toY}, ${rightX - 70} ${toY}"
-                        stroke="${color}"
-                        stroke-width="${strokeWidth}"
-                        fill="none"
-                        opacity="0.6"
-                    />
+        function connectorPath(edge) {
+            const x0 = edge.x0;
+            const y0 = edge.y0;
+            const x1 = edge.x1;
+            const y1 = edge.y1;
+            const dx = Math.max(24, Math.abs(x1 - x0) * 0.45);
+            const c1x = x0 + dx;
+            const c2x = x1 - dx;
+            return `M ${x0.toFixed(3)} ${y0.toFixed(3)} C ${c1x.toFixed(3)} ${y0.toFixed(3)}, ${c2x.toFixed(3)} ${y1.toFixed(3)}, ${x1.toFixed(3)} ${y1.toFixed(3)}`;
+        }
+
+        class CascadeTimelineRenderer {
+            constructor(svg) {
+                this.svg = svg;
+                this.prev = null;
+                this.eventEls = new Map();
+                this.edgeEls = new Map();
+
+                while (this.svg.firstChild) this.svg.removeChild(this.svg.firstChild);
+
+                const defs = document.createElementNS(SVG_NS, 'defs');
+                defs.innerHTML = `
+                    <marker id="arrowInk" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                        <path d="M 0 0 L 8 3 L 0 6 z" fill="rgba(44,24,16,0.35)"></path>
+                    </marker>
                 `;
-            });
+                this.svg.appendChild(defs);
 
-            svg.innerHTML = svgContent;
+                this.gGrid = document.createElementNS(SVG_NS, 'g');
+                this.gEdges = document.createElementNS(SVG_NS, 'g');
+                this.gEvents = document.createElementNS(SVG_NS, 'g');
+                this.gOverlay = document.createElementNS(SVG_NS, 'g');
+
+                this.gGrid.setAttribute('opacity', '0.9');
+                this.gEdges.setAttribute('opacity', '0.75');
+                this.gEdges.setAttribute('style', 'mix-blend-mode:multiply');
+                this.gOverlay.setAttribute('pointer-events', 'none');
+
+                this.svg.appendChild(this.gGrid);
+                this.svg.appendChild(this.gEdges);
+                this.svg.appendChild(this.gEvents);
+                this.svg.appendChild(this.gOverlay);
+
+                this.currentLine = document.createElementNS(SVG_NS, 'line');
+                this.currentLine.setAttribute('stroke', 'var(--stamp-red)');
+                this.currentLine.setAttribute('stroke-width', '2');
+                this.currentLine.setAttribute('stroke-opacity', '0.55');
+                this.currentLine.setAttribute('y1', '0');
+                this.currentLine.setAttribute('y2', '240');
+                this.gOverlay.appendChild(this.currentLine);
+
+                this.currentLabel = document.createElementNS(SVG_NS, 'text');
+                this.currentLabel.setAttribute('fill', 'var(--stamp-red)');
+                this.currentLabel.setAttribute('font-family', "'Berkeley Mono', 'Courier New', monospace");
+                this.currentLabel.setAttribute('font-size', '10');
+                this.currentLabel.setAttribute('font-weight', 'bold');
+                this.currentLabel.setAttribute('text-anchor', 'middle');
+                this.currentLabel.setAttribute('y', '14');
+                this.gOverlay.appendChild(this.currentLabel);
+            }
+
+            drawStatic(layout) {
+                if (this._staticDrawn) return;
+                this._staticDrawn = true;
+
+                const width = layout.width;
+                const height = layout.height;
+
+                // Year grid lines + labels
+                for (let yr = 0; yr <= 30; yr += 5) {
+                    const x = lerp(layout.x0, layout.x1, yr / 30);
+                    const line = document.createElementNS(SVG_NS, 'line');
+                    line.setAttribute('x1', x.toFixed(3));
+                    line.setAttribute('x2', x.toFixed(3));
+                    line.setAttribute('y1', '16');
+                    line.setAttribute('y2', (height - 18).toFixed(3));
+                    line.setAttribute('stroke', 'rgba(44,24,16,0.07)');
+                    line.setAttribute('stroke-width', '1');
+                    this.gGrid.appendChild(line);
+
+                    const label = document.createElementNS(SVG_NS, 'text');
+                    label.setAttribute('x', x.toFixed(3));
+                    label.setAttribute('y', (height - 8).toFixed(3));
+                    label.setAttribute('fill', 'var(--ink-faded)');
+                    label.setAttribute('font-family', "'Berkeley Mono', 'Courier New', monospace");
+                    label.setAttribute('font-size', '10');
+                    label.setAttribute('text-anchor', 'middle');
+                    label.textContent = `Y${yr}`;
+                    this.gGrid.appendChild(label);
+                }
+
+                // Lanes
+                for (const lane of TIMELINE_LANES) {
+                    const y = layout.laneY[lane.id];
+                    const yStr = y.toFixed(3);
+                    const l = document.createElementNS(SVG_NS, 'line');
+                    l.setAttribute('x1', layout.x0.toFixed(3));
+                    l.setAttribute('x2', layout.x1.toFixed(3));
+                    l.setAttribute('y1', yStr);
+                    l.setAttribute('y2', yStr);
+                    l.setAttribute('stroke', 'rgba(44,24,16,0.16)');
+                    l.setAttribute('stroke-width', '1');
+                    l.setAttribute('stroke-dasharray', '2 6');
+                    this.gGrid.appendChild(l);
+
+                    const t = document.createElementNS(SVG_NS, 'text');
+                    t.setAttribute('x', (layout.x0 - 10).toFixed(3));
+                    t.setAttribute('y', yStr);
+                    t.setAttribute('fill', 'var(--ink-faded)');
+                    t.setAttribute('font-family', "'Berkeley Mono', 'Courier New', monospace");
+                    t.setAttribute('font-size', '10');
+                    t.setAttribute('text-anchor', 'end');
+                    t.setAttribute('dominant-baseline', 'middle');
+                    t.textContent = lane.label;
+                    this.gGrid.appendChild(t);
+                }
+            }
+
+            ensureEdge(id) {
+                let el = this.edgeEls.get(id);
+                if (!el) {
+                    el = document.createElementNS(SVG_NS, 'path');
+                    el.setAttribute('fill', 'none');
+                    el.setAttribute('stroke', 'rgba(44,24,16,0.28)');
+                    el.setAttribute('stroke-width', '1.25');
+                    el.setAttribute('marker-end', 'url(#arrowInk)');
+                    el.setAttribute('stroke-linecap', 'round');
+                    el.setAttribute('stroke-linejoin', 'round');
+                    this.gEdges.appendChild(el);
+                    this.edgeEls.set(id, el);
+                }
+                return el;
+            }
+
+            ensureEvent(id) {
+                let g = this.eventEls.get(id);
+                if (!g) {
+                    g = document.createElementNS(SVG_NS, 'g');
+                    g.setAttribute('data-id', id);
+
+                    const dot = document.createElementNS(SVG_NS, 'circle');
+                    dot.setAttribute('r', '5');
+                    dot.setAttribute('stroke', 'rgba(44,24,16,0.55)');
+                    dot.setAttribute('stroke-width', '1');
+                    dot.setAttribute('vector-effect', 'non-scaling-stroke');
+                    g.appendChild(dot);
+
+                    const label = document.createElementNS(SVG_NS, 'text');
+                    label.setAttribute('x', '8');
+                    label.setAttribute('y', '-8');
+                    label.setAttribute('fill', 'var(--ink)');
+                    label.setAttribute('font-family', "'Berkeley Mono', 'Courier New', monospace");
+                    label.setAttribute('font-size', '10');
+                    label.setAttribute('font-weight', 'bold');
+                    label.setAttribute('text-anchor', 'start');
+                    label.setAttribute('dominant-baseline', 'baseline');
+                    g.appendChild(label);
+
+                    const sub = document.createElementNS(SVG_NS, 'text');
+                    sub.setAttribute('x', '8');
+                    sub.setAttribute('y', '6');
+                    sub.setAttribute('fill', 'var(--ink-faded)');
+                    sub.setAttribute('font-family', "'Berkeley Mono', 'Courier New', monospace");
+                    sub.setAttribute('font-size', '9');
+                    sub.setAttribute('text-anchor', 'start');
+                    sub.setAttribute('dominant-baseline', 'hanging');
+                    g.appendChild(sub);
+
+                    const title = document.createElementNS(SVG_NS, 'title');
+                    g.appendChild(title);
+
+                    this.gEvents.appendChild(g);
+                    this.eventEls.set(id, g);
+                }
+                return g;
+            }
+
+            applyLayout(layout) {
+                this.drawStatic(layout);
+
+                // Current year marker
+                const x = layout.currentX.toFixed(3);
+                this.currentLine.setAttribute('x1', x);
+                this.currentLine.setAttribute('x2', x);
+                this.currentLabel.setAttribute('x', x);
+                this.currentLabel.textContent = `Y${layout.currentYear}`;
+
+                // Edges
+                for (const edge of layout.edges) {
+                    const el = this.ensureEdge(edge.id);
+                    el.setAttribute('d', connectorPath(edge));
+                }
+
+                // Events
+                for (const e of layout.events) {
+                    const g = this.ensureEvent(e.id);
+                    g.setAttribute('transform', `translate(${e.x.toFixed(3)} ${e.y.toFixed(3)})`);
+
+                    const [dot, label, sub] = Array.from(g.querySelectorAll('circle, text'));
+                    const occurred = e.year <= layout.currentYear + 1e-6;
+                    const severity = clamp(e.severity ?? 0.4, 0.2, 1);
+                    const r = lerp(4, 9, severity);
+                    dot.setAttribute('r', r.toFixed(2));
+                    dot.setAttribute('fill', occurred ? e.color : 'transparent');
+                    dot.setAttribute('fill-opacity', occurred ? '0.65' : '0');
+                    dot.setAttribute('stroke', occurred ? 'rgba(44,24,16,0.55)' : 'rgba(44,24,16,0.35)');
+
+                    label.textContent = e.label.toUpperCase();
+                    sub.textContent = e.outOfHorizon ? `Y${Math.round(e.year)}+` : `Y${Math.round(e.year)}`;
+                    label.setAttribute('fill', occurred ? 'var(--ink)' : 'var(--ink-faded)');
+
+                    const title = g.querySelector('title');
+                    if (title) {
+                        title.textContent = `${e.label} (${e.outOfHorizon ? `Y${Math.round(e.year)}+` : `Y${Math.round(e.year)}`})`;
+                    }
+
+                    // Visual cue for "beyond horizon"
+                    g.setAttribute('opacity', e.outOfHorizon ? '0.75' : '1');
+                }
+            }
+
+            animateTo(next, durationMs = 650) {
+                const reduced = prefersReducedMotion();
+                if (!this.prev || reduced || durationMs <= 0) {
+                    this.applyLayout(next);
+                    this.prev = next;
+                    return;
+                }
+
+                const prev = this.prev;
+                const prevEventById = Object.fromEntries(prev.events.map(e => [e.id, e]));
+                const prevEdgeById = Object.fromEntries(prev.edges.map(e => [e.id, e]));
+
+                const start = performance.now();
+                const tick = (now) => {
+                    const t = clamp((now - start) / durationMs, 0, 1);
+                    const eT = easeInOutCubic(t);
+
+                    // Interpolate current year line
+                    const cx = lerp(prev.currentX, next.currentX, eT);
+                    const x = cx.toFixed(3);
+                    this.currentLine.setAttribute('x1', x);
+                    this.currentLine.setAttribute('x2', x);
+                    this.currentLabel.setAttribute('x', x);
+                    this.currentLabel.textContent = `Y${next.currentYear}`;
+
+                    // Edges
+                    for (const edge of next.edges) {
+                        const a = prevEdgeById[edge.id] || edge;
+                        const interp = {
+                            ...edge,
+                            x0: lerp(a.x0, edge.x0, eT),
+                            y0: lerp(a.y0, edge.y0, eT),
+                            x1: lerp(a.x1, edge.x1, eT),
+                            y1: lerp(a.y1, edge.y1, eT)
+                        };
+                        const el = this.ensureEdge(edge.id);
+                        el.setAttribute('d', connectorPath(interp));
+                    }
+
+                    // Events
+                    for (const ev of next.events) {
+                        const a = prevEventById[ev.id] || ev;
+                        const xI = lerp(a.x, ev.x, eT);
+                        const yI = lerp(a.y, ev.y, eT);
+                        const g = this.ensureEvent(ev.id);
+                        g.setAttribute('transform', `translate(${xI.toFixed(3)} ${yI.toFixed(3)})`);
+                    }
+
+                    if (t < 1) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        this.applyLayout(next);
+                        this.prev = next;
+                    }
+                };
+                requestAnimationFrame(tick);
+            }
+        }
+
+        function updateCascadeTimeline(impacts, opts = {}) {
+            const svg = document.getElementById('cascade-timeline');
+            if (!svg) return;
+
+            const width = 800;
+            const height = 240;
+            if (!cascadeTimelineRenderer) {
+                cascadeTimelineRenderer = new CascadeTimelineRenderer(svg);
+            }
+
+            const params = getVizParams();
+            const events = computeCascadeEvents(impacts, params);
+            const layout = computeTimelineLayout(events, width, height, params);
+            const animate = opts.animate !== false;
+            if (animate) {
+                cascadeTimelineRenderer.animateTo(layout, 650);
+            } else {
+                cascadeTimelineRenderer.applyLayout(layout);
+                cascadeTimelineRenderer.prev = layout;
+            }
+
+            const notes = document.getElementById('timeline-notes');
+            if (notes) {
+                const now = layout.currentYear;
+                const completed = events.filter(e => e.year <= now + 1e-6).sort((a, b) => b.year - a.year).slice(0, 6);
+                const upcoming = events.filter(e => e.year > now + 1e-6).sort((a, b) => a.year - b.year).slice(0, 6);
+
+                const renderList = (list) => list.map(e => `
+                    <div class="event-line">
+                        <div class="event-name">${e.label}</div>
+                        <div class="event-year">${e.outOfHorizon ? `Y${Math.round(e.year)}+` : `Y${Math.round(e.year)}`}</div>
+                    </div>
+                `).join('') || '<div class="event-line"><div class="event-name">None</div><div class="event-year">—</div></div>';
+
+                notes.innerHTML = `
+                    <div class="notes-title">FIELD NOTES — YEAR ${layout.currentYear}</div>
+                    <div class="notes-section">
+                        <div class="notes-title">Completed</div>
+                        ${renderList(completed)}
+                    </div>
+                    <div class="notes-section">
+                        <div class="notes-title">Next</div>
+                        ${renderList(upcoming)}
+                    </div>
+                `;
+            }
         }
 
         // Parameter value labels
@@ -1951,6 +4054,7 @@
         document.getElementById('timeline-scrubber').addEventListener('input', (e) => {
             state.timelineYear = parseInt(e.target.value);
             document.getElementById('timeline-year').textContent = state.timelineYear;
+            updateTimeSliceVisuals({ animate: false });
         });
 
         document.getElementById('recalculate').addEventListener('click', () => {
@@ -2017,14 +4121,31 @@
         });
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
+        let _initialized = false;
+        function init() {
+            if (_initialized) return;
+            _initialized = true;
+
             updateUI();
-        });
+            renderSparklines();
+
+            // Redraw canvas-based visuals on resize (throttled).
+            let resizeTicking = false;
+            window.addEventListener('resize', () => {
+                if (resizeTicking) return;
+                resizeTicking = true;
+                requestAnimationFrame(() => {
+                    resizeTicking = false;
+                    renderSparklines();
+                    updateTimeSliceVisuals({ animate: false });
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
 
         // Also run immediately in case DOMContentLoaded already fired
-        if (document.readyState !== 'loading') {
-            updateUI();
-        }
+        if (document.readyState !== 'loading') init();
     </script>
 </body>
 </html>
