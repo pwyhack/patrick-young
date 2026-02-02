@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "Bash(python3:*)",
+      "WebFetch(domain:www.hostinger.com)",
+      "Bash(git -C /Users/py/patrick-young remote:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.asciiarthub.com)",
+      "WebFetch(domain:emojicombos.com)",
+      "WebFetch(domain:www.asciiart.eu)",
+      "WebFetch(domain:heartcopypaste.com)",
+      "WebFetch(domain:www.asciiartcopy.com)",
+      "WebFetch(domain:ai-text-humanizer.com)"
+    ],
+    "deny": []
+  }
+}
