@@ -732,6 +732,15 @@
             position: relative;
             background: rgba(255,255,255,0.05);
             border-left: 3px solid var(--ink-faded);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .section[data-year] {
+            transform-origin: top left;
+        }
+
+        .section[style*="display: none"] {
+            transform: translateY(-10px);
         }
 
         .section::before {
@@ -1643,41 +1652,723 @@
 
         <main class="tab-content" id="tab-content">
             <section class="tab-panel" id="panel-social" role="tabpanel" aria-labelledby="tab-social" hidden>
-                <section class="section" data-section-num="S1" id="social-overview">
+
+                <!-- Year 1: The Containment Illusion -->
+                <section class="section" data-section-num="S1" data-year="1" id="social-year1">
+                    <div class="paper-clip"></div>
                     <div class="section-header">
-                        <h2 class="section-title">Social Impacts</h2>
+                        <h2 class="section-title">Year 1: The Containment Illusion</h2>
                         <div class="section-status">
                             <span class="status-indicator mid" aria-hidden="true"></span>
-                            <span>Pending Compilation</span>
+                            <span>Containment Theater</span>
                         </div>
                     </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Social Volatility Index</span>
+                            <span>42%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 42%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Friction</span>
+                            <span>Break</span>
+                            <span>Phase Change</span>
+                        </div>
+                    </div>
+
                     <p class="narrative">
-                        Placeholder dossier. Social projections will be added later. Current time slice: Year <span class="js-current-year">10</span>.
+                        The first viral video shows a teenager in Seoul floating above her apartment building, filming the sunrise.
+                        Within 48 hours, governments worldwide announce "temporary flight restrictions" while frantically convening
+                        emergency sessions. The technology spreads anyway, through <span class="redacted">encrypted channels</span>
+                        and 3D-printed components, exactly as every revolutionary technology has before.
+                    </p>
+                    <div class="annotation" style="position: static; transform: rotate(-2deg); margin: 10px 0 6px;">
+                        FIELD NOTE: you can regulate aircraft. You cannot regulate <span class="redacted">presence</span>.
+                    </div>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The Underground Float</strong>
+                                <span>Early adopters form secretive communities, sharing coordinates for "safe zones" where government surveillance is thin. Night floating becomes a subculture, like early rave culture but vertical. Social media fills with blurry nighttime footage.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The First Floating Protest</strong>
+                                <span>Occupy veterans realize police kettling no longer works. A protest in Manila with 200 floaters hovering above a government building ends in chaos when authorities have no protocol for aerial civil disobedience.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The Panic Move</strong>
+                                <span>Wealthy families begin relocating to countries with weaker enforcement, creating the first "float havens." The Maldives declares itself <span class="redacted">open sky sovereign territory</span>.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The Distance Death Begins</strong>
+                                <span>Long-distance relationships see the first transformations. A couple separated by the Pacific realizes they can meet for lunch daily. Dating apps add "float-capable" as a filter.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Winners</strong>
+                                <span>Early tech adopters, privacy advocates, people in long-distance relationships, isolated rural communities suddenly connected, mobility-impaired individuals who can now move freely in 3D space.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losers</strong>
+                                <span>Border patrol agencies, gated community security, helicopter tourism operators, anyone whose power derived from controlling movement.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: FAA "Experimental Aircraft"</strong>
+                                <span>Requires certification. Fails because you cannot certify <span class="redacted">50 million</span> devices manufactured in garages.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: Jamming Fields</strong>
+                                <span>China attempts jamming fields over major cities. Fails because the physics don't allow for it; creates massive black market for "jammer-immune" units.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: Mandatory Registration</strong>
+                                <span>EU proposes registration and GPS tracking. Fails because unregistered units work identically to registered ones.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 3: The Great Unsticking -->
+                <section class="section" data-section-num="S2" data-year="3" id="social-year3">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 3: The Great Unsticking</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Geography Unraveling</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Social Volatility Index</span>
+                            <span>61%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 61%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Friction</span>
+                            <span>Break</span>
+                            <span>Phase Change</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative">
+                        Real estate agents in Manhattan watch their listings rot as the commuter logic that built New York collapses
+                        in real-time. A family in rural Montana now lives thirty minutes from Times Square, the Louvre, and their
+                        grandmother in Osaka. The phrase "I live in..." becomes philosophically complicated.
                     </p>
                     <ul class="impact-list">
                         <li class="impact-item">
                             <div class="impact-marker"></div>
                             <div class="impact-text">
-                                <strong>Migration & Community</strong>
-                                <span>[To be filed] Effects on cities, rural revival, and voluntary density.</span>
+                                <strong>Commuter Marriage Dies</strong>
+                                <span>Couples maintaining separate residences for careers simply stop. A banker in London and filmmaker in LA share breakfast daily. Divorce rates for "distance-strained" marriages plummet 60%.</span>
                             </div>
                         </li>
                         <li class="impact-item">
                             <div class="impact-marker"></div>
                             <div class="impact-text">
-                                <strong>Inequality & Access</strong>
-                                <span>[To be filed] Who gets antigravity first, and what social strata it reshapes.</span>
+                                <strong>Grandparent Renaissance</strong>
+                                <span>Grandparents become daily presences. A grandmother in Lagos helps raise her grandchildren in Toronto, present for school pickup every day.</span>
                             </div>
                         </li>
                         <li class="impact-item">
                             <div class="impact-marker"></div>
                             <div class="impact-text">
-                                <strong>Institutions</strong>
-                                <span>[To be filed] Education, healthcare, religion, and governance under distance collapse.</span>
+                                <strong>Rural Healthcare Revolution</strong>
+                                <span>Trauma surgeons arrive anywhere in minutes. Rural hospitals close—not from neglect, but because specialists now make house calls to mountain villages.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>University Scramble</strong>
+                                <span>Harvard's value proposition collapses. Why pay for Cambridge housing when you can live in Bali and float to lecture? Applications for in-person programs fall 40%.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The New Homelessness</strong>
+                                <span>A disturbing pattern emerges—people living permanently aloft, floating between public spaces, never touching ground. Cities have no legal framework for "vertical vagrancy."</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Winners</strong>
+                                <span>Rural property owners, multi-generational families, patients in medical deserts, relationships strained by distance, people escaping abusive situations who can now simply leave.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losers</strong>
+                                <span>Urban real estate holders, commuter rail systems, regional airlines, college town economies, anyone whose social power came from proximity gatekeeping.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: City "Float Zones"</strong>
+                                <span>Major cities designate advisory altitudes for transit. Fails because enforcement requires resources that don't exist; becomes purely advisory.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: "Rooted" Tax Incentives</strong>
+                                <span>Incentivize workers to maintain traditional commutes. Fails because employers quickly realize float-capable employees are more productive.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: University "Hybrid" Pivot</strong>
+                                <span>Attempts at hybrid models fail because students correctly identify this as paying full tuition for Zoom calls.</span>
                             </div>
                         </li>
                     </ul>
                 </section>
+
+                <!-- Year 5: First Social Ruptures -->
+                <section class="section" data-section-num="S3" data-year="5" id="social-year5">
+                    <span class="stamp stamp-top-secret stamp-animate" style="--rotation: 10deg; top: 18px; right: 18px;">FILED</span>
+                    <div class="section-header">
+                        <h2 class="section-title">Year 5: The First Social Ruptures</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Legal Systems Lagging</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Social Volatility Index</span>
+                            <span>74%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 74%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Friction</span>
+                            <span>Break</span>
+                            <span>Phase Change</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative">
+                        The skyline of every major city now includes a permanent floating population. Below, a man sues his neighbor
+                        for "persistent aerial surveillance" after discovering drone footage of his backyard. The courts have no
+                        precedent; privacy law assumed a <span class="redacted">2D world</span>.
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Vertical Class War</strong>
+                                <span>Floating becomes a class marker, but inverted. The wealthy cling to ground-level estates while the masses occupy the limitless sky. "Grounded" becomes slang for rich.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Death of Daily Commute</strong>
+                                <span>Office work fragments entirely. Commercial real estate enters terminal decline. WeWork's successor provides "gathering coordinates."</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Tourism Inversion</strong>
+                                <span>Paris doesn't empty—it transforms. 500,000 daily float-visitors. Parisians sell "authentic local experience" packages.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Border Fiction</strong>
+                                <span>Immigration enforcement becomes theoretical. Some nations attempt vertical walls extending kilometers. They become tourist attractions.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Relationship Revolution</strong>
+                                <span>Dating apps show "float radius"—not distance, but time. Everyone is fifteen minutes from everyone else. Hook-up culture accelerates, then so does long-term commitment: when you can meet anyone anywhere, choosing someone becomes meaningful.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Winners</strong>
+                                <span>People in developing nations suddenly accessible to global opportunities, persecuted minorities who can flee, lovers separated by borders, anyone whose talent was trapped by geography.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losers</strong>
+                                <span>Border industrial complex, tourism-dependent economies that can't adapt, privacy-dependent lifestyles, xenophobes who assumed geography would maintain separation.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: "Citizenship Radius"</strong>
+                                <span>Mandatory GPS tracking to define citizenship by time-spent. Fails because people game location data and enforcement is impossible.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: Total Float Management</strong>
+                                <span>Air traffic control attempts comprehensive float management. Fails spectacularly during the Christmas rush when <span class="redacted">80 million</span> people try to visit family simultaneously.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: Privacy "Domes"</strong>
+                                <span>Laws require visual barriers above private property. Fails when barriers become floating gardens, then habitats, then a new property class.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 10: New Geography -->
+                <section class="section" data-section-num="S4" data-year="10" id="social-year10">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 10: The New Geography of Human Life</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Post-Commuter Society</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Social Volatility Index</span>
+                            <span>86%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 86%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Friction</span>
+                            <span>Break</span>
+                            <span>Phase Change</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative">
+                        The child born today will never understand why humans clustered in cities. She floats to school across
+                        three time zones, her classroom a rotating assembly from every continent. Her best friend lives above
+                        the Pacific. Her grandmother, orbiting at low altitude, waves as the girl passes beneath her
+                        <span class="redacted">floating garden</span>.
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Floating Communities</strong>
+                                <span>Permanent aerial settlements—communities of thousands maintaining relative positions. Neo-Amsterdam hovers above the original, a mirror city in the sky.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Neo-Nomad Majority</strong>
+                                <span>Percentage maintaining fixed residence drops below 40%. The concept of "hometown" survives only in the elderly.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Language Homogenization</strong>
+                                <span>When every child has friends on every continent, linguistic isolation ends. A global pidgin emerges. The French Academy surrenders.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Healthcare Singularity</strong>
+                                <span>Medical specialists become effectively omnipresent. A patient in rural Ghana receives the same quality of care as Manhattan. Geographic health inequity ends; new inequities emerge based on information access.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Death of Regional Culture</strong>
+                                <span>Authentic local culture becomes impossible. "Regional" becomes a brand, a performance. Genuine culture—developed through isolation—ceases to exist.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Winners</strong>
+                                <span>Children born into this world (no nostalgia for geographic constraints), global south populations accessing first-world opportunities, multilingual individuals, adaptable personalities.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losers</strong>
+                                <span>Place-based identities, traditional educational institutions, anyone whose expertise was "local knowledge," linguistic minorities, people who found meaning in geographic community.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: "Cultural Protection Zones"</strong>
+                                <span>No-float areas meant to preserve authentic regional culture. Fails because young people simply leave; the zones become elderly enclaves.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: Universal Basic Coordinates</strong>
+                                <span>Every human guaranteed a registered float-space. Fails because "property" in infinite sky becomes meaningless; the concept breaks down.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy: Global Coordination (Partial)</strong>
+                                <span>Float-traffic coordination finally achieved, but only through radical decentralization; no single authority could manage the complexity.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 25: Distributed Society -->
+                <section class="section" data-section-num="S5" data-year="25" id="social-year25">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 25: The Social Structure Nobody Predicted</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Constellation Norms</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Social Volatility Index</span>
+                            <span>93%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 93%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Friction</span>
+                            <span>Break</span>
+                            <span>Phase Change</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative">
+                        Marriage means something entirely different. The couple shares consciousness across planetary distances,
+                        meeting physically three times daily across continents, their children raised by a network of seventeen
+                        adults who consider themselves a single family unit. Asked where they "live," they look confused by the question.
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Constellation Families</strong>
+                                <span>Networks of 10-30 adults and children in continuous contact globally. Children have multiple "home bases." Geographic rootedness is quaint artifact.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>University Death</strong>
+                                <span>Physical universities exist only as monuments. Education is mentorship-based, students floating to experts worldwide. Harvard persists only as certification service.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Work as Pure Collaboration</strong>
+                                <span>The concept of "workplace" becomes archaeologically interesting. Teams assemble physically for creative work, then disperse globally. "Colleagues" are people you've physically met perhaps three times. It works better than permanent co-location ever did.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>New Religion</strong>
+                                <span>Pilgrimage transforms from journey to instant arrival. Mecca sees 50 million visitors during Hajj—daily, not annually. New faiths emerge for float-specific practices.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Crime and Policing in 3D Space</strong>
+                                <span>Traditional law enforcement collapses entirely. New systems emerge based on social credit, community enforcement, and the impossibility of hiding. Privacy is dead, but so is anonymized crime. A strange equilibrium emerges: total surveillance enables total accountability.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Winners</strong>
+                                <span>Humans who thrive on novelty and connection, children who never knew limitations, creative collaborators, distributed families, spiritual seekers.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losers</strong>
+                                <span>Introverts who relied on geographic barriers, criminals who depended on anonymity, institutions whose power derived from physical gatekeeping, anyone nostalgic for the old world.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy: Global Governance (Finally)</strong>
+                                <span>Attempts succeed only because national boundaries become fictional. The <span class="redacted">United Regions</span> replaces the UN, organized by interest rather than geography.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy: Privacy as Paid Service</strong>
+                                <span>Electromagnetic shields that guarantee solitude become the new luxury good.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy: Universal Translation</strong>
+                                <span>Language barriers become moot. Homogenization accelerates; distinct cultures become performance art.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 50: Unrecognizable Present -->
+                <section class="section" data-section-num="S6" data-year="50" id="social-year50">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 50: The Unrecognizable Present</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Post-National Humanity</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Social Volatility Index</span>
+                            <span>97%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 97%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Friction</span>
+                            <span>Break</span>
+                            <span>Phase Change</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative">
+                        The historian explains "immigration" to her students. They cannot grasp it. The idea that humans were sorted
+                        by birthplace, that invisible lines determined life outcomes—it sounds like a <span class="redacted">fairy tale</span>,
+                        something from the age of kings and serfs. The students float back to their various continents, promising to
+                        reconvene tomorrow above the Pacific.
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Physical Gathering as Ritual</strong>
+                                <span>Meeting in person becomes sacred. "Convergence days" for weddings, births, deaths. Physical co-location is ceremony, not default.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The Great Mixing</strong>
+                                <span>Four generations of global mobility homogenize genetics. "Race" survives only in historical texts. Everyone is some version of brown.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Orbital Suburbs</strong>
+                                <span>Low Earth orbit communities house 100 million. They develop distinct customs, slang, physical adaptations. First orbital-born generation reaches adulthood.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The Memory of Place</strong>
+                                <span>Nostalgia for geographic rootedness becomes an entire cultural movement. "Rooters" voluntarily restrict their movement, living in single locations for years—romantic or mentally ill, depending on perspective.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Democracy Without Borders</strong>
+                                <span>Political participation decouples from geography. Vote for interest-community representatives, not location. Constituencies become ideological.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Winners</strong>
+                                <span>Humanity as a species (genetic diversity increases resilience), space-adapted humans, interest-based communities, creative types who thrive on constant stimulation.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losers</strong>
+                                <span>Historical preservationists, traditionalists of all stripes, anyone who found meaning in place-based identity, introverts who can no longer find genuine solitude.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy: "Heritage Zones"</strong>
+                                <span>Protect remaining traditional communities. Partial success—they become living museums, subsidized for cultural preservation value.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy: Orbital Governance</strong>
+                                <span>Orbital governance emerges as genuinely distinct jurisdiction. Success—the first true post-national political entities.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Failure: "Heritage Matching"</strong>
+                                <span>Attempts to limit genetic homogenization fail completely—young people find the concept offensive.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 100: Speculation -->
+                <section class="section" data-section-num="S7" data-year="100" id="social-year100">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 100: Speculation Territory</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Beyond Recognition</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Social Volatility Index</span>
+                            <span>99%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 99%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Friction</span>
+                            <span>Break</span>
+                            <span>Phase Change</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative">
+                        The being who was once called human floats between Venus and Mars, consciousness distributed across seventeen
+                        bodies, some biological, some synthetic. She remembers—or thinks she remembers—a time when people were
+                        trapped on a single rock, unable to move except by <span class="redacted">crawling along its surface</span>.
+                        It seems impossibly primitive.
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Solar Diaspora</strong>
+                                <span>Humanity on every viable body. Mars has 5M+ population. Travel time measured in hours. Distinct cultures develop—by ideology, not isolation.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Identity Beyond Body</strong>
+                                <span>Physical embodiment optional. Consciousness transmitted, backed up, distributed. "Family" means networks of minds merged and recombined across a century.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Death of Scarcity Psychology</strong>
+                                <span>Go anywhere, obtain anything, meet anyone. New meaning systems focused on creation, experience, and attention—the only remaining scarcity.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Distance Rediscovered</strong>
+                                <span>First interstellar colonists depart knowing they'll be separated by decades of lag. Voluntary limitation as spiritual practice.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The Question of Humanity</strong>
+                                <span>What remains of "human society" when bodies are optional, location is arbitrary, and consciousness can be copied? The concept becomes archaeologically interesting—something else has emerged, continuous with humanity but transformed beyond recognition.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Winners</strong>
+                                <span>Post-human entities, consciousness-explorers, meaning-makers, those who embrace transformation.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losers</strong>
+                                <span>The concept of "winning and losing" has become incoherent when applied to beings this transformed.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Policy Response</strong>
+                                <span>Policy itself becomes antiquated. Coordination happens through distributed consensus protocols, evolutionary selection among competing governance experiments, and the accumulated wisdom of civilizations that survived their own technological adolescence.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
             </section>
 
             <section class="tab-panel" id="panel-economic" role="tabpanel" aria-labelledby="tab-economic">
@@ -2343,41 +3034,677 @@
             </section>
 
             <section class="tab-panel" id="panel-defense" role="tabpanel" aria-labelledby="tab-defense" hidden>
-                <section class="section" data-section-num="D1" id="defense-overview">
+
+                <!-- Year 1: Discovery Shock -->
+                <section class="section" data-section-num="D1" data-year="1" id="defense-year1">
+                    <span class="stamp stamp-eyes-only stamp-animate" style="--rotation: -6deg; top: 18px; right: 18px; bottom: auto; left: auto;">SIMULATION</span>
                     <div class="section-header">
-                        <h2 class="section-title">Defense Impacts</h2>
+                        <h2 class="section-title">Year 1: Discovery Shock</h2>
                         <div class="section-status">
                             <span class="status-indicator high" aria-hidden="true"></span>
-                            <span>Restricted Addendum</span>
+                            <span>Assumptions Collapsing</span>
                         </div>
                     </div>
-                    <p class="narrative">
-                        Placeholder dossier. Defense projections will be added later. Current time slice: Year <span class="js-current-year">10</span>.
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Strategic Instability Index</span>
+                            <span>67%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 67%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Contested</span>
+                            <span>Uncertain</span>
+                            <span>Obsolete</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative" style="font-style: normal; border-left-color: var(--stamp-red);">
+                        "Gentlemen, we have confirmation. The physics is real. Within 18 months, every assumption underlying our
+                        force structure, our treaties, our entire concept of defensible borders—all of it becomes obsolete.
+                        The question isn't whether this leaks. It's whether we're <span class="redacted">ahead or behind</span> when it does."
+                        <br><em>— Simulated NSC Principal's Committee, Day 14</em>
                     </p>
                     <ul class="impact-list">
                         <li class="impact-item">
                             <div class="impact-marker"></div>
                             <div class="impact-text">
-                                <strong>Deterrence & Escalation</strong>
-                                <span>[To be filed] Stability under instantaneous mobility and payload delivery.</span>
+                                <strong>Classification Panic</strong>
+                                <span>Discovery triggers immediate SIGMA-level compartmentalization regardless of origin. Manhattan Project 2.0 activated within 72 hours. Historical precedent: nuclear secrets reached the USSR in 4 years. AG physics cannot be unlearned. Clock starts now.</span>
                             </div>
                         </li>
                         <li class="impact-item">
                             <div class="impact-marker"></div>
                             <div class="impact-text">
-                                <strong>Airspace & Sovereignty</strong>
-                                <span>[To be filed] Borders when altitude becomes a new geography.</span>
+                                <strong>Intelligence Chaos</strong>
+                                <span>Every major service audits physics programs, floods academia with talent spotters, initiates crash replication, and tries to assess competitors' progress (impossible—no indicators yet). Paranoia hits Cold War peaks.</span>
                             </div>
                         </li>
                         <li class="impact-item">
                             <div class="impact-marker"></div>
                             <div class="impact-text">
-                                <strong>Doctrine & Platforms</strong>
-                                <span>[To be filed] Legacy assets, new platforms, and asymmetric adoption curves.</span>
+                                <strong>Immediate Military Assessment</strong>
+                                <span>Initial wargames are catastrophic: carrier strike groups shift from "contested" to "indefensible"; borders become "unenforceable against peer AG capability"; strategic depth is negated—<span class="redacted">all territory becomes frontier</span>. Classified recommendation: accelerate submarine fleet expansion. Only platform that can still hide.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Diplomatic Scramble</strong>
+                                <span>Backchannels activate across major powers. Everyone lies about progress. Trust collapses further. Existing arms control frameworks (New START, Open Skies remnants) become irrelevant—no inspection regime covers this.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Gaining Advantage</strong>
+                                <span>Nations with advanced physics research bases (US, China, Russia, EU, Japan, Israel), submarine-focused navies, landlocked nations (geographic disadvantage erased), intelligence services (budget explosion).</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losing Advantage</strong>
+                                <span>Island fortress nations (UK, Japan, Australia), chokepoint controllers (Egypt, Panama, Singapore, Turkey), nations reliant on geographic barriers, surface naval powers (doctrine obsolete).</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Academic Suppression</strong>
+                                <span>Pre-print servers scrubbed, researchers approached. Three leak anyway within 8 months. You cannot classify physics.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Patent Denial</strong>
+                                <span>Corporate applicants denied on national security grounds. They publish theory out of spite. Knowledge spreads.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: International Agreement</strong>
+                                <span>Emergency UN Security Council session. China and Russia agree to "joint oversight." Neither means it. Neither believes the other.</span>
                             </div>
                         </li>
                     </ul>
                 </section>
+
+                <!-- Year 3: Proliferation Begins -->
+                <section class="section" data-section-num="D2" data-year="3" id="defense-year3">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 3: Proliferation Begins</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Containment Failing</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Strategic Instability Index</span>
+                            <span>79%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 79%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Contested</span>
+                            <span>Uncertain</span>
+                            <span>Obsolete</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative" style="font-style: normal; border-left-color: var(--stamp-red);">
+                        "We've confirmed AG capability in seven nations. Suspected in twelve more. At least three non-state actors
+                        have working prototypes—two corporate, one <span class="redacted">unknown</span>. The genie isn't just out of the bottle.
+                        The bottle is shattered."
+                        <br><em>— Simulated DIA Assessment, Month 31</em>
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>First Military Prototypes</strong>
+                                <span>Low payload, limited range, massive energy signatures. But immune to ALL existing air defense doctrine. Every SAM system becomes expensive lawn decoration.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Carrier Crisis</strong>
+                                <span>US Navy classified exercise simulates AG attack on carrier strike group. Results redacted. CNO requests emergency SECDEF meeting. Carrier construction "paused."</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Border Collapse Preview</strong>
+                                <span>First smuggling incidents via improvised AG. Crude, dangerous, effective. Every border agency realizes: walls are now decorative.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Submarine Premium</strong>
+                                <span>Submarines become the only platform that can hide, survive first strike, preserve second-strike capability, and project power without immediate destruction. Every major power begins emergency submarine expansion.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Nuclear Calculus Shift</strong>
+                                <span>ICBMs become redundant—AG platforms deliver from any vector. Detection nearly impossible. No rocket plume. No ballistic arc. Nuclear terrorism barrier drops catastrophically.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Gaining Advantage</strong>
+                                <span>Nations with submarine industrial bases (US, Russia, China, France, UK), physics talent magnets, compact/mobile doctrines (Israel, smaller NATO members), organizations able to transform fast.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losing Advantage</strong>
+                                <span>Large surface navies, border-dependent economies (chokepoint premium evaporates), nations with expensive fixed defenses, nuclear states relying on detection for deterrence.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Export Controls</strong>
+                                <span>ITAR expanded to cover AG. Components too simple and physics too basic. Iran has a working prototype by Month 24.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Corporate Containment</strong>
+                                <span>Three companies "voluntarily" nationalized. Two others move headquarters to Switzerland and continue development.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: AG Non-Proliferation Treaty</strong>
+                                <span>Proposed treaty collapses fast. China walks out. Russia signs and violates immediately. Dead in 8 months.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 5: Operational Deployments -->
+                <section class="section" data-section-num="D3" data-year="5" id="defense-year5">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 5: First Operational Deployments</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Doctrine Obsolescence</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Strategic Instability Index</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 88%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Contested</span>
+                            <span>Uncertain</span>
+                            <span>Obsolete</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative" style="font-style: normal; border-left-color: var(--stamp-red);">
+                        "PACOM reports Chinese AG platform conducted sustained overflight of Taiwan at 80,000 feet for six hours.
+                        No intercept was possible. None was attempted. They wanted us to see it. <span class="redacted">Message received.</span>"
+                        <br><em>— Simulated Presidential Daily Brief, Year 5</em>
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Carrier Decommissioning</strong>
+                                <span>USS Gerald R. Ford in "strategic reserve" (mothballed). Cannot justify crewing $13B target with 5,000 sailors. Surface fleet doctrine collapses globally.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>First Orbital Platforms</strong>
+                                <span>Crude but terrifying. Persistent surveillance from any altitude. Kinetic strike capability—just drop mass. No existing treaty covers this.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Chokepoint Collapse</strong>
+                                <span>Suez revenue -60%. Panama -45%. Malacca optional. Nations dependent on chokepoint revenue face crisis. Everyone else has options.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Border Security Theater</strong>
+                                <span>Every nation quietly abandons real border enforcement. Walls remain for political theater. Security shifts to interior checkpoints, surveillance, and acceptance that some threats are unpreventable.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Terrorism Transformation</strong>
+                                <span>First major AG-enabled attack. Target accessed from above. No approach vector to defend. "Secure facility" becomes oxymoron.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Gaining Advantage</strong>
+                                <span>Orbital-capable nations, submarine fleets, distributed/redundant architectures, small/mobile/dispersed forces, private security industry (demand explosion).</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losing Advantage</strong>
+                                <span>Fixed military installations, centralized command structures, large concentrated bases, nations without space capability, chokepoint economies.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Airspace Control</strong>
+                                <span>FAA/ICAO attempt AG flight regulations. Unenforceable. You cannot track what you cannot see coming. Black market AG aviation thrives.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Transfer Controls</strong>
+                                <span>Signals indicate dozens of nations now have AG capability. Controls failed.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Orbital Treaty</strong>
+                                <span>Outer Space Treaty update proposed. China/Russia veto. US wouldn't have signed anyway. Space militarization proceeds unchecked.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 10: Doctrine Revolution -->
+                <section class="section" data-section-num="D4" data-year="10" id="defense-year10">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 10: Doctrine Revolution</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Doctrinal Vocabulary Obsolete</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Strategic Instability Index</span>
+                            <span>93%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 93%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Contested</span>
+                            <span>Uncertain</span>
+                            <span>Obsolete</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative" style="font-style: normal; border-left-color: var(--stamp-red);">
+                        "Sir, we need to retire the term 'air superiority.' When a cargo truck can fly, when infantry has vertical
+                        mobility, when there is no terrain—the word 'air' loses meaning. We have <span class="redacted">mobility forces</span>.
+                        Our entire doctrinal vocabulary is obsolete."
+                        <br><em>— Simulated Joint Chiefs Strategic Review, Year 10</em>
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Surface Navy: History</strong>
+                                <span>Last carrier retired globally. Surface combatants: coastal patrol, ceremonial, museums. "Admiral" now means submarine or orbital commander.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Submarine Supremacy Peaks</strong>
+                                <span>Ocean depth is only concealment. SSBN sole survivable second-strike. New class: "Arsenal submarines" with AG vertical launch. Nations without subs are strategically naked.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Permanent Orbital Presence</strong>
+                                <span>US: 12 platforms. China: 8. Russia: 4. EU: 2. Orbital bombardment—pure kinetic, no warhead—becomes primary strategic threat.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Army Redefinition</strong>
+                                <span>"Ground forces" becomes a misnomer. Infantry becomes AG-mobile squads with vertical insertion from any vector. Tanks and large slow platforms vanish. Concealment is everything (thermal/radar/visual signature reduction).</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Fortress Death</strong>
+                                <span>No fixed position defensible. Pentagon symbolic only. Cheyenne Mountain defeated by patience and mass. Military shifts to pure mobility.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Gaining Advantage</strong>
+                                <span>Nations with submarine industrial bases, space-industrial complexes, AI/autonomous systems developers, dispersed/networked organizations, insurgent movements (asymmetry works both ways).</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losing Advantage</strong>
+                                <span>Conventional powers with expensive legacy systems, nations with concentrated infrastructure, any state without orbital AND submarine capability, the territorial nation-state concept itself.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Orbital Arms Control</strong>
+                                <span>"Orbital Demilitarization Treaty" proposed. No major power signs. Dead on arrival.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: AG Weapons Ban</strong>
+                                <span>Dual-use by nature. Like banning sharpened sticks after inventing metallurgy. Unenforceable.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Private AG Prohibition</strong>
+                                <span>Corporations develop better AG capability than most nations. Can't be stopped. Won't be stopped.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 25: New Equilibrium -->
+                <section class="section" data-section-num="D5" data-year="25" id="defense-year25">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 25: New Strategic Equilibrium</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Territory Deprecated</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Strategic Instability Index</span>
+                            <span>96%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 96%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Contested</span>
+                            <span>Uncertain</span>
+                            <span>Obsolete</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative" style="font-style: normal; border-left-color: var(--stamp-red);">
+                        "The concept of 'national defense' is deprecated. You cannot defend territory when territory has no meaning.
+                        What we have instead is '<span class="redacted">competitive persistence</span>'—the ability to operate and survive in an
+                        environment where anyone can reach anything."
+                        <br><em>— Simulated War College Doctrine, Year 25</em>
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Surface Navies: History</strong>
+                                <span>Last surface combatants decommissioned (ceremonial at most). Naval museums feature carriers, destroyers, and the entire concept of "fleet." Naval power = submarine power + orbital power. Nothing else counts.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Orbital Industrial = Military Power</strong>
+                                <span>Mass in orbit = strike capability. Manufacturing in orbit = sustained ops. Earth-based military matters only for submarines.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The Asteroid Question</strong>
+                                <span>First proposals for captured asteroids as strategic assets. 500m nickel-iron = extinction-level kinetic weapon. "Dinosaur killer on demand" enters vocabulary.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Nuclear Uncertainty</strong>
+                                <span>Delivery trivial, detection impossible, attribution difficult. MAD becomes "Mutually Assured Uncertainty." Grey threat—everyone has them, no one admits it.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Nation-State Stress</strong>
+                                <span>Core functions erode: territorial control becomes impossible, borders fictional, monopoly on violence laughable (corporations have AG fleets), tax collection harder when anyone can leave anywhere. What replaces it: network states, corporate territories, orbital sovereignties, ideological confederations.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Gaining Advantage</strong>
+                                <span>Orbital industrial powers, submarine-industrial nations, network organizations, corporations with AG/orbital capability, distributed governance structures.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losing Advantage</strong>
+                                <span>Traditional nation-states, territory-defined entities, centralized governments, anyone dependent on Earth-surface control, the Westphalian order itself.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Orbital Sovereignty Treaty</strong>
+                                <span>Attempt to extend territorial-waters logic to orbit. Ignored by everyone who matters.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Corporate Military Limits</strong>
+                                <span>Proposals to cap private AG/orbital capacity fail when corporations threaten relocation to orbital platforms beyond jurisdiction.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Asteroid Capture Ban</strong>
+                                <span>No verification mechanism exists. Treaty survives on paper only.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 50: Orbital Supremacy -->
+                <section class="section" data-section-num="D6" data-year="50" id="defense-year50">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 50: Orbital Supremacy Era</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high" aria-hidden="true"></span>
+                            <span>Orbital-Industrial Power</span>
+                        </div>
+                    </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Strategic Instability Index</span>
+                            <span>98%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 98%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Contested</span>
+                            <span>Uncertain</span>
+                            <span>Obsolete</span>
+                        </div>
+                    </div>
+
+                    <p class="narrative" style="font-style: normal; border-left-color: var(--stamp-red);">
+                        "We no longer speak of 'superpowers.' The term is '<span class="redacted">orbital-industrial complexes</span>.' There are three
+                        that matter: American Consortium, Chinese Authority, Euro-Indian Alliance. Russia is a submarine power
+                        with pretensions. Everyone else is a client state or a market."
+                        <br><em>— Simulated Geopolitical Assessment, Year 50</em>
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Earth Military: Ceremonial</strong>
+                                <span>Ground forces for disaster response and tradition. Actual power projection: 100% orbital + submarine. Everything else is internal security.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Three Orbital Powers</strong>
+                                <span>American Consortium: largest orbital manufacturing. Chinese Authority: most aggressive expansion, 50K+ orbital population. Euro-Indian: most advanced AG tech.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Asteroid Deterrence</strong>
+                                <span>Three powers each control captured asteroids. Positioned in stable orbits. Capable of deorbit on command. Nuclear weapons now tertiary concern.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Earth-Orbital Divide</strong>
+                                <span>New class structure: orbital citizens (space-industrial workers, orbital-born) vs Earth population ("legacy humanity"). Military service bifurcates; cultures and loyalties diverge.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Invasion Redefined</strong>
+                                <span>Traditional invasion impossible. Instead: economic coercion, infrastructure targeting, population pressure. Conquest without occupation.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Gaining Advantage</strong>
+                                <span>Orbital-industrial complexes (the power centers), submarine nations (niche but survivable), space-born populations, post-territorial corporate entities, anyone who got to orbit early.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losing Advantage</strong>
+                                <span>Earth-bound nation-states, territorial governments, surface-dependent economies, late-to-space nations (permanent second-tier status), traditional military-industrial complexes.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Earth-Orbital Treaty Organization</strong>
+                                <span>Attempts to keep Earth governments in control of orbital assets fail as orbital populations ignore directives.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Asteroid Control Regime</strong>
+                                <span>Proposed international authority over asteroid resources/weapons rejected by the three powers.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Orbital Independence</strong>
+                                <span>Platforms declare autonomy. Earth-based responses ineffective. What are you going to do—ground them?</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Year 100: Post-Terrestrial -->
+                <section class="section" data-section-num="D7" data-year="100" id="defense-year100">
+                    <div class="section-header">
+                        <h2 class="section-title">Year 100: Post-Terrestrial Warfare</h2>
+                        <div class="section-status">
+                            <span class="status-indicator high"></span>
+                            <span>Solar System Scale</span>
+                        </div>
+                    </div>
+                    <p class="narrative" style="font-style: normal; border-left-color: var(--stamp-red);">
+                        "The entity requesting this briefing self-identifies as the 'Solar Logistics Cooperative'—habitats, mining ops,
+                        Mars colonies. They ask about '<span class="redacted">Earth defense arrangements</span>.' They view Earth as a single actor.
+                        They may be correct. We are no longer certain who 'we' refers to."
+                        <br><em>— Simulated Strategic Communication, Year 100</em>
+                    </p>
+                    <ul class="impact-list">
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Nation-State: Historical Curiosity</strong>
+                                <span>Territorial states persist as administrative conveniences, cultural zones, historical theme parks. Westphalian order: dead 50 years, finally acknowledged.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Solar System Strategic Geography</strong>
+                                <span>Inner system: densest military. Belt: industrial heartland. Outer system: frontier. Time-distance measured in hours to weeks. Warning time relative.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Post-Human Military</strong>
+                                <span>Human soldiers largely obsolete. Autonomous systems handle operations. Humans: strategic decision, ethical oversight. "Soldier" is administrative role.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>The Long Peace or Preparation</strong>
+                                <span>Two schools: Mutual destruction so absolute war is obsolete. Or: consolidation phase before unimaginable conflict. Evidence supports both.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
             </section>
         </main>
     </div>
@@ -2619,6 +3946,17 @@
             updateSankeyDiagram(lastImpacts, opts);
             updateWorldMap(lastImpacts, opts);
             updateCascadeTimeline(lastImpacts, opts);
+            filterSectionsByYear(state.timelineYear);
+        }
+
+        function filterSectionsByYear(selectedYear) {
+            const sections = document.querySelectorAll('.section[data-year]');
+            sections.forEach(section => {
+                const sectionYear = parseInt(section.dataset.year);
+                const shouldShow = sectionYear <= selectedYear;
+                section.style.display = shouldShow ? '' : 'none';
+                section.style.opacity = shouldShow ? '1' : '0';
+            });
         }
 
         // Animate counter values
@@ -4504,6 +5842,7 @@
             if (!Number.isFinite(year)) return;
             state.timelineYear = year;
             syncTimelineUI();
+            filterSectionsByYear(year);
             if (opts.updateVisuals !== false) {
                 updateTimeSliceVisuals({ animate: opts.animate ?? false });
             }
@@ -4702,6 +6041,7 @@
             initHorizonScrubber();
             updateUI();
             renderSparklines();
+            filterSectionsByYear(state.timelineYear);
 
             // Redraw canvas-based visuals on resize (throttled).
             let resizeTicking = false;
