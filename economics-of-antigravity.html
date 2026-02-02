@@ -965,6 +965,11 @@
             outline-offset: 2px;
         }
 
+        .redacted.revealed {
+            background: var(--classified-red);
+            color: var(--parchment);
+        }
+
         /* Sankey Diagram Container */
         .sankey-container {
             margin: 30px 0;
@@ -3663,10 +3668,26 @@
                     <div class="section-header">
                         <h2 class="section-title">Year 100: Post-Terrestrial Warfare</h2>
                         <div class="section-status">
-                            <span class="status-indicator high"></span>
+                            <span class="status-indicator high" aria-hidden="true"></span>
                             <span>Solar System Scale</span>
                         </div>
                     </div>
+
+                    <div class="disruption-meter">
+                        <div class="meter-header">
+                            <span>Strategic Instability Index</span>
+                            <span>99%</span>
+                        </div>
+                        <div class="meter-track">
+                            <div class="meter-fill" style="width: 99%"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Contested</span>
+                            <span>Uncertain</span>
+                            <span>Obsolete</span>
+                        </div>
+                    </div>
+
                     <p class="narrative" style="font-style: normal; border-left-color: var(--stamp-red);">
                         "The entity requesting this briefing self-identifies as the 'Solar Logistics Cooperative'—habitats, mining ops,
                         Mars colonies. They ask about '<span class="redacted">Earth defense arrangements</span>.' They view Earth as a single actor.
@@ -3684,8 +3705,15 @@
                         <li class="impact-item">
                             <div class="impact-marker"></div>
                             <div class="impact-text">
-                                <strong>Solar System Strategic Geography</strong>
-                                <span>Inner system: densest military. Belt: industrial heartland. Outer system: frontier. Time-distance measured in hours to weeks. Warning time relative.</span>
+                                <strong>Solar System-Scale Military Considerations</strong>
+                                <span>Strategic geography measured in AU: inner system (Earth orbit to Mars) is densest; belt is the industrial heartland; outer system is frontier. Interplanetary transit is the vulnerable phase. Warning times measured in hours to weeks.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Interplanetary Power Projection</strong>
+                                <span>True power projection is limited to former-Earth orbital complexes, the growing Mars industrial combine, and a distributed belt confederation. Earth is largely demilitarized—protected by orbital complexes, emigration heavy, tourism dominant.</span>
                             </div>
                         </li>
                         <li class="impact-item">
@@ -3700,6 +3728,41 @@
                             <div class="impact-text">
                                 <strong>The Long Peace or Preparation</strong>
                                 <span>Two schools: Mutual destruction so absolute war is obsolete. Or: consolidation phase before unimaginable conflict. Evidence supports both.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Gaining Advantage</strong>
+                                <span>Early orbital movers, distributed/resilient organizational forms, post-biological/hybrid entities, interplanetary-native populations, whoever controls helium-3 and water ice.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Losing Advantage</strong>
+                                <span>Earth-centric thinking, centralized hierarchies (too slow/fragile), carbon-chauvinist doctrine, late-space civilizations, anyone still thinking in national terms.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Solar Governance Treaty</strong>
+                                <span>Attempt at solar-system-wide governance collapses (belt rejects, Mars ambivalent). Fails.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: AI Military Limitation</strong>
+                                <span>Proposals for strict human control become impractical; human reaction time is insufficient for interplanetary warfare. Quietly abandoned.</span>
+                            </div>
+                        </li>
+                        <li class="impact-item">
+                            <div class="impact-marker"></div>
+                            <div class="impact-text">
+                                <strong>Containment Failure: Earth Reunification</strong>
+                                <span>Repeated attempts to reconstitute Earth under a single government fail. Population indifferent; orbital powers prefer a divided customer base.</span>
                             </div>
                         </li>
                     </ul>
@@ -3942,20 +4005,22 @@
         }
 
         function updateTimeSliceVisuals(opts = {}) {
+            filterSectionsByYear(state.timelineYear);
             if (!lastImpacts) return;
             updateSankeyDiagram(lastImpacts, opts);
             updateWorldMap(lastImpacts, opts);
             updateCascadeTimeline(lastImpacts, opts);
-            filterSectionsByYear(state.timelineYear);
         }
 
         function filterSectionsByYear(selectedYear) {
-            const sections = document.querySelectorAll('.section[data-year]');
+            const year = parseInt(selectedYear, 10);
+            if (!Number.isFinite(year)) return;
+
+            const sections = document.querySelectorAll('.tab-content .section[data-year]');
             sections.forEach(section => {
-                const sectionYear = parseInt(section.dataset.year);
-                const shouldShow = sectionYear <= selectedYear;
-                section.style.display = shouldShow ? '' : 'none';
-                section.style.opacity = shouldShow ? '1' : '0';
+                const sectionYear = parseInt(section.dataset.year, 10);
+                if (!Number.isFinite(sectionYear)) return;
+                section.hidden = sectionYear > year;
             });
         }
 
