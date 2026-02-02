@@ -3,13 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>babu</title>
+    <title>Babu - Patrick Young</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Names compress people into symbols. Symbols compress meaning into sound. Sound compresses time into memory.">
+    <meta name="author" content="Patrick Young">
+    <link rel="canonical" href="https://patrickyoung.ai/babu.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Babu - Patrick Young">
+    <meta property="og:description" content="Names compress people into symbols. Symbols compress meaning into sound. Sound compresses time into memory.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://patrickyoung.ai/babu.html">
+    <meta property="og:image" content="https://patrickyoung.ai/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Babu - Patrick Young">
+    <meta name="twitter:description" content="Names compress people into symbols. Symbols compress meaning into sound. Sound compresses time into memory.">
+    <meta name="twitter:image" content="https://patrickyoung.ai/og-image.png">
+
+    <!-- Font preloading -->
+    <link rel="preload" href="/fonts/BerkeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Babu",
+        "author": {
+            "@type": "Person",
+            "name": "Patrick Young"
+        }
+    }
+    </script>
+
     <style>
         @font-face {
             font-family: 'Berkeley Mono';
-            src: url('/fonts/BerkeleyMono-Regular.otf') format('opentype');
+            src: url('/fonts/BerkeleyMono-Regular.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
+            font-display: swap;
         }
 
         body {
@@ -135,7 +171,6 @@
     </div>
 
     <script>
-        // Seeded random for consistent trees
         function seededRandom(seed) {
             return function() {
                 seed = (seed * 1103515245 + 12345) & 0x7fffffff;
@@ -154,7 +189,6 @@
             ctx.fillStyle = '#f5e6c8';
             ctx.fillRect(0, 0, width, height);
 
-            // L-system parameters
             const axiom = 'F';
             const rules = { 'F': 'F[+F]F[-F][F]' };
             const angle = 20 + rand() * 15;
@@ -233,7 +267,6 @@
 
             drawLSystem();
 
-            // Neural network connections
             ctx.strokeStyle = 'rgba(44, 24, 16, 0.1)';
             ctx.lineWidth = 0.2 * scale;
             for (let i = 0; i < endpoints.length - 1; i++) {
@@ -250,7 +283,6 @@
                 }
             }
 
-            // Henon map strange attractor
             let hx = 0.1, hy = 0.1;
             const a = 1.4, b = 0.3;
             ctx.fillStyle = 'rgba(139, 69, 19, 0.3)';
@@ -267,7 +299,6 @@
                 ctx.fill();
             }
 
-            // Lifelike banana clusters
             function drawBanana(ctx, x, y, angle, size, ripeness, rand) {
                 ctx.save();
                 ctx.translate(x, y);
@@ -277,7 +308,6 @@
                 const thick = size * 3;
                 const curve = size * 4;
 
-                // Banana body with bezier curve
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
                 ctx.bezierCurveTo(
@@ -292,7 +322,6 @@
                 );
                 ctx.closePath();
 
-                // Gradient fill for 3D effect
                 const grad = ctx.createLinearGradient(0, -curve, 0, thick);
                 const yellow = ripeness > 0.7 ? '#f4d03f' : '#e6c229';
                 const darkYellow = ripeness > 0.7 ? '#d4a017' : '#c9a227';
@@ -303,24 +332,20 @@
                 ctx.fillStyle = grad;
                 ctx.fill();
 
-                // Subtle outline
                 ctx.strokeStyle = '#b8860b';
                 ctx.lineWidth = size * 0.3;
                 ctx.stroke();
 
-                // Brown tip (stem end)
                 ctx.beginPath();
                 ctx.arc(0, thick * 0.15, size * 1.2, 0, Math.PI * 2);
                 ctx.fillStyle = '#5d4037';
                 ctx.fill();
 
-                // Brown tip (bottom end)
                 ctx.beginPath();
                 ctx.arc(len, 0, size * 0.8, 0, Math.PI * 2);
                 ctx.fillStyle = '#3e2723';
                 ctx.fill();
 
-                // Bruise spots for realism
                 if (ripeness > 0.6) {
                     for (let i = 0; i < Math.floor(ripeness * 4); i++) {
                         const spotX = len * (0.2 + rand() * 0.6);
@@ -332,7 +357,6 @@
                     }
                 }
 
-                // Highlight shine
                 ctx.beginPath();
                 ctx.ellipse(len * 0.5, -curve * 0.3, len * 0.25, size * 0.5, 0, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
@@ -355,7 +379,6 @@
                 }
             });
 
-            // Particle flow
             const time = Date.now() * 0.001;
             endpoints.forEach((point, i) => {
                 const orbitX = point.x + Math.cos(time + i) * 5 * scale;
@@ -383,7 +406,6 @@
         let currentSeed = null;
         let renderTimeout = null;
 
-        // Calculate iterations based on zoom level - more detail as you zoom in
         function getIterations(z) {
             if (z < 0.5) return 3;
             if (z < 1) return 4;
@@ -394,7 +416,6 @@
             return 9;
         }
 
-        // Calculate canvas size based on zoom - bigger canvas for more detail
         function getCanvasSize(z) {
             const base = Math.max(window.innerWidth, window.innerHeight);
             return Math.min(Math.floor(base * Math.max(z, 1) * 2), 8000);
@@ -407,7 +428,7 @@
             largeCanvas.width = size;
             largeCanvas.height = size;
 
-            const scale = size / 150; // Scale relative to base size
+            const scale = size / 150;
             drawFractal(largeCanvas, scale, currentSeed, iterations);
 
             updateCanvasPosition();
@@ -448,7 +469,6 @@
             document.body.style.overflow = '';
         };
 
-        // Dragging
         modal.onmousedown = (e) => {
             if (e.target === closeBtn || e.target.closest('#controls')) return;
             isDragging = true;
@@ -478,7 +498,6 @@
             modal.style.cursor = 'grab';
         };
 
-        // Touch support
         modal.ontouchstart = (e) => {
             if (e.target === closeBtn || e.target.closest('#controls')) return;
             isDragging = true;
@@ -502,12 +521,10 @@
             isDragging = false;
         };
 
-        // Zoom controls
         zoomIn.onclick = (e) => {
             e.stopPropagation();
             const oldZoom = zoom;
             zoom = Math.min(zoom * 1.5, 100);
-            // Adjust pan to keep center
             panX = panX * (zoom / oldZoom);
             panY = panY * (zoom / oldZoom);
             scheduleRender();
@@ -524,7 +541,6 @@
             updateCanvasPosition();
         };
 
-        // Mouse wheel zoom
         modal.onwheel = (e) => {
             e.preventDefault();
             const oldZoom = zoom;
@@ -533,7 +549,6 @@
             } else {
                 zoom = Math.max(zoom / 1.15, 0.2);
             }
-            // Zoom toward mouse position
             const rect = modal.getBoundingClientRect();
             const mouseX = e.clientX - rect.left - rect.width / 2;
             const mouseY = e.clientY - rect.top - rect.height / 2;
