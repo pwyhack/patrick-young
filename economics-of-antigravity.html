@@ -3,65 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Economics of Antigravity - Patrick Young</title>
-
-    <!-- SEO -->
-    <meta name="description" content="An analysis of how antigravity technology would reshape civilization, destroy industries, and face institutional resistance.">
-    <meta name="author" content="Patrick Young">
-    <link rel="canonical" href="https://patrickyoung.ai/economics-of-antigravity.html">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Economics of Antigravity - Patrick Young">
-    <meta property="og:description" content="An analysis of how antigravity technology would reshape civilization, destroy industries, and face institutional resistance.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://patrickyoung.ai/economics-of-antigravity.html">
-    <meta property="og:image" content="https://patrickyoung.ai/og-image.png">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Economics of Antigravity - Patrick Young">
-    <meta name="twitter:description" content="An analysis of how antigravity technology would reshape civilization, destroy industries, and face institutional resistance.">
-    <meta name="twitter:image" content="https://patrickyoung.ai/og-image.png">
-
-    <!-- Font preloading -->
-    <link rel="preload" href="/fonts/BerkeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/BerkeleyMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Economics of Antigravity",
-        "author": {
-            "@type": "Person",
-            "name": "Patrick Young"
-        },
-        "datePublished": "2025-11"
-    }
-    </script>
-
+    <title>The Economics of Antigravity - Field Report</title>
     <style>
         @font-face {
             font-family: 'Berkeley Mono';
-            src: url('/fonts/BerkeleyMono-Regular.woff2') format('woff2');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
+            src: url('fonts/BerkeleyMono-Regular.woff2') format('woff2');
+            font-weight: normal;
         }
         @font-face {
             font-family: 'Berkeley Mono';
-            src: url('/fonts/BerkeleyMono-Bold.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
+            src: url('fonts/BerkeleyMono-Bold.woff2') format('woff2');
+            font-weight: bold;
         }
-        @font-face {
-            font-family: 'Berkeley Mono';
-            src: url('/fonts/BerkeleyMono-Oblique.woff2') format('woff2');
-            font-weight: 400;
-            font-style: italic;
-            font-display: swap;
+
+        :root {
+            --parchment: #f4e4bc;
+            --parchment-dark: #d4c4a0;
+            --parchment-edge: #c4a470;
+            --ink: #2c1810;
+            --ink-faded: #5c4833;
+            --ink-light: #8b7355;
+            --stamp-red: #8b0000;
+            --classified-red: #cc0000;
+            --pencil: #4a4a4a;
+            --coffee-stain: rgba(139, 90, 43, 0.12);
+            --fold-shadow: rgba(0, 0, 0, 0.08);
+            --disruption-low: #3d5c3d;
+            --disruption-mid: #8b7500;
+            --disruption-high: #8b0000;
+            --flow-transport: #4a7c9b;
+            --flow-realestate: #7b5c3d;
+            --flow-energy: #9b7c3d;
+            --flow-labor: #5c4a7c;
+            --flow-supply: #3d7c6b;
+            --flow-military: #7c3d3d;
+            --flow-space: #3d4a7c;
+            --flow-urban: #6b7c3d;
         }
 
         * {
@@ -70,400 +47,1893 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background: #f5e6c8;
-            color: #2c1810;
-            font-family: 'Berkeley Mono', monospace;
-            font-size: 16px;
-            line-height: 1.75;
-            padding: 60px 20px;
+            font-family: 'Berkeley Mono', 'Courier New', monospace;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.01) 2px,
+                    rgba(0,0,0,0.01) 4px
+                ),
+                linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 50%, var(--parchment) 100%);
+            background-attachment: fixed;
+            color: var(--ink);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
         }
 
-        .container {
-            max-width: 650px;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 30%, var(--coffee-stain) 0%, transparent 40%),
+                radial-gradient(ellipse at 85% 70%, var(--coffee-stain) 0%, transparent 35%),
+                radial-gradient(ellipse at 60% 90%, rgba(139, 90, 43, 0.08) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .document-container {
+            max-width: 900px;
             margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        header {
-            margin-bottom: 60px;
+        .fold-line {
+            position: fixed;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                var(--fold-shadow) 10%,
+                var(--fold-shadow) 90%,
+                transparent 100%
+            );
+            pointer-events: none;
+            z-index: 3;
         }
 
-        header a {
-            color: #5c4033;
-            text-decoration: none;
+        .fold-line::after {
+            content: '';
+            position: absolute;
+            left: 1px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(255,255,255,0.3) 10%,
+                rgba(255,255,255,0.3) 90%,
+                transparent 100%
+            );
+        }
+
+        /* Header */
+        .document-header {
+            text-align: center;
+            padding: 40px 20px;
+            border: 3px double var(--ink);
+            margin-bottom: 40px;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+        }
+
+        .document-header::before {
+            content: 'CLASSIFIED';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            background: var(--classified-red);
+            color: white;
+            padding: 4px 20px;
             font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        header a:hover {
-            text-decoration: underline;
+        .stamp {
+            position: absolute;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            pointer-events: none;
         }
 
-        h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-top: 20px;
-            margin-bottom: 8px;
-            line-height: 1.3;
-        }
-
-        .date {
-            color: #8b7355;
-            font-size: 14px;
-        }
-
-        article {
-            margin-top: 40px;
-        }
-
-        article p {
-            margin-bottom: 24px;
-        }
-
-        article h2 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-top: 48px;
-            margin-bottom: 16px;
-        }
-
-        article h3 {
+        .stamp-top-secret {
+            top: 20px;
+            right: 20px;
+            color: var(--stamp-red);
             font-size: 18px;
-            font-weight: 700;
-            margin-top: 36px;
-            margin-bottom: 12px;
+            transform: rotate(12deg);
+            border: 3px solid var(--stamp-red);
+            padding: 5px 10px;
+            border-radius: 4px;
         }
 
-        article a {
-            color: #8b4513;
+        .stamp-eyes-only {
+            bottom: 20px;
+            left: 20px;
+            color: var(--ink-faded);
+            font-size: 12px;
+            transform: rotate(-8deg);
+            border: 2px solid var(--ink-faded);
+            padding: 3px 8px;
         }
 
-        article ul, article ol {
-            margin-bottom: 24px;
-            padding-left: 24px;
+        .document-title {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        article li {
+        .document-subtitle {
+            font-size: 16px;
+            color: var(--ink-faded);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .document-meta {
+            font-size: 12px;
+            color: var(--ink-light);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .document-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Navigation */
+        .nav-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--ink-faded);
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-dot:hover,
+        .nav-dot.active {
+            background: var(--ink);
+            border-color: var(--ink);
+        }
+
+        .nav-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: var(--ink-faded);
+        }
+
+        .nav-dot:hover::after {
+            opacity: 1;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,0.02), transparent),
+                var(--parchment-dark);
+            border: 2px solid var(--ink-faded);
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .control-panel::before {
+            content: 'OPERATION ICARUS';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--parchment-dark);
+            padding: 0 10px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--ink-faded);
+        }
+
+        .control-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--ink-faded);
+        }
+
+        .control-header h2 {
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .control-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: 180px 1fr 80px;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .control-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ink-faded);
+        }
+
+        .control-slider {
+            position: relative;
+            height: 24px;
+        }
+
+        .control-slider input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--parchment);
+            border: 1px solid var(--ink-faded);
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        .control-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--ink);
+            border: 2px solid var(--parchment);
+            cursor: pointer;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .control-slider input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--ink);
+            border: 2px solid var(--parchment);
+            cursor: pointer;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .control-value {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .control-select {
+            position: relative;
+        }
+
+        .control-select select {
+            width: 100%;
+            padding: 8px 12px;
+            font-family: inherit;
+            font-size: 12px;
+            background: var(--parchment);
+            border: 1px solid var(--ink-faded);
+            color: var(--ink);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .recalculate-btn {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background: var(--ink);
+            color: var(--parchment);
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .recalculate-btn:hover {
+            background: var(--stamp-red);
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 60px;
+            padding: 30px;
+            position: relative;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid var(--ink-faded);
+        }
+
+        .section::before {
+            content: attr(data-section-num);
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 30px;
+            height: 30px;
+            background: var(--ink);
+            color: var(--parchment);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--ink-faded);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--disruption-low);
+        }
+
+        .status-indicator.mid { background: var(--disruption-mid); }
+        .status-indicator.high { background: var(--disruption-high); }
+
+        /* Disruption Meter */
+        .disruption-meter {
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--parchment);
+            border: 1px solid var(--ink-faded);
+        }
+
+        .meter-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ink-faded);
+        }
+
+        .meter-track {
+            height: 24px;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    var(--parchment-dark) 0px,
+                    var(--parchment-dark) 1px,
+                    transparent 1px,
+                    transparent 10px
+                ),
+                linear-gradient(to right,
+                    var(--disruption-low) 0%,
+                    var(--disruption-low) 33%,
+                    var(--disruption-mid) 33%,
+                    var(--disruption-mid) 66%,
+                    var(--disruption-high) 66%,
+                    var(--disruption-high) 100%
+                );
+            position: relative;
+            border: 1px solid var(--ink-faded);
+        }
+
+        .meter-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--ink);
+            opacity: 0.85;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .meter-value {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--parchment);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .meter-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ink-light);
+        }
+
+        /* Narrative Text */
+        .narrative {
+            margin: 20px 0;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.1);
+            border-left: 2px solid var(--ink-light);
+            font-style: italic;
+            color: var(--ink-faded);
+            position: relative;
+        }
+
+        .narrative::before {
+            content: '"';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 30px;
+            opacity: 0.3;
+        }
+
+        /* Impact List */
+        .impact-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .impact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--parchment-dark);
+        }
+
+        .impact-marker {
+            width: 8px;
+            height: 8px;
+            background: var(--ink);
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .impact-text strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .impact-text span {
+            font-size: 12px;
+            color: var(--ink-faded);
+        }
+
+        /* Redacted Text */
+        .redacted {
+            background: var(--ink);
+            color: var(--ink);
+            padding: 0 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .redacted:hover {
+            background: var(--classified-red);
+            color: var(--parchment);
+        }
+
+        /* Sankey Diagram Container */
+        .sankey-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--parchment);
+            border: 2px solid var(--ink-faded);
+            position: relative;
+        }
+
+        .sankey-container::before {
+            content: 'ECONOMIC FLOW ANALYSIS';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--parchment);
+            padding: 0 10px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--ink-faded);
+        }
+
+        .sankey-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sankey-header span {
+            padding: 4px 12px;
+            background: var(--ink-faded);
+            color: var(--parchment);
+        }
+
+        #sankey-diagram {
+            width: 100%;
+            height: 400px;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--parchment);
+            border: 2px solid var(--ink-faded);
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .timeline-track {
+            position: relative;
+            height: 60px;
+            margin: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--ink-faded);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: var(--ink);
+            border: 2px solid var(--parchment);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-marker:hover {
+            transform: translate(-50%, -50%) scale(1.3);
+            background: var(--stamp-red);
+        }
+
+        .timeline-marker-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 10px;
+            font-size: 10px;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .timeline-scrubber {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .timeline-scrubber input[type="range"] {
+            width: 100%;
+        }
+
+        .timeline-year-display {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Job Counter */
+        .job-counter {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .counter-box {
+            padding: 15px;
+            text-align: center;
+            background: var(--parchment);
+            border: 1px solid var(--ink-faded);
+        }
+
+        .counter-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ink-faded);
             margin-bottom: 8px;
         }
 
-        article blockquote {
-            border-left: 3px solid #8b7355;
-            padding-left: 20px;
-            margin: 32px 0;
-            color: #5c4033;
+        .counter-value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .counter-value.negative { color: var(--disruption-high); }
+        .counter-value.positive { color: var(--disruption-low); }
+        .counter-value.neutral { color: var(--ink); }
+
+        .counter-unit {
+            font-size: 11px;
+            color: var(--ink-faded);
+        }
+
+        /* Annotation */
+        .annotation {
+            position: absolute;
+            font-size: 11px;
+            color: var(--pencil);
             font-style: italic;
+            transform: rotate(-3deg);
+            opacity: 0.8;
         }
 
-        article code {
-            background: rgba(0, 0, 0, 0.06);
-            padding: 2px 6px;
-            font-size: 14px;
+        /* Paper Clip */
+        .paper-clip {
+            position: absolute;
+            top: -10px;
+            right: 30px;
+            width: 30px;
+            height: 60px;
+            border: 3px solid #888;
+            border-radius: 15px 15px 0 0;
+            border-bottom: none;
+            transform: rotate(10deg);
+            opacity: 0.5;
         }
 
-        article pre {
-            background: rgba(0, 0, 0, 0.06);
-            padding: 16px 20px;
-            overflow-x: auto;
-            margin-bottom: 24px;
-            font-size: 14px;
+        /* Footer */
+        .document-footer {
+            margin-top: 60px;
+            padding: 30px;
+            border-top: 2px solid var(--ink-faded);
+            text-align: center;
         }
 
-        article pre code {
-            background: none;
-            padding: 0;
+        .footer-stamp {
+            display: inline-block;
+            padding: 10px 30px;
+            border: 3px solid var(--stamp-red);
+            color: var(--stamp-red);
+            font-weight: bold;
+            letter-spacing: 3px;
+            transform: rotate(-5deg);
+            opacity: 0.8;
         }
 
-        article hr {
-            border: none;
-            border-top: 1px solid #d4c4a8;
-            margin: 48px 0;
+        .footer-text {
+            margin-top: 20px;
+            font-size: 11px;
+            color: var(--ink-light);
+            letter-spacing: 1px;
         }
 
-        article img {
-            max-width: 100%;
-            height: auto;
-            margin: 24px 0;
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-sidebar {
+                display: none;
+            }
+
+            .document-container {
+                padding: 20px 15px;
+            }
+
+            .control-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .control-value {
+                text-align: left;
+            }
+
+            .job-counter {
+                grid-template-columns: 1fr;
+            }
+
+            .sankey-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #sankey-diagram {
+                height: 300px;
+            }
+        }
+
+        /* Animations */
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes stamp-slam {
+            0% { transform: scale(3) rotate(var(--rotation, 0deg)); opacity: 0; }
+            50% { transform: scale(0.9) rotate(var(--rotation, 0deg)); }
+            100% { transform: scale(1) rotate(var(--rotation, 0deg)); opacity: 0.7; }
+        }
+
+        .stamp-animate {
+            animation: stamp-slam 0.4s ease-out forwards;
+        }
+
+        @keyframes ink-fill {
+            from { width: 0; }
+        }
+
+        .meter-fill {
+            animation: ink-fill 1s ease-out;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <a href="/">← back</a>
-            <h1>Economics of Antigravity</h1>
-            <span class="date">November 2025</span>
+    <div class="fold-line"></div>
+
+    <nav class="nav-sidebar">
+        <div class="nav-dot active" data-label="Overview" data-section="header"></div>
+        <div class="nav-dot" data-label="Parameters" data-section="controls"></div>
+        <div class="nav-dot" data-label="Transportation" data-section="transport"></div>
+        <div class="nav-dot" data-label="Real Estate" data-section="realestate"></div>
+        <div class="nav-dot" data-label="Energy" data-section="energy"></div>
+        <div class="nav-dot" data-label="Labor" data-section="labor"></div>
+        <div class="nav-dot" data-label="Supply Chain" data-section="supply"></div>
+        <div class="nav-dot" data-label="Military" data-section="military"></div>
+        <div class="nav-dot" data-label="Space" data-section="space"></div>
+        <div class="nav-dot" data-label="Urban" data-section="urban"></div>
+    </nav>
+
+    <div class="document-container">
+        <!-- Header -->
+        <header class="document-header" id="header">
+            <span class="stamp stamp-top-secret">Top Secret</span>
+            <span class="stamp stamp-eyes-only">Eyes Only</span>
+            <h1 class="document-title">The Economics of Antigravity</h1>
+            <p class="document-subtitle">Global Economic Impact Assessment</p>
+            <div class="document-meta">
+                <span>REF: AG-ECON-2024-001</span>
+                <span>STATUS: ACTIVE ANALYSIS</span>
+                <span>CLEARANCE: LEVEL 5</span>
+            </div>
         </header>
 
-        <article>
-            <p>
-                I recently had a chance to watch "Age of Disclosure." The premise of the documentary is interesting: UFOs are real,
-                antigravity technology exists, and all the major powers of the world possess it—and it's within our grasp.
-                <br><br>
-                So, why wouldn't we just release it? Why wouldn't we use it?
-            </p>
-            <p>
-                The true answer is complex and rooted in the way society must collectively update its understanding of reality. We are conditioned to believe
-                that transportation is constrained and finite, fuel costs are high, and—economically speaking—the total value of the global
-                airline industry is enormous (X Amount).
-            </p>
-            <p>
-                So let's think about this: how could society effectively integrate antigravity, and what would the implications be?
-            </p>
-            <h2>
-                US Antigravity Corporation
-            </h2>
-            <p>
-                Welcome to 2025, the US Antigravity Coroporation has announced their seed round led by INQTEL. They raised $100,000,000 at $1B Post with follow on
-                from Founders Fund, General Catalyst, and, of course, Andreessen Horowitz.
+        <!-- Control Panel -->
+        <section class="control-panel" id="controls">
+            <div class="control-header">
+                <h2>Scenario Parameters</h2>
+            </div>
+            <div class="control-grid">
+                <div class="control-row">
+                    <label class="control-label">Adoption Timeline</label>
+                    <div class="control-slider">
+                        <input type="range" id="adoption-rate" min="1" max="100" value="20">
+                    </div>
+                    <span class="control-value" id="adoption-value">20 years</span>
+                </div>
+                <div class="control-row">
+                    <label class="control-label">Energy Requirement</label>
+                    <div class="control-slider">
+                        <input type="range" id="energy-cost" min="0" max="100" value="50">
+                    </div>
+                    <span class="control-value" id="energy-value">Moderate</span>
+                </div>
+                <div class="control-row">
+                    <label class="control-label">Payload Capacity</label>
+                    <div class="control-slider">
+                        <input type="range" id="payload" min="0" max="100" value="60">
+                    </div>
+                    <span class="control-value" id="payload-value">Industrial</span>
+                </div>
+                <div class="control-row">
+                    <label class="control-label">Regulatory Response</label>
+                    <div class="control-slider">
+                        <input type="range" id="regulation" min="0" max="100" value="50">
+                    </div>
+                    <span class="control-value" id="regulation-value">Controlled</span>
+                </div>
+                <div class="control-row">
+                    <label class="control-label">Discovery Context</label>
+                    <div class="control-select">
+                        <select id="discovery-context">
+                            <option value="government">Government Lab</option>
+                            <option value="corporation" selected>Corporation</option>
+                            <option value="individual">Independent</option>
+                            <option value="accident">Accident</option>
+                        </select>
+                    </div>
+                    <span class="control-value"></span>
+                </div>
+            </div>
+            <button class="recalculate-btn" id="recalculate">Recalculate Projections</button>
+        </section>
 
-            </p>
-            <p>
-                Their flagship prodcut is the AG-001, a small, portable antigravity engine. Alongside their engine they release a small personal craft
-                the FP-MK-0 (named after the <a href="https://en.wikipedia.org/wiki/Peregrine_falcon"><em>Falco Peregrinus</em></a>)
-            </p>
-            <p>
-                Its available starting at the small price of
-            </p>
+        <!-- Economic Flow Sankey -->
+        <section class="sankey-container">
+            <div class="sankey-header">
+                <span>Pre-Antigravity</span>
+                <span>Post-Antigravity</span>
+            </div>
+            <svg id="sankey-diagram" viewBox="0 0 800 400"></svg>
+        </section>
 
-            <hr>
-            <p><em>[Note: Analysis below is AI-assisted]</em></p>
-            <hr>
+        <!-- Job Counter Summary -->
+        <div class="job-counter">
+            <div class="counter-box">
+                <div class="counter-label">Jobs Eliminated</div>
+                <div class="counter-value negative" id="jobs-lost">-47.2M</div>
+                <div class="counter-unit">globally</div>
+            </div>
+            <div class="counter-box">
+                <div class="counter-label">Jobs Created</div>
+                <div class="counter-value positive" id="jobs-gained">+18.6M</div>
+                <div class="counter-unit">new sectors</div>
+            </div>
+            <div class="counter-box">
+                <div class="counter-label">Net Impact</div>
+                <div class="counter-value neutral" id="jobs-net">-28.6M</div>
+                <div class="counter-unit">transition period</div>
+            </div>
+        </div>
 
-            <h2>What Changes</h2>
+        <!-- Section 1: Transportation -->
+        <section class="section" data-section-num="01" id="transport">
+            <div class="section-header">
+                <h2 class="section-title">Transportation</h2>
+                <div class="section-status">
+                    <span class="status-indicator high"></span>
+                    <span>Catastrophic Disruption</span>
+                </div>
+            </div>
 
-            <p>
-                Moving mass upward costs energy: mass × height × 9.8 m/s². Every airplane, rocket, crane, and elevator exists because lifting is expensive.
-            </p>
+            <div class="disruption-meter">
+                <div class="meter-header">
+                    <span>Sector Disruption Level</span>
+                    <span id="transport-pct">94%</span>
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill" id="transport-meter" style="width: 94%"></div>
+                </div>
+                <div class="meter-labels">
+                    <span>Adaptation</span>
+                    <span>Restructuring</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
 
-            <p>
-                Antigravity makes vertical movement free. Not cheaper. Free.
-            </p>
-
-            <p>
-                Every civilization in history has been shaped by gravity as constraint. Remove the constraint, and you don't get incremental gains. You get phase change.
-            </p>
-
-            <h2>The Destruction Ledger</h2>
-
-<pre style="font-size: 11px; line-height: 1.3; background: rgba(0,0,0,0.04); padding: 20px; margin: 24px 0;">
-INDUSTRIES AT RISK (Annual Value / Assets)
-══════════════════════════════════════════════════════════════
-
-Shipping & Logistics     ████████████████████████████  $14.0T
-  └─ 3D routing kills ports, highways, rail
-
-Oil & Gas (transport)    ██████████████████            $4.2T
-  └─ 60% of petroleum is transportation
-
-Commercial Aviation      ████                          $0.8T
-  └─ Hub-and-spoke airports become obsolete
-
-Space Industry           ██                            $0.4T
-  └─ Falcon 9 becomes museum piece
-
-Construction (vertical)  ████████                      $2.0T
-  └─ Foundations, cranes, elevators: all gravity tax
-──────────────────────────────────────────────────────────────
-TOTAL EXPOSURE                                        ~$21T
-</pre>
-
-            <p>
-                $21 trillion in assets exist because gravity is a problem. If gravity stops being a problem, that wealth doesn't transfer. It vanishes.
-            </p>
-
-            <h2>Who Fights, Who Wins</h2>
-
-            <p>
-                Mancur Olson explained why bad policies persist: concentrated losers organize, diffuse winners don't.
-            </p>
-
-<pre style="font-size: 11px; line-height: 1.4; background: rgba(0,0,0,0.04); padding: 20px; margin: 24px 0;">
-                    LOSERS                           WINNERS
-            ┌─────────────────────┐           ┌─────────────────────┐
-            │  • Concentrated     │           │  • Diffuse          │
-            │  • Wealthy NOW      │           │  • Wealthy LATER    │
-            │  • Organized        │           │  • Unorganized      │
-            │  • Aware            │           │  • Unaware          │
-            │                     │           │                     │
-            │  Airlines, Oil,     │           │  Everyone,          │
-            │  Shipping, Aerospace│           │  Eventually         │
-            └─────────────────────┘           └─────────────────────┘
-                     │                                  │
-                     ▼                                  ▼
-               LOBBY HARD ────────────────────── DO NOTHING
-                     │                                  │
-                     └──────────► LOSERS WIN ◄─────────┘
-                                 (for now)
-</pre>
-
-            <p>
-                No conspiracy needed. Just incentives. A few trillion dollars and institutional self-preservation do the work.
-            </p>
-
-            <h2>Why Gradual Adoption Fails</h2>
-
-            <p>
-                Cars didn't kill horses overnight. The transition took decades. Infrastructure evolved. Buggy whip makers retrained.
+            <p class="narrative" id="transport-narrative">
+                At current parameters, the first commercial antigravity cargo platform enters service within <span class="redacted">five years</span>.
+                By year fifteen, traditional shipping routes become archaeological curiosities. The Port of Shanghai
+                transforms into the world's largest floating logistics hub, processing cargo that never touches water.
             </p>
 
-            <p>
-                Antigravity can't work that way.
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Maritime Shipping: $14.1T Industry Collapse</strong>
+                        <span>Container ships become scrap metal. Fuel costs: irrelevant. Port infrastructure: stranded assets.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Trucking: 3.5M US Jobs Eliminated</strong>
+                        <span>Long-haul trucking disappears. Last-mile delivery transforms into aerial drop zones.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Commercial Aviation: Route Networks Obsolete</strong>
+                        <span>Airports become redundant. Point-to-point travel at any scale, any distance.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Rail Freight: Niche Survival Only</strong>
+                        <span>Bulk commodities may justify fixed routes. Everything else goes airborne.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Section 2: Real Estate -->
+        <section class="section" data-section-num="02" id="realestate">
+            <div class="paper-clip"></div>
+            <div class="section-header">
+                <h2 class="section-title">Real Estate</h2>
+                <div class="section-status">
+                    <span class="status-indicator high"></span>
+                    <span>Fundamental Restructuring</span>
+                </div>
+            </div>
+
+            <div class="disruption-meter">
+                <div class="meter-header">
+                    <span>Sector Disruption Level</span>
+                    <span id="realestate-pct">87%</span>
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill" id="realestate-meter" style="width: 87%"></div>
+                </div>
+                <div class="meter-labels">
+                    <span>Adaptation</span>
+                    <span>Restructuring</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
+
+            <p class="narrative" id="realestate-narrative">
+                The fundamental premise of real estate—location, location, location—dissolves overnight. Manhattan
+                square footage trades at parity with Kansas farmland. The only remaining premium: views and neighbors.
             </p>
 
-<pre style="font-size: 11px; line-height: 1.4; background: rgba(0,0,0,0.04); padding: 20px; margin: 24px 0;">
-WHY AG IS DISCONTINUOUS:
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Location Premium: Eliminated</strong>
+                        <span>Commute time becomes universal. Proximity to anything stops mattering.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Vertical Expansion: Unlimited</strong>
+                        <span>Buildings float. Stack infinitely. Ground connection becomes optional.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Commercial Property: Mass Obsolescence</strong>
+                        <span>Warehouses, ports, airports—billions in stranded assets.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Rural Land: Appreciation</strong>
+                        <span>Space becomes the only constraint. Remote locations gain equivalence.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
 
-  1. PRICE CONTROL FAILS
-     Can't price high enough ──► Black markets emerge ──► Tech spreads
+        <!-- Section 3: Energy -->
+        <section class="section" data-section-num="03" id="energy">
+            <div class="section-header">
+                <h2 class="section-title">Energy Sector</h2>
+                <div class="section-status">
+                    <span class="status-indicator mid"></span>
+                    <span>Depends on Physics</span>
+                </div>
+            </div>
 
-  2. GEOGRAPHIC CONTAINMENT FAILS
-     Not like nukes (rare isotopes) ──► If engineerable, reproducible
+            <div class="disruption-meter">
+                <div class="meter-header">
+                    <span>Sector Disruption Level</span>
+                    <span id="energy-pct">62%</span>
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill" id="energy-meter" style="width: 62%"></div>
+                </div>
+                <div class="meter-labels">
+                    <span>Adaptation</span>
+                    <span>Restructuring</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
 
-  3. MILITARY PRESSURE
-     Any nation that delays ──► Loses dominance to those who don't
-</pre>
-
-            <p>
-                Everyone might agree slow transition is better. No one can commit to it. Defection pays too well.
+            <p class="narrative" id="energy-narrative">
+                The energy implications depend entirely on what antigravity <em>costs</em> to run. At current parameter settings,
+                antigravity requires moderate energy input—enough to disrupt transportation fuels while preserving
+                the broader energy infrastructure.
             </p>
 
-<pre style="font-size: 11px; line-height: 1.4; background: rgba(0,0,0,0.04); padding: 20px; margin: 24px 0;">
-THE CIVILIZATIONAL PRISONER'S DILEMMA
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>If Energy-Intensive: Oil Gets a Reprieve</strong>
+                        <span>Massive electricity demand. Nuclear becomes critical. Grid expansion urgent.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>If Energy-Neutral: Transportation Fuels Collapse</strong>
+                        <span>Gasoline, diesel, jet fuel demand craters. Refineries close.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>If Net-Positive: <span class="redacted">Post-Scarcity</span></strong>
+                        <span>Physics breaks. Infinite energy. Economic models become meaningless.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
 
-                          NATION B
-                    Suppress    Release
-                 ┌───────────┬───────────┐
-        Suppress │  Status   │  B wins   │
-NATION A         │   quo     │ A loses   │
-                 ├───────────┼───────────┤
-        Release  │  A wins   │   Chaos   │
-                 │  B loses  │ (but fair)│
-                 └───────────┴───────────┘
+        <!-- Section 4: Labor Markets -->
+        <section class="section" data-section-num="04" id="labor">
+            <div class="section-header">
+                <h2 class="section-title">Labor Markets</h2>
+                <div class="section-status">
+                    <span class="status-indicator high"></span>
+                    <span>Mass Displacement</span>
+                </div>
+            </div>
 
-Dominant strategy: RELEASE
-Nash equilibrium: CHAOS
-</pre>
+            <div class="disruption-meter">
+                <div class="meter-header">
+                    <span>Sector Disruption Level</span>
+                    <span id="labor-pct">78%</span>
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill" id="labor-meter" style="width: 78%"></div>
+                </div>
+                <div class="meter-labels">
+                    <span>Adaptation</span>
+                    <span>Restructuring</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
 
-            <h2>The Math on Transition</h2>
-
-            <p>
-                Total wealth created by antigravity exceeds wealth destroyed. Asteroid mining alone dwarfs all terrestrial resources. Geographic barriers to development disappear. Transportation costs hit the poor hardest, so the poor gain most.
+            <p class="narrative" id="labor-narrative">
+                Fifty million transport workers globally face obsolescence. The cascade extends through logistics,
+                warehousing, fuel stations, roadside services. New jobs emerge in antigravity maintenance, vertical
+                construction, and space operations—but the transition period is brutal.
             </p>
 
-            <p>
-                But "total wealth increases" and "smooth transition" are different claims.
-            </p>
-
-<pre style="font-size: 11px; line-height: 1.4; background: rgba(0,0,0,0.04); padding: 20px; margin: 24px 0;">
-TRANSITION TIMELINE
-
-Present ─────────────────────────────────────────────► Future
-
-    LOSSES                              GAINS
-    (concrete)                          (abstract)
-    (now)                               (later)
-    (real people)                       (unborn people)
-        │                                    │
-        ▼                                    ▼
-    POLITICAL                            NO LOBBY
-    POWER                                NO VOICE
-</pre>
-
-            <p>
-                Present losses are concrete, future gains are abstract. Humans trade poorly across that gap. Institutions trade worse.
-            </p>
-
-            <h2>Four Options, All Bad</h2>
-
-<pre style="font-size: 11px; line-height: 1.4; background: rgba(0,0,0,0.04); padding: 20px; margin: 24px 0;">
-┌────────────────────┬─────────────────────────────────────────┐
-│ OPTION             │ PROBLEM                                 │
-├────────────────────┼─────────────────────────────────────────┤
-│ Government         │ Captured by incumbents. FAA won't       │
-│ monopoly           │ deregulate aviation out of existence.   │
-├────────────────────┼─────────────────────────────────────────┤
-│ Patent-protected   │ Unenforceable if tech is simple.        │
-│ rollout            │ 20 years of artificial scarcity on      │
-│                    │ civilization-altering tech is obscene.  │
-├────────────────────┼─────────────────────────────────────────┤
-│ Open-source        │ Fastest wealth creation. Also fastest   │
-│ release            │ wealth destruction. Probably wars.      │
-├────────────────────┼─────────────────────────────────────────┤
-│ International      │ Requires trust that doesn't exist.      │
-│ coordination       │ First defector wins. No one signs.      │
-└────────────────────┴─────────────────────────────────────────┘
-</pre>
-
-            <p>
-                Every path leads to suppression (delayed benefits, pressure builds) or disruption (wealth destruction, lives lost). Pick your poison.
-            </p>
-
-            <h2>The Equilibrium</h2>
-
-            <p>
-                If antigravity exists and can be suppressed, the stable state is:
-            </p>
-
-<pre style="font-size: 11px; line-height: 1.4; background: rgba(0,0,0,0.04); padding: 20px; margin: 24px 0;">
-SUPPRESSION EQUILIBRIUM
-
-    ┌─────────────────────────────────────────────────────┐
-    │                                                     │
-    │   Major powers possess AG secretly                  │
-    │              │                                      │
-    │              ▼                                      │
-    │   Use for military (advantage too large)            │
-    │              │                                      │
-    │              ▼                                      │
-    │   Suppress civilian use (regime stability)          │
-    │              │                                      │
-    │              ▼                                      │
-    │   Leaks occur ──► Discredited ──► Suppressed        │
-    │              │                                      │
-    │              ▼                                      │
-    │   REPEAT until:                                     │
-    │     • Secret becomes unkeepable, OR                 │
-    │     • Major power defects for advantage             │
-    │                                                     │
-    └─────────────────────────────────────────────────────┘
-</pre>
-
-            <p>
-                "Age of Disclosure" fits this model. Disclosure isn't truth-seeking. It's someone calculating that breaking the equilibrium now beats continued suppression.
-            </p>
-
-            <p>
-                The jig is up. Or someone wants to force transition before a rival does. Or the suppression apparatus degraded past functionality.
-            </p>
-
-            <h2>Implications</h2>
-
-            <p>
-                If you believe AG is real:
-            </p>
-
-            <ul>
-                <li>Avoid long positions in gravity-dependent industries. Timing uncertain, direction clear.</li>
-                <li>Location-dependent real estate is fragile. "Near the airport" means nothing without airports.</li>
-                <li>Logistics/transport/aerospace careers face disruption. Pivotability matters.</li>
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Direct Job Loss: ~50M Transport Workers</strong>
+                        <span>Truck drivers, pilots, sailors, rail workers—entire professions vanish.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Indirect Cascade: Multiplied Impact</strong>
+                        <span>Logistics, warehousing, fuel stations, motels, truck stops, repair shops.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>New Sectors: Partial Offset</strong>
+                        <span>Antigravity techs, vertical architects, space operations, aerial traffic control.</span>
+                    </div>
+                </li>
             </ul>
 
-            <p>
-                If you don't believe AG is real: the framework still applies. Swap in strong AI, or any constraint-removing technology. Same political economy. Same transition problem.
+            <div class="job-counter" style="margin-top: 20px;">
+                <div class="counter-box">
+                    <div class="counter-label">Transport</div>
+                    <div class="counter-value negative">-12.4M</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Logistics</div>
+                    <div class="counter-value negative">-8.7M</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Services</div>
+                    <div class="counter-value negative">-6.2M</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Supply Chains -->
+        <section class="section" data-section-num="05" id="supply">
+            <div class="section-header">
+                <h2 class="section-title">Supply Chains</h2>
+                <div class="section-status">
+                    <span class="status-indicator high"></span>
+                    <span>Singularity</span>
+                </div>
+            </div>
+
+            <div class="disruption-meter">
+                <div class="meter-header">
+                    <span>Sector Disruption Level</span>
+                    <span id="supply-pct">91%</span>
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill" id="supply-meter" style="width: 91%"></div>
+                </div>
+                <div class="meter-labels">
+                    <span>Adaptation</span>
+                    <span>Restructuring</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
+
+            <p class="narrative" id="supply-narrative">
+                Just-in-time manufacturing reaches its logical conclusion: minutes from factory to consumer.
+                Why maintain inventory when replenishment is instant? Why build warehouses when the sky is the warehouse?
             </p>
 
-            <p>
-                Civilization-altering technologies will emerge. The question is whether institutions can handle constraint removal. Track record on smaller disruptions suggests: probably not.
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Inventory: Near Zero</strong>
+                        <span>Storage becomes obsolete. Goods move continuously from production to consumption.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Globalization: Complete</strong>
+                        <span>Distance friction eliminated. Manufacturing location becomes arbitrary.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Labor Arbitrage: The Only Factor</strong>
+                        <span>With transport costs at zero, wage differentials drive all location decisions.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Section 6: Military -->
+        <section class="section" data-section-num="06" id="military">
+            <div class="paper-clip"></div>
+            <div class="section-header">
+                <h2 class="section-title">Military & Defense</h2>
+                <div class="section-status">
+                    <span class="status-indicator high"></span>
+                    <span>Power Projection Transformed</span>
+                </div>
+            </div>
+
+            <div class="disruption-meter">
+                <div class="meter-header">
+                    <span>Sector Disruption Level</span>
+                    <span id="military-pct">89%</span>
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill" id="military-meter" style="width: 89%"></div>
+                </div>
+                <div class="meter-labels">
+                    <span>Adaptation</span>
+                    <span>Restructuring</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
+
+            <p class="narrative" id="military-narrative">
+                Aircraft carriers become the most expensive targets in history. Fortifications cease to exist.
+                Every nation with antigravity can project power anywhere, instantly. The calculus of defense
+                inverts entirely.
             </p>
 
-            <p>
-                That's the real economics of antigravity. Not "what does an AG-001 cost?" but "can human institutions survive the removal of fundamental constraints?"
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Naval Supremacy: Ended</strong>
+                        <span>Surface ships become sitting ducks. Submarines gain relative advantage.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Air Superiority: Redefined</strong>
+                        <span>3D movement without runways. Combat becomes truly three-dimensional.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Fortification: Impossible</strong>
+                        <span>Walls, bunkers, terrain—all irrelevant when attackers float overhead.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Space Militarization: Accelerated</strong>
+                        <span>Orbital platforms become trivial to construct. High ground redefined.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Section 7: Space Access -->
+        <section class="section" data-section-num="07" id="space">
+            <div class="section-header">
+                <h2 class="section-title">Space Access</h2>
+                <div class="section-status">
+                    <span class="status-indicator high"></span>
+                    <span>The Door Opens</span>
+                </div>
+            </div>
+
+            <div class="disruption-meter">
+                <div class="meter-header">
+                    <span>Sector Disruption Level</span>
+                    <span id="space-pct">96%</span>
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill" id="space-meter" style="width: 96%"></div>
+                </div>
+                <div class="meter-labels">
+                    <span>Adaptation</span>
+                    <span>Restructuring</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
+
+            <p class="narrative" id="space-narrative">
+                Launch costs drop from $2,720/kg to effectively zero. The rocket equation becomes a historical
+                footnote. Orbital infrastructure explodes. The Moon becomes a weekend destination. Mars colonization
+                shifts from decades to years.
             </p>
 
-            <p>
-                History says: eventually, yes. Gracefully, no.
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Launch Costs: Collapse</strong>
+                        <span>No rockets. No fuel. No expendable hardware. Just lift.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Orbital Infrastructure: Explosion</strong>
+                        <span>Stations, habitats, manufacturing platforms—mass construction begins.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Asteroid Mining: Viable</strong>
+                        <span>Transport cost was the only blocker. Rare earth abundance transforms.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Colonization: Accelerated</strong>
+                        <span>Moon bases, Mars settlements—the timeline compresses from decades to years.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Section 8: Urban Planning -->
+        <section class="section" data-section-num="08" id="urban">
+            <div class="section-header">
+                <h2 class="section-title">Urban Planning</h2>
+                <div class="section-status">
+                    <span class="status-indicator mid"></span>
+                    <span>Cities Transform</span>
+                </div>
+            </div>
+
+            <div class="disruption-meter">
+                <div class="meter-header">
+                    <span>Sector Disruption Level</span>
+                    <span id="urban-pct">73%</span>
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill" id="urban-meter" style="width: 73%"></div>
+                </div>
+                <div class="meter-labels">
+                    <span>Adaptation</span>
+                    <span>Restructuring</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
+
+            <p class="narrative" id="urban-narrative">
+                Paradoxically, the end of commuting reverses suburban sprawl. When you can live anywhere, density
+                becomes a choice rather than a necessity. Cities transform from transportation hubs into cultural
+                centers. Roads become parks.
             </p>
-        </article>
+
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Sprawl: Reverses</strong>
+                        <span>No commute means density becomes preference-driven, not necessity.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Floating Structures: Commonplace</strong>
+                        <span>Parks above cities. Residential platforms. 3D urban grids emerge.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Roads: Obsolete</strong>
+                        <span>Ground-level transportation infrastructure repurposed or demolished.</span>
+                    </div>
+                </li>
+                <li class="impact-item">
+                    <div class="impact-marker"></div>
+                    <div class="impact-text">
+                        <strong>Megastructures: Possible</strong>
+                        <span>Arcologies, orbital rings, floating cities—engineering limits redefined.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline-container">
+            <h3 class="timeline-header">Cascade Timeline</h3>
+            <div class="timeline-track">
+                <div class="timeline-line"></div>
+                <div class="timeline-marker" style="left: 5%" data-year="1">
+                    <div class="timeline-marker-label">Year 1<br><small>First Patent</small></div>
+                </div>
+                <div class="timeline-marker" style="left: 20%" data-year="5">
+                    <div class="timeline-marker-label">Year 5<br><small>Commercial</small></div>
+                </div>
+                <div class="timeline-marker" style="left: 40%" data-year="10">
+                    <div class="timeline-marker-label">Year 10<br><small>Mass Adoption</small></div>
+                </div>
+                <div class="timeline-marker" style="left: 60%" data-year="15">
+                    <div class="timeline-marker-label">Year 15<br><small>Transport Collapse</small></div>
+                </div>
+                <div class="timeline-marker" style="left: 80%" data-year="20">
+                    <div class="timeline-marker-label">Year 20<br><small>Full Transform</small></div>
+                </div>
+                <div class="timeline-marker" style="left: 95%" data-year="30">
+                    <div class="timeline-marker-label">Year 30<br><small>New Equilibrium</small></div>
+                </div>
+            </div>
+            <div class="timeline-scrubber">
+                <input type="range" id="timeline-scrubber" min="0" max="30" value="15">
+            </div>
+            <div class="timeline-year-display">Year <span id="timeline-year">15</span></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="document-footer">
+            <div class="footer-stamp">End of Document</div>
+            <p class="footer-text">
+                This document contains speculative economic analysis based on theoretical physics.<br>
+                All projections assume successful implementation of antigravity technology.<br>
+                Actual outcomes may vary based on <span class="redacted">classified variables</span>.
+            </p>
+        </footer>
     </div>
+
+    <script>
+        // Economic Model State
+        const state = {
+            adoptionRate: 20,
+            energyCost: 50,
+            payload: 60,
+            regulation: 50,
+            discoveryContext: 'corporation',
+            timelineYear: 15
+        };
+
+        // Sector base disruption values (0-100)
+        const SECTOR_BASES = {
+            transport: 94,
+            realestate: 87,
+            energy: 62,
+            labor: 78,
+            supply: 91,
+            military: 89,
+            space: 96,
+            urban: 73
+        };
+
+        // Calculate sector impacts based on parameters
+        function calculateSectorImpacts(params) {
+            const { adoptionRate, energyCost, payload, regulation, discoveryContext } = params;
+
+            // Modifiers based on parameters
+            const adoptionMod = (100 - adoptionRate) / 100; // Faster adoption = more disruption
+            const energyMod = (100 - energyCost) / 100; // Lower energy cost = more disruption
+            const payloadMod = payload / 100; // Higher payload = more disruption
+            const regulationMod = (100 - regulation) / 100; // Less regulation = more disruption
+
+            // Discovery context modifiers
+            const contextMods = {
+                government: { military: 1.2, space: 1.3, transport: 0.8 },
+                corporation: { transport: 1.1, supply: 1.2, realestate: 1.1 },
+                individual: { urban: 1.2, realestate: 1.3, transport: 1.0 },
+                accident: { military: 0.9, regulation: 1.3, transport: 1.1 }
+            };
+
+            const ctxMod = contextMods[discoveryContext] || {};
+
+            const impacts = {};
+            Object.keys(SECTOR_BASES).forEach(sector => {
+                let base = SECTOR_BASES[sector];
+                let mod = (adoptionMod + energyMod + payloadMod + regulationMod) / 4;
+                let ctxFactor = ctxMod[sector] || 1;
+
+                // Special cases
+                if (sector === 'energy') {
+                    // Energy disruption depends heavily on energy cost parameter
+                    mod = energyMod * 0.8 + (adoptionMod + payloadMod) * 0.1;
+                }
+                if (sector === 'space') {
+                    // Space is less affected by regulation
+                    mod = (adoptionMod + energyMod + payloadMod) / 3 * 1.1;
+                }
+
+                impacts[sector] = Math.min(100, Math.max(0, Math.round(base * mod * ctxFactor)));
+            });
+
+            return impacts;
+        }
+
+        // Calculate job displacement
+        function calculateJobDisplacement(impacts) {
+            const baseJobs = {
+                transport: 15.2,  // millions
+                logistics: 12.4,
+                services: 8.7,
+                manufacturing: 6.2,
+                realestate: 4.8
+            };
+
+            const avgDisruption = Object.values(impacts).reduce((a, b) => a + b, 0) / Object.keys(impacts).length / 100;
+
+            const lost = {
+                transport: baseJobs.transport * (impacts.transport / 100),
+                logistics: baseJobs.logistics * (impacts.supply / 100),
+                services: baseJobs.services * avgDisruption,
+                manufacturing: baseJobs.manufacturing * avgDisruption * 0.5,
+                realestate: baseJobs.realestate * (impacts.realestate / 100) * 0.6
+            };
+
+            const totalLost = Object.values(lost).reduce((a, b) => a + b, 0);
+
+            // New jobs created (rough estimate: 40% of lost jobs eventually replaced)
+            const gained = {
+                agTech: totalLost * 0.15,
+                space: totalLost * 0.08,
+                construction: totalLost * 0.12,
+                services: totalLost * 0.05
+            };
+
+            const totalGained = Object.values(gained).reduce((a, b) => a + b, 0);
+
+            return {
+                lost: totalLost,
+                gained: totalGained,
+                net: totalGained - totalLost
+            };
+        }
+
+        // Generate narrative text based on parameters
+        function generateNarrative(sector, params, impacts) {
+            const narratives = {
+                transport: {
+                    high: `At current parameters, the first commercial antigravity cargo platform enters service within five years. By year fifteen, traditional shipping routes become archaeological curiosities. The Port of Shanghai transforms into the world's largest floating logistics hub, processing cargo that never touches water.`,
+                    mid: `With moderate adoption rates and controlled regulation, traditional transportation enters a prolonged decline rather than sudden collapse. Hybrid systems emerge—antigravity for premium cargo, conventional methods for bulk commodities. The transition spans decades rather than years.`,
+                    low: `Heavy regulation and energy costs slow antigravity adoption significantly. Traditional transportation infrastructure receives a reprieve, but investment shifts toward preparation rather than expansion. Everyone knows the change is coming—the question is when.`
+                },
+                realestate: {
+                    high: `The fundamental premise of real estate—location, location, location—dissolves overnight. Manhattan square footage trades at parity with Kansas farmland. The only remaining premium: views and neighbors.`,
+                    mid: `Location premiums compress but don't disappear entirely. Cultural centers, established communities, and natural amenities retain value. The market bifurcates: commodity space versus experiential living.`,
+                    low: `Real estate markets adjust gradually as antigravity remains expensive and regulated. Premium locations retain value longer, but the writing is on the wall. Smart investors begin repositioning.`
+                },
+                energy: {
+                    high: `With low energy requirements, antigravity devastates transportation fuel markets. Gasoline, diesel, jet fuel demand craters. Refineries close. The oil industry pivots desperately toward petrochemicals.`,
+                    mid: `At current parameter settings, antigravity requires moderate energy input—enough to disrupt transportation fuels while preserving the broader energy infrastructure.`,
+                    low: `High energy requirements mean antigravity increases overall electricity demand. Nuclear and renewables become critical. The grid expansion required rivals the 20th century electrification effort.`
+                },
+                labor: {
+                    high: `Fifty million transport workers globally face obsolescence. The cascade extends through logistics, warehousing, fuel stations, roadside services. New jobs emerge in antigravity maintenance, vertical construction, and space operations—but the transition period is brutal.`,
+                    mid: `Labor markets face significant disruption, but the slower adoption timeline allows for adaptation. Retraining programs proliferate. Some workers transition; many don't. Social safety nets strain but hold.`,
+                    low: `With controlled rollout, labor displacement spreads over decades. Generational turnover absorbs much of the impact. Still, specific regions and demographics face concentrated pain.`
+                },
+                supply: {
+                    high: `Just-in-time manufacturing reaches its logical conclusion: minutes from factory to consumer. Why maintain inventory when replenishment is instant? Why build warehouses when the sky is the warehouse?`,
+                    mid: `Supply chains optimize around antigravity where available, but geographic concentration shifts rather than disappears. Labor costs become the dominant factor in location decisions.`,
+                    low: `Supply chain transformation proceeds gradually. Early adopters gain competitive advantage; laggards face increasing pressure. The transition rewards agility over scale.`
+                },
+                military: {
+                    high: `Aircraft carriers become the most expensive targets in history. Fortifications cease to exist. Every nation with antigravity can project power anywhere, instantly. The calculus of defense inverts entirely.`,
+                    mid: `Military doctrine evolves rapidly, but legacy systems retain some relevance during the transition. Asymmetric advantages emerge for early adopters. Arms races accelerate.`,
+                    low: `Controlled proliferation allows military establishments time to adapt. New doctrines emerge incrementally. The transformation is revolutionary but not overnight.`
+                },
+                space: {
+                    high: `Launch costs drop from $2,720/kg to effectively zero. The rocket equation becomes a historical footnote. Orbital infrastructure explodes. The Moon becomes a weekend destination. Mars colonization shifts from decades to years.`,
+                    mid: `Space access expands dramatically, but regulatory frameworks struggle to keep pace. Orbital territory disputes emerge. The space economy grows exponentially but chaotically.`,
+                    low: `Space programs accelerate, but government control keeps commercial development measured. Strategic orbital positions are secured. The space race restarts under new rules.`
+                },
+                urban: {
+                    high: `Paradoxically, the end of commuting reverses suburban sprawl. When you can live anywhere, density becomes a choice rather than a necessity. Cities transform from transportation hubs into cultural centers. Roads become parks.`,
+                    mid: `Urban transformation proceeds unevenly. Some cities embrace vertical expansion and floating infrastructure; others cling to traditional patterns. A new urban hierarchy emerges based on adaptability.`,
+                    low: `City planning adapts gradually. Pilot projects demonstrate floating structures and 3D urban grids. Full transformation awaits broader antigravity adoption.`
+                }
+            };
+
+            const impact = impacts[sector];
+            const intensity = impact >= 80 ? 'high' : impact >= 50 ? 'mid' : 'low';
+
+            return narratives[sector]?.[intensity] || narratives[sector]?.['mid'];
+        }
+
+        // Update UI with new calculations
+        function updateUI() {
+            const impacts = calculateSectorImpacts(state);
+            const jobs = calculateJobDisplacement(impacts);
+
+            // Update meters
+            Object.keys(impacts).forEach(sector => {
+                const meter = document.getElementById(`${sector}-meter`);
+                const pct = document.getElementById(`${sector}-pct`);
+                if (meter) {
+                    meter.style.width = `${impacts[sector]}%`;
+                }
+                if (pct) {
+                    pct.textContent = `${impacts[sector]}%`;
+                }
+
+                // Update status indicator
+                const section = document.getElementById(sector);
+                if (section) {
+                    const indicator = section.querySelector('.status-indicator');
+                    if (indicator) {
+                        indicator.classList.remove('high', 'mid');
+                        if (impacts[sector] >= 80) indicator.classList.add('high');
+                        else if (impacts[sector] >= 50) indicator.classList.add('mid');
+                    }
+                }
+
+                // Update narrative
+                const narrative = document.getElementById(`${sector}-narrative`);
+                if (narrative) {
+                    narrative.innerHTML = generateNarrative(sector, state, impacts);
+                }
+            });
+
+            // Update job counters with animation
+            animateCounter('jobs-lost', -jobs.lost, 'M');
+            animateCounter('jobs-gained', jobs.gained, 'M');
+            animateCounter('jobs-net', jobs.net, 'M');
+
+            // Update Sankey diagram
+            updateSankeyDiagram(impacts);
+        }
+
+        // Animate counter values
+        function animateCounter(id, targetValue, suffix) {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            const current = parseFloat(el.textContent.replace(/[^\d.-]/g, '')) || 0;
+            const diff = targetValue - current;
+            const steps = 30;
+            const stepValue = diff / steps;
+            let step = 0;
+
+            const interval = setInterval(() => {
+                step++;
+                const value = current + (stepValue * step);
+                const prefix = value >= 0 ? '+' : '';
+                el.textContent = `${prefix}${value.toFixed(1)}${suffix}`;
+
+                // Update class based on value
+                el.classList.remove('positive', 'negative', 'neutral');
+                if (value > 0.5) el.classList.add('positive');
+                else if (value < -0.5) el.classList.add('negative');
+                else el.classList.add('neutral');
+
+                if (step >= steps) clearInterval(interval);
+            }, 20);
+        }
+
+        // Sankey diagram using SVG
+        function updateSankeyDiagram(impacts) {
+            const svg = document.getElementById('sankey-diagram');
+            if (!svg) return;
+
+            const width = 800;
+            const height = 400;
+
+            // Pre-antigravity sectors (left side)
+            const preSectors = [
+                { name: 'Transport', value: 14.1, color: 'var(--flow-transport)' },
+                { name: 'Real Estate', value: 9.2, color: 'var(--flow-realestate)' },
+                { name: 'Energy', value: 8.4, color: 'var(--flow-energy)' },
+                { name: 'Labor', value: 12.6, color: 'var(--flow-labor)' },
+                { name: 'Manufacturing', value: 7.8, color: 'var(--flow-supply)' }
+            ];
+
+            // Post-antigravity sectors (right side)
+            const postSectors = [
+                { name: 'AG Transport', color: 'var(--flow-transport)' },
+                { name: 'Vertical RE', color: 'var(--flow-realestate)' },
+                { name: 'Space Industry', color: 'var(--flow-space)' },
+                { name: 'AG Services', color: 'var(--flow-labor)' },
+                { name: 'Displaced', color: '#666' }
+            ];
+
+            // Calculate flows based on impacts
+            const avgDisruption = (impacts.transport + impacts.realestate + impacts.labor + impacts.supply) / 400;
+
+            const flows = [
+                // From Transport
+                { from: 0, to: 0, value: preSectors[0].value * (1 - impacts.transport/100) * 1.5 },
+                { from: 0, to: 4, value: preSectors[0].value * (impacts.transport/100) * 0.6 },
+                { from: 0, to: 2, value: preSectors[0].value * (impacts.transport/100) * 0.4 },
+                // From Real Estate
+                { from: 1, to: 1, value: preSectors[1].value * (1 - impacts.realestate/100) * 1.2 },
+                { from: 1, to: 4, value: preSectors[1].value * (impacts.realestate/100) * 0.5 },
+                { from: 1, to: 2, value: preSectors[1].value * (impacts.realestate/100) * 0.3 },
+                // From Energy
+                { from: 2, to: 2, value: preSectors[2].value * (1 - impacts.energy/150) },
+                { from: 2, to: 3, value: preSectors[2].value * (impacts.energy/200) },
+                // From Labor
+                { from: 3, to: 3, value: preSectors[3].value * (1 - impacts.labor/100) * 0.8 },
+                { from: 3, to: 4, value: preSectors[3].value * (impacts.labor/100) * 0.7 },
+                { from: 3, to: 2, value: preSectors[3].value * 0.15 },
+                // From Manufacturing
+                { from: 4, to: 0, value: preSectors[4].value * (impacts.supply/200) },
+                { from: 4, to: 2, value: preSectors[4].value * 0.3 },
+                { from: 4, to: 4, value: preSectors[4].value * avgDisruption * 0.5 }
+            ];
+
+            // Build SVG content
+            let svgContent = '';
+
+            // Calculate positions
+            const leftX = 50;
+            const rightX = 750;
+            const sectorHeight = height / (preSectors.length + 1);
+
+            // Draw sector labels (left)
+            preSectors.forEach((sector, i) => {
+                const y = (i + 0.5) * sectorHeight + 20;
+                svgContent += `
+                    <text x="${leftX}" y="${y}" fill="var(--ink)" font-size="11" text-anchor="end" dominant-baseline="middle">
+                        ${sector.name}
+                    </text>
+                    <text x="${leftX + 5}" y="${y + 12}" fill="var(--ink-faded)" font-size="9" dominant-baseline="middle">
+                        $${sector.value}T
+                    </text>
+                `;
+            });
+
+            // Draw sector labels (right)
+            postSectors.forEach((sector, i) => {
+                const y = (i + 0.5) * sectorHeight + 20;
+                svgContent += `
+                    <text x="${rightX}" y="${y}" fill="var(--ink)" font-size="11" text-anchor="start" dominant-baseline="middle">
+                        ${sector.name}
+                    </text>
+                `;
+            });
+
+            // Draw flows as curved paths
+            const maxFlow = Math.max(...flows.map(f => f.value));
+
+            flows.forEach(flow => {
+                if (flow.value < 0.1) return; // Skip tiny flows
+
+                const fromY = (flow.from + 0.5) * sectorHeight + 20;
+                const toY = (flow.to + 0.5) * sectorHeight + 20;
+                const strokeWidth = Math.max(2, (flow.value / maxFlow) * 40);
+                const color = preSectors[flow.from].color;
+
+                const midX = (leftX + rightX) / 2;
+
+                svgContent += `
+                    <path
+                        d="M ${leftX + 70} ${fromY}
+                           C ${midX} ${fromY}, ${midX} ${toY}, ${rightX - 70} ${toY}"
+                        stroke="${color}"
+                        stroke-width="${strokeWidth}"
+                        fill="none"
+                        opacity="0.6"
+                    />
+                `;
+            });
+
+            svg.innerHTML = svgContent;
+        }
+
+        // Parameter value labels
+        const VALUE_LABELS = {
+            energy: ['Free', 'Minimal', 'Low', 'Moderate', 'High', 'Very High', 'Prohibitive'],
+            payload: ['Personal', 'Vehicle', 'Truck', 'Industrial', 'Ship', 'Massive', 'Unlimited'],
+            regulation: ['Open', 'Light', 'Moderate', 'Controlled', 'Heavy', 'Restricted', 'Locked']
+        };
+
+        function getValueLabel(type, value) {
+            const labels = VALUE_LABELS[type];
+            if (!labels) return value;
+            const index = Math.min(Math.floor(value / 100 * labels.length), labels.length - 1);
+            return labels[index];
+        }
+
+        // Event Listeners
+        document.getElementById('adoption-rate').addEventListener('input', (e) => {
+            state.adoptionRate = parseInt(e.target.value);
+            document.getElementById('adoption-value').textContent = `${state.adoptionRate} years`;
+        });
+
+        document.getElementById('energy-cost').addEventListener('input', (e) => {
+            state.energyCost = parseInt(e.target.value);
+            document.getElementById('energy-value').textContent = getValueLabel('energy', state.energyCost);
+        });
+
+        document.getElementById('payload').addEventListener('input', (e) => {
+            state.payload = parseInt(e.target.value);
+            document.getElementById('payload-value').textContent = getValueLabel('payload', state.payload);
+        });
+
+        document.getElementById('regulation').addEventListener('input', (e) => {
+            state.regulation = parseInt(e.target.value);
+            document.getElementById('regulation-value').textContent = getValueLabel('regulation', state.regulation);
+        });
+
+        document.getElementById('discovery-context').addEventListener('change', (e) => {
+            state.discoveryContext = e.target.value;
+        });
+
+        document.getElementById('timeline-scrubber').addEventListener('input', (e) => {
+            state.timelineYear = parseInt(e.target.value);
+            document.getElementById('timeline-year').textContent = state.timelineYear;
+        });
+
+        document.getElementById('recalculate').addEventListener('click', () => {
+            updateUI();
+        });
+
+        // Navigation
+        document.querySelectorAll('.nav-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const section = dot.dataset.section;
+                const el = document.getElementById(section);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Update active nav dot on scroll
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const sections = document.querySelectorAll('.section, .control-panel, .document-header');
+                    let activeSection = 'header';
+
+                    sections.forEach(section => {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top < window.innerHeight / 2) {
+                            activeSection = section.id;
+                        }
+                    });
+
+                    document.querySelectorAll('.nav-dot').forEach(dot => {
+                        dot.classList.toggle('active', dot.dataset.section === activeSection);
+                    });
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Redacted text reveal
+        document.querySelectorAll('.redacted').forEach(el => {
+            el.addEventListener('click', () => {
+                el.classList.toggle('revealed');
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUI();
+        });
+
+        // Also run immediately in case DOMContentLoaded already fired
+        if (document.readyState !== 'loading') {
+            updateUI();
+        }
+    </script>
 </body>
 </html>
