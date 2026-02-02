@@ -3,17 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Economics of Antigravity - Field Report</title>
+    <title>The Economics of Antigravity - Patrick Young</title>
+
+    <!-- SEO -->
+    <meta name="description" content="An interactive analysis of how antigravity technology would reshape civilization, destroy industries, and face institutional resistance.">
+    <meta name="author" content="Patrick Young">
+    <link rel="canonical" href="https://patrickyoung.ai/economics-of-antigravity.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="The Economics of Antigravity - Patrick Young">
+    <meta property="og:description" content="An interactive analysis of how antigravity technology would reshape civilization and face institutional resistance.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://patrickyoung.ai/economics-of-antigravity.html">
+    <meta property="og:image" content="https://patrickyoung.ai/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Economics of Antigravity - Patrick Young">
+    <meta name="twitter:description" content="An interactive analysis of how antigravity technology would reshape civilization and face institutional resistance.">
+    <meta name="twitter:image" content="https://patrickyoung.ai/og-image.png">
+
+    <!-- Font preloading -->
+    <link rel="preload" href="/fonts/BerkeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/BerkeleyMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
     <style>
         @font-face {
             font-family: 'Berkeley Mono';
-            src: url('fonts/BerkeleyMono-Regular.woff2') format('woff2');
+            src: url('/fonts/BerkeleyMono-Regular.woff2') format('woff2');
             font-weight: normal;
+            font-display: swap;
         }
         @font-face {
             font-family: 'Berkeley Mono';
-            src: url('fonts/BerkeleyMono-Bold.woff2') format('woff2');
+            src: url('/fonts/BerkeleyMono-Bold.woff2') format('woff2');
             font-weight: bold;
+            font-display: swap;
         }
 
         :root {
@@ -21,8 +46,8 @@
             --parchment-dark: #d4c4a0;
             --parchment-edge: #c4a470;
             --ink: #2c1810;
-            --ink-faded: #5c4833;
-            --ink-light: #8b7355;
+            --ink-faded: #4a3828;
+            --ink-light: #6b5340;
             --stamp-red: #8b0000;
             --classified-red: #cc0000;
             --pencil: #4a4a4a;
@@ -252,8 +277,23 @@
             color: var(--ink-faded);
         }
 
-        .nav-dot:hover::after {
+        .nav-dot:hover::after,
+        .nav-dot:focus::after {
             opacity: 1;
+        }
+
+        .nav-dot:focus {
+            outline: 2px solid var(--ink);
+            outline-offset: 2px;
+        }
+
+        .nav-dot:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .nav-dot:focus-visible {
+            outline: 2px solid var(--ink);
+            outline-offset: 2px;
         }
 
         /* Control Panel */
@@ -576,6 +616,34 @@
             color: var(--ink-faded);
         }
 
+        /* Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--ink);
+            color: var(--parchment);
+            padding: 8px 16px;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         /* Redacted Text */
         .redacted {
             background: var(--ink);
@@ -586,9 +654,12 @@
             user-select: none;
         }
 
-        .redacted:hover {
+        .redacted:hover,
+        .redacted:focus {
             background: var(--classified-red);
             color: var(--parchment);
+            outline: 2px solid var(--classified-red);
+            outline-offset: 2px;
         }
 
         /* Sankey Diagram Container */
@@ -855,17 +926,19 @@
 <body>
     <div class="fold-line"></div>
 
-    <nav class="nav-sidebar">
-        <div class="nav-dot active" data-label="Overview" data-section="header"></div>
-        <div class="nav-dot" data-label="Parameters" data-section="controls"></div>
-        <div class="nav-dot" data-label="Transportation" data-section="transport"></div>
-        <div class="nav-dot" data-label="Real Estate" data-section="realestate"></div>
-        <div class="nav-dot" data-label="Energy" data-section="energy"></div>
-        <div class="nav-dot" data-label="Labor" data-section="labor"></div>
-        <div class="nav-dot" data-label="Supply Chain" data-section="supply"></div>
-        <div class="nav-dot" data-label="Military" data-section="military"></div>
-        <div class="nav-dot" data-label="Space" data-section="space"></div>
-        <div class="nav-dot" data-label="Urban" data-section="urban"></div>
+    <a href="#controls" class="skip-link">Skip to main content</a>
+
+    <nav class="nav-sidebar" aria-label="Document sections">
+        <button class="nav-dot active" data-label="Overview" data-section="header" aria-label="Navigate to Overview" aria-current="true"></button>
+        <button class="nav-dot" data-label="Parameters" data-section="controls" aria-label="Navigate to Parameters"></button>
+        <button class="nav-dot" data-label="Transportation" data-section="transport" aria-label="Navigate to Transportation"></button>
+        <button class="nav-dot" data-label="Real Estate" data-section="realestate" aria-label="Navigate to Real Estate"></button>
+        <button class="nav-dot" data-label="Energy" data-section="energy" aria-label="Navigate to Energy"></button>
+        <button class="nav-dot" data-label="Labor" data-section="labor" aria-label="Navigate to Labor"></button>
+        <button class="nav-dot" data-label="Supply Chain" data-section="supply" aria-label="Navigate to Supply Chain"></button>
+        <button class="nav-dot" data-label="Military" data-section="military" aria-label="Navigate to Military"></button>
+        <button class="nav-dot" data-label="Space" data-section="space" aria-label="Navigate to Space"></button>
+        <button class="nav-dot" data-label="Urban" data-section="urban" aria-label="Navigate to Urban"></button>
     </nav>
 
     <div class="document-container">
@@ -887,37 +960,37 @@
             <div class="control-header">
                 <h2>Scenario Parameters</h2>
             </div>
-            <div class="control-grid">
+            <div class="control-grid" role="group" aria-label="Scenario parameters">
                 <div class="control-row">
-                    <label class="control-label">Adoption Timeline</label>
+                    <label class="control-label" for="adoption-rate">Adoption Timeline</label>
                     <div class="control-slider">
-                        <input type="range" id="adoption-rate" min="1" max="100" value="20">
+                        <input type="range" id="adoption-rate" min="1" max="100" value="20" aria-describedby="adoption-value">
                     </div>
-                    <span class="control-value" id="adoption-value">20 years</span>
+                    <span class="control-value" id="adoption-value" aria-live="polite">20 years</span>
                 </div>
                 <div class="control-row">
-                    <label class="control-label">Energy Requirement</label>
+                    <label class="control-label" for="energy-cost">Energy Requirement</label>
                     <div class="control-slider">
-                        <input type="range" id="energy-cost" min="0" max="100" value="50">
+                        <input type="range" id="energy-cost" min="0" max="100" value="50" aria-describedby="energy-value">
                     </div>
-                    <span class="control-value" id="energy-value">Moderate</span>
+                    <span class="control-value" id="energy-value" aria-live="polite">Moderate</span>
                 </div>
                 <div class="control-row">
-                    <label class="control-label">Payload Capacity</label>
+                    <label class="control-label" for="payload">Payload Capacity</label>
                     <div class="control-slider">
-                        <input type="range" id="payload" min="0" max="100" value="60">
+                        <input type="range" id="payload" min="0" max="100" value="60" aria-describedby="payload-value">
                     </div>
-                    <span class="control-value" id="payload-value">Industrial</span>
+                    <span class="control-value" id="payload-value" aria-live="polite">Industrial</span>
                 </div>
                 <div class="control-row">
-                    <label class="control-label">Regulatory Response</label>
+                    <label class="control-label" for="regulation">Regulatory Response</label>
                     <div class="control-slider">
-                        <input type="range" id="regulation" min="0" max="100" value="50">
+                        <input type="range" id="regulation" min="0" max="100" value="50" aria-describedby="regulation-value">
                     </div>
-                    <span class="control-value" id="regulation-value">Controlled</span>
+                    <span class="control-value" id="regulation-value" aria-live="polite">Controlled</span>
                 </div>
                 <div class="control-row">
-                    <label class="control-label">Discovery Context</label>
+                    <label class="control-label" for="discovery-context">Discovery Context</label>
                     <div class="control-select">
                         <select id="discovery-context">
                             <option value="government">Government Lab</option>
@@ -933,12 +1006,13 @@
         </section>
 
         <!-- Economic Flow Sankey -->
-        <section class="sankey-container">
+        <section class="sankey-container" aria-labelledby="sankey-title">
+            <h3 id="sankey-title" class="visually-hidden">Economic Flow Analysis</h3>
             <div class="sankey-header">
                 <span>Pre-Antigravity</span>
                 <span>Post-Antigravity</span>
             </div>
-            <svg id="sankey-diagram" viewBox="0 0 800 400"></svg>
+            <svg id="sankey-diagram" viewBox="0 0 800 400" role="img" aria-label="Sankey diagram showing economic flow changes from pre-antigravity to post-antigravity sectors"></svg>
         </section>
 
         <!-- Job Counter Summary -->
@@ -965,7 +1039,7 @@
             <div class="section-header">
                 <h2 class="section-title">Transportation</h2>
                 <div class="section-status">
-                    <span class="status-indicator high"></span>
+                    <span class="status-indicator high" aria-hidden="true"></span>
                     <span>Catastrophic Disruption</span>
                 </div>
             </div>
@@ -1029,7 +1103,7 @@
             <div class="section-header">
                 <h2 class="section-title">Real Estate</h2>
                 <div class="section-status">
-                    <span class="status-indicator high"></span>
+                    <span class="status-indicator high" aria-hidden="true"></span>
                     <span>Fundamental Restructuring</span>
                 </div>
             </div>
@@ -1091,7 +1165,7 @@
             <div class="section-header">
                 <h2 class="section-title">Energy Sector</h2>
                 <div class="section-status">
-                    <span class="status-indicator mid"></span>
+                    <span class="status-indicator mid" aria-hidden="true"></span>
                     <span>Depends on Physics</span>
                 </div>
             </div>
@@ -1147,7 +1221,7 @@
             <div class="section-header">
                 <h2 class="section-title">Labor Markets</h2>
                 <div class="section-status">
-                    <span class="status-indicator high"></span>
+                    <span class="status-indicator high" aria-hidden="true"></span>
                     <span>Mass Displacement</span>
                 </div>
             </div>
@@ -1218,7 +1292,7 @@
             <div class="section-header">
                 <h2 class="section-title">Supply Chains</h2>
                 <div class="section-status">
-                    <span class="status-indicator high"></span>
+                    <span class="status-indicator high" aria-hidden="true"></span>
                     <span>Singularity</span>
                 </div>
             </div>
@@ -1274,7 +1348,7 @@
             <div class="section-header">
                 <h2 class="section-title">Military & Defense</h2>
                 <div class="section-status">
-                    <span class="status-indicator high"></span>
+                    <span class="status-indicator high" aria-hidden="true"></span>
                     <span>Power Projection Transformed</span>
                 </div>
             </div>
@@ -1337,7 +1411,7 @@
             <div class="section-header">
                 <h2 class="section-title">Space Access</h2>
                 <div class="section-status">
-                    <span class="status-indicator high"></span>
+                    <span class="status-indicator high" aria-hidden="true"></span>
                     <span>The Door Opens</span>
                 </div>
             </div>
@@ -1400,7 +1474,7 @@
             <div class="section-header">
                 <h2 class="section-title">Urban Planning</h2>
                 <div class="section-status">
-                    <span class="status-indicator mid"></span>
+                    <span class="status-indicator mid" aria-hidden="true"></span>
                     <span>Cities Transform</span>
                 </div>
             </div>
@@ -1459,33 +1533,34 @@
         </section>
 
         <!-- Timeline Section -->
-        <section class="timeline-container">
-            <h3 class="timeline-header">Cascade Timeline</h3>
-            <div class="timeline-track">
+        <section class="timeline-container" aria-labelledby="timeline-title">
+            <h3 class="timeline-header" id="timeline-title">Cascade Timeline</h3>
+            <div class="timeline-track" role="img" aria-label="Timeline showing key milestones from Year 1 to Year 30">
                 <div class="timeline-line"></div>
-                <div class="timeline-marker" style="left: 5%" data-year="1">
+                <div class="timeline-marker" style="left: 5%" data-year="1" aria-hidden="true">
                     <div class="timeline-marker-label">Year 1<br><small>First Patent</small></div>
                 </div>
-                <div class="timeline-marker" style="left: 20%" data-year="5">
+                <div class="timeline-marker" style="left: 20%" data-year="5" aria-hidden="true">
                     <div class="timeline-marker-label">Year 5<br><small>Commercial</small></div>
                 </div>
-                <div class="timeline-marker" style="left: 40%" data-year="10">
+                <div class="timeline-marker" style="left: 40%" data-year="10" aria-hidden="true">
                     <div class="timeline-marker-label">Year 10<br><small>Mass Adoption</small></div>
                 </div>
-                <div class="timeline-marker" style="left: 60%" data-year="15">
+                <div class="timeline-marker" style="left: 60%" data-year="15" aria-hidden="true">
                     <div class="timeline-marker-label">Year 15<br><small>Transport Collapse</small></div>
                 </div>
-                <div class="timeline-marker" style="left: 80%" data-year="20">
+                <div class="timeline-marker" style="left: 80%" data-year="20" aria-hidden="true">
                     <div class="timeline-marker-label">Year 20<br><small>Full Transform</small></div>
                 </div>
-                <div class="timeline-marker" style="left: 95%" data-year="30">
+                <div class="timeline-marker" style="left: 95%" data-year="30" aria-hidden="true">
                     <div class="timeline-marker-label">Year 30<br><small>New Equilibrium</small></div>
                 </div>
             </div>
             <div class="timeline-scrubber">
-                <input type="range" id="timeline-scrubber" min="0" max="30" value="15">
+                <label for="timeline-scrubber" class="visually-hidden">Select timeline year</label>
+                <input type="range" id="timeline-scrubber" min="0" max="30" value="15" aria-describedby="timeline-year-display">
             </div>
-            <div class="timeline-year-display">Year <span id="timeline-year">15</span></div>
+            <div class="timeline-year-display" id="timeline-year-display" aria-live="polite">Year <span id="timeline-year">15</span></div>
         </section>
 
         <!-- Footer -->
@@ -1909,7 +1984,9 @@
                     });
 
                     document.querySelectorAll('.nav-dot').forEach(dot => {
-                        dot.classList.toggle('active', dot.dataset.section === activeSection);
+                        const isActive = dot.dataset.section === activeSection;
+                        dot.classList.toggle('active', isActive);
+                        dot.setAttribute('aria-current', isActive ? 'true' : 'false');
                     });
 
                     ticking = false;
@@ -1918,10 +1995,24 @@
             }
         });
 
-        // Redacted text reveal
+        // Redacted text reveal - make keyboard accessible
         document.querySelectorAll('.redacted').forEach(el => {
-            el.addEventListener('click', () => {
+            el.setAttribute('tabindex', '0');
+            el.setAttribute('role', 'button');
+            el.setAttribute('aria-label', 'Reveal redacted text');
+
+            const toggle = () => {
                 el.classList.toggle('revealed');
+                const isRevealed = el.classList.contains('revealed');
+                el.setAttribute('aria-pressed', isRevealed ? 'true' : 'false');
+            };
+
+            el.addEventListener('click', toggle);
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle();
+                }
             });
         });
 
