@@ -12,7 +12,9 @@
       "WebFetch(domain:www.asciiart.eu)",
       "WebFetch(domain:heartcopypaste.com)",
       "WebFetch(domain:www.asciiartcopy.com)",
-      "WebFetch(domain:ai-text-humanizer.com)"
+      "WebFetch(domain:ai-text-humanizer.com)",
+      "WebFetch(domain:www.manybooks.net)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }
