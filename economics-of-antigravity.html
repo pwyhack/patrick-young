@@ -334,23 +334,21 @@
         /* Main Layout with Sidebar */
         .main-layout {
             display: flex;
-            gap: 0;
+            gap: 20px;
             align-items: flex-start;
-            margin-top: 20px;
+            position: relative;
         }
 
         /* Timeline Sidebar */
         .horizon-panel {
             position: sticky;
             top: 20px;
-            width: 72px;
+            width: 70px;
             flex-shrink: 0;
-            padding: 12px 8px;
+            padding: 10px 8px;
             background: var(--parchment);
             border: 2px solid var(--ink-faded);
             border-radius: 4px;
-            margin-right: 20px;
-            z-index: 10;
         }
 
         .horizon-header {
@@ -1574,12 +1572,8 @@
         <div class="main-layout">
             <!-- Timeline Sidebar -->
             <aside class="horizon-panel" aria-labelledby="horizon-title">
-                <div class="horizon-header">
-                    <div class="horizon-title" id="horizon-title">Timeline</div>
-                    <div class="horizon-readout" aria-live="polite"><span id="timeline-year">1</span> <span id="timeline-year-unit">yr</span></div>
-                </div>
-                <div class="horizon-scrubber" role="radiogroup" aria-label="Select projection horizon">
-                    <button class="horizon-marker active" type="button" role="radio" aria-checked="true" data-year="1" tabindex="0">
+                <div class="horizon-scrubber" role="radiogroup" aria-label="Select projection year">
+                    <button class="horizon-marker" type="button" role="radio" aria-checked="false" data-year="1" tabindex="-1">
                         <span class="horizon-marker-year">1</span>
                         <span class="horizon-marker-label">yr</span>
                     </button>
@@ -3735,7 +3729,7 @@
             payload: 60,
             regulation: 50,
             discoveryContext: 'corporation',
-            timelineYear: 1
+            timelineYear: 100
         };
 
         // Scenario parameters are "committed" when projections are recalculated.
@@ -5924,12 +5918,26 @@
             setActiveTab(activeTab, { focus: false });
         }
 
+        function scrollToYear(year) {
+            const activePanel = document.querySelector('.tab-panel:not([hidden])');
+            if (!activePanel) return;
+            const section = activePanel.querySelector(`.section[data-year="${year}"]`);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
         function initHorizonScrubber() {
             const buttons = Array.from(document.querySelectorAll('.horizon-marker'));
             if (!buttons.length) return;
 
             buttons.forEach((btn) => {
-                btn.addEventListener('click', () => setTimelineYear(btn.dataset.year, { animate: false }));
+                btn.addEventListener('click', () => {
+                    const year = btn.dataset.year;
+                    state.timelineYear = parseInt(year, 10);
+                    syncTimelineUI();
+                    scrollToYear(year);
+                });
                 btn.addEventListener('keydown', (e) => {
                     const idx = buttons.indexOf(btn);
                     if (idx === -1) return;
@@ -6051,6 +6059,35 @@
             });
         });
 
+        // Scroll-based year tracking
+        function initScrollTracking() {
+            const sections = document.querySelectorAll('.section[data-year]');
+            if (!sections.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                let maxRatio = 0;
+                let visibleYear = null;
+
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                        maxRatio = entry.intersectionRatio;
+                        visibleYear = parseInt(entry.target.dataset.year, 10);
+                    }
+                });
+
+                if (visibleYear && visibleYear !== state.timelineYear) {
+                    state.timelineYear = visibleYear;
+                    syncTimelineUI();
+                }
+            }, {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: [0, 0.25, 0.5, 0.75, 1]
+            });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
         // Initialize
         let _initialized = false;
         function init() {
@@ -6059,6 +6096,8 @@
 
             initTabs();
             initHorizonScrubber();
+            initScrollTracking();
+            syncTimelineUI();
             updateUI();
             renderSparklines();
             filterSectionsByYear(state.timelineYear);
