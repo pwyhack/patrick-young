@@ -1,7 +1,13 @@
 {
   "name": "patrick-young",
-  "compatibility_date": "2026-02-02",
+  "compatibility_date": "2026-07-22",
   "assets": {
     "directory": "./"
-  }
+  },
+  "routes": [
+    { "pattern": "patrickyoung.ai/*", "zone_name": "patrickyoung.ai" },
+    { "pattern": "www.patrickyoung.ai/*", "zone_name": "patrickyoung.ai" },
+    { "pattern": "pwy.ai/*", "zone_name": "pwy.ai" },
+    { "pattern": "www.pwy.ai/*", "zone_name": "pwy.ai" }
+  ]
 }

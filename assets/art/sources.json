@@ -1,0 +1,41 @@
+{
+  "collection": "The Metropolitan Museum of Art Open Access",
+  "works": [
+    {
+      "object_id": 458971,
+      "artist": "Giovanni di Paolo",
+      "title": "The Creation of the World and the Expulsion from Paradise",
+      "date": "1445",
+      "public_domain": true,
+      "source": "https://www.metmuseum.org/art/collection/search/458971",
+      "local_asset": "/assets/art/creation-giovanni-di-paolo.jpg"
+    },
+    {
+      "object_id": 436575,
+      "artist": "El Greco",
+      "title": "View of Toledo",
+      "date": "1596–1600",
+      "public_domain": true,
+      "source": "https://www.metmuseum.org/art/collection/search/436575",
+      "local_asset": "/assets/art/view-of-toledo-el-greco.jpg"
+    },
+    {
+      "object_id": 10154,
+      "artist": "Albert Bierstadt",
+      "title": "The Rocky Mountains, Lander's Peak",
+      "date": "1863",
+      "public_domain": true,
+      "source": "https://www.metmuseum.org/art/collection/search/10154",
+      "local_asset": "/assets/art/rocky-mountains-bierstadt.jpg"
+    },
+    {
+      "object_id": 198556,
+      "artist": "Francesco di Giorgio Martini, Giuliano da Maiano, and workshop",
+      "title": "Studiolo from the Ducal Palace in Gubbio",
+      "date": "ca. 1478–82",
+      "public_domain": true,
+      "source": "https://www.metmuseum.org/art/collection/search/198556",
+      "local_asset": "/assets/art/gubbio-studiolo.jpg"
+    }
+  ]
+}

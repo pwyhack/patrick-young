@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "subject": {
+    "name": "Patrick William Young",
+    "handles": ["pwy", "pwyhack", "rickyoungfitness"],
+    "origin": {
+      "place": "Glenwood Springs, Colorado",
+      "coordinates": [39.5505, -107.3248],
+      "elevation_m_approx": 1757
+    },
+    "public_role": ["operator", "builder", "writer"]
+  },
+  "portrait": {
+    "basis": "x = faith + work + wonder + place",
+    "invariants": [
+      "Catholic faith",
+      "Colorado",
+      "building",
+      "books",
+      "poetry",
+      "curiosity"
+    ],
+    "languages": {
+      "spoken": ["English", "Spanish"],
+      "state": "always attempting the next language"
+    },
+    "preferences": {
+      "color": "#075cff",
+      "nicotine": {
+        "form": "pouch",
+        "flavor": "cool mint",
+        "dose_mg": 6
+      },
+      "cinema": {
+        "favorite_film": "Indiana Jones and the Raiders of the Lost Ark",
+        "favorite_director": "Christopher Nolan",
+        "attractors": ["adventure", "time", "scale", "practical wonder"]
+      },
+      "interests": [
+        "firearms and ballistics",
+        "Catholicism",
+        "the Crusades",
+        "language learning",
+        "UFOs and nonhuman intelligence",
+        "antigravity",
+        "esotericism and the occult",
+        "AI and superintelligence",
+        "systems, products and companies"
+      ]
+    }
+  },
+  "work_graph": {
+    "pOS": "operator control surface over canonical runtime and repository state",
+    "Mercantile": "shared compute substrate for media and AI jobs",
+    "Shootr": "iOS-first basketball training and shot-analysis product",
+    "Primordial": "ritual and intention around a physical pendant",
+    "Coger": "scenario-based Spanish conversation training",
+    "Credo": "Catholic faith tracking and parish intelligence",
+    "Parallel": "branching-life simulation",
+    "Vino": "wine identification, collection and marketplace",
+    "Cure": "evidence-oriented treatment and protocol research"
+  },
+  "written_attractors": [
+    {
+      "title": "The Economics of Antigravity",
+      "vector": ["transportation", "real estate", "energy", "defense", "space", "social rupture"]
+    },
+    {
+      "title": "Social Simulacra",
+      "thesis": "We compress each other recursively and rarely traverse our own social graphs."
+    },
+    {
+      "title": "Apologies to the ASI",
+      "vector": "humility before future intelligence"
+    },
+    {
+      "title": "Babu",
+      "vector": "names compress people into symbols; symbols compress memory"
+    },
+    {
+      "title": "Accelerando",
+      "author": "Charles Stross",
+      "role": "favorite/reference text preserved on the site"
+    }
+  ],
+  "mathematical_form": {
+    "origin": "x₀ = (39.5505°N, 107.3248°W)",
+    "faith": "∀t, F(t) = 1",
+    "building": "idea → code → system → company",
+    "language": "Lₙ₊₁ = Lₙ + ε",
+    "kinetics": "Eₖ = 1/2 mv²",
+    "cinema": "t ⇄ t⁻¹",
+    "unknown": "P(nonhuman intelligence | public evidence) = unknown",
+    "wonder": "lim(question→∞) Patrick = alive"
+  },
+  "artworks": [
+    {
+      "id": "III",
+      "name": "The Impossible Studiolo",
+      "operation": "anatomical threshold → illusionistic self-portrait encoded into architecture",
+      "geometry": "a traversable cabinet-room with incompatible vanishing points, concentric cosmology and hinged invariants",
+      "entry": "a single locus on Adam in Giovanni di Paolo's expulsion scene"
+    }
+  ],
+  "interaction_map": {
+    "threshold": "select the anatomical locus to unfold the gallery",
+    "drag": "turn the impossible room; a vertical touch traverses it",
+    "wheel": "walk the depth axis",
+    "select": "hinge open one encoded cabinet",
+    "double_select": "return to the room's first vanishing point",
+    "keyboard": {
+      "arrows": "turn the room",
+      "plus_minus": "change depth",
+      "escape": "ascend"
+    }
+  },
+  "artistic_sources": [
+    {
+      "artist": "Giovanni di Paolo",
+      "work": "The Creation of the World and the Expulsion from Paradise",
+      "date": 1445,
+      "role": "cosmology, sacred blue, nested world",
+      "status": "Public Domain",
+      "source": "https://www.metmuseum.org/art/collection/search/458971"
+    },
+    {
+      "artist": "El Greco",
+      "work": "View of Toledo",
+      "date": "1596–1600",
+      "role": "storm, sacred landscape, psychic atmosphere",
+      "status": "Public Domain",
+      "source": "https://www.metmuseum.org/art/collection/search/436575"
+    },
+    {
+      "artist": "Albert Bierstadt",
+      "work": "The Rocky Mountains, Lander's Peak",
+      "date": 1863,
+      "role": "mountain scale, western light, origin",
+      "status": "Public Domain",
+      "source": "https://www.metmuseum.org/art/collection/search/10154"
+    },
+    {
+      "artist": "Francesco di Giorgio Martini, Giuliano da Maiano, and workshop",
+      "work": "Studiolo from the Ducal Palace in Gubbio",
+      "date": "ca. 1478–82",
+      "role": "the self encoded into illusionistic cabinets, perspective and private architecture",
+      "status": "Public Domain",
+      "source": "https://www.metmuseum.org/art/collection/search/198556"
+    },
+    {
+      "artist": "Giorgio de Chirico",
+      "work": "Great Metaphysical Interior",
+      "date": 1917,
+      "role": "conceptual reference only: enigmatic objects and incompatible spatial systems",
+      "status": "Referenced, not reproduced",
+      "source": "https://www.moma.org/collection/works/80539"
+    }
+  ],
+  "hidden": {
+    "depth": 2,
+    "path": ["painting", "Adam", "anatomical threshold", "III"],
+    "constraint": "The interior can be entered only through UI interaction; it has no address."
+  },
+  "links": {
+    "site": "https://patrickyoung.ai",
+    "github": "https://github.com/pwyhack",
+    "x": "https://x.com/rickyoungfitness"
+  },
+  "provenance": [
+    "user-provided biography and preferences",
+    "public patrickyoung.ai pages and metadata",
+    "public GitHub profile and repository",
+    "local archive of the subject's own projects and writings"
+  ],
+  "privacy": "No private credentials, private contact data, or unverified biographical claims are included."
+}
