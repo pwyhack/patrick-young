@@ -7,6 +7,6 @@ Patrick Young's site. Static HTML + one stylesheet, served by a Cloudflare Worke
 - Add a page: write `name.html` using an existing note as the template, link it from `index.html`, add it to `sitemap.xml`.
 
 ```
-python3 -m http.server 8800   # local preview of pages (the Worker redirects plain-http requests)
+python3 dev.py        # local preview at http://127.0.0.1:8800
 npx wrangler deploy   # ship
 ```

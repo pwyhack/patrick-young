@@ -21,3 +21,4 @@ wrangler.jsonc
 /.dev.vars.*
 worker.js
 README.md
+dev.py
