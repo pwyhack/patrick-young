@@ -11,6 +11,7 @@
   "routes": [
     { "pattern": "pwy.ai/*", "zone_name": "pwy.ai" },
     { "pattern": "patrickyoung.ai/*", "zone_name": "patrickyoung.ai" },
+    { "pattern": "pwy.ai", "custom_domain": true },
     { "pattern": "www.pwy.ai", "custom_domain": true },
     { "pattern": "www.patrickyoung.ai", "custom_domain": true }
   ]

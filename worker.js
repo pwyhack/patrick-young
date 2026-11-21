@@ -6,11 +6,12 @@ const GONE_TO_HOME = new Set(["/writing", "/writing/", "/writing/index.html"]);
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const insecure = url.protocol === "http:";
     url.protocol = "https:";
     url.port = "";
 
-    // Every other host (patrickyoung.ai, www.*) → same path on pwy.ai.
-    if (url.hostname !== CANONICAL) {
+    // Every other host (patrickyoung.ai, www.*), and plain http → same path on https://pwy.ai.
+    if (url.hostname !== CANONICAL || insecure) {
       url.hostname = CANONICAL;
       return Response.redirect(url.toString(), 301);
     }
