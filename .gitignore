@@ -1,3 +1,5 @@
 cache/
 /private-wiki/
 /private-wiki/**
+.wrangler/
+node_modules/
