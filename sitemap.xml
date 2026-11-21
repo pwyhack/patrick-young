@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://patrickyoung.ai/</loc>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://patrickyoung.ai/accelerando.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://patrickyoung.ai/apologies-to-the-asi.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://patrickyoung.ai/social-simulacra.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://patrickyoung.ai/babu.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://patrickyoung.ai/economics-of-antigravity.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://patrickyoung.ai/writing/</loc>
-    <priority>0.7</priority>
-  </url>
+  <url><loc>https://pwy.ai/</loc></url>
+  <url><loc>https://pwy.ai/social-simulacra</loc></url>
+  <url><loc>https://pwy.ai/babu</loc></url>
+  <url><loc>https://pwy.ai/apologies-to-the-asi</loc></url>
 </urlset>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://patrickyoung.ai/sitemap.xml
+Sitemap: https://pwy.ai/sitemap.xml

@@ -1,139 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Simulacra - Patrick Young</title>
-
-    <!-- SEO -->
-    <meta name="description" content="We compress each other, recursively, and we never internally traverse our own social graphs.">
-    <meta name="author" content="Patrick Young">
-    <link rel="canonical" href="https://patrickyoung.ai/social-simulacra.html">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Social Simulacra - Patrick Young">
-    <meta property="og:description" content="We compress each other, recursively, and we never internally traverse our own social graphs.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://patrickyoung.ai/social-simulacra.html">
-    <meta property="og:image" content="https://patrickyoung.ai/og-image.png">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Social Simulacra - Patrick Young">
-    <meta name="twitter:description" content="We compress each other, recursively, and we never internally traverse our own social graphs.">
-    <meta name="twitter:image" content="https://patrickyoung.ai/og-image.png">
-
-    <!-- Font preloading -->
-    <link rel="preload" href="/fonts/BerkeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Social Simulacra",
-        "author": {
-            "@type": "Person",
-            "name": "Patrick Young"
-        }
-    }
-    </script>
-
-    <style>
-        @font-face {
-            font-family: 'Berkeley Mono';
-            src: url('/fonts/BerkeleyMono-Regular.woff2') format('woff2');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        body {
-            margin: 0;
-            padding: 60px 20px;
-            background: #f5e6c8;
-            color: #2c1810;
-            font-family: 'Berkeley Mono', monospace;
-            font-size: 16px;
-            line-height: 1.75;
-        }
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-        }
-        header {
-            margin-bottom: 60px;
-        }
-        header a {
-            color: #5c4033;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        header a:hover {
-            text-decoration: underline;
-        }
-        h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-top: 20px;
-        }
-        p {
-            margin-bottom: 24px;
-        }
-        a {
-            color: #8b4513;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 40px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>social simulacra · Patrick Young</title>
+  <meta name="description" content="We compress each other, recursively, and we never internally traverse our own social graphs.">
+  <meta name="author" content="Patrick William Young">
+  <link rel="canonical" href="https://pwy.ai/social-simulacra">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://pwy.ai/social-simulacra">
+  <meta property="og:title" content="social simulacra · Patrick Young">
+  <meta property="og:description" content="We compress each other, recursively, and we never internally traverse our own social graphs.">
+  <meta name="twitter:card" content="summary">
+  <link rel="preload" href="/fonts/BerkeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <a href="/">← back</a>
-            <h1>social simulacra</h1>
-        </header>
-
-        <p>
-            We compress each other, recursively, and we never internally traverse our own social graphs.
-        </p>
-
-        <p>
-            A friend recently asked me how many people I can name. I respond, thousands, and I start with my priests. Along this I had a realization about the compression mechanisms in the brain - you can remember so much, do such a deep search, and you remember so many more people than you're ever cognizant of.
-        </p>
-
-        <div class="footer">
-            <canvas id="fractal" width="100" height="100" style="border: 1px solid #8b7355;"></canvas>
-        </div>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('fractal');
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#f5e6c8';
-        ctx.fillRect(0, 0, 100, 100);
-
-        function drawSierpinski(x, y, size, depth) {
-            if (depth === 0) {
-                ctx.fillStyle = '#2c1810';
-                ctx.fillRect(x, y, 1, 1);
-            } else {
-                const newSize = size / 2;
-                drawSierpinski(x, y, newSize, depth - 1);
-                drawSierpinski(x + newSize, y, newSize, depth - 1);
-                drawSierpinski(x, y + newSize, newSize, depth - 1);
-            }
-        }
-
-        drawSierpinski(0, 0, 100, 6);
-    </script>
+  <main>
+    <a class="back" href="/">← pwy.ai</a>
+    <article>
+      <h1>social simulacra</h1>
+      <p>We compress each other, recursively, and we never internally traverse our own social graphs.</p>
+      <p>A friend recently asked me how many people I can name. I respond, thousands, and I start with my priests. Along this I had a realization about the compression mechanisms in the brain - you can remember so much, do such a deep search, and you remember so many more people than you're ever cognizant of.</p>
+    </article>
+  </main>
 </body>
 </html>

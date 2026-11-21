@@ -1,13 +1,17 @@
 {
   "name": "patrick-young",
+  "main": "worker.js",
   "compatibility_date": "2026-07-22",
   "assets": {
-    "directory": "./"
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
   },
   "routes": [
-    { "pattern": "patrickyoung.ai/*", "zone_name": "patrickyoung.ai" },
-    { "pattern": "www.patrickyoung.ai/*", "zone_name": "patrickyoung.ai" },
     { "pattern": "pwy.ai/*", "zone_name": "pwy.ai" },
-    { "pattern": "www.pwy.ai/*", "zone_name": "pwy.ai" }
+    { "pattern": "patrickyoung.ai/*", "zone_name": "patrickyoung.ai" },
+    { "pattern": "www.pwy.ai", "custom_domain": true },
+    { "pattern": "www.patrickyoung.ai", "custom_domain": true }
   ]
 }
