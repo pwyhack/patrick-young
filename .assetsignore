@@ -22,3 +22,5 @@ wrangler.jsonc
 worker.js
 README.md
 dev.py
+/video/
+/video/**
