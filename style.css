@@ -90,3 +90,8 @@ footer {
   gap: 20px;
 }
 footer a { color: var(--muted); }
+
+.intro { margin-top: 32px; }
+.intro p { margin: 0 0 1.2em; }
+
+ul.dash li::before { content: "– "; color: var(--muted); }
